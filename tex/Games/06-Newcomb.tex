@@ -1,0 +1,401 @@
+\chapter{Games, Decisions and Equilibria}
+
+Let's start today with a different hypothesis. Today's hypothesis is that only Nash \Eqm\ strategies are rationally permissible. This is something that many game theorists would endorse. But it's a striking thesis. It says that sometimes only mixed strategies are rationally permissible, since any pure strategy will not be in \eqm. And this is surprising given what we said earlier about decision theory.
+
+Remember that a game is just a decision problem where the relevant parts of the world include other rational actors. So we should think that decision theoretic considerations would apply. Indeed, the view that game theory and decision theory have radically different norms will have some odd consequences in situations where one is dealing with borderline rational agents, such as, perhaps, non-human primates or very young human children.
+
+And yet, orthodox decision theory \textit{never} says that mixed strategies are preferable to pure strategies. It might say that a mixed strategy is no worse than a pure strategy, but it will never say that the mixed strategy is better. We can see this quite easily. Assume our agent has two possible choices, $s_1$ and $s_2$. The expected value of $s_1$ is $E(s_1)$, and the expected value of $s_2$ is $E(s_2)$. Without loss of generality, assume $E(s_1) \geq E(s_2)$. (If that's not true, just relabel the strategies so it becomes true!) Let's work out the expected value of an arbitrary mixed strategy.
+
+\begin{align*}
+E(\langle x, 1-x \rangle) &= xE(s_1) + (1-x)E(s_2) \\
+&= xE(s_1) + (1-x)E(s_1) + (1-x)((E(s_2) - E(s_1)) \\
+&\leq  xE(s_1) + (1-x)E(s_1) \\
+&= E(s_1) 
+\end{align*} \noindent The reasoning on the third line is that since $E(s_1) \geq E(s_2)$, $E(s_2) - E(s_1) \leq 0$. And since $x$ is a probability, and hence in $[0, 1]$, $1-x \geq 0$. So $(1-x)((E(s_2) - E(s_1)) \leq 0$, so $xE(s_1) + (1-x)E(s_1) + (1-x)((E(s_2) - E(s_1)) \leq  xE(s_1) + (1-x)E(s_1)$.
+
+So the mixed strategy can't do better than the better of the pure strategies. Indeed, it only does as well as $s_1$ when $(1-x)((E(s_2) - E(s_1)) = 0$, which means either $1-x = 0$ or  $E(s_2) - E(s_1)$. The first of these happens when $x=1$, i.e., when the agent plays the pure strategy $s_1$. The second of these happens when $E(s_2) = E(s_1)$, i.e., the two pure strategies have the same expected return, so it doesn't matter, from an expected utility perspective, which one we play. (We'll come back to this fact a lot next time.)
+
+So if a mixed strategy never has a higher expected return than a pure strategy, how can it be better? To see what is really happening, we need to step back a bit and revisit some notions from decision theory. We'll need to rethink what we were saying about dominance, and as we do that, revisit what we were saying about expected value maximisation.
+
+\section{Dominance and Independence}
+Orthodox game theory endorses the following principle:
+
+\begin{description}
+\item[Dominance] If choice $c_1$ does better than choice $c_2$ in every possible state, then $c_1$ is preferable to $c_2$.
+\end{description}
+
+\noindent We could derive that by showing that $c_1$ will have a higher expected utiility than $c_2$, but that would be partially missing the point. The reason we care about expected utility is because it endorses principles like Dominance.  But Dominance has some odd consequences if not applied carefully. We see this in Joyce's example of the extortionist, discussed earlier, and in Shakespeare's version of the Battle of Agincourt. Let's remember how King Henry responds to Westmoreland's argument that he should wait for reinforcements.
+
+\begin{verse}
+What's he that wishes so? \\
+My cousin Westmoreland? No, my fair cousin; \\
+If we are marked to die, we are enough \\
+To do our country loss; and if to live, \\
+The fewer men, the greater share of honor. \\
+God's will! I pray thee, wish not one man more. 
+\end{verse}
+The problem we diagnosed with this reasoning was that it violated independence. But we had to then ask, is the important kind of independence probabilistic, or causal? And the answer matters, because it affects what we say about Newcomb's Problem. Here is, once again, the table for Newcomb's problem.
+
+\starttab{r  c  c}
+& Predicts 1 box & Predicts 2 boxes \\ 
+Take 1 box & \$1,000,000 & \$0 \\ 
+Take 2 boxes & \$1,001,000 & \$1,000
+\fintab The key feature is that the demon's predictions are causally, but not probabilistically, independent of your choices. And that matters, because if the table above is a good representation of the decision problem, the obviously correct thing to do is to take both boxes. After all, taking both boxes does better no matter which state you are in. That is, taking both boxes does better no matter which state you are in, if the demon's predictions are genuinely states in the relevant sense. That is, if it is causal independence that matters, you should take both boxes. If it is probabilistic independence, then you should take one.
+
+\section{Rule Following and Wealth}
+
+You might think that the following argument for taking one-box is compelling.
+
+\begin{enumerate*}
+\item Most people who take one box end up rich, and most people who take two boxes don't.
+\item It is better, at least in the context of this puzzle, to end up rich than not.
+\item So you should do what the people who end up rich do.
+\item So you should take one box.
+\end{enumerate*}
+
+\noindent The problem is that this argument over-generates. The same argument implies that you should take just one box in the case where the demon makes the prediction, and then tells you what it is, before you choose. In other words, the argument implies that you should take one box in this game.
+
+\begin{figure}[h]
+\begin{center}
+\begin{picture}(350, 110)
+\pictext{175}{0}{Demon}
+\put(175, 12){\circle*{4}}
+\put(175, 12){\line(-2, 1){70}}
+\put(175, 12){\line(2, 1){70}}
+\pictext{125}{17}{Predict 2}
+\pictext{225}{17}{Predict 1}
+
+\pictext{105}{29}{Agent}
+\put(105, 47){\circle*{4}}
+\put(105, 47){\line(-1, 1){35}}
+\pictext{70}{85}{(1, 1)}
+\put(105, 47){\line(1, 1){35}}
+\pictext{140}{85}{(0, 0)}
+\pictext{70}{55}{Take 2}
+\pictext{140}{55}{Take 1}
+
+\pictext{245}{29}{Agent}
+\put(245, 47){\circle*{4}}
+\put(245, 47){\line(-1, 1){35}}
+\pictext{210}{85}{(1001, 0)}
+\put(245, 47){\line(1, 1){35}}
+\pictext{280}{85}{(1000, 1)}
+\pictext{210}{55}{Take 2}
+\pictext{280}{55}{Take 1}
+
+%\multiput(105,47)(5, 0){28}{\line(1, 0){3}}
+
+\end{picture}
+\end{center}
+\caption{Transparent Newcomb's Problem}
+\label{TransparentNewcomb}
+\end{figure}
+
+\noindent That seems remarkably implausible to me. So the argument that you should do what people who do well out of the game do also seems implausible. As David Lewis put it, this looks like a game where irrationality is rewarded. But that doesn't mean that one should become irrational; it just means the world has become a slightly odd place.
+
+\section{Evidential Decision Theory}
+Perhaps a better response to Newcomb like problems is evidential decision theory. Evidential decision theory says that we shouldn't take the probability of states as fixed. Rather, in our calculations of expected utility, we should use the probability of being in a state conditional on our having made a particular choice. So we should treat the value of a decision, which we'll write as $V(\varphi)$, as being given by the following rule, where the sum is over the members of some partition $\{p_1, \dots, p_n\}$
+
+\begin{equation*}
+V(\varphi) = \sum_{i=1}^n \Pr(p_i | \varphi) V(\varphi \wedge p_i)
+\end{equation*}
+
+\noindent This obviously isn't a \textit{reductive} definition; we assume that the value of each conjunction of proposition and action is given in advance.
+
+Note that I didn't put any restrictions on the kind of partition mentioned. One of the nice features of this approach to decision problems is that any partition will do. Let's illustrate that by going through the Agincourt example. We'll make the following assumptions about value and probability. (In order to make the numbers easier to compare, I'll assume there is a $\nicefrac{1}{4}$ chance that the English will get more troops before the battle. This, like many other assumptions we're making about the case, is clearly unrealistic!)
+
+First, the values of the four possible outcomes (to the English) are as follows:
+
+\begin{itemize*}
+\item Winning with fewer troops is worth 11;
+\item Winning with more troops is worth 10;
+\item Losing with fewer troops is worth 1;
+\item Losing with more troops is worth 0
+\end{itemize*}
+
+\noindent That matches up with King Henry's idea that whether you win or lose, it's better to do it with fewer troops. Now come the probabilities.
+
+\begin{itemize*}
+\item The probability that the English will have fewer troops and win is 0.15.
+\item The probability that the English will have fewer troops and lose is 0.6.
+\item The probability that the English will have more troops and win is 0.15.
+\item The probability that the English will have more troops and lose is 0.1.
+\end{itemize*}
+
+\noindent It's worth going through some conditional probabilities to get a cleaner sense of what these assumptions come to. I'll use `win', `lose', `more' and `fewer' with their obvious definitions from the English perspective, i.e, win or lose the battle, have more or fewer troops.
+\begin{align*}
+\Pr(\text{win} | \text{more}) &= \frac{\Pr(\text{win} \wedge \text{more})}{\Pr(\text{more})} \\
+ &= \frac{\Pr(\text{win} \wedge \text{more})}{\Pr(\text{win} \wedge \text{more}) + \Pr(\text{lose} \wedge \text{more})} \\
+&= \frac{0.15}{0.15 + 0.1} \\
+&= 0.6 
+\end{align*}
+
+\noindent Since winning and losing are the only outcomes, it follows that $\Pr(\text{lose} | \text{more})$  $= 0.4$. Now what happens if the English have fewer troops.
+\begin{align*}
+\Pr(\text{win} | \text{fewer}) &= \frac{\Pr(\text{win} \wedge \text{fewer})}{\Pr(\text{fewer})} \\
+ &= \frac{\Pr(\text{win} \wedge \text{fewer})}{\Pr(\text{win} \wedge \text{fewer}) + \Pr(\text{lose} \wedge \text{fewer})} \\
+&= \frac{0.15}{0.15 + 0.6} \\
+&= 0.2 
+\end{align*}
+
+\noindent And again, since winning and losing are exclusive and exhaustive, it follows that $\Pr(\text{lose} | \text{fewer}) = 0.8$. 
+
+Given all this, let's work out the value of getting more troops. We'll use $\{\text{win}, \text{lose}\}$ as our partition.
+\begin{align*}
+V(\text{more}) &= \Pr(\text{win} | \text{more}) V(\text{win} \wedge \text{more}) +  \Pr(\text{lose} | \text{more}) V(\text{lose} \wedge \text{more}) \\
+&= 0.6 \times 10 + 0.4 \times 0 \\
+&= 6 \\
+V(\text{fewer}) &= \Pr(\text{win} | \text{fewer}) V(\text{win} \wedge \text{fewer}) +  \Pr(\text{lose} | \text{fewer}) V(\text{lose} \wedge \text{fewer}) \\
+&= 0.2 \times 11 + 0.8 \times 1 \\
+&= 3
+\end{align*} 
+\noindent And we get the intuitively correct response, that fighting with more troops is better than fighting with fewer troops. 
+
+Let's see what happens if we use a different partition. Let $n$ be the proposition that the greater force will win. So it's equivalent to win $\leftrightarrow$ more. And now we'll redo the expected value calculation using $\{n, \neg n\}$ as the partition. I'll leave it as an exercise to figure out why it is true that $\Pr(n | \text{more}) = 0.6$, and $\Pr(n | \text{fewer}) = 0.8$.
+\begin{align*}
+V(\text{more}) &= \Pr(n | \text{more}) V(n \wedge \text{more}) +  \Pr(\neg n | \text{more}) V(\neg n\wedge \text{more}) \\
+&= 0.6 \times 10 + 0.4 \times 0 \\
+&= 6 \\
+V(\text{fewer}) &= \Pr(n | \text{fewer}) V(n \wedge \text{fewer}) +  \Pr(\neg n | \text{fewer}) V(\neg n \wedge \text{fewer}) \\
+&= 0.8 \times 1 + 0.2 \times 11 \\
+&= 3
+\end{align*} 
+\noindent And we get the same answer, for roughly the same reason. I won't go through the formal proof of this, but the general result is quite useful. If we're using this valuation function, it doesn't matter which partition of possibility space we use, we end up with the same value for each choice.
+
+The decision theory that says we should make choices which maximise the value of this function $V$ is known as \textit{evidential decision theory}. It suggests that we should take one box in Newcomb's Problem, though we should take two boxes if we already know what the demon has predicted. The latter claim is, I hope, obvious. Here's the argument for the former, assuming that the demon is 99\% reliable, whether the agent takes 1 or 2 boxes.
+\begin{align*}
+V(\text{Take 2}) &= \Pr(\text{Predict 2} | \text{Take 2}) V (\text{Predict 2} \wedge \text{Take 2}) + \\
+ & \hspace{12pt} \Pr(\text{Predict 1} | \text{Take 2}) V (\text{Predict 1} \wedge \text{Take 2}) \\
+&= 0.99 \times 1 + 0.01 \times 1001 \\
+&= 11 \\
+V(\text{Take 1}) &= \Pr(\text{Predict 2} | \text{Take 1}) V (\text{Predict 2} \wedge \text{Take 1}) + \\
+ & \hspace{12pt} \Pr(\text{Predict 1} | \text{Take 1}) V (\text{Predict 1} \wedge \text{Take 1}) \\
+&= 0.01 \times 0 + 0.99 \times 1000 \\
+&= 990 
+\end{align*} 
+\noindent Since 990 > 11, the theory says you should take just one box. Basically, it says that this case is just like the Agincourt case. Although you'll be better off taking one box whatever state you are in (win or lose in Agincourt, 1 or 2 boxes predicted in Newcomb), since there is a probabilistic connection between what you do and what state you're in, this isn't sufficient reason to act.
+
+Many people find this an attractive account of Newcomb's Problem. But it seems to me (and to many others) that it wildly overgenerates predictions of when you should take actions that appear to be dominated. Consider the following fantasy story about the correlation between smoking and cancer.
+
+\begin{quote}
+It's true that smokers get cancer at a higher rate than non-smokers. And that means that if you smoke, the probability that you'll get cancer will go up. That is, the \textit{epistemic} probability that you will get cancer will go up; we now have more evidence that you will get cancern. But this isn't because smoking \textit{causes} cancer. Rather, smoking and cancer have a common cause. The kind of people who are attracted to cigarettes are, unfortunately, disposed to get cancer. Perhaps this is because there is a gene that causes favourable attitudes towards cigarettes, and causes cancer.
+\end{quote}
+
+\noindent Let's say that story is true. And let's say that our agent has a desire to smoke, but a stronger desire to avoid cancer. What should she do?
+
+Well presumably she should smoke. It won't make her worse off. It will confirm that she is in the high risk pool for cancer, but if the story is true, then she is in that pool whether she smokes or not. So she may as well smoke.
+
+This is hardly just an idiosyncratic view that people like me who think that you should take two boxes in Newcomb's Problem have. In the 1950s, some prominent scientists argued that the common cause story was plausibly true, or at least not ruled out by the evidence. (The most prominent such arguer was R. A. Fisher, the founder of modern statistics.) And the tobacco industry \textit{loved} these claims, because they saw, rightly, that if people believed them they would keep smoking, while if people thought smoking caused cancer, they would stop.
+
+But note that given Evidential Decision Theory, it doesn't seem to matter whether smoking causes cancer, or whether smoking and cancer merely have a common cause. Either way, smoking is evidence for cancer, just like taking both boxes is evidence that there's nothing in the opaque box. So either way, you shouldn't smoke. This is, most people think, wildly implausible, and that implausibility undermines Evidential Decision Theory.
+
+There is, as you may imagine, more to be said here. One popular move made on behalf of Evidential Decision Theory at this point is the 'Tickle Defence'. It says that even if the story is true, smoking doesn't increase the probability of cancer \textit{conditional on an observed desire to smoke}. There are critics of this move as well, and going into this would take us too far afield. Suffice to say that smoking cases cause problems for Evidential Decision Theorists, and many people think they cause unresolvable problems.
+
+\section{Causal Decision Theory}
+In response to these problems, a number of philosophers in the late 1970s and early 1980s developed \textbf{Causal Decision Theory}. The rough idea is that we start with a probability distribution over the causal structure of the world. Each element in this structure tells us what the causal consequences of particular choices will be. We don't know which of them is true; in some cases there may be a sense in which none of them are true \textit{yet}. But we can assign a probability to each, and hence work out the probability of getting each outcome upon making each choice. We use that to generate an expected value of each choice, and then we maximise expected value.
+
+There are disputes about how to implement this. I'm going to present the version due to Allan Gibbard and William Harper, which is the closest thing there is to an orthodox version of the theory. We'll use $U$ for the utility of each choice, and write $A \boxright B$ for \textit{If it were the case that A, it would be the case that B}.
+
+\begin{equation*}
+U(\varphi) = \sum_{i=1}^n \Pr(\varphi \boxright p_i) U(\varphi \wedge p_i)
+\end{equation*}
+
+\noindent Again, this isn't a reductive account; we need utilities of more specific states to get the utilities of choices. But the hope is that those will be clear enough in any context that we can use the formula.
+
+Let's see how this works in two cases, Newcomb's Problem and Joyce's car protection case.
+
+In Newcomb's problem, it is natural to set the two causal hypotheses to be that the demon has put \$1,000,000 in the opaque box, call that $p_1$, and that she has put nothing in the opaque box, call that $p_2$. Then since our choice doesn't make a causal difference to whether $p_1$ or $p_2$ is true, $\Pr(\varphi \boxright p_i)$ will just equal $Pr(p_i)$ no matter whether $i$ is 1 or 2, or whatever choice $\varphi$ is. The probability that there is a certain sum in the opaque box just is the probability that if we were to make a choice, there would be that amount in the opaque box. If we say that $\Pr(p_1) = x$, then we can work out the value of the two choices as follows.
+
+\begin{align*}
+U(\text{Take 1 box}) &= \Pr(\text{Take 1 box} \boxright p_1) U(\text{Take 1 box} \wedge p_1) + \\
+&\hspace{12pt} \Pr(\text{Take 1 box} \boxright p_2) U(\text{Take 1 box} \wedge p_2) \\
+&= \Pr(p_1) U(\text{Take 1 box} \wedge p_1) + \Pr(p_2) U(\text{Take 1 box} \wedge p_2) \\
+&= x \times U(\$1,000,000) + (1-x) \times U(0) \\
+U(\text{Take 2 boxes}) &= \Pr(\text{Take 2 boxes} \boxright p_1) U(\text{Take 2 boxes} \wedge p_1) + \\
+&\hspace{12pt} \Pr(\text{Take 2 boxes} \boxright p_2) U(\text{Take 2 boxes} \wedge p_2) \\
+&= \Pr(p_1) U(\text{Take 2 boxes} \wedge p_1) + \Pr(p_2) U(\text{Take 2 boxes} \wedge p_2) \\
+&= x \times U(\$1,001,000) + (1-x) \times U(\$1,000)
+\end{align*}
+
+\noindent No matter what $x$ is, as long as $U($\$$1,001,000) > U($\$$ 1,000,000)$, and $U($\$$ 1,000)$ $>$ $U($\$$ 0)$, then taking two boxes will be better than taking one box.
+
+Now compare this to Joyce's example. As a reminder, here is the table of possible outcomes in that case.
+
+\starttab{r  c  c}
+& Broken Windshield & Unbroken Windshield \\ 
+Pay extortion & -\$410 & -\$10 \\ 
+Don't pay & -\$400 & 0
+\fintab Let's assume that a cost of \$1 is worth -1 utils, and assume the following probabilities:
+\begin{align*}
+\Pr(\text{Pay extortion} \boxright \text{Broken Windshield}) &= 0.02 \\
+\Pr(\text{Pay extortion} \boxright \text{Unbroken Windshield}) &= 0.98 \\
+\Pr(\text{Don't pay extortion} \boxright \text{Broken Windshield}) &= 0.99 \\
+\Pr(\text{Don't pay extortion} \boxright \text{Unbroken Windshield}) &= 0.01
+\end{align*} Then we will have the following calculations of utilities.
+\begin{align*}
+U(\text{Pay exortion}) &= 0.02 \times -410 + 0.98 \times -10 \\
+&= -8.2 + -9.8 \\
+&= -18 \\
+U(\text{Don't pay exortion}) &= 0.99 \times -400 + 0.01 \times 0 \\
+&= -396 + 0 \\
+&= -396
+\end{align*} And clearly it is better to pay. That is, of course, the correct answer in this case.
+
+As I mentioned, this isn't the only way to spell out Causal Decision Theory. David Lewis complains that the treatment of counterfactuals here is improper, for instance. But looking into those complications would take us too far afield. Instead we'll look at three other concerns one might have.
+
+First, it's worth noting that our treatment of Newcomb's Problem left out a crucial fact. We proved that on a Causal Decision Theory, it would be better to take two boxes than one. But we proved that by proving a fact about comparative utilities, not by computing the actual utility of the two options. It is often non-trivial to do that. Once I've decided that I will take both boxes, presumably the probability that the demon will have put money in the opaque box will be low. But it's not clear that that's the probability I should be using. This might matter in some complicated variants of Newcomb's Problem. Let's say $S$ has a choice between taking \$2000 and playing Newcomb's Problem. And also say that $S$ hasn't thought through what she would do were she to play Newcomb's Problem. Should she conclude that since she hasn't decided what she'll do, there is a substantial probability that she'll take only one box in Newcomb's Problem, so there is, even by Causal lights, a substantial probability that there will be money in the opaque box, so she should play rather than take the \$2000? And if she should reason that way, is that a problem? That is, is it obvious that the ideas behind Causal Decision Theory should lead to taking the \$2000 rather than playing? I'm not sure what to say about these cases, but I worry that there's a problem here.
+
+Second, Causal Decision Theory leads to certain kinds of dilemmas. Consider the following story from Gibbard and Harper's paper introducing Causal Decision Theory.
+
+\begin{quote}
+Consider the story of the man who met Death in Damascus. Death looked surprised, but then recovered his ghastly composure and said, `I {\sc am coming for you tomorrow}'. The terrified man that night bought a camel and rode to Aleppo. The next day, Death knocked on the door of the room where he was hiding, and said `I {\sc have come for you}'. 
+
+`But I thought you would be looking for me in Damascus', said the man.
+ 
+`{\sc Not at all}', said Death `{\sc that is why I was surprised to see you yesterday. I knew that today I was to find you in Aleppo}'. 
+
+Now suppose the man knows the following. Death works from an appointment book which states time and place; a person dies if and only if the book correctly states in what city he will be at the stated time. The book is made up weeks in advance on the basis of highly reliable predictions. An appointment on the next day has been inscribed for him. Suppose, on this basis, the man would take his being in Damascus the next day as strong evidence that his appointment with Death is in Damascus, and would take his being in Aleppo the next day as strong evidence that his appointment is in Aleppo...
+ 
+If... he decides to go to Aleppo, he then has strong grounds for expecting that Aleppo is where Death already expects him to be, and hence it is rational for him to prefer staying in Damascus. Similarly, deciding to stay in Damascus would give him strong grounds for thinking that he ought to go to Aleppo.
+\end{quote}
+
+\noindent If we note that Death has a preference for being wherever the man is, and the man has a preference for avoiding Death, then we can easily model this as a game. Indeed, we can model it as a familiar game, it is just Matching Pennies, i.e., \citegame{MatchingPennies}. In this version of the game, Death plays Row and the man plays column, but we could easily reverse that.
+
+\starttab{r c c}
+%This is called MatchingPenniesText
+%It is Matching Pennies
+\textbf{\citegame{MatchingPenniesText}} & Damascus & Aleppo \\
+Damascus & 1, -1 & -1, 1 \\
+Aleppo & -1, 1 & 1, -1 \\
+\fintab The response that Gibbard and Harper give to this game is that it is just a dil\-emma. Whatever the man plays, he'll regret it. Actually, that strikes me as the right thing to say, but not everyone is convinced. Reed Richter (in a 1984 \textit{AJP} paper) argued that this was the wrong thing to say about \textit{asymmetric} versions of the Death in Damascus case. Imagine that getting to Aleppo will cost a huge amount of money, and be incredibly painful. Then the table might look something like this:
+
+\starttab{r c c}
+%This is called AsymmetricDeathinDamascus
+%It is Matching Pennies with Asymmetries
+\gamelab{AsymmetricDeathinDamascus} & Damascus & Aleppo \\
+Damascus & 1, -1 & -1, 0.5 \\
+Aleppo & -1, 1 & 1, -1.5 \\
+\fintab Again, whatever the man does, he will regret it, just like in the original Death in Damascus example. But it seems wrong to treat the two options available to the man symmetrically. After all, going to Aleppo is much worse for him. If forced to choose, some have argued, he should stay in Damascus.
+
+Third, some people don't like Causal Decision Theory because it trucks in metaphysical notions like causation and counterfactuals. Richard Jeffrey was worried that Causal Decision Theory was too metaphysical, but he agreed that we should take both boxes in Newcomb's Problem. So he promoted a \textit{Ratificationist} version of Evidential Decision Theory.
+
+The idea behind ratificationism is that only \textit{ratifiable} decisions are rationally allowed. A decision is ratifiable if it maximises expected utility conditional on that decision being taken. We can add a ratifiability clause to Evidential Decision Theory, as Jeffrey does, or to Causal Decision Theory, as (in effect) Frank Arntzenius has recently suggested. 
+
+If we add a ratifiability clause to Evidential Decision Theory, we get the result that rational agents should take both boxes. That's because only it is ratifiable. We computed earlier the expected utility of each choice according to Evidential Decision Theory, and concluded that the utility of taking just one box was higher. But now look what happens if we conditionalise on the hypothesis that we'll take just one box. (For simplicity, we'll again assume \$1 is worth 1 util.) It is easy enough to see that taking both boxes is better.
+
+\begin{align*}
+\Pr(\text{Million in opaque box} | \text{Take one box}) &= 0.99 \therefore \\
+V(\text{Take one box} | \text{Take one box}) &= 0.99 \times 1,000,000 + 0.01 \times 0 \\
+&= 990,000 \\
+V(\text{Take both box} | \text{Take one box}) &= 0.99 \times 1,001,000 + 0.01 \times 1,000 \\
+&= 991,000 
+\end{align*} But there is something very odd about this way of putting things. It requires thinking about the expected value of an action conditional on something that entails the action is not taken. In Newcomb's Problem we can sort of make sense of this; we use the conditional assumption that we're taking one box to seed the probability of the demon doing certain actions, then we run the calculations from there. But I don't see any reason to think that we should, in general, be able to make sense of this notion.
+
+A better approach, I think, is to mix ratificationism with Causal Decision Theory. (This isn't to say it's the right approach; I'm an old-fashioned Causal Decision Theorist. But it is \textit{better}.) This lets us solve problems like the two-step Newcomb problem discussed earlier. Let's assume the demon is very very accurate; given that the player is choosing $\varphi$, the probability that the demon will predict $\varphi$ is 0.9999. Now let's work through the values of taking each of the options. (Remember, the game is to take \$2,000, or play Newcomb's Problem. If the player does the latter, she must choose one box or two. And $p_i$ is the proposition that the demon predicts that $i$ boxes will be taken. We'll use $T_i$ as shorthand for \textit{Take i boxes}. And we'll assume, again that a pound is worth a util.)
+\begin{align*}
+U(T_1 | T_1) &= \Pr(T_1 \boxright p_1 | T_1)U(T_1 \wedge p_1) + \Pr(T_1 \boxright p_2 | T_1)U(T_1 \wedge p_2) \\
+&= 0.9999 \times 1,000,000 + 0.0001 \times 0 \\
+&= 999,900 \\
+U(T_2 | T_1) &= \Pr(T_2 \boxright p_1 | T_1)U(T_2 \wedge p_1) + \Pr(T_2 \boxright p_2 | T_1)U(T_2 \wedge p_2) \\
+&= 0.9999 \times 1,001,000 + 0.0001 \times 1,000 \\
+&= 1,001,900 \\
+U(T_1 | T_2) &= \Pr(T_1 \boxright p_1 | T_2)U(T_1 \wedge p_1) + \Pr(T_1 \boxright p_2 | T_2)U(T_1 \wedge p_2) \\
+&= 0.0001 \times 1,000,000 + 0.9999 \times 0 \\
+&= 100 \\
+U(T_2 | T_2) &= \Pr(T_2 \boxright p_1 | T_2)U(T_2 \wedge p_1) + \Pr(T_2 \boxright p_2 | T_2)U(T_2 \wedge p_2) \\
+&= 0.0001 \times 1,001,000 + 0.9999 \times 1,000 \\
+&= 1,100	
+\end{align*} The important thing to note about this calculation is that $\Pr(T_2 \boxright p_1 | T_1)$ is very high, 0.9999 in our version of the game. What this says is that once we've assumed $T_1$, then the counterfactual $T_2 \boxright p_1$ is very very probable. That is, given that we're taking 1 box, it is very probable that if we had taken 2 boxes, there would still have been money in the opaque box. But that's just what Newcomb's problem suggests.
+
+Note that neither $T_1$ nor $T_2$ is ratifiable. Given $T_1$, the player would be better with $T_2$. (The expected value of taking both boxes would be 1,001,900, as compared to an expected value of 999,900 for taking one box.) And given $T_2$, the player would be better with simply taking the \$2,000 and not playing, since the expected payout of $T_2$ is a mere 1,100. But taking \$2,000 is ratifiable. Given that the player is doing this, no other option is better. After all, if they are the kind of player who is moved by the reasoning that leads to taking the \$2,000, then they are almost certainly two boxers, and so probably the opaque box would be empty. So the only ratifiable decision is to take \$2,000. This ratificationist argument is, I think, intuitively plausible.
+
+Note too that it is the very same conclusion that we reach through using a form of backward induction. Let's set up the game as a chart. We'll use $P$ for the player, and $D$ for the demon. At move 1, $P$'s choices are \textit{C}ash or \textit{B}ox. After that, we'll use 1 and 2 for the obvious meanings; predictions for the demon, boxes for the players. The payoffs are player first, demon second. To make the numbers easier to read, we'll set 1 util as being worth \$1,000. And we'll call the extended form of this \gamelab{TwoStageNP}.
+
+\begin{figure}[t]
+\begin{center}
+\begin{picture}(350, 150)
+\pictext{175}{0}{$P$}
+\put(175, 12){\circle*{4}}
+\put(175, 12){\line(-2, 1){70}}
+\put(175, 12){\line(2, 1){70}}
+\pictext{135}{20}{$C$}
+\pictext{215}{20}{$B$}
+
+\pictext{105}{50}{2, 0}
+
+\pictext{245}{35}{$D$}
+\put(245, 47){\circle*{4}}
+\put(245, 47){\line(-1, 1){35}}
+\put(245, 47){\line(1, 1){35}}
+\pictext{220}{55}{1}
+\pictext{270}{55}{2}
+
+\pictext{210}{70}{$P$}
+\put(210, 82){\circle*{4}}
+\put(210, 82){\line(-1, 2){20}}
+\pictext{190}{125}{1000, 1}
+\put(210, 82){\line(1, 2){20}}
+\pictext{230}{125}{1001, 0}
+\pictext{195}{95}{1}
+\pictext{225}{95}{2}
+
+\pictext{280}{70}{$P$}
+\put(280, 82){\circle*{4}}
+\put(280, 82){\line(-1, 2){20}}
+\pictext{260}{125}{0, 0}
+\put(280, 82){\line(1, 2){20}}
+\pictext{300}{125}{1, 1}
+\pictext{265}{95}{1}
+\pictext{295}{95}{2}
+
+\multiput(210,82)(5, 0){14}{\line(1, 0){3}}
+
+\end{picture}
+\end{center}
+\caption{\citegame{TwoStageNP}}
+\label{TwoStageNPChart}
+\end{figure}
+
+Note crucially the dotted line between the player's choices in the top right. Although the player makes her choice \textit{after} the demon does, the player doesn't know what the demon chooses. This makes backwards induction a little tricky; the demon can't assume that the player will make the best response to her choice, if the player doesn't know what the choice is.
+
+But when we look at the numbers more closely, that worry dissipates. Whatever the demon does, the player is better off playing 2. So we should assume that the player will play 2. Given that the player will play 2, the demon is best off playing 2. And given that the demon is best off playing 2, the player at the initial node is best off playing $C$. So backwards induction leads to the same conclusion that ratificationist approaches do. And, as I said, this seems like an intuitive enough verdict, at least in this case.
+
+\section{Equilibrium and Ratification}
+A large number of fairly orthodox game theorists typically accept the following two propositions.
+
+\begin{itemize*}
+\item It is strictly better to defect than co-operate in Prisoners' Dilemma, and in general one should always take strictly dominating options.
+\item In some games, such as Rock-Paper-Scissors, the best thing to do is to play a mixed strategy. In those games, playing a mixed strategy is preferably to playing any pure strategy.
+\end{itemize*}
+
+\noindent In general, anyone who thinks there is something normatively significant in playing Nash \Eqm\ strategies will have to accept something like those two claims. But if you look at the two biggest positions in philosophical decision theory, they are hard to reconcile. Evidential Decision Theorists may accept the second, but will reject the first. On Evidential Decision Theory, it may be best to accept a dominated option if, as in Newcomb's Problem, the states are evidentially connected to one's choice. And Causal Decision Theorists will accept the first, but not the second. On Causal Decision Theory, the expected value of a mixed strategy is just the (weighted) average value of the strategies being mixed, and the only rule is to maximise expected value, so the mixed strategy can't be preferable to each of the elements of the mixture.
+
+Some of the tension is resolved if we add ratificationist decision theories to our menu of choices. In particular, a causal ratificationist might accept both of the bullet points above. It is obvious that they will accept the first. The co-operation option in Prisoners' Dilemma is both unratifiable and lower valued than the defection option. What's interesting is that, given one big extra assumption, they can accept the second as well. 
+
+The big extra assumption is that conditional on one's playing a strategy $S$, one should give probability 1 to the claim that the other player will do something that is in their best interests given that one is playing $S$. Let's apply that to Rock-Paper-Scissors. Conditional on playing Rock, one should give probability 1 to the proposition that the other player will play Paper. That is, one should give probability 0 to the proposition \textit{If I were to play Rock, I would win}, while giving probability 1 to the proposition \textit{If I were to play Scissors, I would win}. So conditional on playing Rock, the best thing to do, \textit{from a causal perspective}, is to play Scissors.
+
+So playing Rock is not ratifiable, and by similar reasoning, neither is playing Paper or Scissors. Does this mean nothing is ratifiable? Not at all; the mixed strategies might still be ratifiable. In particular, the mixed strategy where one plays each of the pure strategies with probability $\nicefrac{1}{3}$, is ratifiable. At least, it is ratifiable if we assume that causal ratificationism is the correct theory of rational choice. If one plays this mixed strategy, and the other player knows it, then every strategy the other player could play is equally valuable to them; they each have expected value 0. Given that each strategy is equally valuable, the other player could play any strategy that is rationally acceptable. Since we are assuming causal ratificationism, that means they could play any ratifiable strategy. But the only ratifiable strategy is the mixed strategy  where one plays each of the pure strategies with probability $\nicefrac{1}{3}$. Conditional on the other player doing that, moving away from the mixed strategy has no advantages (though it also has no costs). So causal ratificationism, plus an assumption that the other player is an excellent mind reader, delivers the orthodox result.
+
+There are other reasons to associate orthodoxy in game theory with causal ratificationism. Here, for instance, is Ken Binmore motivating the use of \eqm\ concepts in a prominent game theory textbook (\textit{Playing for Real}).
+
+\begin{quote}
+Why should anyone care about Nash equilibria? There are at least two reasons. The first is that a game theory book can't authoratively point to a pair of strategies as the solution of a game unless it is a Nash \eqm. Suppose, for example, that $t$ weren't a best reply to $s$. [Player 2] would then reason that if [Player 1] follows the book's advice and plays $s$, then she would do better not to play $t$. But a book can't be authoritative on what is rational if rational people don't play as it predicts. (\textit{Playing for Real}, 18-19)
+\end{quote}
+
+\noindent It seems to me that this argument only makes sense if we assume some ratificationist theory of decision making. What Binmore is encouraging us to focus on here are strategies that are still rational strategies in situations where everyone believes that they are rational strategies. That's close, I think, to saying that we should only follow strategies that are best strategies conditional on being played.
+
+There's a secondary argument Binmore is making here which I think is more misleading. The most the little argument he gives could show is that if a game has a unique solution, then that solution must be a Nash \eqm. But it doesn't follow from that that there is anything special about Nash \eqm\ as opposed, say, to strategies that are BRBRI. After all, if a game has a unique solution, each player will play a strategy that is BRBRI. And if each player has multiple BRBRI strategies, even if some of them are not part of any Nash \eqm, it isn't clear why a book which said each BRBRI strategy was rational would be self-undermining. If I say that any pure or mixed strategy whatsoever could be rational in Rock-Paper-Scissors, and Player 1 believes me, and Player 2 knows this, Player 2 can't use that knowledge to undermine my advice.
+
+But you might note that Binmore says there is a second reason. Here's what it is.
+
+\begin{quote}
+Evolution provides a second reason why we should care about Nash equilibria. If the payoffs in a game correspond to how fit the players are, then adjustment processes that favour the more fit at the expense of the less fit will stop working when we get to a Nash \eqm\ because all the survivors will then be as fit as it is possible to be in the circumstances. (\textit{Playing for Real}, 19)
+\end{quote}
+
+\noindent This seems to me like a very strong reason to care about Nash \eqm\ in \textit{repeated} games, like competition for food over time. The same is true in Rock-Paper-Scissors. It isn't true that Rock wins every time, and you shouldn't play Rock every time like Bart Simpson does. But that's because you'll give away your strategy. It doesn't show that a pure strategy of Rock is wrong in any given game of Rock-Paper-Scissors.
+
+As we noted at the end of the last section, it is not clear that the standard representation of the payoffs in any given round of a repeated game are correct. Some strategies incur costs down the road that aren't properly reflected in the individual payoff matricies. But, as we also noticed, it is hard to do much about this. The best thing might be to just note that the payoffs aren't quite right, and look for \eqm\ with respect to the not quite right payoffs.
+
+In any case, we're going to want to come back to what Causal Decision Theory says about repeated games somewhat later, so it is best to set that aside for now. What I really have wanted to argue here was that ratificationism is necessary to motivate some of the core ideas of game theory.
+
+So is ratificationism correct? I have my doubts, but I think it would be too much of a digression to go into them here. Instead, I want to focus on some of the interesting cases where we have to hunt a little for \eqm, or where there are interesting factors that determine which \eqm\ is chosen.

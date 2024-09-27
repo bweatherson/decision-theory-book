@@ -1,0 +1,229 @@
+\section{Two Important Results}
+None of the three connectives is particularly hard to process, but the rule for negation may well be the easiest of the lot. The truth value of $\neg A$ is just the opposite of the truth value of $A$. So if $A$ is true at a line, then $\neg A$ is false. And if $A$ is false at a line, then $\neg A$ is true. So exactly one of $A$ and $\neg A$ is true at each line. So the sum of the probabilities of those propositions must be 1.
+
+We can get to this result another way. It is easy to see that $A \vee \neg A$ is a logical truth by simply looking at its truth table.
+
+\starttab{c  c c}
+$A$ & $\neg A$ & $A \vee \neg A$ \\ 
+T & F & T \\
+F & T & T
+\stoptab The sentence $A \vee \neg A$ is true on each line, so it is a logical truth. And logical truths have probability 1. Now $A$ and $\neg A$ are clearly inconsistent. So the probability of their disjunction equals the sum of their probabilities. That's to say, $Pr(A \vee \neg A) = Pr(A) + Pr(\neg A)$. But $Pr(A \vee \neg A) = 1$. So,
+
+\begin{equation*}
+Pr(A) + Pr(\neg A) = 1
+\end{equation*}
+
+One important consequence of this is that the probabilities of $A$ and $\neg A$ can't vary independently. Knowing how probable $A$ is settles how probable $\neg A$ is.
+
+The next result is slightly more complicated, but only a little. Consider the following table of truth values and probabilities.
+ 
+\starttab{c  c c  c c}
+$Pr$ & $A$ & $B$ & $A \wedge B$ & $A \vee B$ \\ 
+$x_1$ & T & T & T & T \\
+$x_2$ & T & F & F & T \\
+$x_3$ & F & T & F & T \\
+$x_4$ & F & F & F & F \\
+\stoptab The variables in the first column represent the probability of each row. We can see from the table that the following results all hold.
+
+\begin{enumerate*}
+\item $Pr(A) = x_1 + x_2$, since $A$ is true on the first and second lines
+\item $Pr(B) = x_1 + x_3$, since $B$ is true on the first and third lines
+\item $Pr(A \wedge B) = x_1$, since $A \wedge B$ is true on the first line
+\item $Pr(A \vee B) = x_1 + x_2 + x_3$, since $A \vee B$ is true on the first, second and third lines
+\end{enumerate*}
+
+Adding the first and second lines together, we get
+\begin{equation*}
+Pr(A) + Pr(B) = x_1 + x_2 + x_1 + x_3
+\end{equation*}
+
+And adding the third and fourth lines together, we get
+\begin{equation*}
+Pr(A \wedge B) + Pr(A \vee B) = x_1 + x_1 + x_2 + x_3
+\end{equation*}
+
+And simply rearranging the variables a little reveals that
+\begin{equation*}
+Pr(A) + Pr(B) =Pr(A \wedge B) + Pr(A \vee B)
+\end{equation*}
+
+Again, this is a result that we will use a lot in what follows.
+
+\section{Axioms of Probability}
+We've introduced probability so far through the truth tables. If you are concerned with some finite number, say $n$ of sentences, you can make up a truth table with 2$^n$ rows representing all the possible combinations of truth values for those sentences. And then a probability function is simply a measure defined over sets of those rows, i.e. sets of possibilities.
+
+But we can also introduce probability more directly. A probability function is a function that takes sentences as inputs, has outputs in [0, 1], and satisfies the following constraints.
+
+\begin{itemize*}
+\item If $A$ is a logical truth, then $Pr(A) = 1$
+\item If $A$ and $B$ are logically equivalent, then $Pr(A) = Pr(B)$
+\item If $A$ and $B$ are logically disjoint, i.e. $\neg(A \wedge B)$ is a logical truth, then $Pr(A) + Pr(B) = Pr(A \vee B)$
+\end{itemize*}
+
+To get a feel for how these axioms operate, I'll run through a few proofs using the axioms. The results we prove will be familiar from the previous chapter, but the interest here is in seeing how the axioms interact with the definitions of logical truth, logical equivalence and logical disjointedness to derive familiar results.
+
+\begin{itemize*}
+\item \textbf{$Pr(A) + Pr(\neg A) = 1$}
+\end{itemize*}
+
+\noindent \textbf{Proof:} It is a logical truth that $A \vee \neg A$. This can be easily seen on a truth table. So by axiom 1, $Pr(A \vee \neg A) = 1$. The truth tables can also be used to show that $\neg(A \wedge A)$ is a logical truth, so $A$ and $\neg A$ are disjoint. So $Pr(A) + Pr(\neg A) = Pr(A \vee \neg A)$. But since $Pr(A \vee \neg A) = 1$, it follows that $Pr(A) + Pr(\neg A) = 1$.
+
+\begin{itemize*}
+\item \textbf{If $A$ is a logical falsehood, i.e. $\neg A$ is a logical truth, then $Pr(A) = 0$}
+\end{itemize*}
+
+\noindent \textbf{Proof:} If $\neg A$ is a logical truth, then by axiom 1, $Pr(\neg A) = 1$. We just proved that $Pr(A) + Pr(\neg A) = 1$. From this it follows that $Pr(A) = 0$.
+
+\begin{itemize*}
+\item \textbf{$Pr(A) + Pr(B) = Pr(A \vee B) + Pr(A \wedge B)$}
+\end{itemize*}
+
+\noindent \textbf{Proof:} First, note that $A$ is logically equivalent to $(A \wedge B) \vee (A \wedge \neg B)$, and that $(A \wedge B)$ and $(A \wedge \neg B)$ are logically disjoint. We can see both these facts in the following truth table.
+
+\starttab{c c c c c c}
+$A$ & $B$ & $\neg B$ & $(A \wedge B)$ & $(A \wedge \neg B)$ &  $(A \wedge B) \vee (A \wedge \neg B)$ \\ 
+T & T & F & T & F & T \\
+T & F & T & F & T & T \\
+F & T & F & F & F & F \\
+F & F & T & F & F & F 
+\stoptab The first and sixth columns are identical, so $A$ and $(A \wedge B) \vee (A \wedge \neg B)$. By axiom 2, that means that $Pr(A) = Pr((A \wedge B) \vee (A \wedge \neg B))$.
+
+The fourth and fifth column never have a T on the same row, so $(A \wedge B)$ and $(A \wedge \neg B)$ are disjoint. That means that $Pr((A \wedge B) \vee (A \wedge \neg B) = Pr((A \wedge B) + Pr(A \wedge \neg B)$. Putting the two results together, we get that $Pr(A) = Pr((A \wedge B) + Pr(A \wedge \neg B)$.
+
+The next truth table is designed to get us two results. First, that $A \vee B$ is equivalent to $B \vee (A \wedge \neg B)$. And second that $B$ and $(A \wedge \neg B)$ are disjoint.
+
+\starttab{c c c c c c}
+$A$ & $B$ & $A \vee B$ & $\neg B$ & $A \wedge \neg B$ & $B \vee (A \wedge \neg B)$ \\ 
+T & T & T & F & F & T \\
+T & F & T & T & T & T \\
+F & T & T & F & F & T \\
+F & F & F & T & F & F 
+\stoptab Note that the third column, $A \vee B$, and the sixth column, $B \vee (A \wedge \neg B)$, are identical. So those two propositions are equivalent. So $Pr(A \vee B) = Pr(B \vee (A \wedge \neg B))$.
+
+Note also that the second column, $B$ and the fifth column, $A \wedge \neg B$, have no Ts in common. So they are disjoint. So $Pr(B \vee (A \wedge \neg B)) = Pr(B) + Pr(A \wedge \neg B)$. Putting the last two results together, we get that $Pr(A \vee B) = Pr(B) + Pr(A \wedge \neg B)$.
+
+If we add $Pr(A \wedge B)$ to both sides of that last equation, we get $Pr(A \vee B) + Pr(A \wedge B) = Pr(B) + Pr(A \wedge \neg B) + Pr(A \wedge B)$. But note that we already proved that $Pr(A \wedge \neg B) + Pr(A \wedge B) = Pr(A)$. So we can rewrite $Pr(A \vee B) + Pr(A \wedge B) = Pr(B) + Pr(A \wedge \neg B) + Pr(A \wedge B)$ as $Pr(A \vee B) + Pr(A \wedge B) = Pr(B) + Pr(A)$. And simply rearranging terms around gives us $Pr(A) + Pr(B) = Pr(A \vee B) + Pr(A \wedge B)$, which is what we set out to prove.
+
+\section{Truth Tables and Possibilities}
+So far we've been assuming that whenever we are interested in $n$ sentences, there are $2^n$ possibilities. But this isn't always the case. Sometimes a combination of truth values doesn't express a real possibility. Consider, for example, the case where A = \textit{Many people enjoyed the play}, and B = \textit{Some people enjoyed the play}. Now we might start trying to draw up a truth table as follows.
+
+\starttab{c c}
+$A$ & $B$ \\ \hline
+T & T \\
+T & F \\
+F & T \\
+F & F \\
+\stoptab But there's something deeply wrong with this table. The second line doesn't represent a real possibility. It isn't possible that it's true that many people enjoyed the play, but false that some people enjoyed the play. In fact there are only three real possibilities here. First, many people (and hence some people) enjoyed the play. Second, some people, but not many people, enjoyed the play. Third, no one enjoyed the play. That's all the possibilities that there are. There isn't a fourth possibility.
+
+In this case, $A$ entails $B$, which is why there is no possibility where $A$ is true and $B$ is false. In other cases there might be more complicated interrelations between sentences that account for some of the lines not representing real possibilities. Consider, for instance, the following case.
+
+\begin{itemize*}
+\item $A$ = Alice is taller than Betty
+\item $B$ = Betty is taller than Carla
+\item $C$ = Carla is taller than Alice
+\end{itemize*}
+
+Again, we might try and have a regular, 8 line, truth table for these, as below.
+
+\starttab{c c c}
+$A$ & $B$ & $C$ \\ \hline
+T & T & T \\
+T & T & F \\
+T & F & T \\
+T & F & F \\
+F & T & T \\
+F & T & F \\
+F & F & T \\
+F & F & F \\
+\stoptab But here the first line is not a genuine possibility. If Alice is taller than Betty, and Betty is taller than Carla, then Carla can't be taller than Alice. So there are, at most, 7 real possibilities here. (We'll leave the question of whether there are fewer than 7 possibilities as an exercise.) Again, one of the apparent possibilities is not real.
+
+The chance that there are lines on the truth tables that don't represent real possibilities means that we have to modify several of the definitions we offered above. More carefully, we should say.
+
+\begin{itemize*}
+\item Two sentences are $A$ and $B$ are logically equivalent if (and only if) they have the same truth value at every line on the truth table \textit{that represents a real possibility}.
+\item Some sentences $A_1, ..., A_n$ \textbf{entail} a sentence $B$ if (and only if) at every line which (a) represents a real possibility and (b) each of $A_1, ..., A_n$ is true, $B$ is true. Another way of putting this is that the argument from $A_1, ..., A_n$ to $B$ is \textbf{valid}.
+\item Two sentences $A$ and $B$ are logically disjoint if (and only if) there is no line which (a) represents a real possibility and (b) they are both true at that line
+\end{itemize*}
+
+Surprisingly perhaps, we don't have to change the definition of a probability function all that much. We started off by saying that you got a probability function, defined over $A_1, ...,  A_n$ by starting with the truth table for those sentences, all $2^n$ rows of it, and assigning numbers to each row in a way that they added up to 1. The probability of any sentence was then the sum of the numbers assigned to each row at which it is true.
+
+This needs to be changed a little. If something does not represent a real possibility, then its negation is a logical truth. And all logical truths have to get probability 1. So we have to assign 0 to every row that does not represent a real possibility.
+
+But that's the only change we have to make. Still, any way of assigning numbers to rows such that the numbers sum to 1, and any row that does not represent a real possibility is assigned 0, will be a probability function. And, as long as we are only interested in sentences with $A_1, A_n$ as parts, any probability function can be generated this way.
+
+So in fact all of the proofs in the previous chapter of the notes will still go through. There we generated a lot of results from the assumption that any probability function is a measure over the possibility space generated by a truth table. And that assumption is, strictly speaking, true. Any probability function is a measure over the possibility space generated by a truth table. It's true that some such measures are not probability functions because they assign positive values to lines that don't represent real possibilities. But that doesn't matter for the proofs we were making there.
+
+The upshot is that we can, for the purposes of decision theory, continue to think about probability functions using truth tables. Occasionally we will have to be a little more careful, but for the most part, just assigning numbers to rows gives us all the basic probability theory we will need.
+
+\section{Propositions and Possibilities}
+There are many things we can be uncertain about. Some of these concern matters of fact, especially facts about the future. We can be uncertain about horseraces, or elections, or the weather. And some of them concern matters to do with mathematics or logic. We might be uncertain about whether two propositions are logically equivalent. Or we might be uncertain whether a particular mathematical conjecture is true or false. 
+
+Sometimes our uncertainty about a subject matter relates to both things. I'm writing this in the middle of hurricane season, and we're frequently uncertain about what the hurricanes will do. There are computer models to predict them, but the models are very complicated, and take hours to produce results even once all the data is in. So we might also be uncertain about a purely mathematical fact, namely what this model will predict given these inputs.
+
+One of the consequences of the axioms for probability theory we gave above is that any logical truth, and for current purposes at least mathematical truths count as logical truths, get probability 1. This might seem counterintuitive. Surely we can sensibly say that such and such a mathematical claim is likely to be true, or probable to be true. Or we can say that someone's logical conjecture is probably false. How could it be that the axioms of probability say otherwise?
+
+Well, the important thing to remember here is that what we're developing is a formal, mathematical notion. It remains an open question, indeed a deep philosophical question, whether that mathematical notion is useful in making sense of our intuitive, informal notion of what's more or less likely, or more or less probable. It is natural to think at this point that probability theory, the mathematical version, will not be of much help in modelling our uncertainty about logic or mathematics.
+
+At one level this should not be too surprising. In order to use a logical/mathematical model, we have to use logic and mathematics. And to use logic and mathematics, we have to presuppose that they are given and available to use. But that's very close already to presupposing that they aren't at all uncertain. Now this little argument isn't very formal, and it certainly isn't meant to be a conclusive proof that there couldn't be a mathematical model of uncertainty about mathematics. But it's a reason to think that such a model would have to solve some tricky conceptual questions that a model of uncertainty about the facts does not have to solve.
+
+And not only should this not be surprising, it should not necessarily be too worrying. In decision theory, what we're usually concerned with is uncertainty about the facts. It's possible that probability theory can be the foundation for an excellent model for uncertainty about the facts even if such a model is a terrible tool for understanding uncertainty about mathematics. In most areas of science, we don't expect every model to solve every problem. I mentioned above that at this time of year, we spend a lot of time looking at computer models of hurricane behaviour. Those models are not particularly useful guides to, say, snowfall over winter. (Let alone guides to who will win the next election.) But that doesn't make them bad hurricane models.
+
+The same thing is going to happen here. We're going to try to develop a mathematical model for uncertainty about matters of fact. That model will be extremely useful, when applied to its intended questions. If you apply the model to uncertainty about mathematics, you'll get the crazy result that no mathematical question could ever be uncertain, because every mathematical truth gets probability 1, and every falsehood probability 0. That's not a sign the model is failing; it is a sign that it is being misapplied. (Caveat: Given that the model has limits, we might worry about whether its limits are being breached in some applications. This is a serious question about some applications of decision theory to the Sleeping Beauty puzzle, for example.)
+
+To end, I want to note a connection between this section and two large philosophical debates. The first is about the relationship between mathematics and logic. The second is about the nature of propositions. I'll spend one all-too-brief paragraph on each.
+
+I've freely moved between talk of logical truths and mathematical truths in the above. Whether this is appropriate turns out to be a tricky philosophical question. One view about the nature of mathematics, called logicisim, holds that mathematics is, in some sense, part of logic. If that's right, then mathematical truths are logical truths, and everything I've said is fine. But logicism is very controversial, to put it mildly. So we shouldn't simply assume that mathematical truths are logical truths. But we can safely assume the following disjunction is true. Either (a) simple arithmetical truths (which is all we've been relying on) are part of logic, or (b) the definition of a probability function needs to be clarified so all logical and (simple) mathematical truths get probability 1. With that assumption, everything I've said here will go through.
+
+I've taken probability functions to be defined over sentences. But it is more common in mathematics, and perhaps more elegant, to define probability functions over sets of possibilities. Now some philosophers, most notably Robert Stalnaker, have argued that sets of possibilities also have a central philosophical role. They've argued that propositions, the things we believe, assert, are uncertain about etc, just are sets of possibilities. If that's right, there's a nice connection between the mathematical models of probability, and the psychological notion of uncertainty we're interested in. But this view is controversial. Many philosophers think that, especially in logic and mathematics, there are many distinct propositions that are true in the same possibilities. (One can be uncertain about one mathematical truth while being certain that another is true, they think.) In any case, one of the upshots of the discussion above is that we're going to write as if Stalnaker was right, i.e. as if sets of possibilities are the things that we are certain/uncertain about. We'll leave the tricky philosophical questions about whether he's actually right for another day.
+
+%\newpage
+%\section{Exercises}
+%\subsection{Truth Tables and Probabilities}
+%Consider this table of possibilities and probabilities, that we've used before.
+%
+%\starttab{c c c c}
+%$p$ & $q$ & $r$ \\ 
+%T & T & T & 0.0008\\
+%T & T & F & 0.008\\
+%T & F & T & 0.08\\
+%T & F & F & 0.8\\
+%F & T & T & 0.0002\\
+%F & T & F & 0.001\\
+%F & F & T & 0.01\\
+%F & F & F & 0.1
+%\stoptab If those numbers on each row express the probability that the row is actual, what is the probability of each of the following sentences?
+%
+%\begin{enumerate*}
+%\item $q$
+%\item $\neg r$
+%\item $p \wedge q$
+%\item $q \vee \neg r$
+%\item $p \wedge (q \vee \neg r)$
+%\item $(\neg p \wedge r) \vee (r \wedge \neg q)$
+%\end{enumerate*}
+%
+%\subsection{Tables and Proofs}
+%There's just one question here, but I want you to answer it twice. Make the following assumptions.
+%
+%\begin{itemize*}
+%\item $Pr(p \vee q) = 0.84$
+%\item $Pr(\neg p \vee q) = 0.77$
+%\item $Pr(p \vee \neg q) = 0.59$
+%\end{itemize*}
+%
+%What I want you to figure out is, what is $Pr(p)$. But I want you to show the workings out for this twice.
+%
+%First, I want you to use the information given to work out what the probability of each row of the truth table is, and use that to work out $Pr(p)$.
+%
+%Second, I want an argument directly from the axioms for probability (plus facts about logical relations, as necessary) that ends up with the right value for $Pr(p)$.
+%
+%\subsection{Possibiilities}
+%We discussed above the following example.
+%
+%\begin{itemize*}
+%\item $A$ = Alice is taller than Betty
+%\item $B$ = Betty is taller than Carla
+%\item $C$ = Carla is taller than Alice
+%\end{itemize*}
+%
+%And we noted that one of the eight lines on the truth table, the top one, does not represent a real possibility. How many other lines on the truth table do not represent real possibilities?

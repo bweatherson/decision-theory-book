@@ -1,0 +1,237 @@
+\chapter[Introduction to Games]{Introduction to Games}
+
+%I start talking at one point about strategies; might need to introduce this
+
+Game theory is a somewhat oddly defined subject matter. A \textbf{game} is any decision problem where the outcome depends on the actions of more than one agent, as well as perhaps on other facts about the world. \textbf{Game Theory} is the study of what rational agents do in such situations. You might think that the way to figure that out would be to come up with a theory of how rational agents solve decision problems, i.e., figure out \textbf{Decision Theory}, and then apply it to the special case where the decision problem involves uncertainty about the behaviour of other rational agents. And that answer would not be wrong.
+
+But it would be incomplete. To solve a decision problem, we need one of two things. The decision problem has to either be one where there is a dominant action, or it has to be one where the probabilities of the various states are given to us. If you don't have either of those things, you can't say what the thing to do is. What is distinctive about games is that we can solve for each player's action even though we don't start out knowing the probability of the other player's acts, and not every player has a dominating choice. 
+
+Let's start with a simple, and famous, example of a game. Each player in the game is to choose a letter, A or B. After they make the choice, the player will be paired with a randomly chosen individual who has been faced with the very same choice. They will then get rewarded according to the following table. 
+
+\begin{itemize*}
+\item If they both choose A, they will both get \$1
+\item If they both choose B, they will both get \$3
+\item If one chooses A, and the other B, the one who chose A will get \$5, and the one who chose B will get \$0.
+\end{itemize*}
+
+\noindent We can represent this information in a small table, as follows. (Where possible, we'll use uppercase letters for the choices on the rows, and lowercase letters for choices on the columns.)
+
+\starttab{r c c}
+ & Choose a & Choose b \\
+Choose A & \$1, \$1 & \$5, \$0 \\
+Choose B & \$0, \$5 & \$3, \$3 \\
+\fintab
+
+\noindent We represent one player, imaginatively called \textbf{Row}, or $R$, on the rows, and the other player, imaginatively called \textbf{Column}, or $C$ on the columns. A cell of the table represents the outcomes, if $R$ chose to be on that row, and $C$ chose to be in that column. There are two monetary sums listed in each cell. We will put the row player's outcome first, and the column player's outcome second. You should verify that the table represents the same things as the text. (Actually you should do this for two reasons. One, it's good to make sure you understand what the tables are saying. Two, I'm really sloppy with details, so there's a far from zero chance I've got the table wrong.) 
+
+Now let's note a few distinctive features of this game.
+
+\begin{itemize*}
+\item Whatever $C$ does, $R$ gets more money by choosing A. If $C$ chooses a, then $R$ gets \$1 if she chooses A, and \$0 if she chooses B; i.e., she gets more if she chooses A. And if $C$ chooses b, then $R$ gets \$5 if she chooses A, and \$3 if she chooses B; i.e., she gets more if she chooses A.
+\item Since the game is symmetric, that's true for $C$ as well. Whatever $R$ does, she gets more money if she chooses a.
+\item But the players collectively get the most money if they both choose B.
+\end{itemize*}
+
+\noindent So doing what maximises the players' individual monetary rewards does not maximise, indeed it minimises, their collective monetary rewards. 
+
+I've been careful so far to distinguish two things: the monetary rewards each player gets, and what is best for each player. More elegantly, we need to distinguish the \textbf{outcomes} of a game from the \textbf{payoffs} of a game. The outcomes of the game are things we can easily physically describe: this player gets that much money, that player goes to jail, this other player becomes President of a failing Middle Eastern dictatorship, etc. The payoffs of a game describe how well off each player is with such an outcome. Without knowing much about the background of the players, we don't know much about the payoffs.
+
+Let's make this explicit by looking at four ways in which the agents may value the outcomes of the game. The first way is that agents simply prefer that their monetary payoff is as high as possible. If that's the way the players value things, then the game looks as follows.
+
+\starttab{r c c}
+%This is called PD-Selfish
+\gamelab{PD-Selfish} & Choose a & Choose b \\
+Choose A & 1, 1 & 5, 0\\
+Choose B & 0, 5 & 3, 3\\
+\fintab
+
+\noindent Whenever we just put numbers in a table, we assume that they stand for \textbf{utils}. And we assume that players are constantly trying to maximise utils. We'll come back to this assumption presently. But first, let's note that it doesn't require that players only care about their own well-being. We could change the game, while keeping the outcome the same, if we imagine that $R$ and $C$ are parts of a commune, where all money is shared, and they both know this, so both players utility is given by how much money is added to the commune in a give outcome. That will give us the following game.
+
+\starttab{r c c}
+%This is called PD-Communist
+\gamelab{PD-Communist} & Choose a & Choose b \\
+Choose A & 2, 2 & 5, 5\\
+Choose B & 5, 5 & 6, 6\\
+\fintab
+
+\noindent In Game \arabic{PD-Selfish}, the players face the following awkward circumstance. Each individual will be made \textbf{better off} by playing A rather than B, no matter what happens, but were they both to have played B, they would both be better off than if they'd both played A. That's not true in Game \arabic{PD-Communist}; here what is good for each player is good for the collective.
+
+You might note that I've started numbering the games, and that I didn't number the initial description of the outcomes. There's a reason for this. Technically, we'll say that a game is specified by setting out what moves, or as we'll sometimes call them, \textit{strategies} are available for each player, and what the \textit{payoffs} are for each player, given the moves that they make. (And, perhaps, the state of the world; for now we're just looking at games where only moves matter for payoffs. And we're only looking for now at games where each player makes a simultaneous choice of strategy. We'll return to how general an account this is in a little while.) Specifying the outcome of a game in physical terms doesn't give us a unique game. We need to know more to get a genuine game specification.
+
+There are yet more ways we could imagine the outcomes being mapped into a particular payoff matrix; i.e., a game. Imagine that the players have the following values. First, they care a lot about how much money goes to the two of them together. So the first determinant of their payoff is the sum of the money paid to each player. Second, they care a lot about agreement. If the two players play different strategies, that is equivalent to a cost of \$5 to them. So here is the payoff table for players with those values.
+
+\starttab{r c c}
+%This is called PD-Agree
+\gamelab{PD-Agree} & Choose a & Choose b \\
+Choose A & 2, 2 & 0, 0\\
+Choose B & 0, 0 & 6, 6\\
+\fintab
+
+\noindent Something new happens in Game \arabic{PD-Agree} which we haven't seen before. What is best for the players to do depends on what the other players do. In Game \arabic{PD-Selfish}, each player was best off playing A, no matter what the other player did. In Game \arabic{PD-Communist}, each player was best off playing B, no matter what the other player did. But in Game \arabic{PD-Agree}, the best move for each player is to play what the other player does. If $R$ plays A, then $C$ gets 2 if she plays a, and 0 if she plays b. If $R$ plays B, then $C$ gets 6 if she plays b, and 0 if she plays a. There's no single best strategy for her, until she knows what $R$ does.
+
+We can mix and match these. Let's look at what the game is like if $R$ has the egotistic preferences from Game \arabic{PD-Selfish}, and $C$ has the obsession with agreement of the players in Game \arabic{PD-Agree}.
+
+\starttab{r c c}
+%This is called PD-Mixed
+\gamelab{PD-Mixed} & Choose a & Choose b \\
+Choose A & 1, 2 & 5, 0\\
+Choose B & 0, 0 & 3, 6\\
+\fintab You should confirm this, but what I've attempted to do here is have the first number in each cell, i.e., $R$'s payoff, copy the matching cell in Game \arabic{PD-Selfish}, and the second number in each cell, i.e., $C$'s payoff, copy the matching cell in Game \arabic{PD-Agree}. We will come back in a little while to what to say about Game \arabic{PD-Mixed}, because it is more complicated than the other games we've seen to date. First, let's make three philosophical notes on what we've seen so far. 
+
+\section{Prisoners' Dilemma}
+Game \arabic{PD-Selfish} is often called a \textbf{Prisoners' Dilemma}. There is perhaps some terminological confusion on this point, with some people using the term ``Prisoners' Dilemma'' to pick out any game whose \textit{outcomes} are like those in the games we've seen so far, and some using it only to pick out games whose \textit{payoffs} are like those in Game \arabic{PD-Selfish}. Following what Simon Blackburn says  in ``Practical Tortoise Raising'', I think it's not helpful to use the the term in the first way. So I'll only use it for games whose payoffs are like those in  Game \arabic{PD-Selfish}.
+
+And what I mean by payoffs like those in Game \arabic{PD-Selfish} is the following pair of features.
+
+\begin{itemize*}
+\item Each player is better off choosing A than B, no matter what the other player does.
+\item The players would both be better off if they both chose B rather than both chose A.
+\end{itemize*}
+
+\noindent You might want to add a third condition, namely that the payoffs are symmetric. But just what that could \textit{mean} is a little tricky. It's easy to compare \textit{outcomes} of different players; it's much harder to compare \textit{payoffs}. So we'll just leave it with these two conditions.
+
+It is often very bad to have people in a Prisoners' Dilemma situation; everyone would be better off if they were out of it. Or so it might seem at first. Actually, what's really true is that the two players would be better off if they were out of the Prisoners' Dilemma situation. Third parties might stand to gain quite a lot from it. (If I'm paying out the money at the end of the game, I prefer that the players are in Game \arabic{PD-Selfish} to Game \arabic{PD-Communist}.) We'll come back to this point in a little. There are several ways we could try and escape a Prisoners' Dilemma. We'll mention four here, the first two of which we might naturally associate with Adam Smith.
+
+The first way out is through \textbf{compassion}. If each of the players cares exactly as much about the welfare of the other player as they do about themselves, then we'll be in something like Game \arabic{PD-Communist}, not Game \arabic{PD-Selfish}. Note though that there's a limit to how successful this method will be. There are variants of the Prisoners' Dilemma with arbitrarily many  players, not just two. In these games, each player is better off if they choose A rather than B, no matter what the others do, but all players are better off if all players choose B rather than A. It stretches the limit of compassion to think we can in practice value each of these players's welfare equally to our own.
+
+Moreover, even in the two player game, we need exact match of interests to avoid the possibility of a Prisoners' Dilemma. Let's say that $R$ and $C$ care about each other's welfare a large amount. In any game they play for money, each players' payoff is given by the number of pounds that player wins, plus 90\% of the number of dollars the other player wins. Now let's assume they play a game with the following outcome structure.
+
+\starttab{r c c}
+ & Choose a & Choose b \\
+Choose A & \$9.50, \$9.50 & \$20, \$0 \\
+Choose B & \$0, \$20 & \$10, \$10 \\
+\fintab
+
+\noindent So we'll have the following payoff matrix.
+
+\starttab{r c c}
+%This is called PD-Share
+\gamelab{PD-Share} & Choose a & Choose b \\
+Choose A & 18.05, 18.05 & 20, 18\\
+Choose B & 18, 20 & 19, 19\\
+\fintab
+
+\noindent And that's still a Prisoners' Dilemma, even though the agents are very compassionate. So compassion can't do all the work. But probably none of the other `solutions' we are about to get to can work unless compassion does some of the work. (That's partially why Adam Smith wrote the \textit{Theory of Moral Sentiments} before going on to economic work; some moral sentiments are necessary for economic approaches to work.)
+
+Our second way out is through \textbf{contract}. Let's say each party contracts with the other to choose B, and agrees to pay \$2.50 to the other if they break the contract. Assuming that this contract will be enforced (and that the parties know this), here is what the outcome table now looks like.
+
+\starttab{r c c}
+ & Choose a & Choose b \\
+Choose A & \$1, \$1 & \$2.50, \$2.50 \\
+Choose B & \$2.50, \$2 & \$3, \$3 \\
+\fintab
+
+\noindent Now if we assume that the players just value money, those outcomes generate the following game.
+
+\starttab{r c c}
+%This is called PD-Contract
+\gamelab{PD-Contract} & Choose a & Choose b \\
+Choose A & 1,1 & 2.5, 2.5 \\
+Choose B & 2.5, 2.5 & 3,3\\
+\fintab
+
+\noindent Interestingly, the game looks just like the original Prisoners' Dilemma as played between members of a commune. Basically, the existence of side contracts is enough to turn capitalists into communists. 
+
+A very closely related approach, one which is typically more efficient in games involving larger numbers of players, is to modify the outcomes, and hence the payoffs, with taxes. A striking modern example of this involves congestion charges in large cities. There are many circumstances where each person would prefer to drive somewhere than not, but if everyone drives, we're all worse off than if everyone took mass transit (or simply stayed home). The natural solution to this problem is simply to put a price on driving into the congested area. If the price is set at the right level, those who pay the charge are better off than if the charge was not there, since the amount they lose through the charge is gained back through the time they save.
+
+In principle, we could always avoid Prisoners' Dilemma situations from arising through judicious use of taxes and charges. But it's hard to get the numbers right, and even harder to do the enforcement. So sometimes states will try to solve Prisoners' Dilemma situations with \textbf{regulation}. We see this in Beijing, for example, when they try to deal with congestion not by charging people money to enter the city, but by simply banning (certain classes of) people from driving into the city on given days. At a more abstract level, you might think of ethical prohibitions on `free-riding' as being ways of morally regulating away certain options. If choosing B is simply ruled out, either by law or morality, there's clearly no Prisoners' Dilemma!
+
+Having said that, one important kind of regulation around here concerns making sure Prisoners' Dilemma situations survive, and are not contracted away. Let the two players be two firms in a duopoly; i.e., they are the only firms to provide a certain product. It is common for there to be only two firms in industries that require massive capital costs to startup, e.g., telecommunications or transport. In small towns (like Ann Arbor) , it is common to have only two firms in more or less every sphere of economic life. In such cases there will usually be a big distance between the prices consumers are prepared to pay for the product, and the lowest price that the firm could provide the product and still turn a profit. Call these prices High and Low. 
+
+If the firms only care about maximising profit, then it looks like setting prices to High is like choosing B in Game \arabic{PD-Selfish}, and setting prices to Low is like choosing A in that game. The two firms would be better off if each of them had High prices. But if one had High prices, the other would do better by undercutting them, and capturing (almost) all the market. And if both had Low prices, neither would be better off raising prices, because (almost) everyone would desert their company. So the firms face a Prisoners' Dilemma.
+
+As Adam Smith observed, the usual way businesses deal with this is by agreeing to raise prices. More precisely, he says,
+
+\begin{quote}
+People of the same trade seldom meet together, even for merriment and diversion, but the conversation ends in a conspiracy against the public, or in some contrivance to raise prices.
+\end{quote}
+
+\noindent And that's not too surprising. There's a state where they are both better off than the state where they can compete. If by changing some of the payoffs they can make that state more likely to occur, then they will. And that's something that we should regulate away, if we want the benefits of market competition to accrue to consumers.
+
+The final way to deal with a Prisoners' Dilemma is through \textbf{iteration}. But that's a big, complicated issue, and one that we'll come back to much later in these notes.\footnote{As we've stressed so far, there is a difference between outcomes and payoffs. An agent's payoff may be quite high, even if their outcome looks terrible, if the result of the game involves something they highly value. For instance, if one player values the wealth of the other player, an outcome that involves the other player ending up with lots of money will be one where the payoffs to both players are high.
+
+In that respect the theory does not assume selfishness on the part of agents. It does assume that agents should try to get what they value, but that doesn't seem too big a constraint at first, assuming that agents are allowed to value anything. But in practice things are a little more complicated.
+
+The model game theorists are using here is similar to the model that many ethicists, from G. E. Moore onward, have used to argue that any (plausible) ethical theory has a consequentialist form. To take one example, let's assume that we are virtue ethicists, and we think ethical considerations are `trumps', and we are playing a game that goes from time $t_0$ to time $t_1$. Then we might say the payoff to any agent at $t_1$ is simply how virtuously they acted from $t_0$ to $t_1$. Since agents are supposed to be as virtuous as possible, this will give us, allegedly, the right evaluation of the agent's actions from $t_0$ to $t_1$.
+
+Does this work in general? It certainly doesn't work as a theory of moral motivation, or indeed of any other kind of motivation. But consequentialism isn't really meant to be a theory of motivation. Utilitarians do not think that agents should aim to maximise utility \textit{as such}. They think agents should do the things that, as a matter of fact, maximise utility. But a bigger worry is how this theory of value intersects with a theory of rational action under uncertainty. To settle this, we'd have to offer a theory of action under moral uncertainty, and we're not going to do \textit{that} here. But we will note that there's a big issue here, and one that isn't easily settled by being liberal about what agents can value. If you're interested in this topic, look up articles on whether moral theories can be \textit{consequentialized}.}
+
+\section{Knowledge and Dominance}
+
+Players should never play a \textbf{dominated} strategy.\footnote{Actually, things are a little more complicated than it sounds in the text, for reasons to do with the theory of knowledge. Here's what looks like a very simple game.
+
+\starttab{r c c}
+%This is called SimDom
+%It is an illustration of strict dominance
+%It is paired with SimNoDom, which adds in an extra state of world parameter
+\gamelab{SimDom} & Choose a & Choose b \\
+Choose A & 20, 20 & 10, 1\\
+Choose B & 1,10 & 1,1\\
+\fintab
+
+\noindent It seems clear that both players should choose A. After all, whatever the other player does, they are better off with A. And the two of them are collectively better off both choosing A, so any Prisoners' Dilemma related doubts that we had are not operational here.
+
+But let me tell you a bit more about the background to this game. The payoffs are just payments in dollars. Each player values only their own winnings, and values each dollar equally, so the function from outcomes to payoffs is easy. And it's really true that those are the payoffs the players will get if they choose either A or B. But the players don't know this. What they do know is that a fair coin is about to be tossed 10 times. They also know that if the coin comes down heads every time, then the payoffs are as above. Finally, they know that if the coin comes down tails even once, and either of them chooses A, then neither player will get any money. So the full table looks more like this.
+
+\starttab{r c c c}
+%This is called SimNoDom
+%It is an illustration of the importance of knowledge
+%It is paired with SimDom, which removes the middle option
+\gamelab{SimNoDom} & Choose a & Choose a & Choose b \\
+ & \& 10 Heads & \& at least 1 Tail \\
+Choose A \& 10 Heads & 20, 20 & 0, 0 & 10, 1\\
+Choose A \& at least 1 Tail & 0, 0 & 0, 0 & 0, 0 \\
+Choose B & 1,10 & 0,0 & 1,1\\
+\fintab
+
+\noindent And now choosing A looks like a foolish gamble, since the odds are overwhelming that the coin will fall tails at least once. It seems then that Game \arabic{SimDom} somehow misrepresents the situation facing the players. The table in Game \arabic{SimDom} makes it look like it is best to choose A, but really in the situation facing the players, the smart move is to choose B.
+
+What, though, is wrong with the representation of Game \arabic{SimDom}? It isn't that anything written on the table is \textit{false}. Those really are the payouts the players will get, since the coin does, as a matter of fact, land heads 10 times in a row. What's wrong, at least on standard views, is that the players don't \textit{know} that Game \arabic{SimDom} represents the payoffs correctly. At a minimum, when we write a payoff matrix down, we assume that each player \textbf{knows} that the matrix is correct.
+
+Sometimes, indeed often, we will make stronger assumptions than that. For instance, we'll almost always assume that each player knows that the other player knows the table is correct. And we'll often assume that each player knows that. And we'll often assume that each player knows that. And we'll often assume that each player knows that. And so on. But the basic assumption is that each player knows the table is correct.} A dominated strategy is, roughly, a strategy such that some other strategy can do better, no matter how other things are. In other words, if a player knows that strategy $s_1$ will do better than $s_2$, then it is irrational for her to do $s_2$.\footnote{Those familiar with recent debates in epistemology will recognise this as a form of the Knowledge-Action Principle, which says that knowledge is sufficient for action. This principle plays a central role in work by John Hawthorne and Jason Stanley, and by Jeremy Fantl and Matthew McGrath. But it has also been the subject of some criticism. Orthodox game theory, and for that matter decision theory, incorporates this version of the Knowledge-Action principle, via the principle that dominated actions should not be chosen. Those who want to reject the Knowledge-Action principle will have to either do without orthodox game and decision theory, or find some other way to reinterpret game matricies so that the injunction against choosing dominated options makes sense}
+
+It's important to be careful about what we mean by a dominated strategy. Here is a more careful definition.
+
+\begin{description}
+\item[Strong Domination] A strategy $s_1$ \textit{strongly dominates} strategy $s_2$ for player $i$ iff for any combination of moves by other players, and states of the external world, playing $s_1$ provides a greater payoff than playing $s_2$, assuming other players make those moves, and the world is that way.
+\item[Strongly Dominated] A strategy is strongly dominated iff some other strategy, available to the same player, strongly dominates it.
+\end{description}
+
+\noindent There is a potential scope ambiguity in the description of a strongly dominated strategy that it is important to be clear about. The claim is \textit{not} that a strategy is strongly dominated if no matter what else happens, some strategy or other does better than it. It is that a strategy is dominated if some particular strategy does better in every circumstance. We can see the difference between these two ideas in the following game.
+
+\starttab{r c c }
+%This is called DomScope
+%It is an illustration of the scope ambiguity in the definition of domination
+\gamelab{DomScope} & $l$ & $r$ \\
+$U$ & 3, 0 & 0, 0 \\
+$M$ & 2, 0 & 2, 0 \\
+$D$ & 0, 0 & 3, 0 \\
+\fintab
+
+\noindent Consider this game from $R$'s perspective; who is choosing as always the rows. Her options are \textbf{U}p, \textbf{M}iddle and \textbf{D}own. $C$ is choosing the columns; her choices are \textbf{l}eft or \textbf{r}ight. (I hope the ambiguity between $r$ for \textit{Right} and $R$ for \textit{Row} is not too confusing. It should be very hard in any given context to get them mixed up, and hopefully the convention we've adopted about upper and lower case letters will help.)
+
+Notice that Middle is never the best outcome for $R$. If $C$ chooses Left, $R$ does best choosing Up. If $C$ chooses Right, $R$ does best choosing Down. But that does not mean Middle is dominated. Middle would only be dominated if one particular choice was better than it in both circumstances. And that's not true. Middle does better than Up in one circumstance (when $C$ chooses Right) and does better than Down in another circumstance (when $C$ chooses Left).
+
+Indeed, there are situations where Middle might be uniquely rational. Consider what happens when $R$ suspcts $C$ is just going to flip a coin, and choose Left if it comes up Heads, and Right if it comes up Tails. (Since literally nothing is at stake for $C$ in the game, this might be a reasonable hypothesis about what $C$ will do.) Then it maximises $R$'s \textbf{expected} return to choose Middle. 
+
+So far we've talked about the notion of strong dominance. We also need a notion of \textbf{weak dominance}. Roughly, strategy $s_1$ weakly dominates strategy $s_2$ if $s_1$ can do better than $s_2$, and can't do worse. More formally,
+
+\begin{description}
+\item[Weak Domination] A strategy $s_1$ \textit{weak dominates} strategy $s_2$ for player $i$ iff for some combination of moves by other players, and states of the external world, playing $s_1$ provides a greater payoff than playing $s_2$, assuming other players make those moves, and the world is that way, and for all combination of moves by other players, and states of the external world, playing $s_1$ provides at least as high a payoff as playing $s_2$, assuming other players make those moves, and the world is that way,
+\item[Weakly Dominated] A strategy is weakly dominated iff some other strategy, available to the same player, weakly dominates it.
+\end{description}
+
+\noindent It does seem plausible that agents should prefer any strategy over an alternative that it weakly dominates. This leads to distinctive results in games like the following.
+
+\starttab{r c c }
+%This is called WeakDom
+%It is an illustration of the difference between weak and strong domination
+%It is a nice illustration of how deleting weakly dominated strategies, even once, can rule out Nash Eqm, and even Subgame Perfect Eqm.
+\gamelab{WeakDom} & $a$ & $b$ \\
+$A$ & 1, 1 & 0, 0 \\
+$B$ & 0, 0 & 0, 0 \\
+\fintab
+
+\noindent In this game, choosing $A$ does not strongly dominate choosing $B$ for either player. The game is symmetric, so from now on we'll just analyse it from $R$'s perspective. The reason choosing $A$ does not strongly dominate is is that if $C$ chooses $b$, then choosing $A$ leads to no advantage. $R$ gets 0 either way.
+
+But choosing $A$ does \textit{weakly} dominate choosing $B$. $A$ does better than $B$ in one circumstance, namely when $C$ chooses $a$, and never does worse. So a player who shuns weakly dominated options will always choose $A$ rather than $B$ in this game.

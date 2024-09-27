@@ -1,0 +1,100 @@
+\section{Games}
+A game is any decision problem where the outcome turns on the actions of two or more individuals. We'll entirely be concerned here with games where the outcome turns on the actions of just two agents, though that's largely because the larger cases are more mathematically complicated.
+
+Given a definition that broad, pretty much any human interaction can be described as a game. And indeed game theory, the study of games in this sense, is one of the most thriving areas of modern decision theory. Game theory is routinely used in thinking about conflicts, such as warfare or elections. It is also used in thinking about all sorts of economic interactions. Game theorists have played crucial (and lucrative) roles in recent years designing high-profile auctions, for example. The philosopher and economist Ken Binmore, for example, led the team that used insights from modern game theory to design the auction of the 3G wireless spectrum in Britain. That auction yielded the government billions of pounds more than was anticipated.
+
+When we think of the ordinary term `game', we naturally think of games like football or chess, where there are two players with conflicting goals. But these games are really quite special cases. What's distinctive of football and chess is that, to a first approximation, the players' goals are completely in conflict. Whatever is good for the interests of one player is bad for the interests of the other player. This isn't what's true of most human interaction. Most human interaction is not, as we will put it here, \textbf{zero sum}. When we say that an interaction is zero sum, what we mean (roughly) that the net outcome for the players is constant. (Such games may better be called `constant-sum'.)
+
+We'll generally represent games using tables like the following. Each row represents a possible move (or strategy) for a player called Row, and each column represents a possible move (or strategy) for a player called Column. Each cell represents the payoffs for the two players. The first number is the utility that Row receives for that outcome, and the second number is the utility that Column receives for that outcome. Here is an example of a game. (It's a version of a game called the Stag Hunt.)
+
+\starttab{r | c | c}
+ & Team & Solo \\ \hline
+Team & (4, 4) & (1, 3) \\
+Solo & (3, 1) & (3, 3)
+\stoptab Each player has a choice between two strategies, one called `Team' and the other called `Solo'. (The model here is whether players choose to hunt alone or as a team. A team produces better results for everyone; if it is large enough.) Whoever plays Solo is guaranteed to get an outcome of 3. If someone plays Team, they get 4 if the other player plays Team as well, and 1 if the other player plays solo.
+
+A zero sum game is where the outcomes all sum to a constant. (For simplicity, we usually make this constant zero.) So here is a representation of (a single game of) Rock-Paper-Scissors.
+
+\starttab{r | c c c}
+ & Rock & Paper & Scissors \\ \hline
+Rock & (0, 0) & (-1, 1) & (1, -1) \\
+Paper & (1, -1) & (0, 0) & (-1, 1) \\
+Scissors & (-1, 1) & (1, -1) & (0, 0)
+\stoptab Sometimes we will specify that the game is a zero sum game and simply report the payoffs for Row. In that case we'd represent Rock-Paper-Scissors in the following way.
+
+\starttab{r | c c c}
+ & Rock & Paper & Scissors \\ \hline
+Rock & 0 & -1 & 1 \\ 
+Paper & 1 & 0 & -1 \\
+Scissors & -1 & 1 & 0
+\stoptab The games we've discussed so far are symmetric, but that need not be the case. Consider a situation where two people are trying to meet up and don't have any way of getting in touch with each other. Row would prefer to meet at the Cinema, Column would prefer to meet at the Opera. But they would both prefer to meet up than to not meet up. We might represent the game as follows.
+
+\starttab{r | c  c}
+ & Cinema & Opera \\ \hline
+Cinema & (3, 2) & (1, 1) \\
+Opera & (0, 0) & (2, 3)
+\stoptab 
+
+We will make the following assumptions about all games we discuss. Not all game theorists make these assumptions, but we're just trying to get started here. First, we'll assume that the players have no means of communicating, and hence no means of negotiating. Second, we'll assume that all players know everything about the game table. That is, they know exactly how much each outcome is worth to each player.
+
+Finally, we'll assume that all the payoffs are in `utils'. We won't assume that the payoffs are fully determinate. The payoff might be a probability distribution over outcomes. For example, in the game above, consider the top left outcome, where we say Row's payoff is 3. It might be that Row doesn't know if the movie will be any good, and thinks there is a 50\% chance of a good movie, with utility 5, and a 50\% chance of a bad movie, with utility 1. In that case Row's \textit{expected} utility will be 3, so that's what we put in the table. (Note that this makes the assumption that the players know the full payoff structure quite unrealistic, since players typically don't know the probabilities that other players assign to states of the world. So this is an assumption that we might like to drop in more careful work.)
+
+For the next few handouts, we'll assume that the interaction between the players is ended when they make their, simultaneous, moves. So these are very simple one-move games. We'll get to games that involve series of moves in later handouts. But for now we just want to simplify by thinking of cases where Row and Column move simultaneously, and that ends the game/interaction.
+
+\section{Zero-Sum Games and Backwards Induction}
+Zero-sum games are the simplest to theorise about, so we'll start with them. They are also quite familiar as `games', though as we said above, most human interaction is not zero-sum. Zero-sum games are sometimes called `strictly competitive' games, and we'll use that terminology as well sometimes, just to avoid repetition. For all of this section we'll represent zero-sum games by the `one-number' method mentioned above, where the aim of Row is to maximise that number, and the aim of Column is to minimise it.
+
+Zero-sum games can't have pairs strictly dominating options for each player. That's because what is good for Row is bad for Column. But they can have outcomes that are ended up at by a process of removing something like dominated outcomes. Consider, for instance, the following game.
+
+\starttab{r | c c c}
+ & $A$ & $B$ & $C$ \\ \hline
+$A$ & 5 & 6 & 7 \\ 
+$B$ & 3 & 7 & 8 \\
+$C$ & 4 & 1 & 9
+\stoptab Column pretty clearly isn't going to want to play $C$, because that is the worst possible outcome whatever Row plays. Now $C$ could have been a good play for Row, it could have ended up with the 9 in the bottom-right corner. But that isn't a live option any more. Column isn't going to play $C$, so really Row is faced with something like this game table.
+
+\starttab{r | c c}
+ & $A$ & $B$  \\ \hline
+$A$ & 5 & 6  \\ 
+$B$ & 3 & 7  \\
+$C$ & 4 & 1 
+\stoptab 
+And in that table, $C$ is a dominated outcome. Row is better off playing $A$ than $C$, whatever Column plays. Now Column can figure this out too. So Column knows that Row won't play $C$, so really Column is faced with this choice.
+
+\starttab{r | c c}
+ & $A$ & $B$  \\ \hline
+$A$ & 5 & 6  \\ 
+$B$ & 3 & 7  \\
+\stoptab And whatever Row plays now, Column is better off playing $A$. Note that this really requires the prior inference that Row won't play $C$. If $C$ was a live option for Row, then $B$ might be the best option for Column. But that isn't really a possibility. So Column will play $A$. And given that's what Column will do, the best thing for Row to do is to play $A$. So just eliminating dominated options repeatedly in this way gets us to the solution that both players will play $A$.
+
+So something like repeated dominance reasoning can sometimes get us to the solution of a game. It's worth spending a bit of time reflecting on the assumptions that went into the arguments we've used here. We had to assume that Row could figure out that Column will play $A$. And that required Column figuring out that Row will not play $C$. And Column could only figure that out if they could figure out that Row would figure out that they, i.e. Column, would not play $C$. So Column has to make some strong assumptions about not only the rationality of the other player, but also about how much the other player can know about their own rationality. In games with more than three outcomes, the players may have to use more complicated assumptions, e.g. assumptions about how rational the other player knows that they know that that other player is, or about whether the other player knows they are in a position to make such assumptions, and so on.
+
+This is all to say that even a relatively simple argument like this, and it was fairly simple as game theoretic arguments go, has some heavy duty assumptions about the players' knowledge and assumptions built into it. This will be a theme we'll return to a few times.
+
+\section{Zero-Sum Games and Nash Equilibrium}
+Not all games can be solved by the method described in the previous section. Sometimes there are no dominated options for either player, so we can't get started on this strategy. And sometimes the method described there won't get to a result at one point or another. Consider, for example, the following game.
+
+\starttab{r | c c c}
+ & $A$ & $B$ & $C$ \\ \hline
+$A$ & 5 & 6 & 7 \\ 
+$B$ & 3 & 7 & 2 \\
+$C$ & 4 & 2 & 9
+\stoptab No option is dominated for either player, so we can't use the `eliminate dominated options' method. But there is still something special about the ($A$, $A$) outcome. That is, if either player plays $A$, the other player can't do better than by playing $A$. That's to say, the outcome ($A$, $A$) is a Nash equilibrium.
+
+\begin{itemize*}
+\item A pair of moves ($x_i, y_i$) by Row and Column respectively is a Nash equilibrium if (a) Row can't do any better than playing $x_i$ given that Column is playing $y_i$, and Column can't do any better than playing $y_i$, given that Row is playing $x_i$.
+\end{itemize*}
+
+Assume that each player knows everything the other player knows. And assume that the players are equally, and perfectly, rational. Then you might conclude that each player will be able to figure out the strategy of the other. Now assume that the players pick (between them) a pair of moves that do not form a Nash equilibrium. Since the players know everything about the other player, they know what the other will do. But if the moves picked do not form a Nash equilibrium, then one or other player could do better, given what the other does. Since each player knows what the other will do, that means that they could do better, given what they know. And that isn't rational.
+
+The argument from the previous paragraph goes by fairly fast, and it isn't obviously watertight, but it suggests that there is a reason to think that players should end up playing parts of Nash equilibrium strategies. So identifying Nash equilibria, like ($A$, $A$) in this game, is a useful way to figure out what they each should do.
+
+Some games have more than one Nash equilibria. Consider, for instance, the following game.
+
+\starttab{r | c c c c}
+ & $A$ & $B$ & $C$ & $D$\\ \hline
+$A$ & 5 & 6 & 5 & 6\\ 
+$B$ & 5 & 7 & 5 & 7\\
+$C$ & 4 & 8 & 3 & 8 \\
+$D$ & 3 & 8 & 4 & 9
+\stoptab In this game, both ($A$, $A$) and ($B$, $C$) are Nash equilibria. Note two things about the game. First, the `cross-strategies', where Row plays one half of one Nash equilibrium, and Columns plays the other half of a different Nash equilibrium, are also Nash equilibria. So ($A$, $C$) and ($B$, $A$) are both Nash equilibria. Second, all four of these Nash equilibria have the same value. In one of the exercises later on, you will be asked to prove both of these facts.

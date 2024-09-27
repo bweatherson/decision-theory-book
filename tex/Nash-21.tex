@@ -1,0 +1,96 @@
+\section{Illustrating Nash Equilibrium}
+In the previous notes, we worked out what the Nash equilibrium was for a general 2 $\times$ 2 zero-sum game with these payoffs.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & $a$ & $b$ \\
+$R_2$ & $c$ & $d$
+\stoptab And we worked out that the Nash equilibrium is where Row and Column play the following strategies.
+
+\begin{align*}
+\text{Row plays }& <\frac{c - d}{b + c - (a + d)} \text{  } R_1, \frac{b - a}{b + c - (a + d)}\text{  } R_2>\\
+\text{Column plays }&<\frac{d - b}{a + d - (b + c)} \text{  }C_1, \frac{a - c}{a + d - (b + c)}\text{  }C_2> 
+\end{align*}
+
+Let's see how this works with a particular example. Our task is to find the Nash equilibrium for the following game.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & $1$ & $6$ \\
+$R_2$ & $3$ & $2$
+\stoptab There is no Nash equilibrium here. Basically Column aims to play the same as what Row plays, though just how the payouts go depends on just what they select. 
+
+Row's part of the Nash equilibrium, according to the formula above, is $<$$\frac{3-2}{6 + 3 - (2 + 1)} R_1, \frac{6-1}{6 + 3 - (2 + 1)} R_2$$>$. That is, it is $<$$\frac{1}{6} R_1, \frac{5}{6} R_2$$>$. Row's part of the Nash equilibrium then is to usually play $R_2$, and occasionally play $R_1$, just to stop Column from being sure what Row is playing.
+
+Column's part of the Nash equilibrium, according to the formula above, is $<$$\frac{2-6}{2 + 1 - (6 + 3)} C_1, \frac{1-3}{2 + 1 - (6 + 3)} C_2$$>$. That is, it is $<$$\frac{2}{3} C_1, \frac{1}{3} C_2$$>$. Column's part of the Nash equilibrium then is to frequently play $C_1$, but often play $C_1$.
+
+The following example is more complicated. To find the Nash equilibrium, we first eliminate dominated options, then apply our formulae for finding mixed strategy Nash equilibrium.
+
+\starttab{r | c c c}
+ & $C_1$ & $C_2$ & $C_3$ \\ \hline
+$R_1$ & 1 & 5 & 2 \\
+$R_2$ & 3 & 2 & 4 \\
+$R_3$ & 0 & 4 & 6
+\stoptab Column is trying to minimise the relevant number. So whatever Row plays, it is better for Column to play $C_1$ than $C_3$. Equivalently, $C_1$ dominates $C_3$. So Column won't play $C_3$. So effectively, we're faced with the following game.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & 1 & 5 \\
+$R_2$ & 3 & 2  \\
+$R_3$ & 0 & 4 
+\stoptab In this game, $R_1$ dominates $R_3$ for Row. Whatever Column plays, Row gets a better return playing $R_1$ than $R_3$. So Row won't play $R_3$. Effectively, then, we're faced with this game.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & 1 & 5 \\
+$R_2$ & 3 & 2 
+\stoptab And now we can apply the above formulae. When we do, we see that the Nash equilibrium for this game is with Row playing $<$$\frac{1}{5} R_1, \frac{4}{5} R_2$$>$, and Column playing $<$$\frac{3}{5} C_1, \frac{2}{5} C_2$$>$.
+
+\section{Why Play Equilibrium Moves?}
+We've spent a lot of time so far on the mathematics of equilibrium solutions to games, but we haven't said a lot about the normative significance of these equilibrium solutions. We've occasionally talked as if playing your part of a Nash equilibrium is what you should do. Yet this is far from obvious.
+
+One reason it isn't obvious is that often the only equilibrium solution to a game is a mixed strategy equilibrium. So if you should only play equilibrium solutions, then sometimes you have to play a mixed strategy. So sometimes, the only rational thing to do is to randomise your choices. This seems odd. In regular decision problems, we didn't have any situation where it was better to play a mixed strategy than any pure strategy.
+
+Indeed, it is hard to conceptualise how a mixed strategy is better than any pure strategy. The expected return of a mixed strategy is presumably a weighted average of the expected returns of the pure strategies of which it is made up. That is, if you're playing a mixed strategy of the form $<0.6 A, 0.4 B>$, then the expected utility of that strategy looks like it should be $0.6 \times U(A) + 0.4 \times U(B)$. And that can't possibly be higher than both $U(A)$ and $U(B)$. So what's going on?
+
+We can build up to an argument for playing Nash equilibrium by considering two cases where it seems to really be the rational thing to do. These cases are
+
+\begin{itemize*}
+\item Repeated plays of a zero-sum game
+\item When the other person can figure out your strategy
+\end{itemize*}
+
+Let's take these in turn. Consider again Rock-Paper-Scissors. It might be unclear why, in a one-shot game, it is better to play the mixed strategy $<$$\frac{1}{3}$ Rock, $\frac{1}{3}$ Paper, $\frac{1}{3}$ Scissors$>$ than to play any pure strategy, such as say Rock. But it is clear why the mixed strategy will be better over the long run than the pure strategy Rock. If you just play Rock all the time, then the other player will eventually figure this out, and play Paper every time and win every time.
+
+In short, if you are playing repeatedly, then it is important to be unpredictable. And mixed strategies are ideal for being unpredictable. In real-life, this is an excellent reason for using mixed strategies in zero-sum games. (The penalty kicks study we referred to above is a study of one such game.) Indeed, we've often referred to mixed strategies in ways that only make sense in long run cases. So we would talk about Row as usually, or frequently, or occasionally, playing $R_1$, and we've talked about how doing this avoids detection of Row's strategy by Column. In a repeated game, that talk makes sense. But Nash equilibrium is also meant to be relevant to one-off games. So we need another reason to take mixed strategy equilibrium solutions seriously.
+
+Another case where it seems to make sense to play a mixed strategy is where you have reason to believe that the other player will figure out your strategy. Perhaps the other player has spies in your camp, spies who will figure out what strategy you'll play. If that's so, then often a mixed strategy will be best. That's because, in effect, the other player's move is not independent of what strategy you'll pick. Crucially, it is neither evidentially nor causally independent of what you do. If that's so, then the mixed strategy could possibly produce different results to either mixed strategy, because it will change the probability of the other player's move.
+
+Put more formally, the Nash equilibrium move is the best move you can make conditional on the assumption that the other player will know your move before you make their move. Consider a simple game of 'matching pennies', where each player puts down a coin, and Row wins if they are facing the same way (either both Heads or both Tails), and Column wins if they are facing opposite ways. The game table is
+
+\starttab{r | c c}
+ & Heads & Tails \\ \hline
+Heads & 1 & -1 \\
+Tails & -1 & 1
+\stoptab The equilibrium solution to this game is for each player to play $<0.5 \text{ Heads}, 0.5 \text{ Tails}>$. In other words, the equilibrium thing to do with your coin is to flip it. And if the other player knows what you'll do with your coin, that's clearly the right thing to do. If Row plays Heads, Column will play Tails and win. If Row plays Tails, Column will play Heads and win. But if Row flips their coin, Column can't guarantee a win.
+
+Now in reality, most times you are playing a game, there isn't any such spy around. But the other player may not need a spy. They might simply be able to guess, or predict, what you'll do. So if you play a pure strategy, there is reason to suspect that the other player will figure out that you'll play that strategy. And if you play a mixed strategy, the other player will figure out this as well. Again, assuming the other player will make the optimal move in response to your strategy, the mixed strategy may well be best.
+
+Here's why this is relevant to actual games. We typically assume in game theory that each player is rational, that each player knows the other player is rational, and so on. So the other player can perfectly simulate what you do. That's because they, as a rational person, knows how a rational person thinks. So if it is rational you to pick strategy $S$, the other player will predict that you'll pick strategy $S$. And you'll pick strategy $S$ if and only if it is rational to do so. Putting those last two conditionals together, we get the conclusion that the other player will predict whatever strategy you play.
+
+And with that comes the justification for playing Nash equilibrium moves. Given our assumptions about rationality, we should assume that the other player will predict our strategy. And conditional on the other player playing the best response to our strategy, whatever it is, the Nash equilibrium play has the highest expected utility. So we should make Nash equilibrium plays.
+
+\section{Causal Decision Theory and Game Theory}
+In the last section we gave what is essentially the orthodox argument for playing equilibrium plays. The other player is as rational as you, so the other player can figure out the rational play, i.e. what you'll play. So you should make the play that returns the highest result conditional on the other player figuring out that you'll play it.
+
+This kind of reasoning might be familiar. It is the reasoning that leads to taking one-box in Newcomb's problem. If we think that we are perfectly rational players facing Newcomb's problem, then we should think that the demon can predict what we'll do by simply applying her own rationality. So the demon will predict our play. So we should make the move that has the highest expected utility conditional on it being predicted by the demon. And that's to take one-box. Conditional on the demon figuring out what we'll do, taking one-box leads to \$1,000,00 reward, and taking both leads to a \$1,000 reward. So we should take one-box.
+
+But not everyone agrees with this conclusion. Some people are causal decision theorists, not evidential decision theorists. They think that if the demon is merely predicting what we will do, then it is wrong to conditionalise on the assumption that the demon will be correct. That's because our actions could at best be \textit{evidence} for what the demon predicted; they couldn't \textit{cause} what the demon predicted. So the demon's predictions are effectively states of the world; they are causally independent of our choices. And then applying causal decision theory recommends taking both boxes.
+
+The causal decision theorist will think that the argument from the previous section contained an important, but illegitimate, move. The story we told about the case where there was a spy in our ranks made sense. If there is a spy, then what we do causes the moves of the other player. So the other player's move isn't an antecedently obtaining state of the world in the relevant sense. But when we drop the spy, and assume that the other player is merely \textit{predicting} what we will do, then their choice really is a causally independent state of the world. So our selection of a pure strategy doesn't cause the other person's moves to change, though they may well be evidence that the other person's moves will be different to what we thought they would be.
+
+The core idea behind causal decision theory is that it is illegitimate to conditionalise on our actual choice when working out the probability of various states of the world. We should work out the probability of the different states, and take those as inputs to our expected utility calculations. But to give a high probability to the hypothesis that our choice will be predicted, whatever it is, is to not use one probability for each possible state of the world. And that's what both the expected utility theorist does, and what the game theorist who offers the above defence of equilibrium plays does.
+
+There's an interesting theoretical point here. The use of equilibrium reasoning is endemic in game theory. But the standard justification of equiilbrium strategies relies on one of the two big theories of decision making, namely evidential decision theory. And that's not even the more popular of the two models of decision making. We'll come back to this point a little as we go along.
+
+In practice this is a little different to in theory. Most games in real-life are repeat games, and in repeat games the difference between causal and evidential decision theory is less than in one-shot games. If you were to play Newcomb's Problem many times, you may well be best off picking one-box on the early plays to get the demon to think you are a one-box player. But to think through cases like this one more seriously we need to look at the distinctive features of games involving more than one move, and that's what we'll do next.

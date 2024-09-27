@@ -1,0 +1,101 @@
+\section{Puzzles About Backwards Induction}
+In the previous notes, we showed that one way to work out the subgame perfect equilibrium for a strategic game is by backwards induction. The idea is that we find the Nash equilibrium for the terminal nodes, then we work out the best move at the `penultimate' nodes by working out the best plays for each player assuming a Nash equilibrium play will be made at the terminal nodes. Then we work out the best play at the third-last node by working out the best thing to do assuming players will make the rational play at the last two nodes, and so on until we get back to the start of the game.
+
+The method, which we'll call backwards induction, is easy enough in practice to implement. And the rational seems sound at first glance. It is reasonable to assume that the players will make rational moves at the end of the game, and that earlier moves should be made predicated on our best guesses of later moves. So it seems sensible enough to use backwards induction.
+
+But it leads to crazy results in a few cases. Consider, for example, the centipede game. I've done a small version of it here, where each player has (up to) 7 moves. You should be able to see the pattern, and imagine a version of the game where each player has 50, or for that matter, 50,000 possible moves.
+
+\begin{figure}[htb]
+\hspace*{\fill} 
+\begin{egame}(1400,180) 
+
+\putbranch(50,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(1,0)][]
+ 
+\putbranch(150,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(0,2)][]
+ 
+\putbranch(250,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(2,1)][]
+ 
+\putbranch(350,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(1,3)][]
+ 
+\putbranch(450,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(3,2)][]
+ 
+\putbranch(550,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(2,4)][]
+ 
+\putbranch(650,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(4,3)][]
+ 
+\putbranch(750,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(3,5)][]
+
+\putbranch(850,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(5,4)][]
+ 
+\putbranch(950,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(4,6)][]
+  
+\putbranch(1050,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(6,5)][]
+ 
+\putbranch(1150,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(5,7)][]
+
+\putbranch(1250,140)(0,0)[d]{100} 
+\iib{R}{$d$}{$r$}[(7,6)][]
+ 
+\putbranch(1350,140)(0,0)[d]{100} 
+\iib{C}{$d$}{$r$}[(6,8)][(8,6)]
+ 
+\end{egame}
+\hspace*{\fill} 
+\caption[]{Centipede Game}
+\label{f:one} 
+\end{figure} 
+
+\noindent At each node, players have a choice between playing $d$, which will end the game, and playing $r$, which will (usually) continue it. At the last node, the game will end whatever Column plays. The longer the game goes, the larger the `pot', i.e. the combined payouts to the two players. But whoever plays $d$ and ends the game gets a slightly larger than average share of the pot. Let's see how that works out in practice. 
+
+If the game gets to the terminal node, Column will have a choice between 8 (if she plays $d$) and 6 (if she plays $r$). Since she prefers 8 to 6, she should play $d$ and get the 8. If we assume that Column will play $d$ at the terminal node, then at the penultimate node, Row has a choice between playing $d$, and ending the game with 7, or playing $r$, and hence, after Column plays $d$, ending the game with 6. Since she prefers getting 7 to 6, she should play $d$ at this point. If we assume Row will play $d$ at the second last node, leaving Column with 6, then Column is better off playing $d$ at the third last node and getting 7. And so on. At every node, if you assume the other player will play $d$ at the next node, if it arrives, then the player who is moving has a reason to play $d$ now and end the game. So working backwards from the end of the game, we conclude that Row should play $d$ at the first position, and end the game.
+
+A similar situation arises in a repeated Prisoners Dilemma. Here is a basic version of a Prisoners Dilemma game.
+
+\starttab{r | c c}
+ & Coop & Rat \\ \hline
+Coop & (3, 3) & (5, 0) \\
+Rat & (0, 5) & (1, 1)
+\stoptab Imagine that Row and Column have to play this game 100 times in a row. There might be some incentive here to play Coop in the early rounds, if it will encourage the other player to play Coop in later rounds. Of course, neither player wants to be a sucker, but it seems plausible to think that there might be some benefit to playing `Tit-For-Tat'. This is the strategy of playing Coop on the first round, then on subsequent rounds playing whatever the other player had played on previous rounds.
+ 
+There is some empirical evidence that this is the rational thing to do. In the late 1970s a political scientist, Robert Axelrod, set up just this game, and asked people to send in computer programs with strategies for how to play each round. Some people wrote quite sophisticated programs that were designed to trigger general cooperation, but also occasionally exploit the other player by playing Rat occasionally. Axelrod had all of the strategies sent in play `against' each other, and added up the points each got. Despite the sophistication of some of the submitted strategies, it turned out that the most successful one was simply Tit-For-Tat. After writing up the results of this experiment, Axelrod ran the experiment again, this time with more players because of the greater prominence he'd received from the first experiment. And Tit-For-Tat won again. (There was one other difference in the second version of the game that was important to us, and which we'll get to below.)
+
+But backwards induction suggests that the best thing to do is always to Rat. The rational thing for each player to do in the final game is Rat. That's true whatever the players have done in earlier games, and whatever signals have been sent, tacit agreements formed etc. The players, we are imagining, can't communicate except through their moves, so there is no chance of an explicit agreement forming. But by playing cooperatively, they might in effect form a pact. But that can have no relevance to their choices on the final game, where they should both Rat.
+
+And if they should both play Rat on the final game, then there can't be a strategic benefit from playing Coop on the second last game, since whatever they do, they will both play Rat on the last game. And whenever there is no strategic benefit from playing Coop, the rational thing to do is to play Rat, so they will both play Rat on the second last game.
+
+And if they should both play Rat on the second last game, whatever has happened before, then similar reasoning shows that they should both play Rat on the third last game, and hence on the fourth last game, and so on. So they should both play Rat on every game.
+
+This is, to say the least, extremely counterintuitive. It isn't just that playing Coop in earlier rounds is Pareto superior to playing Rat. After all, each playing Coop on the final round is Pareto superior to playing Rat. It is that it is very plausible that each player has more to gain by trying to set up tacit agreements to cooperate than they have to lose by playing Coop on a particular round.
+
+It would be useful to have Axelrod's experiments to back this up, but they aren't quite as good evidence as we might like. His first experiment was exactly of this form, and Tit-For-Tat did win (with always Rat finishing in last place). But the more thorough experiment, with more players, was not quite of this form. So as to avoid complications about the backwards induction argument, Axelrod made the second game a repeated Prisoners Dilemma with a randomised end point. Without common knowledge of the end point, the backwards induction argument doesn't get off the ground.
+
+Still, it seems highly implausible that rationality requires us to play Rat at every stage, or to play $d$ at every stage in the Centipede game. In the next section we'll look at an argument by Philip Pettit and Robert Sugden that suggests this is not a requirement of rationality.
+
+\section{Pettit and Sugden}
+The backwards induction reasoning is, as the name suggests, from the back of the game to the front of it. But games are played from front to back, and we should check how the reasoning looks from this perspective. For simplicity, we'll work with Centipede, though what we say should carry over to finitely iterated Prisoners Dilemma as well.
+
+First, imagine that one of the players does not play the subgame perfect equilibrium solution to the game. So imagine that Row plays $r$ at the first move. Now Column has a choice to make at the second node. Column knows that if Row plays the subgame perfect equilibrium at the third move, then the best thing for her to do now is to play $d$. And Column presupposed, at the start of the game, that Row was rational. And we're supposing, so far, that rational players play subgame perfect equilibrium plays. So Column should play $d$ right?
+
+Not necessarily. At the start of the game, Column assumed that Row was a rational player. But Row has given her evidence, irrefutable evidence given our assumption that rationality equals making subgame perfect equilibrium plays, that she is not rational. And it isn't at all clear that the right thing to do when playing with a less than rational player is to play $d$. If there is even a small chance that they will keep playing $r$, then it is probably worthwhile to give them the chance to do so.
+
+That's all to say, given the assumptions that we made, if Row plays $r$, Column might well reciprocate by playing $r$. But if that's true, then there is no reason for Row to play $d$ at the start. The argument that Row should play $d$ turned on the assumption that if she played $r$, Column would play $d$. And given various assumptions we made at the start of the game, Column would have played $d$. But, and here is the crucial point, if Column were in a position to make a move at all, those assumptions would no longer still be operational. So perhaps it is rational for Row to play $r$.
+
+None of this is to say that Row should play $r$ on her last move. After all, whatever Column thinks about Row's rationality, Column will play $d$ on the last move, so Row should play $d$ if it gets to her last move. It isn't even clear that it gives Row or Column a reason to play $r$ on their second last moves, since even then it isn't clear there is a strategic benefit to be had. But it might given them a reason to play $r$ on earlier moves, as was intuitively plausible.
+
+There is something that might seem odd about this whole line of reasoning. We started off saying that the uniquely rational option was to play $d$ everywhere. We then said that if Row played $r$, Column wouldn't think that Row was rational, so all bets were off with respect to backwards induction reasoning. So it might be sensible for Row to play $r$. Now you might worry that if all that's true, then when Row plays $r$, that won't be a sign that Row is irrational. Indeed, it will be a sign that Row is completely rational! So how can Pettit and Sugden argue that Column won't play $d$ at the second node?
+
+Well, if their reasoning is right that $r$ is a rational move at the initial node, then it is also good reasoning that Column can play $r$ at the second node. Either playing $r$ early in the game is rational or it isn't. If it is, then both players can play $r$ for a while as a rational resolution of the game. If it isn't, then Row can play $r$ as a way of signaling that she is irrational, and hence Column has some reason to play $r$. Either way, the players can keep on playing $r$.
+
+The upshot of this is that backwards induction reasoning is less impressive than it looked at first.

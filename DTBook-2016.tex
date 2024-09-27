@@ -1,0 +1,161 @@
+\documentclass[openany]{book}
+
+\usepackage{dtf15}
+
+\begin{document}
+
+\frontmatter
+{\pagestyle{plain}
+\fancyhf{}
+\markboth{ }{}
+
+%\newcommand*{\FSfont}[1]{\fontencoding{T1}\fontfamily{#1}\selectfont}
+\newlength{\drop}% for my convenienc
+{\begingroup% Robert Frost, T&H p 149
+%\FSfont{5bp} % FontSite Bergamo (Bembo)
+\drop = 0.2\textheight
+\centering
+\vfill
+{\Huge Lecture Notes on}\\[\baselineskip]
+{\Huge DECISION THEORY}\\[\baselineskip]
+{\large Brian Weatherson}\\[0.5\drop]
+\vfill
+\includegraphics{cclicence} \\
+%{\Large \plogo}\\[0.5\baselineskip]
+%{\Large \cc \ccnc \ccsa}\\[0.5\baselineskip]
+%{\Large The Publisher}\par
+{\large\scshape 2015}\par
+\vfill\null
+\endgroup}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\cleardoublepage}
+
+\mainmatter
+
+\part{Decisions}
+
+\chapter{Introduction}
+\input{./tex/01-Intro.tex}
+
+\chapter{Simple Reasoning Strategies}
+\input{./tex/02-Dominance.tex}
+
+%\chapter{Uncertainty}
+%\input{./tex/03-Uncertainty.tex}
+
+\chapter{Measures and Truth Tables}
+\input{./tex/03-Measure.tex}
+
+%\chapter{Truth Tables}
+%\input{./tex/TruthTables-05.tex}
+
+\chapter{Axioms for Probability}
+\input{./tex/04-MoreTables.tex}
+
+\chapter{Conditional Probability}
+\input{./tex/05-Conditional.tex}
+
+\chapter{About Conditional Probability}
+\input{./tex/06-MoreConditional.tex}
+
+\chapter{Expected Utility}
+\input{./tex/07-MaxExpUtil.tex}
+
+\chapter{Sure Thing Principle}
+\input{./tex/08-SureThing.tex}
+
+\chapter{Understanding Probability}
+\input{./tex/09-UnderProb.tex}
+
+\chapter{Accuracy and Subjective Probabilities}
+\input{./tex/10-Accuracy.tex}
+
+%\chapter{Understanding Probability}
+%\input{./tex/UnderProb-11.tex}
+
+%\chapter{Objective Probabilities}
+%\input{./tex/EvProb-12.tex}
+
+%\chapter{Understanding Utility}
+%\input{./tex/Utility-13.tex}
+
+%\chapter{Subjective Utility}
+%\input{./tex/SubjUtility-14.tex}
+
+\chapter{Declining Marginal Utilities}
+\input{./tex/11-Insurance.tex}
+
+\chapter{Dutch Book Arguments}
+\input{./tex/12-DutchBook.tex}
+
+\chapter{Newcomb's Problem}
+\input{./tex/13-Newcomb.tex}
+
+\chapter{Causal Decision Theory}
+\input{./tex/14-CausalDT.tex}
+
+
+%\chapter{Realistic Newcomb Problems}
+%\input{./tex/Newcomb2-17.tex}
+
+%\chapter{Causal Decision Theory}
+%\input{./tex/Newcomb3-18.tex}
+
+%\chapter{Introduction to Games}
+%\input{./tex/Games-19.tex}
+%
+%\chapter{Zero-Sum Games}
+%\input{./tex/Mixed-20.tex}
+%
+%\chapter{Nash Equilibrium}
+%\input{./tex/Nash-21.tex}
+%
+%\chapter{Many Move Games}
+%\input{./tex/ManyMove-22.tex}
+%
+%\chapter{Backwards Induction}
+%\input{./tex/BackInd-23.tex}
+
+\part{Games}
+
+\input{./tex/Games/01-Introduction}
+
+\input{./tex/Games/02-Iteration}
+
+\input{./tex/Games/03-Time}
+
+\input{./tex/Games/04-BestResponse}
+
+
+\input{./tex/Games/05-Equilibria}
+
+
+\input{./tex/Games/06-Nash}
+
+%\input{06-Newcomb}
+
+
+
+
+ \input{./tex/Games/08-Refinements}
+
+
+ \input{./tex/Games/09-Backward}
+
+
+
+\part{Groups}
+
+\input{./tex/Group-24.tex}
+
+\input{./tex/Arrow-25.tex}
+
+\input{./tex/Voting-26.tex}
+
+
+\input{./tex/Voting-27.tex}
+
+\end{document}
+

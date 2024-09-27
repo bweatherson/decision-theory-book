@@ -1,0 +1,349 @@
+
+\chapter{Finding and Choosing Equilibria}
+
+\section{Finding Mixed Strategy Equilibria}
+
+Let's consider again the asymmetric version of Death in Damascus.
+
+\starttab{r c c}
+%This is called AsymmetricDeathinDamascus
+%It is Matching Pennies with Asymmetries
+\textbf{\citegame{AsymmetricDeathinDamascus}} & Damascus & Aleppo \\
+Damascus & 1, -1 & -1, 0.5 \\
+Aleppo & -1, 1 & 1, -1.5 \\
+\fintab I've set up the game with Death is the Row player, and the Man is the Column player. Death wants to catch Man, Man wants to avoid Death. In that way, the game is like Matching Pennies. But we've added a 0.5 penalty for Man choosing Aleppo. It's an unpleasant journey from Damascus to Aleppo, particularly if you fear Death is at the other end.
+
+There is still no pure strategy \eqm\ in this game. Whatever Death plays, Man would prefer to play the other. And whatever Man plays, Death wants to play it. So there couldn't be a set of pure choices that they would both be happy with given that they know the other's play.
+
+But the mixed strategy \eqm\ that we looked at for Matching Pennies isn't an \eqm\ either. We'll write \tol{x, y} for the mixed strategy of going to Damascus with probability $x$, and going to Aleppo with probability $y$. Clearly we should have $x + y = 1$, but it will make the representation easier to use two variables here, rather than just writing \tol{x, 1-x} for the mixed strategies.
+
+Given that representation, we can ask whether the state where each player plays \tol{\nicefrac{1}{2}, \nicefrac{1}{2}} is a Nash \eqm. And, as you might guess, it is not. You might have guessed this because the game is not symmetric, so it would be odd if the \eqm\ solution to the game is symmetric. But let's prove that it isn't an \eqm. Assume that Death plays \tol{\nicefrac{1}{2}, \nicefrac{1}{2}}. Then Man's expected return from staying in Damascus is:
+\begin{equation*}
+\nicefrac{1}{2} \times -1 + \nicefrac{1}{2} \times 1 = 0
+\end{equation*}
+\noindent while his return from going to Aleppo is 
+\begin{equation*}
+\nicefrac{1}{2} \times 0.5 + \nicefrac{1}{2} \times -1.5 = -0.5
+\end{equation*}
+\noindent So if Death plays \tol{\nicefrac{1}{2}, \nicefrac{1}{2}}, Man is better off staying in Damascus than going to Aleppo. And if he's better off staying in Damascus that going to Aleppo, he's also better off staying in Damascus than playing some mixed strategy that gives some probability of going to Aleppo. In fact, the strategy \tol{x, y} will have expected return $\nicefrac{-y}{2}$, which is clearly worse than 0 when $y > 0$.
+
+There's a general point here. The expected return of a mixed strategy is the weighted average of the returns of the pure strategies that make up the mixed strategy. In this example, for instance, if the expected value of staying in Damascus is $d$, and the expected value of going to Aleppo is $a$, the mixed strategy \tol{x, y} will have expected value $xd + ya$. And since $x + y = 1$, the value of that will be strictly between $a$ and $d$ if $a \neq d$. On the other hand, if $a = d$, then $x + y = 1$ entails that $xd + ya = a = d$. So if $a = d$, then any mixed strategy will be just as good as any other, or indeed as either of the pure strategies. That implies that mixed strategies are candidates to be \eqm\ points, since there is nothing to be gained by moving away from them.
+
+This leads to an immediate, though somewhat counterintuitive, conclusion. Let's say we want to find strategies \tol{x_D, y_D} for Death and \tol{x_M, y_M} for Man that are in \eqm. If the strategies are in \eqm, then neither party can gain by moving away from them. And we just showed that that means that the expected return of Damascus must equal the expected return of Aleppo. So to find \tol{x_D, y_D}, we need to find values for $x_D$ and $y_D$ such that, given Man's values, staying in Damascus and leaving for Aleppo are equally valued. Note, and this is the slightly counterintuitive part, we don't need to look at \textit{Death's} values. All that matters is that Death's strategy and Man's values together entail that the two options open to Man are equally valuable.
+
+Given that Death is playing \tol{x_D, y_D}, we can work out the expected utility of Man's options fairly easily. (We'll occasionally appeal to the fact that $x_D + y_D = 1$.)
+\begin{align*}
+U(\text{Damascus}) &= x_D \times -1 + y_D \times 1 \\
+&= y_D - x_D \\
+&= 1 - 2x_D \\
+U(\text{Aleppo}) &= x_D \times 0.5 + y_D \times -1.5 \\
+&= 0.5x_D - 1.5(1 - x_D) \\
+&= 2x_D - 1.5 
+\end{align*}
+\noindent So there is \eqm\ when $1 - 2x_D = 2x_D - 1.5$, i.e., when $x_D = \nicefrac{5}{8}$. So any mixed strategy \eqm\ will have to have Death playing \tol{\nicefrac{5}{8}, \nicefrac{3}{8}}.
+
+Now let's do the same calculation for Man's strategy. Given that Man is playing \tol{x_D, y_D}, we can work out the expected utility of Death's options. (Again, we'll occasionally appeal to the fact that $x_M + y_M = 1$.)
+\begin{align*}
+U(\text{Damascus}) &= x_M \times 1 + y_M \times -1 \\
+&= x_M - y_M \\
+&= 2x_M - 1 \\
+U(\text{Aleppo}) &= x_M \times -1 + y_M \times 1 \\
+&= y_M - x_M \\
+&= 1 - 2x_M 
+\end{align*}
+\noindent So there is \eqm\ when $2x_M - 1 = 1 - 2x_M$, i.e., when $x_M = \nicefrac{1}{2}$. So any mixed strategy \eqm\ will have to have Man playing \tol{\nicefrac{1}{2}, \nicefrac{1}{2}}. Indeed, we can work out that if Death plays \tol{\nicefrac{5}{8}, \nicefrac{3}{8}}, and Man plays \tol{\nicefrac{1}{2}, \nicefrac{1}{2}}, then any strategy for Death will have expected return 0, and any strategy for Man will have expected return of $\nicefrac{-1}{4}$. So this pair is an \eqm.
+
+But note something very odd about what we just concluded. When we chang\-ed the payoffs for the two cities, we made it worse for \textit{Man} to go to Aleppo. I would have guessed that should make Man more likely to stay in Damascus. But it turns out this isn't right, at least if the players play \eqm\ strategies. The change to Man's payoffs doesn't change Man's strategy at all; he still plays \tol{\nicefrac{1}{2}, \nicefrac{1}{2}}. What it does is change Death's strategy from \tol{\nicefrac{1}{2}, \nicefrac{1}{2}} to \tol{\nicefrac{5}{8}, \nicefrac{3}{8}}.
+
+Let's generalise this to a general recipe for finding \eqm\ strategies in two player games with conflicting incentives. Assume we have the following very abstract form of a game:
+
+\starttab{r c c}
+%This is called General2PP
+%It is illustrating a general pattern of how to discover mixed equilibria
+\gamelab{General2PP} & $l$ & $r$ \\
+$U$ & $a_1, a_2$ & $b_1, b_2$ \\
+$D$ & $c_1, c_2$ & $d_1, d_2$ \\
+\fintab As usual, $R$ow chooses between $U$p and $D$own, while $C$olumn chooses between $l$eft and $r$ight. We will assume that $R$ prefers the outcome to be on the north\-west-southeast diagonal; that is, $a_1 > c_1$, and $d_1 > b_1$. And we'll assume that $C$ prefers the other diagonal; that is, $c_2 > a_2$, and $b_2 > d_2$. We then have to find a pair of mixed strategies \tol{x_U, x_D} and \tol{x_l, x_r} that are in equilibrium. (We'll use $x_A$ for the probability of playing $A$.)
+
+What's crucial is that for each player, the expected value of each option is equal given what the other person plays. Let's compute them the expected value of playing $U$ and $D$, given that $C$ is playing \tol{x_l, x_r}.
+\begin{align*}
+U(U) &= x_la_1 + x_rb_1 \\
+U(D) &= x_lc_1 + x_rd_1
+\end{align*} We get \eqm\ when these two values are equal, and $x_l + x_r = 1$. So we can solve for $x_l$ the following way:
+\begin{align*}
+&x_la_1 +x_rb_1 = x_lc_1 + x_rd_1 \\
+\Leftrightarrow \hspace{6pt} &x_la_1 -x_lc_1 = x_rd_1 - x_rb_1 \\
+\Leftrightarrow \hspace{6pt} &x_l(a_1 - c_1) = x_r(d_1 - b_1) \\
+\Leftrightarrow \hspace{6pt} &x_l\frac{a_1 - c_1}{d_1 - b_1} = x_r \\
+\Leftrightarrow \hspace{6pt} &x_l\frac{a_1 - c_1}{d_1 - b_1} = 1 - x_l \\
+\Leftrightarrow \hspace{6pt} &x_l\frac{a_1 - c_1}{d_1 - b_1} + x_l= 1 \\
+\Leftrightarrow \hspace{6pt} &x_l(\frac{a_1 - c_1}{d_1 - b_1} + 1)= 1 \\
+\Leftrightarrow \hspace{6pt} &x_l= \frac{1}{\frac{a_1 - c_1}{d_1 - b_1} + 1} \\
+\end{align*}
+I won't go through all the same steps, but a similar argument shows that
+\begin{equation*}
+x_U = \frac{1}{\frac{b_2 - a_2}{c_2 - d_2}+1}
+\end{equation*}
+I'll leave it as an exercise to confirm these answers are correct by working out the expected return of $U, D, l$ and $r$ if these strategies are played.
+
+The crucial take-away lesson from this discussion is that to find a mixed strategy equilibrium, we look at the interaction between one player's mixture and the other player's payoffs. The idea is to set the probability for each move in such a way that even if the other player knew this, they wouldn't be able to improve their position, since any move would be just as good for them as any other.
+
+I've focussed on the case of a game where each player has just two moves. When there are more than two moves available, things are a little more complicated, but only a little. We no longer need it to be the case that one player's mixed strategy must make \textit{every} other strategy the other player is considering equally valuable. The restriction to strategies the player is considering is to rule out those strategies that are dominated, or which are ruled out by successive steps of eliminating dominated strategies. Consider, for instance, what happens if we expand our asymmetric Death in Damascus game to give Man the option of shooting himself.
+
+\starttab{r c c c}
+%This is called AsymmetricDeathinDamascuswithShooting
+%It is Matching Pennies with Asymmetries
+\gamelab{AsymmetricDeathinDamascuswithShooting} & Damascus & Aleppo & Shoot \\
+Damascus & 1, -1 & -1, 0.5 & -1, -2\\
+Aleppo & -1, 1 & 1, -1.5 & -1, -2\\
+\fintab The shooting option is no good for anyone; Death doesn't get to meet Man, and Man doesn't get to live the extra day. So if Death plays \tol{\nicefrac{5}{8}, \nicefrac{3}{8}}, that will make Damascus and Aleppo equally valuable to Man, but Shooting will still have an expected return of -2, rather than the expected return of $\nicefrac{-1}{4}$ that Damascus and Aleppo have. But that's consistent with Death's strategy being part of an \eqm, since Man's strategy will be to play \tol{\nicefrac{1}{2}, \nicefrac{1}{2}, 0}. Since Man isn't playing Shoot, it doesn't matter that Shoot is less valuable to him, given Death's move, than the two pure strategies.
+
+\section{Coordination Games}
+
+Many games have multiple equilibria. In such cases, it is interesting to work through the means by which one \eqm\ rather than another may end up being chosen. Consider, for instance, the following three games.
+
+\starttab{r c c}
+%This is called Meeting
+%It is a simple meetup game
+\gamelab{Meeting} & $a$ & $b$ \\
+$A$ & 1, 1 & 0, 0 \\
+$B$ & 0, 0 & 1, 1 \\
+\fintab
+
+\starttab{r c c}
+%This is called Battle
+%It is Battle of the Sexes
+\gamelab{Battle} & $a$ & $b$ \\
+$A$ & 2, 1 & 0, 0 \\
+$B$ & 0, 0 & 1, 2 \\
+\fintab
+
+\starttab{r c c}
+%This is called StagHunt
+%It is Battle of the Sexes
+\gamelab{StagHunt} & $a$ & $b$ \\
+$A$ & 5, 5 & 0, 4 \\
+$B$ & 4, 0 & 2, 2 \\
+\fintab
+
+\noindent In each case, both \tol{A, a} and \tol{B, b} are Nash equilibria. 
+
+\citegame{Meeting} is a purely cooperative game; the players have exactly the same payoffs in every outcome. It is a model for some real-world games. The two players, $R$ and $C$, have to meet up, and it doesn't matter where. They could either go to location $A$ or $B$. If they go to the same location, they are happy; if not, not. 
+
+In such an abstract presentation of game, it is hard to see how we could select an \eqm\ out of the two possibilities. In practice, it often turns out not to be so hard. Thomas Schelling (in \textit{The Strategy of Conflict}) noted that a lot of real-life versions of this game have what he called `focal points'. (These are sometimes called Schelling points now, in his honour.) A focal point is a point that stands out from the other options in some salient respect, and it can be expected that other players will notice that it stands out. Here's a nice example from a recent paper by Christopher Potts (\href{http://semanticsarchive.net/Archive/jExYWZlN/potts-interpretive-economy-mar08.pdf}{Interpretive Economy, Schelling Points, and evolutionary stability}).
+
+\begin{quote}
+\gamelab{NoSchelling}
+
+$A$ and $B$ have to select, without communicating, one of the following nine figures. They each get a reward iff they select the same figure.
+
+
+
+\begin{center}
+\begin{picture}(140,140)
+\drawsquare{0}{0}{40}{40}{40}
+\drawsquare{50}{0}{90}{40}{40}
+\drawsquare{100}{0}{140}{40}{40}
+\drawsquare{0}{50}{40}{90}{40}
+\drawsquare{50}{50}{90}{90}{40}
+\drawsquare{100}{50}{140}{90}{40}
+\drawsquare{0}{100}{40}{140}{40}
+\drawsquare{50}{100}{90}{140}{40}
+\drawsquare{100}{100}{140}{140}{40}
+
+\pictext{20}{116}{1}
+\pictext{70}{116}{2}
+\pictext{120}{116}{3}
+\pictext{20}{66}{4}
+\pictext{70}{66}{5}
+\pictext{120}{66}{6}
+\pictext{20}{16}{7}
+\pictext{70}{16}{8}
+\pictext{120}{16}{9}
+
+\end{picture}
+\end{center}
+
+\end{quote}
+%Schilling on coordination
+
+\begin{quote}
+\gamelab{YesSchelling}
+
+$A$ and $B$ have to select, without communicating, one of the following nine figures. They each get a reward iff they select the same figure.
+
+
+\begin{center}
+\begin{picture}(140,140)
+\drawsquare{0}{0}{40}{40}{40}
+%\drawsquare{50}{0}{90}{40}{40}
+\put(70, 20){\circle{40}}
+\drawsquare{100}{0}{140}{40}{40}
+\drawsquare{0}{50}{40}{90}{40}
+\drawsquare{50}{50}{90}{90}{40}
+\drawsquare{100}{50}{140}{90}{40}
+\drawsquare{0}{100}{40}{140}{40}
+\drawsquare{50}{100}{90}{140}{40}
+\drawsquare{100}{100}{140}{140}{40}
+
+\pictext{20}{116}{1}
+\pictext{70}{116}{2}
+\pictext{120}{116}{3}
+\pictext{20}{66}{4}
+\pictext{70}{66}{5}
+\pictext{120}{66}{6}
+\pictext{20}{16}{7}
+\pictext{70}{16}{8}
+\pictext{120}{16}{9}
+
+\end{picture}
+\end{center}
+
+\end{quote}
+
+\noindent We could run experiments to test this, but intuitively, players will do better at \citegame{YesSchelling} than at \citegame{NoSchelling}. That's because in \citegame{YesSchelling}, they have a focal point to select; one of the options stands out from the crowd.
+
+Schelling tested this by asking people where they would go if they had to meet a stranger in a strange city, and had no way to communicate. The answers suggested that meetups would be much more common than you might expect. People in Paris would go to the Eiffel Tower; people in New York would go to (the information booth at) Grand Central Station, and so on. (This game may be easier if you don't actually live in the city in question. When I lived in New York I would go to Grand Central about once a year; it would be far from the most obvious place I would select.)
+
+\citegame{Battle} is often called `Battle of the Sexes'. The real world example of it that is usually used is that $R$ and $C$ are a married couple trying to coordinate on a night out. But for whatever reason, they are at the stage where they simply have to go to one of two venues. $R$ would prefer that they both go to $A$, while $C$ would prefer that they both go to $B$. But the worst case scenario is that they go to different things.
+
+\citegame{StagHunt} is often called `Stag Hunt'. The idea behind the game goes back to Rousseau, although you can find similar examples in Hume. The general idea is that $A$ is some kind of cooperative action, and $B$ is a `defecting' action. If players make the same selection, then they do well. If they both cooperate, they do better than if they both defect. But if they don't cooperate, it is better to defect than to cooperate.
+
+Rousseau's example was of a group of hunters out hunting a stag, each of whom sees a hare going by. If they leave the group, they will catch the hare for sure, and have something to eat, but the group hunting the stag will be left with a much lower probability of stag catching. Hume was more explicit than Rousseau that these games come up with both two player and many player versions. Here is a nice many player version (from Ben Polak's OpenYale lectures).
+
+\begin{quote}
+\gamelab{Invest}
+
+Everyone in the group has a choice between Investing and Not Investing. The payoff to anyone who doesn't invest is 0. If 90\% or more of the group Invests, then everyone who Invests gains \$1. If less than 90\% of the group Invests, then everyone who invests loses \$1.
+\end{quote}
+
+\noindent Again, there are two Nash equilibria: everyone invests, and everyone does not invest. Hume's hypothesis was that in games like this, the cooperative move (in this case Investing) would be more likely in small groups than large groups.
+
+\section{Mixed Strategies in Multiple Equilibrium Games}
+
+All three of these games have mixed strategy equilibria as well as their pure strategy equilibria. For \citegame{Meeting}, the mixed strategy equilibrium is easy to find. Each player plays \tol{\nicefrac{1}{2}, \nicefrac{1}{2}}. In that case the other player has an expected return of $\nicefrac{1}{2}$ whatever they play, so it is an \eqm.
+
+Things are a little trickier in \citegame{Battle}. To find the mixed strategy \eqm\ there, we have to apply the lesson we learned earlier: find strategies that make the other player indifferent between their options. If $R$ plays \tol{x, 1-x}, then $C$'s expected return from playing $a$ and $b$ is:
+
+\begin{align*}
+U(a) &= x \times 1 + (1-x) \times 0 \\
+ &= x \\
+U(b) &= x \times 0 + (1-x) \times 2 \\
+ &= 2(1-x)
+\end{align*}
+
+\noindent So there will be \eqm\ only if $x = 2(1-x)$, i.e., only if $x = \nicefrac{2}{3}$. If that happens, $C$'s expected return from any strategy will be $\nicefrac{2}{3}$. A similar argument shows that we have \eqm\ when $C$ plays \tol{\nicefrac{1}{3}, \nicefrac{2}{3}}, and in that case $R$'s expected return from any strategy will be $\nicefrac{2}{3}$. (Unlike in the asymmetric version of Death in Damascus, here the \eqm\ strategy is to bias one's mixture towards the result that one wants.)
+
+We apply the same methodology in \citegame{StagHunt}. So $R$ will play \tol{x, 1-x}, and $C$'s expected return from the two available pure strategies is the same. Those expected returns are:
+
+\begin{align*}
+U(a) &= x \times 5 + (1-x) \times 0 \\
+ &= 5x \\
+U(b) &= x \times 4 + (1-x) \times 2 \\
+ &= 4x + 2 - 2x \\
+ &= 2 + 2x
+\end{align*}
+
+\noindent So there will be \eqm\ only if $5x = 2 + 2x$, i.e., only if $x = \nicefrac{2}{3}$. If that happens, $C$'s expected return from any strategy will be $\nicefrac{10}{3}$. Since the game is completely symmetric, a very similar argument shows that if $C$ plays \tol{\nicefrac{2}{3}, \nicefrac{1}{3}}, then $R$ has the same payoff whatever she plays. So each player cooperating with probability $\nicefrac{2}{3}$ is a Nash \eqm.\footnote{The rest of the chapter is optional material, that will not be on any assignment.}
+
+In two of the cases, the mixed strategy \eqm\ is worse for each player than the available pure strategy equilibria. In \citegame{StagHunt}, the mixed \eqm\ is better than the defecting \eqm, but worse than the cooperating \eqm. Say an \eqm\ is \textbf{Pareto-preferred} to another \eqm\ iff every player would prefer the first \eqm\ to the second. An \eqm\ is \textbf{Pareto-dominant} iff it is Pareto-preferred to all other equilibria. The cooperative \eqm\ is Pareto-dominant in \citegame{StagHunt}; neither of the other games have Pareto-dominant equiilbria.\footnote{Consider each of the above games from the perspective of a player who does not know what strategy their partner will play. Given a probability distribution over the other player's moves, we can work out which strategy has the higher expected return, or whether the various strategies have the same expected returns as each other. For any strategy $S$, and possible strategy $S^\prime$ of the other player,  let $f$ be a function that maps $S$ into the set of probabilities $x$ such that if the other player plays $S^\prime$ with probability $x$, $S$ has the highest expected return. In two strategy games, we can remove the relativisation to $S^\prime$, since for the purposes we'll go on to, it doesn't matter which $S^\prime$ we use. In somewhat formal language, $f(S)$ is the \textbf{basin of attraction} for $S$; it is the range of probability functions that points towards $S$ being played.
+
+Let $m$ be the usual (Lesbegue) measure over intervals; all that you need to know about this measure is that for any interval $[x, y]$, $m([x, y]) = y - x$; i.e., it maps a continuous interval onto its length. Say $m(f(S))$ is the risk-attractiveness of $S$. Intuitively, this is a measure of how big a range of probability distributions over the other person's play is compatible with $S$ being the best thing to play.
+
+Say that a strategy $S$ is risk-preferred iff $m(f(S))$ is larger than $m(f(S^*))$ for any alternative strategy $S^*$ available to that agent. Say that an \eqm\ is \textbf{risk-dominant} iff it consists of risk-preferred strategies for all players.
+
+For simple two-player, two-option games like we've been looking at, all of this can be simplified a lot. An \eqm\ is risk-dominant iff each of the moves in it are moves the players would make if they assigned probability $\nicefrac{1}{2}$ to each of the possible moves the other player could make.
+
+Neither \citegame{Meeting} nor \citegame{Battle} have a risk-dominant \eqm. An asymmetric version of \citegame{Meeting}, such as this game, does.
+
+\starttab{r c c}
+%This is called AsymmetricMeeting
+%It is a simple meetup game
+\gamelab{AsymmetricMeeting} & $a$ & $b$ \\
+$A$ & 2, 2 & 0, 0 \\
+$B$ & 0, 0 & 1, 1 \\
+\fintab In this case \tol{A, a} is both Pareto-dominant and risk-dominant. Given that, we might expect that both players would choose $A$. (What if an option is Pareto-dominated, and risk-dominated, but focal? Should it be chosen then? Perhaps; the Eiffel Tower isn't easy to get to, or particularly pleasant once you're there, but seems to be chosen in the Paris version of Schelling's meetup game because of its focality.)
+
+The real interest of risk-dominance comes from \citegame{StagHunt}, the Stag Hunt. In that game, cooperating is Pareto-dominant, but defecting is risk-dominant. The general class of Stag Hunt games is sometimes defined as the class of two-player, two-option games with two equilibria, one of which is Pareto-dominant, and the other of which is risk-dominant. By that definition, the most extreme Stag Hunt is a game we discussed earlier in the context of deleting weakly dominated strategies.
+
+\starttab{r c c}
+\textbf{\citegame{BinmoreOddWeak}} & $l$ & $r$ \\
+$T$ & 1, 1 & 100, 0 \\
+$B$ & 0, 100 & 100, 100 \\
+\fintab The \tol{B, r} \eqm\ is obviously Pareto-dominant. But the \tol{T, l} is \textit{extremely} risk-dominant. Any probability distribution at all over what the other player might do, except for the distribution that assigns probability 1 to $B$/$r$, makes it better to play one's part of \tol{T, l} than one's part of \tol{B, r}.
+
+I won't go through all the variations here, but there are a number of ways of modifying the Stag Hunt so that risk-dominant strategies are preferred. Some of these are applications of Stag Hunt to important cases in evolutionary biology; given certain rules about what kinds of mutations are possible, risk-dominant strategies will invariable evolve more successfully than Pareto-dominant strategies. And some of these involve uncertainty; given some uncertainty about the payoffs available to other players, risk-dominant strategies may be uniquely rational. But going the details of these results is beyond the scope of this course.}
+
+\section{Value of Communication}
+
+In all the games we've discussed to date, we have assumed that the players are not able to communicate before making their choices. Or, equivalently, we've assumed that the payoff structure is what it is after communication has taken place. If we relax that assumption, we need to think a bit about the kind of speech acts that can happen in communication.
+
+Imagine that $R$ and $C$ are playing a Prisoners' Dilemma. There are two importantly different types of communication that might take place before play. First, they might promise really sincerely that they won't defect. Second, they might come to some arrangement whereby the person who defects will incur some costs. This could be by signing a contract promising to pay the other in the event of defection. Or it could be by one player making a plausible threat to punish the other for defection.
+
+The second kind of communication can change the kind of game the players are playing. The first kind does not, at least not if the players do not regard promise breaking as a bad thing. That's because the second kind of communication, but not the first, can change the payoff structure the players face. If $R$ and $C$ each have to pay in the event of defecting, it might be that defecting no longer dominates cooperating, so the game is not really a Prisoners' Dilemma. But if they merely say that they will cooperate, and there is no cost to breaking their word, then the game still is a Prisoners' Dilemma.
+
+Call any communication that does not change the payoff matrix \textbf{cheap talk}. In Prisoners' Dilemma, cheap talk seems to be useless. If the players are both rational, they will still both defect. 
+
+But it isn't always the case that cheap talk is useless. In a pure coordination game, like \citegame{NoSchelling}, cheap talk can be very useful. If a player says that they will play 7, then each player can be motivated to play 7 even if they have no interest in honesty. More precisely, assume that the hearer initially thinks that the speaker is just as likely to be lying as telling the truth when she says something about what she will do. So before she thinks too hard about it, she gives credence 0.5 to the speaker actually playing 7 when she says she will do so. But if there's a 50\% chance the speaker will play 7, then it seems better to play 7 than anything else. In the absence of other information, the chance that the hearer will win when playing some number other than 7 will be much less than 50\%; around 6\% if she has equal credence in the speaker playing each of the other options. So the hearer should play 7. But if the speaker can reason through this, then she will play 7 as well. So her statement will be self-enforcing; by making the statement she gives herself a reason to make it true, even beyond any intrinsic value she assigns to being honest.
+
+There is one step in that reasoning that goes by particularly fast. Just because we think it is in general just as likely that a speaker is lying as telling the truth, doesn't mean that we should think those things are equally likely \textit{on this occasion}. If the speaker has a particular incentive to lie on this occasion, the fact that they are a truth-teller half the time is irrelevant. But in \citegame{NoSchelling}, they have no such incentive. In fact, they have an incentive to tell the truth, since truth-telling is the natural way to a good outcome for them in the game.
+
+But this consideration is a problem in Battle of the Sexes. Assume that $R$ says, ``I'm going to play $A$, whatever you say you'll do.'' If $C$ believes this, then she has a reason to play $a$, and that means $R$ has a reason to do what she says. So you might think that \citegame{Battle} is like \citegame{NoSchelling} as a game in which cheap talk makes a difference. But in fact the reasoning that we used in \citegame{NoSchelling} breaks down a little. Here $R$ has an incentive to make this speech independently of what they are planning to do. Unless we think $R$ has a general policy of truth-telling, it seems speeches like this should be discounted, since $R$'s incentive to talk this way is independent of how the plan to play. And if $R$ has a general policy of truth-telling, a policy they regard it as costly to break, this isn't really a case of cheap talk.
+
+The same analysis seems to apply with even greater force in \citegame{StagHunt}. There, $R$ wants $C$ to play $a$, whatever $R$ is planning on playing. So she wants to give $C$ a reason to play $a$. And saying that she'll play $A$ would be, if believed, such a reason. So it seems we have a simpler explanation for why $R$ says what she says, independent of what $R$ plans to do. So I suspect that in both \citegame{Battle} and \citegame{StagHunt}, this kind of cheap talk (i.e., solemn declarations of what one will play) is worthless.
+
+But that's not all we can do when we communicate. We can also introduce new options. (Just whether this should be called genuinely cheap talk is perhaps a little dubious, but it seems to me to fall under the same general heading.) Assume that we modify \citegame{Battle} by allowing the two players to see the result of a fair coin flip. We introduce a new option for them each to play, which is to do $A$ if the coin lands heads, and $B$ if the coin lands tails. Call this option $Z$. The new game table looks like this. (Note that many of the payoffs are \textit{expected} payoffs, not guarantees.)
+
+\starttab{r c c c}
+\gamelab{BattleCoin} & $a$ & $b$ & $z$ \\
+$A$ & 2, 1 & 0, 0 & 1, 0.5 \\
+$B$ & 0, 0 & 1, 2 & 0.5, 1 \\
+$Z$ & 1, 0.5 & 0.5, 1 & 1.5, 1.5 \\
+\fintab Note that \tol{Z, z} is an \eqm\ of the game. Indeed, it is a better \eqm\ by far than the mixed strategy \eqm\ that left each player with an expected return of $\nicefrac{2}{3}$. Not surprisingly, this kind of result is one that players with a chance to communicate often end up at.
+
+Assume that $R$ thinks that $C$ will play $A, B, z$ with probabilities $x, y, 1-x-y$. Then $R$'s expected returns for her three strategies are:
+\begin{align*}
+U(A) &= 2x + 0y + 1(1 - x - y) \\
+&= 1 + x - y \\
+U(B) &= 0x + 1y + 0.5(1 - x -y) \\
+&= 0.5 - 0.5x + 0.5y \\
+U(Z) &= 1x + 0.5y + 1.5(1 - x - y) \\
+&= 1.5 - 0.5x - y 
+\end{align*}
+\noindent A little algebra gives us the following inequalities.
+\begin{align*}
+U(A) > U(Z) &\Leftrightarrow 3x > 1 \\
+U(A) > U(B) &\Leftrightarrow x > 3y - 1 \\
+U(B) > U(Z) &\Leftrightarrow 3y > 2
+\end{align*} Putting these together we get the following results:
+\begin{align*}
+A &\text{ is best iff } x > \nicefrac{1}{3} \text{ and } x > 3y-1\\
+B &\text{ is best iff } y > \nicefrac{2}{3} \text{ or } (x > \nicefrac{1}{3} \text{ and } 3y-1 > x)\\ 
+Z &\text{ is best iff } x < \nicefrac{1}{3} \text{ and } y < \nicefrac{2}{3}
+\end{align*} Here is a graph showing where each of the three options has the highest utility.
+
+\begin{center}
+\begin{picture}(220, 220)
+\put(20, 140){\line(1, 0){60}}
+\put(80, 20){\line(0, 1){120}}
+\put(80, 100){\line(3, 1){30}}
+\pictext{40}{155}{$B$}
+\pictext{90}{113}{$B$}
+\pictext{50}{75}{$Z$}
+\pictext{130}{50}{$A$}
+\pictext{15}{210}{$y$}
+\pictext{210}{25}{$x$}
+\pictext{5}{135}{$(0, \nicefrac{2}{3})$}
+\pictext{102}{135}{$(\nicefrac{1}{3}, \nicefrac{2}{3})$}
+\pictext{132}{105}{$(\nicefrac{1}{2}, \nicefrac{1}{2})$}
+\pictext{5}{195}{$(0, 1)$}
+\pictext{80}{5}{$(\nicefrac{1}{3}, 0)$}
+\pictext{200}{5}{$(1, 0)$}
+\thicklines
+\put(200,20){\line(-1, 1){180}}
+\put(20, 20){\vector(1, 0){190}}
+\put(20, 20){\vector(0, 1){190}}
+\end{picture}
+\end{center}
+
+\noindent A little geometry reveals that the area of the large rectangle where $Z$ is best is $\nicefrac{2}{9}$, the two triangles where $B$ is best have area $\nicefrac{1}{18}$ amd $\nicefrac{1}{54}$ each, summing to $\nicefrac{2}{27}$, and the remaining area in the triangle, the odd-shaped area where $A$ is best, is therefore $\nicefrac{1}{6}$. In other words, the largest region is the one where $X$ is best.\footnote{And that means, by definition, that $Z$ is risk-preferred for $R$. A similar computation shows that $z$ is risk-preferred for $C$. So we get the result that the newly available \eqm\ is a risk-dominant \eqm. I'll leave the option of extending this analysis to Stag Hunt as an exercise for the interested reader.}

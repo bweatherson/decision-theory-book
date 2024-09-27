@@ -1,0 +1,356 @@
+\chapter{Iterated Dominance}
+\markright{Iterated Dominance}
+
+A rational player, we've argued, won't choose dominated strategies. Now let's assume, as is often the case, that we're playing a game where each player knows that the other player is rational. In that case, the players will not only decline to play dominated strategies, they will decline to play strategies that only produce the best outcomes if the other player adopts a dominated strategy. This can be used to generate a prediction about what people will, or at least should, do in various game. We can see this going back to a variant of Prisoners' Dilemma from earlier on.
+
+\starttab{r  c c}
+%We are re-doing PD-Mixed
+\regame{PD-Mixed} & Choose a & Choose b \\
+Choose A & 1, 2 & 5, 0\\
+Choose B & 0, 0 & 3, 6\\
+\fintab If we look at things from $C$'s perspective, neither strategy is dominated. She wants to choose whatever $R$ chooses. But if we look at things from $R$'s perspective, things are a little different. Here there is a strongly dominating strategy, namely choosing A. So $C$ should really think to herself that there's no way $R$, who is rational, is going to choose B. Given that, the table really looks like this.
+
+\starttab{r  c c}
+%We are re-doing PD-Mixed
+\regame{PD-Mixed}$^\prime$ & Choose a & Choose b \\
+Choose A & 1, 2 & 5, 0\\
+\fintab I've put the prime there to indicate it is officially a different game. But really all I've done is delete a dominated strategy that the other player has. Now it is clear what $C$ should do. In this `reduced' game, the one with the dominated strategy deleted, there is a dominant strategy for $C$. It is choosing a. So $C$ should choose a.
+
+The reasoning here might have been a little convoluted, but the underlying idea is easy enough to express. $R$ is better off choosing A, so she will. $C$ wants to choose whatever $R$ chooses. So $C$ will choose a as well.
+
+Let's go through a small variant of this game which might, after redescription, look fairly familiar.
+
+\starttab{r  c c}
+%This is the game version of Newcomb
+%|t is called Newcomb
+\gamelab{Newcomb} & $l$ & $r$ \\
+$U$ & 1, 1 & 1001, 0 \\
+$D$ & 0, 0 & 1000, 1\\
+\fintab Just as in \citegame{PD-Mixed}, $R$ has a dominant strategy. It is to choose Up. (Again, I'm labelling just using the first letter of the description of the move.) And given that $R$ will choose Up, the best thing for $C$ to do is choose $l$. So it looks like we should end up in the top-left corner of the table, just like in \citegame{PD-Mixed}.
+
+If you've been reading along, you should recognise \citegame{Newcomb}. It is just Newcomb's problem, with some assumptions about the payoffs. $R$ in this case is the human player, who was the focus of attention in the decision theory part of the book. Her payoffs here are just her payments in the usual statement of the game, divided by 1000. Up is her choosing both boxes, and Down is her choosing one box.
+
+$C$ is the demon. The demon isn't usually treated as a player in decision theoretic versions of the puzzle, but she clearly has views, and preferences. The demon wants to predict the move that the player makes. So we've represented her payoffs that way. Left is her predicting two boxes, Right is her predicting one box. And if she gets the prediction right, she gets a payoff of 1, if she gets it wrong, she gets a payoff of 0.
+
+So Newcomb's problem is just a simple game, and it can be solved by noting that one player has a dominating strategy, and the other player, i.e., the demon, has a dominating strategy under the assumption that this dominating strategy is played.
+
+We can use the idea of removing dominating strategies to illustrate some puzzling features of a couple of other games. I won't do tables for these games, because they'd be much too big. The first is a location game that has many applications.
+
+\begin{quote}
+
+\gamelab{IceCream} %This is the location game; we call it IceCream
+
+Two trucks have to choose where they will sell ice-cream on a particular beach. There are 11 locations to choose from, which we'll number 0, 1, \dots, 9, 10. Spot 0 is at the left end of the beach, Spot 10 is at the right end of the beach, and the other spots are equally spaced in between. There are 10 people at each location. Each of them will buy ice-cream. If one truck is closer, they will buy ice-cream from that truck. If two trucks are equally close, then 5 of them will buy ice-cream from one truck, and 5 from the other. Each truck aims to maximise the amount of ice-cream it sells. Where should the trucks end up?
+
+\end{quote}
+
+\noindent Let's start by looking at a fragment of the payoff matrix. The payoffs are numbers of ice-creams sold. We'll call the players $R$ for Row and $C$ for column, as usual, and just use the number $n$ for the strategy of choosing location $n$.
+
+\starttab{r  c c  c c  c c}
+ & 0 & 1 & 2 & 3 & 4 & \dots  \\
+0 & 55, 55 & 10, 100 & 15, 95 & 20, 90 & 25, 85 & \dots \\
+1 & 100, 10 & 55, 55 & 20, 90 & 25, 95 & 30, 80 & \dots \\
+\dots \\
+\fintab I'll leave it as an exercise to confirm that these numbers are indeed correct. Note that no matter what $C$ selects, $R$ is better off picking 1 than 0. If $C$ picks 0 or 1, she is a lot better off; she sells 45 more ice-creams. And if $C$ picks a higher number, she is a bit better off; she sells 5 more ice-creams. So picking 1 dominates picking 2. 
+
+Let's look at the opposite corner of the matrix.
+
+\starttab{r  c c  c c  c c}
+ & \dots & 6 & 7 & 8 & 9 & 10  \\
+\dots \\
+9 & \dots & 30, 80 & 25, 85 & 20, 90 & 55, 55 & 100, 10 \\
+10 & \dots & 25, 85 & 20, 80 & 15, 95 & 10, 100 & 55, 55 \\
+\fintab Again, there should be a pattern. No matter what $C$ does, $R$ is better off picking 9 than 10. In most cases, this leads to selling 5 more ice-creams. If $C$ also picks 9 or 10, the picking 9 gives $R$ a big advantage. The argument here was obviously symmetric to the argument about picking 0 or picking 1, so I'll stop concentrating on what happens when both players select high numbers, and focus from here on the low numbers.
+
+So there is a clear conclusion to be drawn from what we've said so far.
+
+\begin{itemize*}
+\item Spot 0 is dominated by Spot 1, and Spot 10 is dominated by Spot 9. So if $R$ is rational, she won't pick either of those spots. Since the game is symmetric, if $C$ is rational, she won't pick either of those spots either.
+\end{itemize*}
+
+\noindent Now let's turn to the comparison between Spot 1 and Spot 2. Again, we'll just look at a fragment of the matrix.
+
+\starttab{r  c c  c c  c c c}
+ & 0 & 1 & 2 & 3 & 4 & 5 & \dots  \\
+1 & 100, 10 & 55, 55 & 20, 90 & 25, 95 & 30, 80 & 35, 75 & \dots \\
+2 & 95, 15 & 90, 20 & 55, 55 & 30, 80 & 35, 75 & 40, 70 &  \dots \\
+\dots \\
+\fintab The pattern is also clear. If $C$ selects any number above 2, then $R$ sells 5 more ice-creams by picking 2 rather than 1. If $C$ selects either 1 or 2, then $R$ sells 35 more ice-creams by picking 2 rather than 1. But if $C$ selects 0, then $R$ sells 5 \textit{fewer} ice-creams by picking 2 rather than 1. So picking 2 does \textit{not} dominate picking 1.
+
+But note the only circumstance when picking 2 is worse than picking 1 is if $C$ picks 0. And picking 0 is, for $C$, a strongly dominated strategy. So picking 2 is sure to do better than picking 1 if $C$ does not play a strongly dominated strategy. Assuming $C$ is rational, we can represent this by deleting from the game matrix $C$'s dominated options. Here's what the top left corner of the game matrix looks like when we do that.
+
+\starttab{r  c c  c c  c c}
+ & 1 & 2 & 3 & 4 & 5 & \dots  \\
+1 & 55, 55 & 20, 90 & 25, 95 & 30, 80 & 35, 75 & \dots \\
+2 & 90, 20 & 55, 55 & 30, 80 & 35, 75 & 40, 70 &  \dots \\
+\dots \\
+\fintab And now it looks like picking 1 is dominated. This teaches us another lesson about the game.
+
+\begin{itemize*}
+\item If we `delete' the option of picking either 0 or 10 for $C$, then picking 2 dominates picking 1 for $R$. In other words, if $R$ knows $C$ is rational, and hence won't pick a dominated option, then picking 2 dominates picking 1 for $R$, relative to the space of epistemically possible moves in the game. For similar reasons, if $R$ knows $C$ is rational, then picking 8 dominates picking 9. And if $C$ knows $R$ is rational, then picking either 1 or 9 is dominated (by 2 and 8 respectively). 
+\end{itemize*}
+
+\noindent Summarising what we know so far,
+
+\begin{itemize*}
+\item If the players are rational, they won't pick 0 or 10.
+\item If the players know the other player is rational, they also won't pick 1 or 9.
+\end{itemize*}
+
+\noindent Let's continue down the matrix. For simplicity, we'll leave off columns 0 and 10, since they are dominated, and we have deleted those as possible options.
+
+\starttab{r  c c  c c  c c}
+ & 1 & 2 & 3 & 4 & 5 & \dots  \\
+2 & 90, 20 & 55, 55 & 30, 80 & 35, 75 & 40, 70 &  \dots \\
+3 & 85, 25 & 80, 30 & 55, 55 & 40, 70 & 45, 65 & \dots \\
+\dots \\
+\fintab Picking 3 doesn't \textit{quite} dominate picking 2. In most circumstances, $R$ does better by picking 3 rather than 2. But she does a little worse if $C$ picks 1. But wait! We just had an argument that $C$ shouldn't pick 1. Or, at least, if $C$ knows that $R$ is rational, she shouldn't pick 1. Let's assume that $C$ does know that $R$ is rational, and $R$ in turn knows that fact, so she can use it in reasoning. That means she knows $C$ won't pick 1. So she can delete it from consideration too. And once she does, picking 3 dominates picking 2, relative to the reduced space of epistemically possible outcomes.
+
+I haven't belaboured the point as much as in the previous paragraphs, but hopefully the following conclusion is clear.
+
+\begin{itemize*}
+\item If the players know that the players know that the other player is rational, they won't pick 2 or 8.
+\end{itemize*}
+
+\noindent And you can see where this is going. Once we rule out each player picking 2 or 8, then picking 4 dominates picking 3, so picking 3 should be ruled out. And picking 7 should be ruled out for symmetric reasons. But once 3 and 7 are ruled out, picking 5 dominates picking either 4 or 6. So both players will end up picking 5.
+
+And that is, in the standard economic textbooks, a nice explanation of why we see so much `clustering' of shops. (For instance, why so often there are several gas stations on one corner, rather than spread over town.) Of course the full explanation of clustering is more complicated, but it is nice to see such a simple model deliver such a strong outcome. 
+
+This process is called the \textbf{Iterative Deletion of Dominated Strategies}. More precisely, what we've used here is the strategy of iteratively deleting \textbf{strongly} dominated strategies. This is a powerful technique for solving games that don't, at first glance, admit of any easy solution.
+
+But it is worth reminding ourselves just how strong the assumptions that we used were. The standard terminology here can be a little confusing. After all, it isn't that picking 4 \textit{dominates}, in any sense, picking 3. What's really true is that if we quantify over a restricted range of choices for $C$, then picking 4 is better for $R$ than picking 3, no matter which choice \textit{from that range}, $C$ chooses. And that's a good reason to pick 4 rather than 3, provided that $R$ knows that $C$ will make a pick in that range. From that perspective, it's instructive to complete the list of lessons that we were compiling about the game.
+
+\begin{itemize*}
+\item If the players are rational, they won't pick 0 or 10.
+\item If the players know the other player is rational, they also won't pick 1 or 9.
+\item If the players know that the players know that the other player is rational, they also won't pick 2 or 8.
+\item If the players know that the players know that the players know that the other player is rational, they won't pick 3 or 7.
+\item If the players know that the players know that the players know that the players know that the other player is rational, they also won't pick 4 or 6, i.e., they will pick 5
+\end{itemize*}
+
+\noindent There are a lot of assumptions built in to all of this. It would be nice to have a way of summarising them. The standard approach traces back to David Lewis's \textit{Convention}.
+
+\begin{description}
+\item[Common Knowledge] In a game, it is common knowledge that $p$ if each player knows it, each player knows that each player knows it, each player knows that each player knows that each player know it, and so on.
+\end{description}
+
+\noindent In many, but not all, games, we assume common knowledge of the rationality of the players. In \citegame{IceCream}, common knowledge of rationality makes picking 5 rationally mandatory.
+
+There is a fun story that is usually told to illustrate the importance of common knowledge.
+
+\begin{quote}
+\textbf{Slapville}
+
+In Slapville, it is culturally required to slap oneself if one is in public with a dirty face. Larry, Curly and Moe are in a room together, fortunately one without mirrors. Each of them has a dirty face, but they can't see their own faces, they can only see the other faces. And each face is dirty. Inspector Renault  walks into the room and says, ``I'm shocked! Someone in this room has a dirty face.'' After a long delay, Larry, Curly and Moe each slap themselves in the face (thereby getting dirty hands as well as dirty faces). Why?
+\end{quote}
+
+\noindent One way to be puzzled by Slapville is to start with the concept of \textbf{mutual knowledge}. It is mutual knowledge that $p$ if everyone in the game knows that $p$. In Slapville, it is mutual knowledge that someone has a dirty face. It is even, modulo Williamsonian concerns, mutual knowledge* that someone has a dirty face. (By $S$ knows* that $p$, I mean $S$ knows that $p$, and $S$ knows that $S$ knows $p$, and $S$ knows that $S$ knows that $S$ knows that $p$, and so on.) So you might wonder what difference Renault's statement makes. After all, just like his namesake, he's just voicing something everyone already knew.
+
+But it wasn't common knowledge that someone has a dirty face. Consider things from Larry's perspective. He knows someone has a dirty face. He can see Curly and Moe's dirty faces. And he knows that everyone knows that someone has a dirty face. He clearly knows it; he can see Curly and Moe. And Curly knows it; he can see Moe. And Moe knows it; he can see Curly. 
+
+But he doesn't know that everyone knows that everyone knows that someone has a dirty face. For all he knows, only Curly and Moe have dirty faces. If that's true, the only dirty face Curly knows about is Moe's. So for all Larry knows that Curly knows, only Moe has a dirty face. And if only Moe has a dirty face, then Moe doesn't know that someone has a dirty face. So for all Larry knows that Curly knows, Moe doesn't know that someone has a dirty face.
+
+Or at least, that's the situation before Renault speaks. Once Renault speaks, it becomes \textit{common knowledge} that someone has a dirty face. (Assume that it is common knowledge that Renault speaks the truth, at least when he is shocked.) Now let's trace back the consequences.
+
+Consider again the world where only Moe has a dirty face. In that world, once Renault speaks, Moe slaps himself. That's because he learns that he has a dirty face by putting together the clean faces he can see with the fact that someone has a dirty face. (I've been assuming here that it is common knowledge that only Larry, Curly and Moe were in the room to start with. Hopefully that hasn't been too distracting, but it is crucial here.) 
+
+Now as a matter of fact, Moe does not immediately slap himself. That suffices to teach everyone something. In particular, it teaches them they were not in the world where only Moe has a dirty face. Of course, they each already knew that, but it is now clear to everyone that they all know it. 
+
+Consider next the world where only Curly and Moe have dirty faces. From Curly's perspective in that world, there are two possibilities. Either he and Moe have dirty faces, or only Moe has a dirty face. But we just ruled out that only Moe has a dirty face. So if we were in the world where only Curly and Moe have a dirty face, then Curly should slap himself.
+
+But Curly doesn't slap himself yet. (I'll leave the question of precisely why he doesn't as an exercise; it should be clear given what we've said so far.) So that rules out the possibility that we're in the world where only Curly and Moe have dirty faces. But Larry knew to start with that we were either in the world where all of them have dirty faces, or in the world where only Curly and Moe have dirty faces. So they must be in the world where they all have dirty faces.
+
+At this stage Larry realises this, and slaps himself in the face. At roughly the same time, Curly and Moe also slap themselves in the face. And it's all because of the difference between mutual knowledge and common knowledge.
+
+\section{Strong and Weak Dominance}
+The assumption of common knowledge of rationality is a really strong assumption though. The following game makes this very clear.
+
+\begin{quote}
+\gamelab{Averages} %This is the 2/3 of averages game; we'll call it Averages
+
+Everyone in a large group selects an integer between 1 and 100 inclusive. The winner of the game is the person whose number is cloest to \nicefrac{2}{3} of the average of all of the numbers selected. That is, the payoff for the player who selects closest to \nicefrac{2}{3} of the average is 1. (If there is a tie between $n$ players, their payoff is \nicefrac{1}{n}.) The payoff for everyone else is 0.
+\end{quote}
+
+\noindent This game can be played with any number of players, but we'll keep things simple by assuming there are just 10. This still gives us too big a game table. We need 10 dimensions, and $100^{10}$ cells. The latter is not too demanding; but a 10-dimensional representation is tricky on paper. So we'll just describe states of the game.
+
+\newcommand{\twothirds}{\nicefrac{2}{3}}
+
+The first thing to note about the game is that a particular player, let's call her $P$, can't win if she selects a number between 68 and 100. That's because those numbers can't be \twothirds\ of the average unless the average is greater than 100. And, of course, the average can't be greater than 100. So those choices are dominated for $P$.
+
+But we have to be rather careful here. What choice dominates picking, say, 70? We might say that 60 dominates it. After all, 60 could be the best possible play, while 70 could not. But in most circumstances, 60 and 70 will have the same payoff, namely 0. Unless the average is close to 90, or no one else picks around 60, $P$'s payoff will be 0 whether she picks 60 or 70. And the same goes for any alternative to picking 70.
+
+This is all to say that no alternative pick \textbf{strongly} dominates picking 70. But several picks do \textbf{weakly} dominate it. For instance, picking 64 does. Note that picking 70 can never do better than picking 64, because even if everyone else picks 100, if one player picks 64, the average will be 96.4, so 64 will be closest to \twothirds\ of the average. So any circumstance where 70 will be a winning play must be one where everyone else picks more than 70. But in those circumstances, picking 64 will win as well. Conversely, picking 64 could do better than picking 70. If everyone else picks 65, picking 64 will win, and picking 70 will lose. So 64 weakly dominates 70. And as we can see, all that really mattered for that argument was that 70 was always going to be higher than \twothirds\ of the average, so it would be weakly dominated by some numbers that could be closer to \twothirds\ of the average.
+
+Again, let's list the lessons as we learn them.
+
+\begin{itemize*}
+\item Any selection above 67 is weakly dominated.
+\item Since rational players do not play weakly dominated strategies, it is irrational to pick any number above 67.
+\end{itemize*}
+
+\noindent We will, much later on, come back to the assumption that playing weakly dominated strategies is irrational. I think it is true, though it deserves a more careful treatment than we'll give it here. Let's just assume for now it is true.
+
+Now we showed a way that $P$ can win while playing 60. But it has to be said, that it isn't a particularly likely way. It requires the average of the selections to be nearly 90. And that requires a lot of other people to pick high numbers. That is, it requires other people to pick weakly dominated strategies. And that's not very plausible, assuming those other people are rational.
+
+Let's assume, then, that $P$ knows that the other players are rational, and hence will not choose weakly dominated strategies. So no other player will choose a number greater than 67. Then the average of what everyone picks can't be greater than 67. So \twothirds\ of the average can't be greater than 45. So once we remove the weakly dominated strategies, any selection greater than 45 can't be optimal (i.e., it must be considerably greater than \twothirds\ of the average), and we can give an argument similar to the above argument that it is weakly dominated.
+
+As in the ice-cream game, the trick here is to delete dominated strategies. Once you do that, it is as if you are playing a different game. And in that game, more strategies are in turn dominated. That's because they are strategies that only made sense to play on the assumption that other people played dominated strategies. And, really, it isn't very plausible to assume that people will play dominated strategies. So we should delete the dominated strategies in this new game as well.
+
+And once we do that, we'll find yet more strategies become dominated. Let's say we delete the strategies between 46 and 67. Now the most the average can be is 45. So \twothirds\ of the average can't be more than 30. So any pick greater than 30 can't be optimal, and so is weakly dominated, so should be deleted. But once those picks are deleted, the average can't be greater than 30, so \twothirds\ of the average can't be greater than 20, so any pick greater than 20 can't be optimal, and is weakly dominated, so should be deleted. And so on, until every pick greater than 1 is deleted. That's the next lesson from the game.
+
+\begin{itemize*}
+\item The only strategy that survives the iterated deletion of weakly dominated strategies is to select 1.
+\end{itemize*}
+
+\noindent So it seems rational players, who are playing the game with other rational players, should choose 1 right?
+
+Not so fast! Here's a little tip for anyone playing this game in a large enough group. If you pick 1 you will lose with a probability more or less equal to 1. Just what number will win is harder to predict without knowing more about the group's features, but it won't be 1. Why not? Is it because there are irrational players in any group?
+
+Not necessarily. What's really going on is that the assumptions needed to get to 1 are incredibly strong. Let's go through the argument for getting to 1 in some more detail.
+
+\begin{itemize*}
+\item At the start, \twothirds\ of the average is at most 67.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 45.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 30.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 20.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 13.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 9.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 6.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 4.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 3.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 2.
+\item If everyone knows that, and is rational, \twothirds\ of the average is at most 1.
+\end{itemize*}
+
+\noindent Note that at every stage we need to make one more assumption about what the players know. By the end we've assumed that everyone knows that everyone knows that everyone knows that everyone knows that everyone knows that everyone knows that everyone knows that everyone knows that everyone knows that everyone knows that everyone is rational. (There are 10 iterations of `everyone knows that' in that sentence, in case you'd rather not count.) And that's really not a plausible assumption.
+
+To put this in perspective, imagine a variant of the Slapville story where there aren't just 3 people, Larry, Curly and Moe, but 10 people. (Perhaps we add the 7 dwarves to the 3 stooges.) And they all have dirty faces. And none of them can see their own face, but Inspector Renault says that at least one of them has a dirty face. It is hard to imagine that this will make any difference at all. For one thing, the computations required to process the new common knowledge are horrendously difficult. (In a way, this is a denial that the players are \textit{perfectly} rational, but it also brings out what a strong assumption that is already.) To assume that they can be done, and that everyone knows they can be done, and everyone knows that everyone knows they can be done, and so on for 8 more steps, is absurd.\footnote{The rest of the section contains material we won't cover in class, and won't be on any assignment, but may be of interest to some students.}
+
+\section{Puzzles about Weak Domination}
+
+There is something very odd about choosing strategies that are strongly dominated. And from that, we can naturally deduce that we should delete strategies that are strongly dominated. The iterative deletion of strongly dominated strategies requires not just rationality, but common belief in rationality through as many iterations as there are steps of deletion. Sometimes that will be an implausible assumption, but it often seems reasonable enough in practice.
+
+Weak domination, however, generates principles that are both more puzzling and harder to justify. Some people argue that weakly dominated strategies are perfectly rational to play in games like this one, which we might think of as Weak Prisoners' Dilemma. 
+
+\starttab{r c c}
+%Weakly dominated Pareto effecient equilibrium
+%This is called OddWeak
+\gamelab{BinmoreOddWeak} & $l$ & $r$ \\
+$U$ & 1, 1 & 100, 0 \\
+$D$ & 0, 100 & 100, 100 \\
+\fintab $D$ is weakly dominated by $U$. But if $R$ is confident that $C$ will play $r$, then it may be rational to play $D$. And there's good reason to think that $C$ will play $r$; the bottom-right corner is a good place for them to both end up. So you might think it is rational to play a weakly dominated strategy.
+
+If we start iteratively deleting weakly dominated strategies, we get even less plausible outcomes.
+
+\starttab{r c c c}
+%Iteratively weakly dominated Pareto efficient equilibrium
+\gamelab{StalnakerOddWeak} & $l$ & $m$ & $r$ \\
+$T$ & 2, 2 & 100, 0 & 0, 90 \\
+$M$ & 0, 100 & 100, 100 & 100, 95 \\
+$B$ & 0, 95 & 95, 100 & 95, 95 \\
+\fintab Since $B$ and $r$ are weakly dominated by $M$ and $m$ respectively, we can delete them. And now we're back in a small variant of \citegame{BinmoreOddWeak}, where deleting weakly dominated strategies leads to the \tol{T, l} \eqm. But here it is even more attractive to play \tol{M, m}. For one thing, it is an \eqm\ in an important sense that we'll talk more about later. The important sense is that given what the other player is doing, neither player can do better by changing. So if each player thinks the other player will play their half of \tol{M, m}, it makes sense for each player to play their half of \tol{M, m}. All that's true of the \tol{D, R} \eqm\ in \citegame{BinmoreOddWeak}. But in \citegame{BinmoreOddWeak}, the players couldn't do worse by changing their strategies if they are wrong about what the other players will play. Here they might. We'll have much more to say about this later, but there is an even stronger argument that \tol{M, m} is a rational pair of plays in this game than there was that \tol{D, R} was a rational pair of plays in \citegame{BinmoreOddWeak}. For roughly these reasons, Robert Stalnaker argues that there is a good sense of rationality (what he calls \textbf{perfect rationality}) which requires playing \tol{U, L} in \citegame{BinmoreOddWeak}, but which is compatible with playing \tol{M, m} in \citegame{StalnakerOddWeak}.
+
+There are other puzzles with iteratively deleting weakly dominated strategies. Surprisingly, it can turn out that the order in which we delete strategies makes a big difference. This point is made in Elon Kohlberg and Jean-Francois Mertens's 1986 \textit{Econometrica} paper ``On the Strategic Stability of Equilibria''.  Here is (a minor variation on) the example they use.
+
+\starttab{r  c c}
+\gamelab{Kohlberg} & $l$ & $r$ \\
+$T$ & 2, 2 & 2, 2 \\
+$M$ & 1, 0 & 0, 1\\
+$B$ & 0, 1 & 1, 0 \\
+\fintab Since $B$ is dominated, it won't be chosen. But once we eliminate $B$, then for $C$, $r$ (weakly) dominates $l$, so only $r$ survives iterative deletion of weakly dominated strategies. 
+
+But wait! We could also reason as follows. Since $M$ is dominated, it won't be chosen. But once we eliminate $M$, then for $C$, $l$ (weakly) dominates $r$, so only $l$ survives iterative deletion of weakly dominated strategies. What is going on?
+
+Kohlberg and Mertens suggest that we should focus on strategies that survive \textit{some} process of iterative deletion. Since for player 2, there is an iterative deletion path that $l$ survives, and an iterative deletion path that $r$ survives, then both strategies really survive iterative deletion. 
+
+You might be tempted by an alternative take on this example. Perhaps it was wrong to either delete $M$ or to delete $B$. Perhaps we should say that when we are deleting strategies, the right thing to do is to delete \textit{all} strategies that are dominated at a stroke. So we should simultaneously delete $M$ and $B$, and then it will be clear that both $L$ and $R$ survive. This won't avoid the problem though, as we can see by a simple three player game.
+
+\begin{quote}
+%This is the three-player game that points out the importance of order of deletion 
+\gamelab{KohlbergThree}
+
+There are three players, 1, 2 and 3. They can each choose one of two options, which we'll label $A$ and $B$. For player 1 and 2, the payoff structure is easy, they get 2 if they pick $A$, and 1 if they pick $B$. For player 3, it is a little more complicated. Player 3 gets:
+\begin{itemize*}
+\item 2 if both players 1 and 2 pick $A$
+\item 0 if both players 1 and 2 pick $B$
+\item 1 if players 1 and 2 make opposite picks, and player 3 picks the same thing as player 1.
+\item 0 if players 1 and 2 make opposite picks, and player 3 picks the same thing as player 2.
+\end{itemize*}
+\end{quote}
+
+\noindent One way we could analyse this is by saying that since $B$ is dominated for both players 1 and 2, they won't pick it. And since player 3's choice doesn't matter if both player 1 and 2 pick $A$, then it doesn't matter what player 3 picks. But there are other ways we could go as well.
+
+Since $B$ is (strongly) dominated for player 1, we can rule it out. Now player 3 faces the following choice, assuming player 1 picks $A$. (We'll write player 3's choices on the rows, and player 2's on the columns, and put player 3's payoff first.)
+
+\starttab{r c c}
+ & $a$ & $b$ \\
+$A$ & 2, 2 & 1, 1 \\
+$B$ & 2, 2 & 0, 1 \\
+\fintab Now $A$ weakly dominates $B$, so it is uniquely rational, we might think, for player 3 to pick $A$.
+
+But wait! Since $b$ is (strongly) dominated for player 2, we can rule it out. Now player 3 faces the following choice, assuming player 2 picks $A$. (We'll write player 3's choices on the rows, and player 1's on the columns, and put player 3's payoff first.) 
+
+\starttab{r c c}
+ & $a$ & $b$ \\
+$A$ & 2, 2 & 0, 1 \\
+$B$ & 2, 2 & 1, 1 \\
+\fintab Now $B$ weakly dominates $A$, so it is uniquely rational, we might think, for player 3 to pick $B$.
+
+Now it looks like even we delete every dominated strategy that a player has when we get to that player in the analysis, the order in which we do the deletions still matters. Note though that none of the analysis we've just done seems to undermine the intuitive verdict that player 3 could rationally choose either $A$ or $B$. She is going to get 2 whatever she chooses, since the other players will both choose $A$. So this doesn't undermine Kohlberg and Mertens's conclusion that if there is some path of strategy deletion that leads to a strategy being available and no more deletions being possible, then it is (for these purposes) rationally acceptable to choose that strategy.
+
+%Include the proof that this can't happen for strongly dominated strategies. The proof involves the 'canonical' method for deletion, where we delete every strategy that's strongly dominated, then again delete every strategy that's strongly dominated after one round, etc. Can prove by induction that every process of deletion will delete all and only strategies that are deleted under the canonical method.
+
+\section{Four Normative Statuses}
+
+We will spend a lot of time in these notes on various normative statuses that strategies in a game can have. We have, in effect, already seen four such statuses.
+
+\begin{description}
+\item[NSD] That is, \textbf{N}ot \textbf{S}trongly \textbf{D}ominated.
+\item[NWD] That is, \textbf{N}ot \textbf{W}eakly \textbf{D}ominated.
+\item[NSDAI] That is, That is, \textbf{N}ot \textbf{S}trongly \textbf{D}ominated \textbf{A}fter \textbf{I}terations. In other words, it is still there after we repeatedly delete strongly dominated strategies until only undominated strategies remain.
+\item[NWDAI] That is, That is, \textbf{N}ot \textbf{W}eakly \textbf{D}ominated \textbf{A}fter \textbf{I}terations. In other words, it is still there after we repeatedly delete weakly dominated strategies until only undominated strategies remain.
+\end{description}
+
+\noindent We can place these from weakest to strongest in the following lattice, with weakest being on the bottom.
+
+\begin{center}
+\begin{picture}(120, 100)
+%\put(47.5, 0){NSD}
+\pictext{60}{0}{NSD}
+%\put(60, 0){\makebox(0, 0)[b]{NSD}}
+\put(60, 12){\line(-2, 1){40}}
+\put(60, 12){\line(2, 1){40}}
+%\put(20, 40){\makebox(0, 0){NSDAI}}
+%\put(2, 36){\makebox[30][c]{NSDAI}}
+\pictext{20}{36}{NWD}
+\pictext{100}{36}{NSDAI}
+%\put(86, 36){NWD}
+\put(20, 48){\line(2, 1){40}}
+\put(100, 48){\line(-2, 1){40}}
+%\put(43, 72){NWDAI}
+\pictext{60}{72}{NWDAI}
+\end{picture}
+\end{center}
+
+\noindent That table actually encodes a lot of distinct claims. Let's go through them all, noting which ones are obvious, and proving the ones that aren't.
+
+\stratcomp{All NWD strategies are NSD}{This follows from the fact that strong domination entails weak domination, so deleting weakly dominated strategeis will delete strongly dominated strategies.}
+
+\stratcomp{All NWDAI strategies are NSDAI}{This is true for more or less the same reason. Formally proving this is a little tricky, since you have to be careful about how the different iterative steps interact with the definitions of dominance, but it can be proven by induction on the number of iterative steps. We won't do the proof here, but you can show that any strategy that is deleted by step $n$ of the process of iteratively deleting strongly dominated strategies will also be deleted by step $n$ of the process of iteratively deleting weakly dominated strategies.}
+
+\stratcomp{All NSDAI strategies are NSD}{Obvious.}
+
+\stratcomp{All NWDAI strategies are NWD}{Also obvious.}
+
+\stratcomp{Some NSD strategies are not NWD}{In \citegame{Averages}, the strategy of picking 90 is not strongly dominated, as we showed above, but is weakly dominated. So it is NSD, but not NWD.}
+
+\stratcomp{Some NWD strategies are not NWDAI}{In \citegame{Averages}, the strategy of picking 60 is not weakly dominated, as we showed above, but as we also showed, it does not survive the iterative deletion process. Indeed, it is deleted at the second step.}
+
+\stratcomp{Some NSD strategies are not NSDAI}{In \citegame{IceCream}, the strategy of choosing location 1 is not strongly dominated. But it does not survive the iterative deletion process. Indeed, it is deleted at the second step.}
+
+\stratcomp{Some NSDAI strategies are not NWDAI}{In \citegame{Averages}, no strategy is strongly dominated, so all strategies are NSDAI. But many strategies, indeed all but one, are not NWDAI.}
+
+\stratcomp{Some NSDAI strategies are not NWD}{Similarly in \citegame{Averages}, some strategies, like choosing 90, aren't NWD. But as we just showed, they are NSDAI.}
+
+\stratcomp{Some NWD strategies are not NSDAI}{In \citegame{IceCream}, the only weakly dominated strategies are choosing 0 and 10. But the only NSDAI strategy is 5. So any other strategy is NWD but not NSDAI.}
+

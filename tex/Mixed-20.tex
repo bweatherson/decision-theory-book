@@ -1,0 +1,95 @@
+\section{Mixed Strategies}
+In a zero-sum game, there is a simple way to tell that an outcome is a Nash equilibrium outcome. It has to be the smallest value in the row it is (else Column could do better going elsewhere) and the highest value in the column it is in (else Row could do better by going elsewhere). But once we see this, we can see that several games do not have any simple Nash equilibrium. Consider again Rock-Paper-Scissors.
+
+\starttab{r | c c c}
+ & Rock & Paper & Scissors \\ \hline
+Rock & 0 & -1 & 1 \\ 
+Paper & 1 & 0 & -1 \\
+Scissors & -1 & 1 & 0
+\stoptab There is no number that's both the lowest number in the row that it is in, and the highest number in the row that it is in. And this shouldn't be too surprising. Let's think about what Nash equilibrium means. It means that a move is the best each player can do even if the other player plays their part of the equilibrium strategy. That is, it is a move such that if one player announced their move, the other player wouldn't want to change. And there's no such move in Rock-Paper-Scissors. The whole point is to try to trick the other player about what your move will be.
+
+So in one sense there is no Nash equilibrium to the game. But in another sense there is an equilibrium to the game. Let's expand the scope of possible moves. As well as picking one particular play, a player can pick a \textbf{mixed strategy}.
+
+\begin{itemize*}
+\item A \textbf{mixed strategy} is where the player doesn't decide which move they will make, but decides merely the probability with which they will make certain moves.
+\item Intuitively, picking a mixed strategy is deciding to let a randomising device choose what move you'll make; the player's strategy is limited to adjusting the settings on the randomising device.
+\end{itemize*}
+
+We will represent mixed strategies in the following way. $<$0.6 Rock; 0.4 Scissors$>$ is the strategy of playing Rock with probability 0.6, and Scissors with probability 0.4. Now this isn't a great strategy to announce. The other player can do well enough by responding Rock, which has an expected return of 0.4 (Proof: if the other player plays Rock, they have an 0.6 chance of getting a return of 0, and an 0.4 chance of getting a return of 1. So their expected return is $0.6 \times 0 + 0.4 \times 1 = 0.4$.) But this is already a little better than any `pure' strategy. A pure strategy is just any strategy that's not a mixed strategy. For any pure strategy that you announce, the other player can get an expected return of 1.
+
+Now consider the strategy $<$$\frac{1}{3}$ Rock, $\frac{1}{3}$ Paper, $\frac{1}{3}$ Scissors$>$. Whatever pure strategy the other player chooses, it has an expected return of 0. That's because it has a $\frac{1}{3}$ chance of a return of 1, a $\frac{1}{3}$ chance of a return of 0, and a $\frac{1}{3}$ chance of a return of -1. As a consequence of that, whatever mixed strategy they choose has an expected return of 0. That's because the expected return of a mixed strategy can be calculated by taking the expected return of each pure strategy that goes into the mixed strategy, multiplying each number by the probability of that pure strategy being played, and summing the numbers.
+
+The consequence is that if both players play $<$$\frac{1}{3}$ Rock, $\frac{1}{3}$ Paper, $\frac{1}{3}$ Scissors$>$, then each has an expected return of 0. Moreover, if each player plays this strategy, the other player's expected return is 0 no matter what they play. That's to say, playing $<$$\frac{1}{3}$ Rock, $\frac{1}{3}$ Paper, $\frac{1}{3}$ Scissors$>$ does as well as anything they can do. So the `outcome' ($<$$\frac{1}{3}$ Rock, $\frac{1}{3}$ Paper, $\frac{1}{3}$ Scissors$>$, $<$$\frac{1}{3}$ Rock, $\frac{1}{3}$ Paper, $\frac{1}{3}$ Scissors$>$), i.e. the outcome where both players simply choose at random which move to make, is a Nash equilibrium. In fact it is the only Nash equilibrium for this game, though we won't prove this.
+
+It turns out that every zero-sum game has at least one Nash equilibrium if we allow the players to use mixed strategies. (In fact every game has at least one Nash equilibrium if we allow mixed strategies, though we won't get to this general result for a while.) So the instruction \textit{play your half of Nash equilibrium strategies} is a strategy that you can follow.
+
+\section{Surprising Mixed Strategies}
+Consider the following zero-sum game. Row and Column each have to pick either Side or Center. If they pick differently, then Row wins, which we'll represent as a return of 5. If they both pick Center, then Column wins, which we'll represent as a return of 0. If they both pick Side, then Row wins with probability 0.6. In that case Row's expected return is 3. So we can represent the game as follows.
+
+\starttab{r | c c}
+ & Side & Center \\ \hline
+Side & 3 & 5 \\
+Center & 5 & 0
+\stoptab There is no pure Nash equilibrium here. But you might think that Row is best off concentrating their attention on Side possibilities, since it lets them have more chance of winning. You'd be right, but only to an extent. The Nash equilibrium solution is ($<$$\frac{5}{7}$ Side, $\frac{2}{7}$ Center$>$, $<$$\frac{5}{7}$ Side, $\frac{2}{7}$ Center$>$). (Exercise: Verify that this is a Nash equilibrium solution.) So even though the outcomes look a lot better for Row if they play Side, they should play Center with some probability. And conversely, although Column's best outcome comes with Center, Column should in fact play Side quite a bit.
+
+Let's expand the game a little bit. Imagine that each player doesn't get to just pick Side, but split this into Left and Right. Again, Row wins if they don't pick the same way. So the game is now more generous to Row. And the table looks like this.
+
+\starttab{r | c c c}
+ & Left & Center & Right \\ \hline
+Left & 3 & 5& 5 \\
+Center & 5 & 0 & 5 \\
+Right & 5 & 5 & 3
+\stoptab It is a little harder to see, but the Nash solution to this game is ($<$$\frac{5}{12}$ Left, $\frac{1}{6}$ Center, $\frac{5}{12}$ Right$>$, $<$$\frac{5}{12}$ Left, $\frac{1}{6}$ Center, $\frac{5}{12}$ Right$>$). That is, even though Row could keep Column on their toes simply by randomly choosing between Left and Right, they do a little better sometimes playing Center. I'll leave confirming this as an exercise for you, but if Row played $<$0.5 Left, 0.5 Right$>$, then Column could play the same, and Row's expected return would be 4. But in this solution, Row's expected return is a little higher, it is $4 \frac{1}{6}$.
+
+The above game is based on a study of penalty kicks in soccer that Stephen Levitt (of \textit{Freakonomics} fame) did with some colleagues. In a soccer penalty kick, a player, call them Kicker, stands 12 yards in front of the goal and tries to kick it into the goal. The goalkeeper stands in the middle of the goal and tries to stop them. At professional level, the ball moves too quickly for the goalkeeper to see where the ball is going and then react and move to stop it. Rather, the goalkeeper has to move simultaneously with Kicker. Simplifying a little, Kicker can aim left, or right, or straight ahead. Simplifying even more, if the goalkeeper does not guess Kicker's move, a goal will be scored with high probability. (We've made this probability 1 in the game.) If Kicker aims left or right, and goalkeeper guesses this, there is still a very good chance a goal will be scored, but the goalkeeper has some chance of stopping it. And if Kicker aims straight at center, and goalkeeper simply stands centrally, rather than diving to one side or the other, the ball will certainly not go in.
+
+One of the nice results Levitt's team found was that, even when we put in more realistic numbers for the goal-probability than I have used, the Nash equilibrium solution of the game has Kicker having some probability of kicking straight at Center. And it has some probability for goalkeeper standing centrally. So there is some probability that the Kicker will kick the ball straight where the goalkeeper is standing, and the goalkeeper will gratefully stand there and catch the ball.
+
+This might seem like a crazy result in fact; who would play soccer that way? Well, they discovered that professional players do just this. Players do really kick straight at the goalkeeper some of the time, and occasionally the goalkeeper doesn't dive to the side. And very occasionally, both of those things happen. (It turns out that when you are more careful with the numbers, goalkeepers should dive almost all the time, while players should kick straight reasonably often, and that's just what happens.) So in at least one high profile game, players do make the Nash equilibrium play.
+
+\section{Calculating Mixed Strategy Nash Equilibrium}
+Here is a completely general version of a two-player zero-sum game with just two moves available for each player.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & $a$ & $b$ \\
+$R_2$ & $c$ & $d$
+\stoptab If one player has a dominating strategy, then they will play that, and the Nash equilibrium will be the pair consisting of that dominating move and the best move the other player can make, assuming the first player makes the dominating move. If that  doesn't happen, we can use the following method to construct a Nash equilbrium. What we're going to do is to find a pair of mixed strategies such that for each mixed strategy, if it is made, any strategy the other player follows has equal probability.
+
+So let's say that Row plays $<$$p R_1, 1-p R_2$$>$ and Column plays $<$$q C_1 and 1-q C_2$$>$. We want to find values of $p$ and $q$ such that the other player's expected utility is invariant over their possible choices. We'll do this first for Column. Row's expected return is
+
+\begin{align*}
+&Pr(R_1C_1)U(R_1C_1) + Pr(R_1C_2)U(R_1C_2) + Pr(R_2C_1)U(R_2C_1) + Pr(R_2C_2)U(R_2C_2) \\
+= &pq \times a + p(1-q) \times b + (1-p)q \times c + (1-p)(1-q) \times d \\
+= &pqa + pb - pqb + qc - pqc + d - pd -qd + pqd \\ 
+=&p(qa + b - qb - qc - d +qd) + qc + d - qd \\
+\end{align*}
+
+Now our aim is to make that value a constant when $p$ varies. So we have to make $qa + b - qb - qc -d +qd$ equal 0, and then Row's expected return will be exactly $qc + d - qd$. So we have the following series of equations.
+
+\begin{align*}
+qa + b - qb - qc -d +qd &= 0 \\
+qa + qd - qb - qc &= d - b \\
+q(a + d - (b + c)) &= d - b \\
+q &= \frac{d - b}{a + d - (b + c)}
+\end{align*}
+
+Let's do the same thing for Row. Again, we're assuming that there is no pure Nash equilibrium, and we're trying to find a mixed equilibrium. And in such a state, whatever Column does, it won't change her expected return. Now Column's expected return is the negation of Row's return. So her return is
+
+\begin{align*}
+&Pr(R_1C_1)U(R_1C_1) + Pr(R_1C_2)U(R_1C_2) + Pr(R_2C_1)U(R_2C_1) + Pr(R_2C_2)U(R_2C_2) \\
+= &pq \times -a + p(1-q) \times -b + (1-p)q \times -c + (1-p)(1-q) \times -d \\
+= &-pqa - pb + pqb - qc + pqc - d + pd + qd - pqd \\ 
+= &q(-pa + pb - c + pc + d - pd) -pb - c + d
+\end{align*}
+
+Again, our aim is to make that value a constant when $p$ varies. So we have to make $-pa + pb - c + pc + d - pd$ equal 0, and then Column's expected return will be exactly $qc + d - qd$. So we have the following series of equations.
+
+\begin{align*}
+-pa + pb - c + pc + d - pd &= 0 \\
+-pa + pb + pc - pd &= c - d \\
+p(b + c - (a + d)) &= c - d \\
+p &= \frac{c - d}{b + c - (a + d)}
+\end{align*}
+
+So if Row plays $<$$\frac{c - d}{b + c - (a + d)} R_1, \frac{b - a}{b + c - (a + d)} R_2$$>$, Column's expected return is the same whatever she plays. And if Column plays $<$$\frac{d - b}{a + d - (b + c)} C_1 and \frac{a - c}{a + d - (b + c)}C_2$$>$, Row's expected return is the same whatever she plays. So that pair of plays forms a Nash equilibrium.

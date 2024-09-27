@@ -1,0 +1,76 @@
+\section{Likely Outcomes}
+Earlier we considered the a decision problem, basically deciding what to do with a Sunday afternoon, that had the following table.
+
+\starttab{c   c c c}
+& \textbf{Sunny} & \textbf{Light rain} & \textbf{Thunderstorm}  \\
+\textbf{Picnic} & 20 & 5 & 0  \\
+\textbf{Baseball} & 15 & 2 & 6  \\
+\textbf{Movies} & 8 & 10 & 9
+\stoptab We looked at how a few different decision rules would treat this decision. The maximin rule would recommend going to the movies, the maximax rule going to the picnic, and the minimax regret rule going to the baseball.
+
+But if we were faced with that kind of decision in real life, we wouldn't sit down to start thinking about which of those three rules were correct, and using the answer to that philosophical question to determine what to do. Rather, we'd consult a weather forecast. If it looked like it was going to be sunny, we'd go on a picnic. If it looked like it was going to rain, we'd go to the movie. What's relevant is how likely each of the three states of the world are. That's something none of our decision rules to date have considered, and it seems like a large omission.
+
+In general, how likely various states are plays a major role in deciding what to do. Consider the following broad kind of decision problem. There is a particular disease that, if you catch it and don't have any drugs to treat it with, is likely fatal. Buying the drugs in question will cost \$500. Do you buy the drugs?
+
+Well, that probably depends on how likely it is that you'll catch the disease in the first place. The case isn't entirely hypothetical. You or I could, at this moment, be stockpiling drugs that treat anthrax poisoning, or avian flu. I'm not buying drugs to defend against either thing. If it looked more likely that there would be more terrorist attacks using anthrax, or an avian flu epidemic, then it would be sensible to spend \$500, and perhaps a lot more, defending against them. As it stands, that doesn't seem particularly sensible. (I have no idea exactly how much buying the relevant drugs would cost; the \$500 figure was somewhat made up. I suspect it would be a rolling cost because the drugs would go `stale'.)
+
+We'll start off today looking at various decision rules that might be employed taking account of the likelihood of various outcomes. Then we'll look at what we might mean by likelihoods. This will start us down the track to discussions of probability, a subject that we'll be interested in for most of the rest of the course.
+
+\section{Do What's Likely to Work}
+The following decision rule doesn't have a catchy name, but I'll call it Do What's Likely to Work. The idea is that we should look at the various states that could come about, and decide which of them is most likely to actually happen. This is more or less what we would do in the decision above about what to do with a Sunday afternoon. The rule says then we should make the choice that will result in the best outcome in that most likely of states.
+
+The rule has two nice advantages. First, it doesn't require a very sophisticated theory of likelihoods. It just requires us to be able to rank the various states in terms of how likely they are. Using some language from the previous section, we rely on a \textit{ordinal} rather than a \textit{cardinal} theory of likelihoods. Second, it matches up well enough with a lot of our everyday decisions. In real life cases like the above example, we really do decide what state is likely to be actual (i.e. decide what the weather is likely to be) then decide what would be best to do in that circumstance.
+
+But the rule also leads to implausible recommendations in other real life cases. Indeed, in some cases it is so implausible that it seems that it must at some level be deeply mistaken. Here is a simple example of such a case.
+
+You have been exposed to a deadly virus. About $\nicefrac{1}{3}$ of people who are exposed to the virus are infected by it, and all those infected by it die unless they receive a vaccine. By the time any symptoms of the virus show up, it is too late for the vaccine to work. You are offered a vaccine for \$500. Do you take it or not?
+
+Well, the most likely state of the world is that you don't have the virus. After all, only $\nicefrac{1}{3}$ of people who are exposed catch the virus. The other $\nicefrac{2}{3}$ do not, and the odds are that you are in that group. And if you don't have the virus, it isn't worth paying \$500 for a vaccine against a virus you haven't caught. So by ``Do What's Likely to Work'', you should decline the vaccine.
+
+But that's crazy! It seems as clear as anything that you should pay for the vaccine. You're in serious danger of dying here, and getting rid of that risk for \$500 seems like a good deal. So ``Do What's Likely to Work'' gives you the wrong result. There's a reason for this. You stand to lose a lot if you die. And while \$500 is a lot of money, it's a lot less of a loss than dying. Whenever the downside is very different depending on which choice you make, sometimes you should avoid the bigger loss, rather than doing the thing that is most likely to lead to the right result.
+
+Indeed, sometimes the sensible decision is one that leads to the best outcome in no possible states at all. Consider the following situation. You've caught a nasty virus, which will be fatal unless treated. Happily, there is a treatment for the virus, and it only costs \$100. Unhappily, there are two strands of the virus, call them A and B. And each strand requires a different treatment. If you have the A strand, and only get the treatment for the B virus, you'll die. Happily, you can have each of the two treatments; they don't interact with each other in nasty ways. So here are your options.
+
+\starttab{c   c c}
+& \textbf{Have strand A} & \textbf{Have strand B}  \\
+\textbf{Get treatment A only} & Pay \$100 + live & Pay \$100 + die  \\
+\textbf{Get treatment B only} & Pay \$100 + die & Pay \$100 + live  \\
+\textbf{Get both treatments} & Pay \$200 + live & Pay \$200 + live
+\stoptab Now the sensible thing to do is to get both treatments. But if you have strand A, the best thing to do is to get treatment A only. And if you have strand B, the best thing to do is to get treatment B only. There is no state whatsoever in which getting both treatments leads to the best outcome. Note that ``Do What's Likely to Work'' only ever recommends options that are the best in some state or other. So it's a real problem that sometimes the thing to do does not produce the best outcome in \textit{any} situation.
+
+\section{Probability and Uncertainty}
+As I mentioned above, none of the rules we'd looked at before today took into account the likelihood of the various states of the world. Some authors have been tempted to see this as a feature not a bug. To see why, we need to look at a common three-fold distinction between states.
+
+There are lots of things we know, even that we're certain about. If we are certain which state of the world will be actual, call the decision we face a \textbf{decision under certainty}.
+
+Some times we don't know which state will be actual. But we can state precisely what the probability is that each of the states in question will be actual. For instance, if we're trying to decide whether to bet on a roulette wheel, then the relevant states will be the 37 or 38 slots in which the ball can land. We can't know which of those will happen, but we do know the probability of each possible state. In cases where we can state the relevant probabilities, call the decision we face a \textbf{decision under risk}.
+
+In other cases, we can't even state any probabilities. Imagine the following (not entirely unrealistic) case. You have an option to invest in a speculative mining venture. The people doing the projections for the investment say that it will be a profitable investment, over its lifetime, if private cars running primarily on fossil fuel products are still the dominant form of transportation in 20 years time. Maybe that will happen, maybe it won't. It depends a lot on how non fossil-fuel energy projects go, and I gather that that's very hard to predict. Call such a decision, one where we can't even assign probabilities to states, a \textbf{decision under uncertainty}.
+
+It is sometimes proposed that rules like maximin, and minimax regret, while they are clearly bad rules to use for decisions under risk, might be good rules for decisions under uncertainty. I suspect that isn't correct, largely because I suspect the distinction between decisions under risk and decisions under uncertainty is not as sharp as the above tripartite distinction suggests. Here is a famous passage from John Maynard Keynes, written in 1937, describing the distinction between risk and uncertainty.
+
+\begin{quote}
+By ``uncertain" knowledge, let me explain, I do not mean merely to distinguish what is known for certain from what is only probable. The game of roulette is not subject, in this sense, to uncertainty; nor is the prospect of a Victory bond being drawn. Or, again, the expectation of life is only slightly uncertain. Even the weather is only moderately uncertain. The sense in which I am using the term is that in which the prospect of a European war is uncertain, or the price of copper and the rate of interest twenty years hence, or the obsolescence of a new invention, or the position of private wealth owners in the social system in 1970. About these matters there is no scientific basis on which to form any calculable probability whatever. We simply do not know. Nevertheless, the necessity for action and for decision compels us as practical men to do our best to overlook this awkward fact and to behave exactly as we should if we had behind us a good Benthamite calculation of a series of prospective advantages and disadvantages, each multiplied by its appropriate probability, waiting to be summed.
+\end{quote}
+
+\noindent There's something very important about how Keynes sets up the distinction between risk and uncertainty here. He says that it is a matter of degree. Some things are very uncertain, such as the position of wealth holders in the social system a generation hence. Some things are a little uncertain, such as the weather in a week's time. We need a way of thinking about risk and uncertainty that allows that in many cases, we can't say exactly what the relevant probabilities are, but we can say something about the comparative likelihoods.
+
+Let's look more closely at the case of the weather. In particular, think about decisions that you have to make which turn on what the weather will be like in 7 to 10 days time. These are a particularly tricky range of cases to think about. 
+
+If your decision turns on what the weather will be like in the distant future, you can look at historical data. That data might not tell you much about the particular day you're interested in, but it will be reasonably helpful in setting probabilities. For instance, if it has historically rained on 17\% of August days in your hometown, then it isn't utterly crazy to think the probability it will rain on August 19 in 3 years time is about 0.17.
+
+If your decision turns on what the weather will be like in the near future, such as the next few hours or days, you have a lot of information ready to hand on which to base a decision. Looking out the window is a decent guide to what the weather will be like for the next hour, and looking up a professional weather service is a decent guide to what it will be for days after that. 
+
+But in between those two it is hard. What do you think if historically it rarely rains at this time of year, but the forecasters think there's a chance a storm is brewing out west that could arrive in 7 to 10 days? It's hard even to assign probabilities to whether it will rain.
+
+But this doesn't mean that we should throw out all information we have about relative likelihoods. I don't know what the weather will be like in 10 days time, and I can't even sensibly assign probabilities to outcomes, but I'm not in a state of complete uncertainty. I have a little information, and that information is useful in making decisions. Imagine it's a typical day in early August, and that I'm faced with the following decision table. The numbers at the top refer to what the temperature will be, to the nearest 10 degrees Fahrenheit, 8 days from now, here in Ann Arbor in late summer.
+
+\starttab{c   c c c c}
+& \textbf{60} & \textbf{70} & \textbf{80} & \textbf{90}  \\
+\textbf{Have picnic} & 0 & 4 & 5 & 6  \\
+\textbf{Watch baseball }& 2 & 3 & 4 & 5 \\
+\stoptab Both the maximin rule, and the minimax regret rule say that I should watch baseball rather than having a picnic. (Exercise: prove this.) But this seems wrong. I don't know exactly how probable the various outcomes are, but I know that 60 degree days in late summer are pretty rare, and nothing much in the long range forecast suggests that 8 days time will be unseasonally mild. 
+
+The point is, even when we can't say exactly how probable the various states are, we still might be able to say something inexact. We might be able to say that some state is fairly likely, or that another is just about certain not to happen. And that can be useful information for decision making purposes. Rules like minimax regret throw out that information, and that seems to make them bad rules.
+
+We won't get to it in these notes, but it's important to be able to be able to think about these cases where we have some information, but not complete information, about the salient probabilities. The orthodox treatment in decision theory is to say that these cases are rather like cases of decision making when you know the probabilities. That is, orthodoxy doesn't distinguish decision making under risk and decision making under uncertainty. We're going to mostly assume here that orthodoxy is right. That's in part because it's important to know what the standard views (in philosophy, economics, political science and so on) are. And in part it's because the orthodox views are close to being correct. But we're going to spend more time on saying what orthodoxy is, than defending that last sentence.

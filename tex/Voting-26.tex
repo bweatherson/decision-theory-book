@@ -1,0 +1,92 @@
+\chapter{Voting Systems}
+
+The Arrow Impossibility Theorem shows that we can't have everything that we want in a voting system. In particular, we can't have a voting system that takes as inputs the preferences of each voter, and outputs a preference ordering of the group that satisfies these three constraints.
+
+\begin{enumerate*}
+\item \textbf{Unanimity}: If everyone prefers $A$ to $B$, then the group prefers $A$ to $B$.
+\item \textbf{Independence of Irrelevant Alternatives}: If nobody changes their mind about the relative ordering of $A$ and $B$, then the group can't change its mind about the relative ordering of $A$ and $B$.
+\item \textbf{No Dictators}: For each voter, it is possible that the group's ranking will be different to their ranking
+\end{enumerate*}
+
+Any voting system either won't be a function in the sense that we're interested in for Arrow's Theorem, or will violate some of those constraints. (Or both.) But still there could be better or worse voting systems. Indeed, there are many voting systems in use around the world, and serious debate about which is best. In these notes we'll look at the pros and cons of a few different voting systems.
+
+The discussion here will be restricted in two respects. First, we're only interested in systems for making political decisions, indeed, in systems for electing representatives to political positions. We're not interested in, for instance, the systems that a group of friends might use to choose which movie to see, or that an academic department might use to hire new faculty. Some of the constraints we'll be looking at are characteristic of elections in particular, not of choices in general.
+
+Second, we'll be looking only at elections to fill a single position. This is a fairly substantial constraint. Many elections are to fill multiple positions. The way a lot of electoral systems work is that many candidates are elected at once, with the number of representatives each party gets being (roughly) in proportion to the number of people who vote for that party. This is how the parliament is elected in many countries around the world (including, for instance, Mexico, Germany and Spain). Perhaps more importantly, it is basically the norm for new parliaments to have such kind of multi-member constituencies. But the mathematical issues get a little complicated when we look at the mechanisms for selecting multiple candidates, and we'll restrict ourselves to looking at mechanisms for electing a single candidate.
+
+\section{Plurality voting}
+By far the most common method used in America, and throughout much of the rest of the world, is plurality voting. Every voter selects one of the candidates, and the candidates with the most votes wins. As we've already noted, this is called plurality, or first-past-the-post, voting.
+
+Plurality voting clearly does not satisfy the independence of irrelevant alternatives condition. We can see this if we imagine that the voting distribution starts off with the table on the left, and ends with the table on the right. (The three candidates are $A$, $B$ and $C$, with the numbers at the top of each column representing the percentage of voters who have the preference ordering listed below it.)
+\starttab{c c c p{100pt} c c c}
+40\% & 35\% & 25\% & & 40\% & 35\% & 25\% \\
+\cmidrule(r){1-3}
+\cmidrule(r){5-7}
+$A$ & $B$ & $C$ & & $A$ & $B$ & $B$ \\
+$B$ & $A$ & $B$ & & $B$ & $A$ & $C$ \\
+$C$ & $C$ & $A$ & & $C$ & $C$ & $A$
+\stoptab All that happens as we go from left-to-right is that some people who previously favoured $C$ over $B$, come to favour $B$ over $C$. Yet this change, which is completely independent of how anyone feels about $A$, is sufficient for $B$ to go from losing the election 40-35 to winning the election 60-40.
+
+This is how we show that a system does not satisfy independent of irrelevant alternatives - coming up with a pair of situations where no voter's opinion about the relative merits of two choices (in this case $A$ and $B$) changes, but the group's ranking of those two choices changes.
+
+One odd effect of this is that whether $B$ wins the election depends not just on how voters compare $A$ and $B$, but on how voters compare $B$ and $C$. One of the consequences of Arrow's Theorem might be taken to be that this kind of thing is unavoidable, but it is worth stopping to reflect on just how pernicious this is to the democratic system. 
+
+Imagine that we are in the left-hand situation, and you are one of the 25\% of voters who like $C$ best, then $B$ then $A$. It seems that there is a reason for you to not vote the way your preferences go; you'll have a better chance of electing a candidate you prefer if you vote, against your preferences, for $B$. So the voting system might encourage voters to not express their preferences adequately. This can have a snowball effect - if in one election a number of people who prefer $C$ vote for $B$, at future elections other people who might have voted for $C$ will also vote for $B$ because they don't think enough other people share their preferences for $C$ to make such a vote worthwhile.
+
+Indeed, if the candidate $C$ themselves strongly prefers $B$ to $A$, but thinks a lot of people will vote for them if they run, then $C$ might even be discouraged from running because it will lead to a worse election result. This doesn't seem like a democratically ideal situation.
+
+Some of these consequences are inevitable consequences of a system that doesn't satisfy independence of irrelevant alternatives. And the Arrow Theorem shows that it is hard to avoid independence of irrelevant alternatives. But some of them seem like serious democratic shortcomings, the effects of which can be seen in American democracy, and especially in the extreme power the two major parties have. (Though, to be fair, a number of other electoral systems that use plurality voting do not have such strong major parties. Indeed, Canada seems to have very strong third parties despite using this system, as does the United Kingdom.)
+
+One clear advantage of plurality voting should be stressed: it is quick and easy. There is little chance that voters will not understand what they have to do in order to express their preferences. And voting is, or at least should be, relatively quick. The voter just has to make one mark on a piece of paper, or press a single button, to vote. When the voter is expected to vote for dozens of offices, as is usual in America (though not elsewhere) this is a serious benefit. In many U.S. elections, we have seen queues hours long of people waiting to vote. Were voting any slower than it actually is, these queues might have been worse.
+
+Relatedly, it is easy to count the votes in a plurality system. You just sort all the votes into different bundles and count the size of each bundle. Some of the other systems we'll be looking at are much harder to count the votes in. This can lead to serious delays in even being able to announce the results of an election.
+
+\section{Runoff Voting}
+One solution to some of the problems with plurality voting is runoff voting, which is used in parts of America (notably Georgia and Louisiana) and is very common throughout Europe and South America. The idea is that there are, in general, two elections. At the first election, if one candidate has majority support, then they win. But otherwise the top two candidates go into a runoff. In the runoff, voters get to vote for one of those two candidates, and the candidate with the most votes wins.
+
+This doesn't entirely deal with the problem of a spoiler candidate having an outsized effect on the election, but it makes such cases a little harder to produce. For instance, imagine that there are four candidates, and the arrangement of votes is as follows.
+
+\starttab{c c c c}
+35\% & 30\% & 20\% & 15\% \\ 
+$A$ & $B$ & $C$ & $D$ \\
+$B$ & $D$ & $D$ & $C$ \\
+$C$ & $C$ & $B$ & $B$ \\
+$D$ & $A$ & $A$ & $A$
+\stoptab In a plurality election, $A$ will win with only 35\% of the vote.\footnote{This isn't actually that unusual in the overall scope of American elections, especially in primaries.} In a runoff election, the runoff will be between $A$ and $B$, and presumably $B$ will win, since 65\% of the voters prefer $B$ to $A$. But look what happens if $D$ drops out of the election, or all of $D$'s supporters decide to vote more strategically.
+
+\starttab{c c c c}
+35\% & 30\% & 20\% & 15\% \\ 
+$A$ & $B$ & $C$ & $C$ \\
+$B$ & $C$ & $B$ & $B$ \\
+$C$ & $A$ & $A$ & $A$ \\
+\stoptab Now the runoff is between $C$ and $A$, and $C$ will win. $D$ being a candidate means that the candidate most like $D$, namely $C$, loses a race they could have won.
+
+In one respect this is much like what happens with plurality voting. On the other hand, it is somewhat harder to find real life cases that show this pattern of votes. That's in part because it is hard to find cases where there are (a) four serious candidates, and (b) the third and fourth candidates are so close ideologically that they eat into each other's votes and (c) the top two candidates are so close that these third and fourth candidates combined could leapfrog over each of them. Theoretically, the problem about spoiler candidates might look as severe, but it is much less of a problem in practice.
+
+The downside of runoff voting of course is that it requires people to go and vote twice. This can be a major imposition on the time and energy of the voters. More seriously from a democratic perspective, it can lead to an unrepresentative electorate. In American runoff elections, the runoff typically has a much lower turnout than the initial election, so the election comes down to the true party loyalists. In Europe, the first round sometimes has a very low turnout, which has led on occasion to fringe candidates with a small but loyal supporter base making the final round.
+
+\section{Instant Runoff Voting}
+One approach to this problem is to do, in effect, the initial election and the runoff at the same time. In instant runoff voting, every voter lists their preference ordering over their desired candidates. In practice, that means marking `1' beside their first choice candidate, `2' beside their second choice and so on through the candidates. 
+
+When the votes are being counted, the first thing that is done is to count how many first-place votes each candidate gets. If any candidate has a majority of votes, they win. If not, the candidate with the lowest number of votes is eliminated. The vote counter then distributes each ballot for that eliminated candidate to whichever candidate receives the `2' vote on that ballot. If that leads to a candidate having a majority, that candidate wins. If not, the candidate with the lowest number of votes at this stage is eliminated, and their votes are distributed, each voter's vote going to their most preferred candidate of the remaining candidates. This continues until a candidate gets a majority of the votes.
+
+This avoids the particular problem we discussed about runoff voting. In that case, $D$ would have been eliminated at the first round, and $D$'s votes would all have flowed to $C$. That would have moved $C$ about $B$, eliminating $B$. Then with $B$'s preferences, $C$ would have won the election comfortably. But it doesn't remove all problems. In particular, it leads to an odd kind of strategic voting possibility. The following situation does arise, though rarely. Imagine the voters are split the following way.
+\starttab{c c c}
+45\% & 28\% &27\% \\
+$A$ & $B$ & $C$ \\
+$B$ & $A$ & $B$ \\
+$C$ & $C$ & $A$
+\stoptab As things stand, $C$ will be eliminated. And when $C$ is eliminated, all of $C$'s votes will be transferred to $B$, leading to $B$ winning. Now imagine that a few of $A$'s voters change the way they vote, voting for $C$ instead of their preferred candidate $A$, so now the votes look like this.
+\starttab{c c c c}
+43\% & 28\% &27\% & 2\% \\ 
+$A$ & $B$ & $C$ & $C$\\
+$B$ & $A$ & $B$ & $A$ \\
+$C$ & $C$ & $A$ & $B$
+\stoptab Now $C$ has more votes than $B$, so $B$ will be eliminated. But $B$'s voters have $A$ as their second choice, so now $A$ will get all the new votes, and $A$ will easily win. Some theorists think that this possibility for strategic voting is a sign that instant runoff voting is flawed.
+
+Perhaps a more serious worry is that the voting and counting system is more complicated. This slows down voting itself, though this is a problem can be partially dealt with by having more resources dedicated to making it possible to vote. The vote count is also somewhat slower. A worse consequence is that because the voter has more to do, there is more chance for the voter to make a mistake. In some jurisdictions, if the voter does not put a number down for each candidate, their vote is invalid, even if it is clear which candidate they wish to vote for. It also requires the voter to have opinions about all the candidates running, and this may include a number of frivolous candidates. But it isn't clear that this is a major problem if it does seem worthwhile to avoid the problems with plurality and runoff voting.
+%Runoff voting
+%Instant runoff voting
+%Borda count
+%Approval voting
+%Range voting

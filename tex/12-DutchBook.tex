@@ -1,0 +1,98 @@
+\section{Probabilism}
+
+So far we've been assuming that agents should have credence functions that look like probability functions. That is, we've been assuming that if $Cr$ is the function from propositions to an agent's confidence in that proposition, then $Cr$ is a probability function. In fact, we've often made that assumption completely implicitly, by just talking about the subjective probability of a proposition or state. But why should we believe that credences, or confidences, are probabilities?
+
+One reason to believe this is that it seems to be obviously the right thing to believe in simple cases like drawing a marble from an urn with a known composition. If you know the proportion of marbles in the urn that are red, then your credence that the next marble to be drawn will be red should just equal that proportion. And since proportion functions just are probability functions, it follows in these simple cases that credences should be probabilities.
+
+But the simple case is altogether too simple. Indeed, thinking about this case might make one think that probabilism is intuitively false. Many of the things we do not know are nothing like the draw of a marble from an urn. Think about how confident you are in any of the following propositions, or their negations.
+
+\begin{enumerate*}
+\item Google will be profitable in 100 years time.
+\item The United States and Canada will fight at least one war in the next 500 years.
+\item Jack the Ripper was a member of the aristocracy.
+\item There are at least two gods.
+\end{enumerate*}
+Thinking about those examples suggests there is a distinction between economists (such as Frank Knight and John Maynard Keynes) called \textbf{risk} and \textbf{uncertainty}. A risky proposition, in this terminology, is one whose truth value we don't know, but for which there is a very good reason to assign a particular probability to it. That might be because we know its objective chance, or because it is part of a sequence with a known ratio of successes to failures. Other unknown propositions are uncertain propositions. This can come in degrees. It is only moderately uncertain how long each of you will live; actuarial tables plus knowing a bit about your social and medical background would suffice to give a pretty decent probability distribution over the range of possible life extents. On the other hand, it is completely uncertain how long the United States will live; it's hard to know what could remotely justify a particular probability in the proposition that the United States will cease to exist between 600 and 700 years from now.
+
+For many highly uncertain propositions, it seems reasonable to have very little confidence in both the proposition and its negation. This does not mean having a credence close to one half. We can't, logically, have credences close to one-half in each of the following propositions.
+
+\begin{itemize*}
+\item The United States will cease to exist between 500 and 600 years from now.
+\item The United States will cease to exist between 600 and 700 years from now.
+\item The United States will cease to exist between 700 and 800 years from now.
+\item The United States will cease to exist between 800 and 900 years from now.
+\end{itemize*}
+Yet each of these seems very uncertain. A widespread, if rarely popular, response to these cases has been to say that there are propositions in which a credence close to 0 in both $p$ and $\neg p$ is appropriate. What can probabilists say to such claims.
+
+\section{Dutch Book Arguments}
+One common response is to argue that anything other than probabilism leads to a certain kind of catastrophe. In particular, the agent whose credences are not probabilities will be led to a series of bets that lead to sure loss. I don't know how such a set of bets acquired this name, but they are now referred to as a \textit{Dutch Book}, and the activity of offering someone a series of bets that leads to a sure loss is known as \textit{making a book} against them.
+
+Let's work through how this might work with a special case. Assume the agent in question is a \textit{miser}, by which we will mean that they value each dollar as much as the previous one. As we've seen, real people are not misers, and it is worthwhile to work through the argument without the assumption of miserliness. But we'll leave that activity as an exercise for the interested reader. (Hint: Replace the reference to dollars in what follows with tickets in a single lottery, and then argue that the agent will be a miser with respect to those tickets.)
+
+Say that a $p$-bet is a bet that pays \$1 if $p$ is true, and nothing otherwise. The agent, if they are a miser, should value this bet at $Cr(p)$. If they don't have this valuation, then there is a good sense in which $Cr(p)$ is not really their credence in $p$; it isn't the mental state they have that drives action in the right way.
+
+Now assume that the agent's credences do not generate a probability function. There are four ways that this could happen.
+
+\begin{enumerate*}
+\item It could be that for some $p$, $Cr(p) < 0$. In that case, they will regard a $p$-bet as a liability. So the bookmaker offers the agent a deal: the agent gives the bookmaker a $p$-bet, and the agent gives the bookmaker $Cr(p)$/2. Since this is a way of taking a liability away for less than half the cost of it, the agent likes the deal. But the bookmaker makes money whether $p$ is true or false.
+\item It could be that for some $p$, $Cr(p) > 1$. In that case, the bookmaker sells the agent a $p$-bet for \$$(1 + Cr(p))/2$, and makes money whether $p$ is true or false.
+\item It could be that for logically equivalent propositions $p$ and $q$, $Cr(p)$ and $Cr(q)$ are different. Assume that $Cr(p) > Cr(q)$. (If not, reverse what follows.) Then the bookmaker sells the agent a $p$-bet for \$$(2Cr(p) + Cr(q))/3$, and buys a $q$-bet from the agent for \$$(Cr(p) + 2Cr(q))/3$. The agent regards each of these trades as having positive value, so she makes each of them. The payoffs of the two bets are the same, so they cancel. But the bookmaker makes a profit of \$$(Cr(p) - Cr(q))/3$ on the trades, no matter what.
+\item It could be that the agent has $Cr(p) + Cr(q) \neq Cr(p \vee q)$, for logically exclusive $p, q$. Assume the agent has $Cr(p \vee q) > Cr(p) + Cr(q)$. (The other case is left as an exercise.) Let $\epsilon$ be a small enough number that $Cr(p \vee q) > Cr(p) + Cr(q) + 3\epsilon$. The bookmaker sells the agent a $(p \vee q)$-bet for \$$Cr(p \vee q) - \epsilon$, and then buys a $p$-bet from the agent for \$$Cr(p) + \epsilon$, and buys a $q$-bet from the agent for \$$Cr(q) + \epsilon$. The agent regards each bet as having a positive value, so they make it. The payouts from the bets cancel. But the bookmaker has paid less for the bets they bought than they received for selling the $(p \vee q)$-bet, so they make a profit, no matter what.
+\end{enumerate*}
+The upshot is that any case where the agent's credences do not form a probability function is a case where a bookmaker can make a profit from the agent, no matter what.
+
+\section{Objections}
+Here are four objections to the argument from Dutch Books for probabilism. I don't mean these to exhaust the objections, but I do think these are particularly important objections.
+
+\subsection{Wrong Kind of Failure}
+The Dutch Book argument seems to show that agents who have non-probabilistic credences are doomed to make a certain kind of practical failure. They will, for certain, lose money. But what we started out wanting to show was that there was some kind of epistemological, or even logical, shortcoming to such agents. Indeed, in the literature it is common for probabilists to describe these agents as \textit{incoherent}. And being subject to a practical shortcoming does not seem to be a way of being incoherent.
+
+\subsection{Betting Ex Ante and Ex Post}
+Perhaps the fact that the agents are making a practical error could be a premise in an argument that they are making an epistemological error. If there were no explanation of why they are making a practical error, i.e., losing money, other than the epistemological error, then it might be a good inference from their practical failing to an epistemic shortcoming. Unfortunately, there are plenty of other explanations of why they might lose money. Perhaps they are not sufficiently sensitive to the existence of bookmakers.
+
+The fact that the agent has credence $Cr(q)$ might mean that right now they value a $q$-bet and \$$Cr(q)$ the same. But it doesn't mean that they will willingly accept an offer to sell a $q$-bet for \$$Cr(q) + \epsilon$. After all, the fact that someone wants to buy something from you for more than you think it is worth is, in general, some evidence that you've undervalued the thing. Damon Runyon puts this point in the form of memorable advice.
+
+\begin{quote}
+One of these days in your travels, a guy is going to come up to you and show you a nice brand-new deck of cards on which the seal is not yet broken, and this guy is going to offer to bet you that he can make the Jack of Spades jump out of the deck and squirt cider in your ear. But, son, do not bet this man, for as sure as you are standing there, you are going to end up with an earful of cider.
+\end{quote}
+
+\subsection{See the Dutch Book Coming}
+There is a distinct kind of practical mistake that the agent who buys a Dutch Book could be making. They might be failing to engage in appropriate \textbf{backwards induction} reasoning. We'll discuss this concept in greater detail in game theory, but it's a generally important idea. The thought is that when making choices in sequence, a rational agent should first think about what they'll do last. Then when making earlier choices, the agent should not look at the effect of the choice now, but about the ultimate result from heading down a particular path, assuming they will act rationally at later times.
+
+Assume that the agent knows the plans of the bookmaker. And assume that the last trade the bookmaker offers is one that they will accept. (Backwards induction reasoning becomes single case reasoning at the last step, so that's a reasonable assumption.) Then the agent should not make the earlier trades. They know that making the earlier trades, even if they look good on their own, set them off down a path to ruin. And good dynamic traders do not set off on the path to ruin.
+
+Is it fair to assume that the agent knows the plans of the bookmaker? I think it is. The bookmaker knows the plans of the bookmaker. And there isn't anything too surprising about the conclusion that if X knows something Y doesn't, then X can make money trading with Y. That doesn't show Y has incoherent credal attitudes. (It might show Y is foolish to trade with someone who knows more than they do, but this is leading back to the Runyon point mentioned above.)
+
+Does the Dutch Book have to be dynamic? Couldn't the bookmaker offer these bets all at once? They could, but then the agent would surely decline them, for accepting them as a unit would amount to giving money away.
+
+\subsection{Dutch Books and Decidability}
+Assume for a moment that I have non-probabilistic credal states about whether the United States will cease to exist in approximately 600 years. Then a Dutch Book can be made against me. Great. But the construction of those books assumed that we could decide which bets won or lost, and pay those bets out. And that's not going to happen; I'm not going to be around to see whether the bets won or lost. 
+
+And even if someone, an angel perhaps, could make me lose a few pennies by running such a book on me, I'd find out something amazing about the future of the United States. I'd be happy to lose a few pennies to find that out.
+
+This is relevant because the main cases where philosophers have objected to probabilism have been cases where we don't have any good way to even find out whether the propositions are true. Assuming that we can decide the propositions sufficiently in order to work out who wins and loses bets on them seems to me to feels like an illegitimate assumption, relative to that background.
+
+\subsection{Dutch Books Without Bookmakers}
+
+David Christensen has developed what seems to me to be the best response to these objections. He thinks that we should just view the bookmaker as a metaphorical device. The problem is not that the agent in question will actually turn into a money pump, and hand over money to the bookmaker. Rather, what the thought experiment involving the bookmaker makes vivid is that the agent values the same thing in two different ways, depending on how the thing is presented. And that, says Christensen, is a kind of incoherence.
+
+This is, I think, a really nice response to the objections. That the agent values the same thing in two different ways, depending on the presentation, does seem like a kind of incoherence, and not just a flaw in practical rationality. Reasoning this way doesn't assume that the agent fails to use backwards induction, or fails to heed Runyon's advice. That's because we don't look to how the agent does or would bet, but just at how they actually, currently, vaoue. And we don't have to worry about the bets being decided, because we aren't assuming there will even be bets.
+
+But there is still a problem for the argument. It isn't clear that the agent really does value the same thing in two different ways. Let's step through a case slowly to see this. Assume that the agent has the following attitudes:
+
+\begin{itemize*}
+\item $Cr(p) = 0.3$
+\item $Cr(q) = 0.4$
+\item $Cr(p \vee q) = 0.8$
+\end{itemize*}
+And assume that $p, q$ are logically exclusive. Now Christensen wants to argue that the following two goods are the same, but the agent values them differently.
+
+\begin{enumerate*}
+\item A bundle consisting of a $p$-bet plus a $q$-bet.
+\item A $(p \vee q)$-bet.
+\end{enumerate*}
+The argument that they are the same is pretty good I think, since the bundles have of necessity the same payoffs. But what's the argument that the agent values them the same. We know the following. The agent values the second bundle at 80 cents. And the agent values the parts of the first bundle at 30 cents and 40 cents, respectively. But what do we know about how they value the bundle?
+
+If the value of the bundle is the value of its parts, then the agent values the bundle at 70 cents. And then they are guilty of valuing the same thing two ways. But that seems like a very quick attribution. It isn't true in general that we value bundles as just the sums of parts. I might value a pair of shoes highly, but have little use for either shoe on its own. Economists say that in this case the goods are \textit{complementary} goods. That just means that their value as a bundle is greater than the sum of their value alone.
+
+The non-probabilist can avoid incoherence if they say that the $p$-bet and the $q$-bet are complementary goods. Perhaps there are arguments that this is not something that they should say. After all, it is a bit odd that bets that cannot pay off together could be viewed as complementary. But it does seem very hard to find a watertight argument from the existence of Dutch Books to constraints on credences.

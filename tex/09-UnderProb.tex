@@ -1,0 +1,83 @@
+\section{Kinds of Probability}
+As might be clear from the discussion of what probability functions are, there are a lot of probability functions. For instance, the following is a probability function for any (logically independent) $p$ and $q$.
+
+\starttab{c c c}
+$\bm{p}$ & $\bm{q}$ & $\textbf{Probability}$ \\ 
+T & T & 0.97 \\
+T & F & 0.01 \\
+F & T & 0.01 \\
+F & F & 0.01
+\stoptab But if $p$ actually is that the moon is made of green cheese, and $q$ is that there are little green men on Mars, you probably won't want to use this probability function in decision making. That would commit you to making some bets that are intuitively quite crazy.
+
+So we have to put some constraints on the kinds of probability we use if the ``Maximise Expected Utility'' rule is likely to make sense. As it is sometimes put, we need to have an \textbf{interpretation} of the $Pr$ in the expected utility rule. We'll look at three possible interpretations that might be used.
+
+\section{Frequency}
+Historically probabilities were often identified with frequencies. If we say that the probability that this $F$ is a $G$ is, say, $\frac{2}{3}$, that means that the proportion of $F$'s that are $G$'s is $\frac{2}{3}$.
+
+Such an approach is plausible in a lot of cases. If we want to know what the probability is that a particular student will catch influenza this winter, a good first step would be to find out the proportion of students who will catch influenza this winter. Let's say this is $\frac{1}{10}$. Then, to a first approximation, if we need to feed into our expected utility calculator the probability that this student will catch influenza this winter, using $\frac{1}{10}$ is not a bad first step. Indeed, the insurance industry does not a bad job using frequencies as guides to probabilities in just this way.
+
+But that can hardly be the end of the story. If we know that this particular student has not had an influenza shot, and that their boyfriend and their roommate have both caught influenza, then the probability of them catching influenza would now be much higher. With that new information, you wouldn't want to take a bet that paid \$1 if they didn't catch influenza, but lost you \$8 if they did catch influenza. The odds now look like that's a bad bet.
+
+Perhaps the thing to say is that the relevant group is not all students. Perhaps the relevant group is students who haven't had influenza shots and whose roommates and boyfriends have also caught influenza. And if, say, $\frac{2}{3}$ of such students have caught influenza, then perhaps the probability that this student will catch influenza is $\frac{2}{3}$.
+
+You might be able to see where this story is going by now. We can always imagine more details that will make that number look inappropriate as well. Perhaps the student in question is spending most of the winter doing field work in South America, so they have little chance to catch influenza from their infected friends. And now the probability should be lower. Or perhaps we can imagine that they have a genetic predisposition to catch influenza, so the probability should be higher. There is always more information that could be relevant.
+
+The problem for using frequencies as probabilities then is that there could always be more precise information that is relevant to the probability. Every time we find that the person in question isn't merely an $F$ (a student, say), but is a particular kind of $F$ (a student who hasn't had an influenza shot, whose close contacts are infected, who has a genetic predisposition to influenza), we want to know the proportion not of $F$'s who are $G$'s, but the proportion of the more narrowly defined class who are $G$'s. But eventually this will leave us with no useful probabilities at all, because we'll have found a way of describing the student in question such that they are the only person in history who satisfies this description.
+
+This is hardly a merely theoretical concern. If we are interested in the probability that a particular bank will go bankrupt, or that a particular Presidential candidate will win an election, it isn't too hard to come up with a list of characteristics of the bank or candidate in question in such a way that they are the only one in history to meet that description. So the frequency that such banks will go bankrupt is either 1 (1 out of 1 go bankrupt) or 0 (0 out of 1 do). But those aren't particularly useful probabilities. So we should look elsewhere for an interpretation of the $Pr$ that goes into our definition of expected utility.
+
+In the literature there are two objections to using frequencies as probabilities that seem related to the argument we're looking at here. 
+
+One of these is the \textbf{Reference Class Problem}. This is the problem that if we're interested in the probability that a particular person is $G$, then the frequency of $G$-hood amongst the different classes the person is in might differ.
+
+The other is the \textbf{Single Case Problem}. This is the problem that we're often interested in one-off events, like bank failures, elections, wars etc, that don't naturally fit into any natural broader category.
+
+I think the reflections here support the idea that these are two sides of a serious problem for the view that probabilities are frequencies. In general, there actually is a natural solution to the Reference Class Problem. We look to the most narrowly drawn reference class we have available. So if we're interested in whether a particular person will survive for 30 years, and we know they are a 52 year old man who smokes, we want to look not to the survival frequencies of people in general, or men in general, or 52 year old men in general, but 52 year old male smokers.
+
+Perhaps by looking at cases like this, we can convince ourselves that there is a natural solution to the Reference Class Problem. But the solution makes the Single Case Problem worse. Pretty much anything that we care about is distinct in some way or another. That's to say, if we look closely we'll find that the most natural reference class for it just contains that one thing. That's to say, it's a single case in some respect. And one-off events don't have interesting frequencies. So frequencies aren't what we should be looking to as probabilities.
+
+\section{Degrees of Belief}
+In response to these worries, a lot of philosophers and statisticians started thinking of probability in purely subjective terms. The probability of a proposition $p$ is just how confident the agent is that $p$ will obtain. This level of confidence is the agent's \textit{degree of belief} that $p$ will obtain. These degrees of belief are sometimes called \textit{credences}, and I'll use both terms here.
+
+Now it isn't altogether to measure degrees of belief. I might be fairly confident that my favourite baseball team will win tonight, and more confident that they'll win at least one of the next three games, and less confident that they'll win all of their next three games, but how could we measure numerically each of those strengths? Remember that probabilities are \textit{numbers}. So if we're going to identify probabilities with degrees of belief, we have to have a way to convert strengths of confidence to numbers.
+
+The core idea about how to do this uses the very decision theory that we're looking for input to. I'll run through a rough version of how the measurement works; we'll be refining this a bit as the course goes on. Imagine you have a chance to buy a ticket that pays \$1 if $p$ is true. How much, in dollars, is the most would you pay for this? Well, it seems that how much you should pay for this is the probability of $p$. Let's see why this is true. (Assume in what follows that the utility of each action is given by how many dollars you get from the action; this is the simplifying assumption we're making.) If you pay \$$Pr(p)$ for the ticket, then you've performed some action (call it $A$) that has the following payout structure.
+
+\begin{equation*}
+U(A)= 
+\begin{cases} 1 - Pr(p) & \text{if $p$,}
+\\
+-Pr(p) & \text{if $\neg p$.}
+\end{cases}
+\end{equation*}
+So the expected value of $U(A)$ is
+
+\begin{align*}
+Exp(U(A)) &= Pr(p)U(Ap) + Pr(\neg p)U(A \neg p) \\
+ &= Pr(p)(1 - Pr(p)) + Pr(\neg p)U(A \neg p) \\
+ &= Pr(p)(1 - Pr(p)) + (1 - Pr(p))(-Pr(p)) \\
+ &= Pr(p)(1 - Pr(p)) - (1 - Pr(p))(Pr(p)) \\
+ &= 0
+\end{align*}
+
+So if you pay \$$Pr(p)$ for the bet, your expected return is exactly 0. Obviously if you pay more, you're worse off, and if you pay less, you're better off. \$$Pr(p)$ is the break even point, so that's the fair price for the bet.
+
+And that's how we measure degrees of belief. We look at the agent's `fair price' for a bet that returns \$1 if $p$. (Alternatively, we look at the maximum they'll pay for such a bet.) And that's they're degree of belief that $p$. If we're taking probabilities to be degrees of belief, if we are (as it is sometimes put) interpreting probability subjectively, then that's the probability of $p$.
+
+This might look suspiciously circular. The expected utility rule was meant to give us guidance as to how we should make decisions. But the rule needed a probability as an input. And now we're taking that probability to not only be a subjective state of the agent, but a subjective state that is revealed in virtue of the agent's own decisions. Something seems odd here.
+
+Perhaps we can make it look even odder. Let $p$ be some proposition that might be true and might be false, and assume that the agent's choice is to take or decline a bet on $p$ that has some chance of winning and some chance of losing. Then if the agent takes the bet, that's a sign that their degree of belief in $p$ was higher than the odds of the bet on $p$, so therefore they are increasing their expected utility by taking the bet, so they are doing the right thing. On the other hand, if they decline the bet, that's a sign that their degree of belief in $p$ was lower than the odds of the bet on $p$, so therefore they are increasing their expected utility by taking the bet, so they are doing the right thing. So either way, they do the right thing. But a rule that says they did the right thing whatever they do isn't much of a rule.
+
+There are two important responses to this, which are related to one another. The first is that although the rule does (more or less) put no restrictions at all on what you do when faced with a single choice, it can put quite firm constraints on your sets of choices when you have to make multiple decisions. The second is that the rule should be thought of as a \textbf{procedural} rather than \textbf{substantive} rule of rationality. We'll look at these more closely.
+
+If we take probabilities to be subjective probabilities, i.e. degrees of belief, then the maximise expected utility rule turns out to be something like a consistency constraint. Compare it to a rule like \textit{Have Consistent Beliefs}. As long as we're talking about logically contingent matters, this doesn't put any constraint at all on what you do when faced with a single question of whether to believe $p$ or $\neg p$. But it does put constraints on what further beliefs you can have once you believe $p$. For instance, you can't now believe $\neg p$.
+
+The maximise expected utility rule is like this. Indeed we already saw this in the Allais paradox. The rule, far from being empty, rules out the pair of choices that many people intuitively think is best. So if the objection is that the rule has no teeth, that objection can't hold up.
+
+We can see this too in simpler cases. Let's say I offer the agent a ticket that pays \$1 if $p$, and she pays 60$c$ for it. So her degree of belief in $p$ must be at least 0.6. Then I offer her a ticket that pays \$1 if $\neg p$, and she pays 60$c$ for it too. So her degree of belief in $\neg p$ must be at least 0.6. But, and here's the constraint, we think degrees of belief have to be probabilities. And if $Pr(p) > 0.6$, then $Pr(\neg p) < 0.4$. So if $Pr(\neg p) > 0.6$, we have an inconsistency. That's bad, and it's the kind of badness it is the job of the theory to rule out.
+
+One way to think about the expected utility rule is to compare it to norms of \textbf{means-end rationality}. At times when we're thinking about what someone should do, we really focus on what the best means is to their preferred end. So we might say to someone in New York, \textit{If you want to go to Harlem, you should take the A train}, without it even being a relevant question whether they should, in the circumstances, want to go to Harlem.
+
+The point being made here is quite striking when we consider people with manifestly crazy beliefs. If we're just focussing on means to an end, then we might look at someone who, say, wants to crawl from the southern tip of New York's Broadway to its northern tip. And we'll say ``You should get some kneepads so you don't scrape your knees, and you should take lots of water, and you should catch the 1 train down to near to where Broadway starts, etc.'' But if we're not just offering procedural advice, but are taking a more substantive look at their position, we'll say ``You should come up with a better idea about what to do, because that's an absolutely crazy thing to want.''
+
+As we'll see, the combination of the maximise expected utility rule with the use of degrees of belief as probabilities leads to a similar set of judgments. On the one hand, it is a very good guide to procedural questions. But it leaves some substantive questions worryingly unanswered. Perhaps, however, those substantive questions should be best left to another domain; perhaps ethics, perhaps epistemology. Next time, we'll turn to looking at what more we can say about what makes credences better or worse.

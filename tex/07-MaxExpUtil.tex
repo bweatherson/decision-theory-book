@@ -1,0 +1,106 @@
+\section{Expected Values}
+A \textbf{random variable} is simply a variable that takes different numerical values in different states. In other words, it is a function from possibilities to numbers. Typically, random variables are denoted by capital letters. So we might have a random variable X whose value is the age of the next President of the United States, and his or her inauguration. Or we might have a random variable that is the number of children you will have in your lifetime. Basically any mapping from possibilities to numbers can be a random variable. 
+
+It will be easier to work with a specific example, so let's imagine the following case. You've asked each of your friends who will win the big football game this weekend, and 9 said the home team will win, while 5 said the away team will win. (Let's assume draws are impossible to make the equations easier.) Then we can let $X$ be a random variable measuring the number of your friends who correctly predicted the result of the game. The value $X$ takes is
+\begin{equation*}
+X = \begin{cases}9,& \text{if the home team wins} ,\\ 5,& \text{if the away team wins} .\end{cases}
+\end{equation*}
+Given a random variable $X$ and a probability function $Pr$, we can work out the \textbf{expected value} of that random variable with respect to that probability function. Intuitively, the expected value of $X$ is a weighted average of the possible values of $X$, where the weights are given by the probability (according to $Pr$) of each value coming about. More formally, we work out the expected value of $X$ this way. For each case, we multiply the value of $X$ in that case by the probability of the case obtaining. Then we sum the numbers we've got, and the result is the expected value of $X$. We'll write the expected value of $X$ as $Exp(X)$. So if the probability that the home wins is 0.8, and the probability that the away team wins is 0.2, then
+\begin{align*}
+Exp(X) &= 9 \times 0.8 + 5 \times 0.2 \\
+ &= 7.2 + 1 \\
+ &= 8.2
+\end{align*} There are a couple of things to note about this result. First, the expected value of $X$ isn't in any sense the value that we expect $X$ to take. Indeed, the expected value of $X$ is not even a value that $X$ could take. So we shouldn't think that ``expected value'' is a phrase we can understand by simply understanding the notion of expectation and of value. Rather, we should think of the expected value as a kind of average.
+
+Indeed, thinking of the expected value as an average lets us relate it back to the common notion of expectation. If you repeated the situation here -- where there's an 0.8 chance that 9 of your friends will be correct, and an 0.2 chance that 5 of your friends will be correct -- very often, then you would expect that in the long run the number of friends who were correct on each occasion would average about 8.2. That is, the expected value of a random variable $X$ is what you'd expect the \textit{average} value of $X$ to be if (perhaps per impossible) the underlying situation was repeated many many times.
+
+\section{Maximise Expected Utility Rule}
+The orthodox view in modern decision theory is that the right decision is the one that maximises the expected utility of your choice. Let's work through a few examples to see how this might work. Consider again the decision about whether to take a cheap airline or a more reliable airline, where the cheap airline is cheaper, but it performs badly in bad weather. In cases where the probability is that the plane won't run into difficulties, and you have much to gain by taking the cheaper ticket, and even if something goes wrong it won't go badly wrong, it seems that you should take the cheaper plane. Let's set up that situation in a table.
+\starttab{c  c c}
+ & \textbf{Good weather} & \textbf{Bad weather} \\
+ & $Pr = 0.8$ & $Pr = 0.2$ \\ 
+\textbf{Cheap Airline} & 10 & 0 \\
+\textbf{Reliable Airline} & 6 & 5
+\stoptab We can work out the expected utility of each action fairly easily.
+\begin{align*}
+Exp(\text{Cheap Airline}) &= 0.8 \times 10 + 0.2 \times 0 \\
+ &= 8 + 0 \\
+ &= 8 \\
+Exp(\text{Reliable Airline}) &= 0.8 \times 6 + 0.2 \times 5 \\
+ &= 4.8 + 1 \\
+ &= 5.8 
+\end{align*} So the cheap airline has an expected utility of 8, the reliable airline has an expected utility of 5.8. The cheap airline has a higher expected utility, so it is what you should take.
+
+We'll now look at three changes to the example. Each change should intuitively change the correct decision, and we'll see that the maximise expected utility rule does change in each case. First, change the downside of getting the cheap airline so it is now more of a risk to take it.
+\starttab{c  c c}
+ & \textbf{Good weather} & \textbf{Bad weather} \\
+ & $Pr = 0.8$ & $Pr = 0.2$ \\ 
+\textbf{Cheap Airline} & 10 & -20 \\
+\textbf{Reliable Airline} & 6 & 5
+\stoptab Here are the new expected utility considerations.
+\begin{align*}
+Exp(\text{Cheap Airline}) &= 0.8 \times 10 + 0.2 \times -20 \\
+ &= 8 + (-4) \\
+ &= 4 \\
+Exp(\text{Reliable Airline}) &= 0.8 \times 6 + 0.2 \times 5 \\
+ &= 4.8 + 1 \\
+ &= 5.8 
+\end{align*}
+\noindent Now the expected utility of catching the reliable airline is higher than the expected utility of catching the cheap airline. So it is better to catch the reliable airline.
+
+Alternatively, we could lower the price of the reliable airline, so it is closer to the cheap airline, even if it isn't quite as cheap.
+\starttab{c  c c}
+ & \textbf{Good weather} & \textbf{Bad weather }\\
+ & $Pr = 0.8$ & $Pr = 0.2$ \\ 
+\textbf{Cheap Airline} & 10 & 0 \\
+\textbf{Reliable Airline} & 9 & 8
+\stoptab Here are the revised expected utility considerations.
+\begin{align*}
+Exp(\text{Cheap Airline}) &= 0.8 \times 10 + 0.2 \times 0 \\
+ &= 8 + 0 \\
+ &= 8 \\
+Exp(\text{Reliable Airline}) &= 0.8 \times 9 + 0.2 \times 8 \\
+ &= 7.2 + 1.6 \\
+ &= 8.8 
+\end{align*}
+\noindent And again this is enough to make the reliable airline the better choice.
+
+Finally, we can go back to the original utility tables and simply increase the probability of bad weather.
+\starttab{c c c}
+ & \textbf{Good weather} & \textbf{Bad weather} \\
+ & $Pr = 0.3$ & $Pr = 0.7$ \\ 
+\textbf{Cheap Airline} & 10 & 0 \\
+\textbf{Reliable Airline} & 6 & 5
+\stoptab We can work out the expected utility of each action fairly easily.
+\begin{align*}
+Exp(\text{Cheap Airline}) &= 0.3 \times 10 + 0.7 \times 0 \\
+ &= 3 + 0 \\
+ &= 3 \\
+Exp(\text{Reliable Airline}) &= 0.3 \times 6 + 0.7 \times 5 \\
+ &= 1.8 + 3.5 \\
+ &= 5.3 
+\end{align*}
+\noindent We've looked at four versions of the same case. In each case the ordering of the outcomes, from best to worst, was:
+\begin{enumerate*}
+\item Cheap airline and good weather
+\item Reliable airline and good weather
+\item Reliable airline and bad weather
+\item Cheap airline and bad weather
+\end{enumerate*}
+As we originally set up the case, the cheap airline was the better choice. But there were three ways to change this. First, we increased the possible loss from taking the cheap airline. (That is, we increased the gap between the third and fourth options.) Second, we decreased the gain from taking the cheap airline. (That is, we decreased the gap between the first and second options.) Finally, we increased the risk of things going wrong, i.e. we increased the probability of the bad weather state. Any of these on their own was sufficient to change the recommendation that ``Maximise Expected Utility'' makes. And that's all to the good, since any of these things does seem like it should be sufficient to change what's best to do.
+
+\section{Structural Features}
+When using the ``Maximise Expected Utility'' rule we assign a number to each choice, and then pick the option with the highest number. Moreover, the number we assign is independent of the other options that are available. The number we assign to a choice depends on the utility of that choice in each state and the probability of the states. Any decision rule that works this way is guaranteed to have a number of interesting properties.
+
+First, it is guaranteed to be \textbf{transitive}. That is, if it recommends $A$ over $B$, and $B$ over $C$, then it recommends $A$ over $C$. To see this, let's write the expected utility of a choice $A$ as $Exp(U(A))$. If $A$ is chosen over $B$, then $Exp(U(A)) > Exp(U(B))$. And if $B$ is chosen over $C$, then $Exp(U(B)) > Exp(U(C))$. Now $>$, defined over numbers, is transitive. That is, if $Exp(U(A)) > Exp(U(B))$ and $Exp(U(B)) > Exp(U(C))$, then $Exp(U(A)) > Exp(U(C))$. So the rule will recommend $A$ over $B$.
+
+Second, it satisfies the independence of irrelevant alternatives. Assume $A$ is chosen over $B$ and $C$. That is, $Exp(U(A)) > Exp(U(B))$ and $Exp(U(A)) > Exp(U(C))$. Then $A$ will be chosen when the only options are $A$ and $B$, since $Exp(U(A)) > Exp(U(B))$. And $A$ will be chosen when the only options are $A$ and $C$, since $Exp(U(A)) > Exp(U(C))$. These two features are intuitively pleasing features of a decision rule.
+
+Numbers are totally ordered by $>$. That is, for any two numbers $x$ and $y$, either $x > y$ or $y > x$ or $x = y$. So if each choice is associated with a number, a similar relation holds among choices. That is, either $A$ is preferable to $B$, or $B$ is preferable to $A$, or they are equally preferable. 
+
+Expected utility maximisation never recommends choosing dominated options. Assume that $A$ dominates $B$. For each state $S_i$, write utility of $A$ in $S_i$ as $U(A | S_i)$. Then dominance means that for all $i$, $U(A | S_i) > U(B | S_i)$. Now $Exp(U(A))$ and $Exp(U(B))$ are given by the following formulae. (In what follows $n$ is the number of possible states.)
+\begin{align*}
+Exp(A) &= Pr(S_1)U(A|S_1) + Pr(S_2)U(A|S_2) + ... + Pr(S_n)U(A | S_n) \\
+Exp(B) &= Pr(S_1)U(B|S_1) + Pr(S_2)U(B|S_2) + ... + Pr(S_n)U(B | S_n)
+\end{align*}
+Note that the two values are each the sum of $n$ terms. Note also that, given dominance, each term on the top row is at least as great as than the term immediately below it on the second row. (This follows from the fact that $U(A | S_i) > U(B | S_i)$ and the fact that $Pr(S_i) \geq 0$.) Moreover, at least one of the terms on the top row is greater than the term immediately below it.  (This follows from the fact that $U(A | S_i) > U(B | S_i)$ and the fact that for at least one $i$, $Pr(S_i) > 0$. That in turn has to be true because if $Pr(S_i) = 0$ for each $i$, then $Pr(S_1 \vee S_2 \vee ... \vee S_n) = 0$. But $S_1 \vee S_2 \vee ... \vee S_n$ has to be true.) So $Exp(A)$ has to be greater than $Exp(B)$. So if $A$ dominates $B$, it has a higher expected utility.

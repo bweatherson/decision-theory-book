@@ -1,0 +1,145 @@
+\section{Conglomerability}
+Here is a feature that we might like an updating rule to have. If getting some evidence $E$ will make a hypothesis $H$ more probable, then not getting $E$ will not also make $H$ more probable. Indeed, in standard cases, not getting evidence that would have made $H$ more probable should make $H$ less probable. It would be very surprising if we could know, before running a test, that however it turns out some hypothesis $H$ will be more probable at the end of the test than at the beginning of it. We might have to qualify this in odd cases where $H$ is, e.g., that the test is completed. But in standard cases if $H$ will be likely whether some evidence comes in or doesn't come in, then $H$ should be already likely.
+
+We'll say that an update rule is \textbf{conglomerable} if it has this feature, and \textbf{non-con\-glom\-er\-able} otherwise. That is, it is non-conglomerable iff there are $H$ and $E$ such that,
+\begin{equation*}
+Pr_{E}(H) > Pr(H) \text{ and } Pr_{\neg E}(H) > Pr(H)
+\end{equation*}
+\noindent Now a happy result for conditionalisation, the rule that says $P_{E}(H) = Pr(H | E)$, is that it is conglomerable. This result is worth going over in some detail. Assume that $Pr(H|E) > Pr(H) \text{and} Pr_{\neg E}(H) > Pr(H)$. Then we can derive a contradiction as follows
+\begin{align*}
+	Pr(H) &= Pr((H \wedge E) \vee (H \wedge \neg E)) && \text{since } H = (H \wedge E) \vee (H \wedge \neg E) \\
+	&= Pr(H \wedge E) + Pr (H \wedge \neg E)&& \text{since }(H \wedge E) \text{ and } (H \wedge \neg E) \text{ are disjoint} \\
+	&= Pr(H|E)Pr(E) + Pr(H|\neg E)Pr(\neg E) && \text{since }Pr(H|E)Pr(E) = Pr(H \wedge E) \\
+	&> Pr(H)Pr(E) + Pr(H)Pr(\neg E) && \text{since by assumption } Pr(H | E) > Pr(H) \\
+	& && \text{ and } Pr(H | \neg E) > Pr(H) \\
+	&= Pr(H)(Pr(E) + Pr(\neg E)) \\
+	&= Pr(H)Pr(E \vee \neg E) && \text{since }E \text{ and } \neg E \text{ are disjoint} \\
+	&= Pr(H)  && \text{since } Pr(E \vee \neg E) = 1
+\end{align*}
+
+\noindent Conglomerability is related to dominance. The dominance rule of decision making says (among other things) that if $C_1$ is preferable to $C_2$ given $E$, and $C_1$ is preferable to $C_2$ given $\neg E$, then $C_1$ is simply preferable to $C_2$. Conglomerability says (among other things) that if $Pr(H)$ is greater than $x$ given $E$, and it is greater than $x$ given $\neg E$, then it is simply greater than $x$.
+
+Contemporary decision theory makes deep and essential use of principles of this form, i.e. that if something holds given $E$, and given $\neg E$, then it simply holds. And one of the running themes of these notes will be sorting out just which such principles hold, and which do not hold. The above proof shows that we get one nice result relating conditional probability and simple probability which we can rely on.
+
+\section{Independence}
+The probability of some propositions depends on other propositions. The probability that I'll be happy on Monday morning is not independent of whether I win the lottery on the weekend. On the other hand, the probability that I win the lottery on the weekend is independent of whether it rains in Seattle next weekend. Formally, we define \textbf{probabilistic indepdendence} as follows. 
+
+\begin{itemize*}
+\item Propositions $A$ and $B$ are \textbf{independent} iff $Pr(A | B) = Pr(A)$.
+\end{itemize*}
+
+There is something odd about this definition. We purported to define a relationship that holds between pairs of propositions. It looked like it should be a symmetric relation: $A$ is independent from $B$ iff $B$ is independent from $A$. But the definition looks asymmetric: $A$ and $B$ play very different roles on the right-hand side of the definition. Happily, this is just an appearance. Assuming that $A$ and $B$ both have positive probability, we can show that $Pr(A | B) = Pr(A)$ is equivalent to $Pr(B | A) = Pr(B)$. 
+\begin{align*}
+ Pr(A|B) &= Pr(A) \\
+\Leftrightarrow \frac{Pr(A \wedge B)}{Pr(B)} &= Pr(A) \\
+\Leftrightarrow  Pr(A \wedge B) &= Pr(A) \times Pr(B) \\
+\Leftrightarrow  \frac{Pr(A \wedge B)}{Pr(A)} &= Pr(B) \\
+\Leftrightarrow  Pr(B|A) &= Pr(B)
+\end{align*}
+\noindent We've multiplied and divided by $Pr(A)$ and $Pr(B)$, so these equivalences don't hold if $Pr(A)$ or $Pr(B)$ is 0. But in other cases, it turns out that $Pr(A | B) = Pr(A)$ is equivalent to $Pr(B | A) = Pr(B)$. And each of these is equivalent to the claim that $Pr(A \wedge B) = Pr(A) Pr(B)$. This is an important result, and one that we'll refer to a bit.
+
+\begin{itemize*}
+\item For independent propositions, the probability of their conjunction is the product of their probabilities.
+\item That is, if $A$ and $B$ are independent, then $Pr(A \wedge B) = Pr(A) Pr(B)$.
+\end{itemize*}
+
+\noindent This rule doesn't apply in cases where $A$ and $B$ are dependent. To take an extreme case, when $A$ is equivalent to $B$, then $A \wedge B$ is equivalent to $A$. In that case, $Pr(A \wedge B) = Pr(A)$, not $Pr(A)^2$. So we have to be careful applying this multiplication rule. But it is a powerful rule in those cases where it works.
+
+\section{Kinds of Independence}
+The formula $Pr(A|B) = Pr(A)$ is, by definition, what probabilistic independence amounts to. It's important to note that probabilistic dependence is very different from causal dependence, and so we'll spend a bit of time going over the differences.
+
+The phrase `causal dependence' is a little ambiguous, but one natural way to use it is that $A$ causally depends on $B$ just in case $B$ is among the causes of $A$. If we use it that way, it is an \textit{asymmetric} relation. If $B$ causes $A$, then $A$ doesn't cause $B$. But probabilistic dependence is \textit{symmetric}. That's what we proved in the previous section.
+
+Indeed, there will typically be a quite strong probabilistic dependence between effects and their causes. So not only is the probability that I'll be happy on Monday dependent on whether I win the lottery, the probability that I'll win the lottery is dependent on whether I'll be happy on Monday. It isn't causally dependent; my moods don't cause lottery results. But the probability of my winning (or, perhaps better, having won) is higher conditional on my being happy on Monday than on my not being happy.
+
+One other frequent way in which we get probabilistic dependence without causal dependence is when we have common effects of a cause. So imagine that Fred and I jointly purchased some lottery tickets. If one of those tickets wins, that will cause each of us to be happy. So if I'm happy, that is some evidence that I won the lottery, which is some evidence that Fred is happy. So there is a probabilistic connection between my being happy and Fred's being happy. This point is easier to appreciate if we work through an example numerically. Make each of the following assumptions.
+
+\begin{itemize*}
+\item We have a 10\% chance of winning the lottery, and hence a 90\% chance of losing.
+\item If we win, it is certain that we'll be happy. The probability of either of us not being happy after winning is 0.
+\item If we lose, the probability that we'll be unhappy is 0.5.
+\item Moreover, if we lose, our happiness is completely independent of one another, so conditional on losing, the proposition that I'm happy is independent of the proposition that Fred's happy
+\end{itemize*}
+
+So conditional on losing, each of the four possible outcomes have the same probability. Since these probabilities have to sum to 0.9, they're each equal to 0.225. So we can list the possible outcomes in a table. In this table $A$ is winning the lottery, $B$ is my being happy and $C$ is Fred's being happy.
+
+\starttab{c c c c}
+$\bm{A}$ & $\bm{B}$ & $\bm{C}$ & \textbf{Probability}\\ 
+T & T & T & 0.1 \\
+T & T & F & 0 \\
+T & F & T & 0 \\
+T & F & F & 0 \\
+F & T & T & 0.225 \\
+F & T & F & 0.225 \\
+F & F & T & 0.225 \\
+F & F & F & 0.225 \\
+\stoptab Adding up the various rows tells us that each of the following are true.
+\begin{itemize*}
+\item $Pr(B) = 0.1 + 0.225 + 0.225 = 0.55$
+\item $Pr(C) = 0.1 + 0.225 + 0.225 = 0.55$
+\item $Pr(B \wedge C) = 0.1 + 0.225 = 0.325$
+\end{itemize*}
+From that it follows that $Pr(B |C) = \nicefrac{0.325}{0.55} \approx 0.59$. So $Pr(B | C) > Pr(B)$. So $B$ and $C$ are not independent. Conditionalising on $C$ raises the probability of $B$ because it raises the probability of one of the possible causes of $C$, and that cause is also a possible cause of $B$.
+
+Often we know a lot more about probabilistic dependence than we know about causal connections and we have work to do to figure out the causal connections. It's very hard, especially in for example public health settings, to figure out what is a cause-effect pair, and what is the result of a common cause. One of the most important research programs in modern statistics is developing methods for solving just this problem. The details of those methods won't concern us here, but we'll just note that there's a big gap between probabilistic dependence and causal dependence.
+
+On the other hand, it is usually safe to infer probabilistic dependence from causal dependence. If $E$ is one of the (possible) causes of $H$, then usually $E$ will change the probabilities of $H$. We can perhaps dimly imagine exceptions to this rule. 
+
+So imagine that a quarterback is trying to decide whether to run or pass on the final play of a football game. He decides to pass, and the pass is successful, and his team wins. Now as it happens, had he decided to run, the team would have had just as good a chance of winning, since the team was exactly as likely to score on a run play as on a pass play. It's not crazy to think in those circumstances that the decision to pass was among the causes of the win, but the win was probabilistically independent of the decision to pass. In general we can imagine cases where some event moves a process down one of two possible paths to success, and where the other path had just as good a chance of success. (Imagine a doctor deciding to operate in a certain way, a politician campaigning in one area rather than another, a storm moving a battle from one piece of land to another, or any number of such cases.) In these cases we might have causal dependence (though whether we do is a contentious issue in the metaphysics of causation) without probabilistic dependence.
+
+But such cases are rare at best. It is a completely commonplace occurrence to have probabilistic dependence without clear lines of causal dependence. We have to have very delicately balanced states of the world in order to have causal dependence without probabilistic dependence, and in every day cases we can safely assume that such a situation is impossible without probabilistic connections.
+
+\section{Gamblers' Fallacy}
+If some events are independent, then the probability of one is independent of the probability of the others. So knowing the results of one event gives you no guidance, not even probabilistic guidance, into whether the other will happen.
+
+These points may seem completely banal, but in fact they are very hard to fully incorporate into our daily lives. In particular, they are very hard to completely incorporate in cases where we are dealing with successive outcomes of a particular chance process, such as a dice roll or a coin flip. In those cases we know that the individual events are independent of one another. But it's very hard not to think that, after a long run of heads say, that the coin landing tails is `due'.
+
+This feeling is what is known as the \textit{Gamblers' Fallacy}. It is the fallacy of thinking that, when events A and B are independent, that what happens in A can be a guide of some kind to event B. 
+
+One way of noting how hard a grip the Gamblers' Fallacy has over our thoughts is to try to simulate a random device such as a coin flip. As an exercise, imagine that you're writing down the results of a series of 100 coin flips. Don't actually flip the coin, just write down a sequence of 100 Hs (for Heads) and Ts (for Tails) that look like what you think a random series of coin flips will look like. I suspect that it won't look a lot like what an actual sequence does look like, in part because it is hard to avoid the Gamblers' Fallacy.
+
+Occasionally people will talk about the Inverse Gamblers' Fallacy, but this is a much less clear notion. The worry would be someone inferring from the fact that the coin has landed heads a lot that it will probably land heads next time. Now sometimes, if we know that it is a fair coin for example, this will be just as fallacious as the Gamblers' Fallacy itself. But it isn't always a fallacy. Sometimes the fact that the coin lands heads a few times in a row is evidence that it isn't really a fair coin.
+
+It's important to remember the gap between causal and probabilistic dependence here. In normal coin-tossing situations, it is a mistake to think that the earlier throws have a causal impact on the later throws. But there are many ways in which we can have probabilistic dependence without causal dependence. And in cases where the coin has been landing heads a suspiciously large number of times, it might be reasonable to think that there is a common cause of it landing heads in the past and in the future - namely that it's a biased coin! And when there's a common cause of two causally independent events, they may be probabilistically dependent. That's to say, the first event might change the probabilities of the second event. In those cases, it doesn't seem fallacious to think that various patterns will continue.
+
+This does all depend on just how plausible it is that there is such a causal mechanism. It's one thing to think, because the coin has landed heads ten times in a row, that it might be biased. There are many causal mechanisms that could explain that. It's another thing to think, because the coin has alternated heads and tails for the last ten tosses that it will continue to do so in the future. It's very hard, in normal circumstances, to see what could explain that. And thinking that patterns for which there's no natural causal explanation will continue is probably a mistake.
+%
+%\section{Exercises}
+%
+%\subsection{Inverting Probabilities}
+%Some blegs are rotten, some are grubby, and some are bloated. These are exclusive and exhaustive categories; no bleg has more than one of these features, and all have at least one.
+%
+%There is a test that produces a red, green or blue light depending, in a probabilistic way, on whether the bleg is rotten, grubby or bloated. The test satisfies the following conditions:
+%
+%\begin{itemize*}
+%\item Given the bleg is rotten, there is a 90\% chance the light is red, and a 5\% chance it is blue, and a 5\% chance it is green.
+%\item Given the bleg is grubby, there is a 90\% chance the light is green, and a 5\% chance it is red, and a 5\% chance it is blue.
+%\item Given the bleg is bloated, there is a 90\% chance the light is blue, and a 5\% chance it is red, and a 5\% chance it is green.
+%\end{itemize*}
+%This bleg was picked at random from a jar where 60\% of the blegs are rotten, 30\% are grubby, and 10\% are bloated. The test is about to be run on it.
+%
+%\begin{enumerate*}
+%\item Conditional on the light being red, what is the probability the bleg is rotten, what is the probability it is grubby, and what is the probability that it is bloated?
+%\item Conditional on the light being blue, what is the probability the bleg is rotten, what is the probability it is grubby, and what is the probability that it is bloated?
+%\item Conditional on the light being green, what is the probability the bleg is rotten, what is the probability it is grubby, and what is the probability that it is bloated?
+%\end{enumerate*}
+%
+%\subsection{Chains of Dependence}
+%Describe a probability function $Pr$ with the following properties:
+%
+%\begin{enumerate*}
+%\item $p$ and $q$ are not probabilistically independent according to $Pr$.
+%\item $q$ and $r$ are not probabilistically independent according to $Pr$.
+%\item $p$ and $r$ are probabilistically independent according to $Pr$.
+%\end{enumerate*}
+%To answer this, you'll have say what is the probability, according to $Pr$, of each of the eight combinations of $p, q$ and $r$.
+%
+%\subsection{Screening}
+%Describe a probability function $Pr$ with the following properties:
+%
+%\begin{enumerate*}
+%\item $p$ and $q$ are not probabilistically independent according to $Pr$.
+%\item $p$ and $q$ are probabilistically independent according to $Pr_r$.
+%\item $p$ and $q$ are probabilistically independent according to $Pr_{\neg r}$.
+%\end{enumerate*}
+%To answer this, you'll have say what is the probability, according to $Pr$, of each of the eight combinations of $p, q$ and $r$.

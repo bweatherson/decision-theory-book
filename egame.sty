@@ -1,0 +1,1181 @@
+% egame.sty
+% <title>LaTeX style file for typesetting strategic games</title>
+% Provides macros to draw extensive games, using the LaTeX picture environment.
+% See egame.tex for documentation.
+% By Martin J. Osborne (osborne@mcmaster.ca)
+% Version 1.0, 97/10/16
+
+\newcount\initnodediam
+\initnodediam=10
+\def\egnode{\circle*{10}}
+\def\infosetdot{\circle*{5}}
+\def\infosetds{20} % dot spacing (n means: n times unitlength)
+\newdimen\egplayerlabelsep
+\egplayerlabelsep=1mm
+\newdimen\egactionlabelsep
+\egactionlabelsep=0.7mm
+\newdimen\egpayoffsep
+\egpayoffsep=2mm
+\newdimen\@egunitlength
+\newcount\@initnodediam
+\@initnodediam=10
+
+\newif\ifinitial
+
+\newcount\@egxnum
+\newcount\@egynum
+\newcount\@egmodxnum
+\newcount\@egmodynum
+\newcount\@eghnum
+\newcount\@egvnum
+\newcount\@egabshnum
+\newcount\@egabsvnum
+\newcount\@eghdistance
+\newcount\@eghoffset
+\newcount\@egvoffset
+\newcount\@adjdist
+\newcount\@hshift
+\newcount\@vshift
+ 
+% Command to change default direction
+
+\newcommand{\egdirection}[1]{\def\@egdefdirection{#1}}
+\def\@egdefdirection{d}
+
+% \putbranch and the two macros it calls define parameters, to be used
+% by \iib etc.
+
+\def\putbranch(#1,#2)(#3,#4)%
+{\@ifnextchar[{\@putbrancho(#1,#2)(#3,#4)}{\@putbranch(#1,#2)(#3,#4)}}
+
+\def\@putbrancho(#1,#2)(#3,#4)[#5]#6{%
+	\@egxnum=#1\@egynum=#2\@eghnum=#3\@egvnum=#4%
+% define absolute values of \@eghnum and \@egvnum
+	\ifnum\@eghnum<0
+	   \@egabshnum=-\@eghnum
+	\else\@egabshnum=\@eghnum\fi
+	\ifnum\@egvnum<0
+	   \@egabsvnum=-\@egvnum
+	\else\@egabsvnum=\@egvnum\fi
+	\def\@egdirection{#5}\@eghdistance=#6%
+}
+
+\def\@putbranch(#1,#2)(#3,#4)#5{%
+	\@egxnum=#1\@egynum=#2\@eghnum=#3\@egvnum=#4%
+% define absolute values of \@eghnum and \@egvnum
+	\ifnum\@eghnum<0
+	   \@egabshnum=-\@eghnum
+	\else\@egabshnum=\@eghnum\fi
+	\ifnum\@egvnum<0
+	   \@egabsvnum=-\@egvnum
+	\else\@egabsvnum=\@egvnum\fi
+	\def\@egdirection{\@egdefdirection}\@eghdistance=#5%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%    TWO BRANCHES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Two branches
+
+\def\iib#1{%
+	\ifnum\@eghnum<0\@eghnum=-\@eghnum\fi
+	\ifnum\@egvnum<0\@egvnum=-\@egvnum\fi
+	\ifinitial\@iibranchesi\initialfalse
+	\else\@iibranches\fi
+	\@ifnextchar[{\@iibo{#1}}{\@iib{#1}}%
+}
+
+\def\@iibo#1[#2]#3#4{%
+	\def\@branchplp{#2}
+	\@iilabels{#1}{#3}{#4}
+	\@ifnextchar[{\@iibot{#1}[#2]{#3}{#4}}{}%
+}
+
+\def\@iib#1#2#3{%
+	\def\@branchplp{t}
+	\@iilabels{#1}{#2}{#3}
+	\@ifnextchar[{\@iibt{#1}{#2}{#3}}{}%
+}
+
+\def\@iibot#1[#2]#3#4[#5][#6]{%
+	\@iipayoffs{#5}{#6}%
+}
+
+\def\@iibt#1#2#3[#4][#5]{%
+	\@iipayoffs{#4}{#5}%
+}
+
+% Noninitial node with 2 branches
+
+\def\@iibranches{%
+	\put(\@egxnum,\@egynum){\egnode}
+	\if\@egdirection d
+	   \ifnum\@eghnum=0
+	      \put(\@egxnum,\@egynum){\line(1,0){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(0,-1){\@eghdistance}}
+	   \else
+	      \put(\@egxnum,\@egynum){\line(-\@eghnum,-\@egvnum){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(\@eghnum,-\@egvnum){\@eghdistance}}
+	   \fi
+	\else\if\@egdirection u
+	   \ifnum\@eghnum=0
+	      \put(\@egxnum,\@egynum){\line(-1,0){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(0,1){\@eghdistance}}
+	   \else
+	      \put(\@egxnum,\@egynum){\line(-\@eghnum,\@egvnum){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(\@eghnum,\@egvnum){\@eghdistance}}
+	   \fi
+	\else\if\@egdirection r
+	   \ifnum\@egvnum=0
+	      \put(\@egxnum,\@egynum){\line(1,0){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(0,1){\@eghdistance}}
+	   \else
+	      \put(\@egxnum,\@egynum){\line(\@eghnum,\@egvnum){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(\@eghnum,-\@egvnum){\@eghdistance}}
+	   \fi
+	\else\if\@egdirection l
+	   \ifnum\@egvnum=0
+	      \put(\@egxnum,\@egynum){\line(-1,0){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(0,-1){\@eghdistance}}
+	   \else
+	      \put(\@egxnum,\@egynum){\line(-\@eghnum,\@egvnum){\@eghdistance}}
+	      \put(\@egxnum,\@egynum){\line(-\@eghnum,-\@egvnum){\@eghdistance}}
+	   \fi
+	\fi\fi\fi\fi
+}
+
+% Initial node with 2 branches
+
+\def\@iibranchesi{%
+% Initial node
+	\put(\@egxnum,\@egynum){\circle{\initnodediam}}
+	\@egmodxnum=\@egxnum\@egmodynum=\@egynum
+% Branches
+% Divide unitlength by 10 to make things more accurate
+     \divide\unitlength by 10
+	\multiply\@egmodxnum by 10\multiply\@egmodynum by 10
+	\@adjdist=\@eghdistance\multiply\@adjdist by 10
+% Make correction for size of initial circle
+	\calcshift
+     \advance\@adjdist by -\@hshift
+% Draw lines, depending on direction of game
+	\if\@egdirection d
+	   \ifnum\@eghnum=0
+	      \advance\@egmodxnum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(1,0){\@adjdist}}
+	      \advance\@egmodxnum by -\@vshift\advance\@egmodynum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(0,-1){\@adjdist}}
+	   \else
+	      \advance\@egmodxnum by -\@hshift\advance\@egmodynum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,-\@egvnum){\@adjdist}}
+	      \advance\@egmodxnum by \@hshift\advance\@egmodxnum by \@hshift
+	      \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,-\@egvnum){\@adjdist}}
+	   \fi
+	\else\if\@egdirection u
+	   \ifnum\@eghnum=0
+	      \advance\@egmodxnum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-1,0){\@adjdist}}
+	      \advance\@egmodxnum by \@vshift\advance\@egmodynum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(0,1){\@adjdist}}
+	   \else
+	      \advance\@egmodxnum by -\@hshift\advance\@egmodynum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,\@egvnum){\@adjdist}}
+	      \advance\@egmodxnum by \@hshift\advance\@egmodxnum by \@hshift
+	      \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,\@egvnum){\@adjdist}}
+	   \fi
+	\else\if\@egdirection r
+	   \ifnum\@egvnum=0
+	      \advance\@egmodxnum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(1,0){\@adjdist}}
+	      \advance\@egmodxnum by -\@vshift\advance\@egmodynum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(0,1){\@adjdist}}
+	   \else
+	      \advance\@egmodxnum by \@hshift\advance\@egmodynum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,\@egvnum){\@adjdist}}
+	      \advance\@egmodynum by -\@vshift\advance\@egmodynum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,-\@egvnum){\@adjdist}}
+	   \fi
+	\else\if\@egdirection l
+	   \ifnum\@egvnum=0
+	      \advance\@egmodxnum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-1,0){\@adjdist}}
+	      \advance\@egmodxnum by \@vshift\advance\@egmodynum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(0,-1){\@adjdist}}
+	   \else
+	      \advance\@egmodxnum by -\@hshift\advance\@egmodynum by \@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,\@egvnum){\@adjdist}}
+	      \advance\@egmodynum by -\@vshift\advance\@egmodynum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,-\@egvnum){\@adjdist}}
+	   \fi
+	\fi\fi\fi\fi
+% Reset unitlength
+     \multiply\unitlength by 10
+}
+
+% Player label and action labels
+
+\def\@iilabels#1#2#3{%
+% player label
+     \fboxrule 0pt\fboxsep\egplayerlabelsep
+	\@egmodxnum=\@egxnum\@egmodynum=\@egynum
+     \if\@egdirection d
+        \if\@branchplp l
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#1}}}
+        \else\if\@branchplp r
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection u
+        \if\@branchplp l
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#1}}}
+        \else\if\@branchplp r
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection r
+        \if\@branchplp u
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#1}}}
+        \else\if\@branchplp d
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection l
+        \if\@branchplp u
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#1}}}
+        \else\if\@branchplp d
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#1}}}
+        \fi\fi
+     \fi\fi\fi\fi
+% action labels
+     \fboxsep\egactionlabelsep
+	\ifnum\@eghnum=0\@egvoffset=\@eghdistance
+	\else
+        \@egvoffset=\@egvnum
+        \multiply\@egvoffset by\@eghdistance
+        \divide\@egvoffset by\@eghnum
+	\fi
+	\divide\@egvoffset by 2
+	\ifnum\@eghnum=0\@eghoffset=0
+	   \else\@eghoffset=\@eghdistance
+	\fi
+	\divide\@eghoffset by 2
+     \if\@egdirection d
+	   \ifnum\@eghnum=0
+           \advance\@egmodynum by -\@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#2}}}
+           \advance\@egmodynum by \@egvoffset
+           \advance\@egmodxnum by \@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#3}}}
+	   \else
+           \advance\@egmodynum by -\@egvoffset
+           \advance\@egmodxnum by -\@eghoffset
+	      \ifnum\@egvnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#2}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#2}}}
+           \fi
+           \advance\@egmodxnum by \@eghoffset
+           \advance\@egmodxnum by \@eghoffset
+	      \ifnum\@egvnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#3}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#3}}}
+           \fi
+	   \fi
+     \else\if\@egdirection u
+	   \ifnum\@eghnum=0
+           \advance\@egmodxnum by -\@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#2}}}
+           \advance\@egmodxnum by \@egvoffset
+           \advance\@egmodynum by \@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#3}}}
+	   \else
+	      \advance\@egmodynum by \@egvoffset
+	      \advance\@egmodxnum by -\@eghoffset
+	      \ifnum\@egvnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#2}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#2}}}
+           \fi
+           \advance\@egmodxnum by \@eghoffset
+           \advance\@egmodxnum by \@eghoffset
+	      \ifnum\@egvnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#3}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#3}}}
+	      \fi
+	   \fi
+     \else\if\@egdirection r
+	   \ifnum\@egvnum=0
+           \advance\@egmodynum by \@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#2}}}
+           \advance\@egmodynum by -\@egvoffset
+           \advance\@egmodxnum by \@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#3}}}
+	   \else
+           \advance\@egmodxnum by \@eghoffset
+           \advance\@egmodynum by \@egvoffset
+	      \ifnum\@eghnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#2}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#2}}}
+           \fi
+           \advance\@egmodynum by -\@egvoffset
+           \advance\@egmodynum by -\@egvoffset
+	      \ifnum\@eghnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#3}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#3}}}
+           \fi
+	   \fi
+     \else\if\@egdirection l
+	   \ifnum\@egvnum=0
+           \advance\@egmodxnum by -\@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#2}}}
+           \advance\@egmodxnum by \@egvoffset
+           \advance\@egmodynum by -\@egvoffset
+	      \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#3}}}
+	   \else
+           \advance\@egmodxnum by -\@eghoffset
+           \advance\@egmodynum by \@egvoffset
+	      \ifnum\@eghnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#2}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#2}}}
+           \fi
+           \advance\@egmodynum by -\@egvoffset
+           \advance\@egmodynum by -\@egvoffset
+	      \ifnum\@eghnum=0
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#3}}}
+           \else
+              \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#3}}}
+           \fi
+	   \fi
+     \fi\fi\fi\fi
+}
+
+% Payoffs
+
+\def\@iipayoffs#1#2{%
+     \fboxsep\egpayoffsep
+     \ifnum\@eghnum=0\@egvoffset=\@eghdistance
+     \else
+        \@egvoffset=\@egvnum
+        \multiply\@egvoffset by\@eghdistance
+        \divide\@egvoffset by\@eghnum
+     \fi
+	\@eghoffset=\@eghdistance
+     \if\@egdirection d
+	   \ifnum\@eghnum=0
+           \advance\@egynum by -\@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#1}}}
+           \advance\@egynum by \@egvoffset
+           \advance\@egxnum by \@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#2}}}
+	   \else
+           \advance\@egynum by -\@egvoffset
+           \advance\@egxnum by -\@eghoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@egvnum=0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+           \else
+              \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#1}}}
+           \fi
+           \advance\@egxnum by \@eghoffset
+           \advance\@egxnum by \@eghoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@egvnum=0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#2}}}
+           \else
+              \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#2}}}
+           \fi
+	   \fi
+     \else\if\@egdirection u
+	   \ifnum\@eghnum=0
+           \advance\@egxnum by -\@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+           \advance\@egxnum by \@egvoffset
+           \advance\@egynum by \@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#2}}}
+	   \else
+           \advance\@egynum by \@egvoffset
+           \advance\@egxnum by -\@eghoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@egvnum=0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+           \else
+              \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+           \fi
+           \advance\@egxnum by \@eghoffset
+           \advance\@egxnum by \@eghoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@egvnum=0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#2}}}
+           \else
+              \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#2}}}
+           \fi
+	   \fi
+     \else\if\@egdirection r
+	   \ifnum\@egvnum=0
+           \advance\@egynum by \@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+           \advance\@egynum by -\@egvoffset
+           \advance\@egxnum by \@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#2}}}
+	   \else
+           \ifnum\@eghnum=0\relax
+           \else
+              \advance\@egxnum by \@eghoffset
+           \fi
+           \advance\@egynum by \@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@eghnum=0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+           \else
+              \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#1}}}
+           \fi
+           \advance\@egynum by -\@egvoffset
+           \advance\@egynum by -\@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@eghnum=0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#2}}}
+           \else
+              \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#2}}}
+           \fi
+	   \fi
+     \else\if\@egdirection l
+	   \ifnum\@egvnum=0
+           \advance\@egxnum by -\@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+           \advance\@egxnum by \@egvoffset
+           \advance\@egynum by -\@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+	      \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#2}}}
+	   \else
+           \ifnum\@eghnum=0\relax
+           \else
+              \advance\@egxnum by -\@eghoffset
+           \fi
+           \advance\@egynum by \@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@eghnum=0
+             \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+           \else
+             \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+           \fi
+           \advance\@egynum by -\@egvoffset
+           \advance\@egynum by -\@egvoffset
+           \put(\@egxnum,\@egynum){\egnode}
+           \ifnum\@eghnum=0
+             \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#2}}}
+           \else
+             \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#2}}}
+           \fi
+	   \fi
+     \fi\fi\fi\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%    ONE BRANCH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% One branch
+
+\def\ib#1{%
+	\if\@egdirection d
+	   \ifnum\@egvnum>0\@egvnum=-\@egvnum\fi
+	\else\if\@egdirection u
+	   \ifnum\@egvnum<0\@egvnum=-\@egvnum\fi
+	\else\if\@egdirection r
+	   \ifnum\@eghnum<0\@eghnum=-\@eghnum\fi
+	\else\if\@egdirection l
+	   \ifnum\@eghnum>0\@eghnum=-\@eghnum\fi
+	\fi\fi\fi\fi
+	\ifinitial\@ibranchi\initialfalse
+	\else\@ibranch\fi
+	\@ifnextchar[{\@ibo{#1}}{\@ib{#1}}%
+}
+
+\def\@ibo#1[#2]#3{%
+	\def\@branchplp{#2}
+	\@ilabel{#1}{#3}
+	\@ifnextchar[{\@ibot{#1}[#2]{#3}}{}%
+}
+
+\def\@ib#1#2{%
+	\def\@branchplp{t}
+	\@ilabel{#1}{#2}
+	\@ifnextchar[{\@ibt{#1}{#2}}{}%
+}
+
+\def\@ibot#1[#2]#3[#4]{%
+	\@ipayoff{#4}%
+}
+
+\def\@ibt#1#2[#3]{%
+	\@ipayoff{#3}%
+}
+
+% Noninitial node with 1 branch
+
+\def\@ibranch{%
+	\put(\@egxnum,\@egynum){\egnode}
+	\put(\@egxnum,\@egynum){\line(\@eghnum,\@egvnum){\@eghdistance}}
+}
+
+% Initial node with 1 branch
+
+\def\@ibranchi{%
+% Initial node
+	\put(\@egxnum,\@egynum){\circle{\initnodediam}}
+	\@egmodxnum=\@egxnum\@egmodynum=\@egynum
+% Branches
+%  Divide unitlength by 10 to make things more accurate
+     \divide\unitlength by 10
+	\multiply\@egmodxnum by 10\multiply\@egmodynum by 10
+	\@adjdist=\@eghdistance\multiply\@adjdist by 10
+%  Make correction for size of initial circle
+	\calcshift
+     \advance\@adjdist by -\@hshift
+% Draw line
+	\ifnum\@eghnum<0
+        \advance\@egmodxnum by -\@hshift
+	\else\advance\@egmodxnum by \@hshift\fi
+	\ifnum\@egvnum<0
+        \advance\@egmodynum by -\@vshift
+	\else\advance\@egmodynum by \@vshift\fi
+     \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,\@egvnum){\@adjdist}}
+% Reset unitlength
+	\multiply\unitlength by 10
+}
+
+% Player label and action labels
+
+\def\@ilabel#1#2{%
+% player label
+     \fboxrule 0pt\fboxsep\egplayerlabelsep
+	\@egmodxnum=\@egxnum\@egmodynum=\@egynum
+     \if\@egdirection d
+        \if\@branchplp l
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#1}}}
+        \else\if\@branchplp r
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection u
+        \if\@branchplp l
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#1}}}
+        \else\if\@branchplp r
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection r
+        \if\@branchplp u
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#1}}}
+        \else\if\@branchplp d
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection l
+        \if\@branchplp u
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#1}}}
+        \else\if\@branchplp d
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#1}}}
+        \fi\fi
+     \fi\fi\fi\fi
+% action label
+     \fboxsep\egactionlabelsep
+	\ifnum\@eghnum=0\@egvoffset=\@eghdistance
+	   \multiply\@egvoffset by\@egvnum
+	\else
+	   \@egvoffset=\@egvnum
+        \multiply\@egvoffset by\@eghdistance
+        \divide\@egvoffset by\@egabshnum
+	\fi
+	\divide\@egvoffset by 2
+	\ifnum\@eghnum=0\@eghoffset=0
+	   \else\ifnum\@eghnum<0\@eghoffset=-\@eghdistance
+	   \else\ifnum\@eghnum>0\@eghoffset=\@eghdistance
+	\fi\fi\fi
+	\divide\@eghoffset by 2
+	\advance\@egmodynum by \@egvoffset
+	\advance\@egmodxnum by \@eghoffset
+     \if\@egdirection d
+	   \ifnum\@egvnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#2}}}
+        \else\ifnum\@eghnum<0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#2}}}
+        \else\ifnum\@eghnum>0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#2}}}
+        \fi\fi\fi
+     \else\if\@egdirection u
+	   \ifnum\@egvnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#2}}}
+        \else\ifnum\@eghnum<0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#2}}}
+        \else\ifnum\@eghnum>0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#2}}}
+        \fi\fi\fi
+     \else\if\@egdirection r
+	   \ifnum\@eghnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#2}}}
+        \else\ifnum\@egvnum<0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#2}}}
+        \else\ifnum\@egvnum>0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#2}}}
+        \fi\fi\fi
+     \else\if\@egdirection l
+	   \ifnum\@eghnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#2}}}
+        \else\ifnum\@egvnum<0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#2}}}
+        \else\ifnum\@egvnum>0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#2}}}
+        \fi\fi\fi
+     \fi\fi\fi\fi
+}
+
+% Payoffs
+
+\def\@ipayoff#1{%
+     \fboxsep\egpayoffsep
+     \ifnum\@eghnum=0\@egvoffset=\@eghdistance
+	   \multiply\@egvoffset by\@egvnum
+     \else
+        \@egvoffset=\@egvnum
+        \multiply\@egvoffset by\@eghdistance
+        \divide\@egvoffset by\@egabshnum
+     \fi
+	\ifnum\@eghnum=0\@eghoffset=0
+	   \else\ifnum\@eghnum<0\@eghoffset=-\@eghdistance
+	   \else\ifnum\@eghnum>0\@eghoffset=\@eghdistance
+	\fi\fi\fi
+     \advance\@egynum by \@egvoffset
+     \advance\@egxnum by \@eghoffset
+     \put(\@egxnum,\@egynum){\egnode}
+     \if\@egdirection d
+        \ifnum\@egvnum=0
+	      \ifnum\@eghnum<0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+	      \else\ifnum\@eghnum>0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#1}}}
+	      \fi\fi
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#1}}}
+        \fi
+     \else\if\@egdirection u
+        \ifnum\@egvnum=0
+	      \ifnum\@eghnum<0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+	      \else\ifnum\@eghnum>0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#1}}}
+	      \fi\fi
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \fi
+     \else\if\@egdirection r
+        \ifnum\@eghnum=0
+	      \ifnum\@egvnum<0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#1}}}
+	      \else\ifnum\@egvnum>0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+	      \fi\fi
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#1}}}
+        \fi
+     \else\if\@egdirection l
+        \ifnum\@eghnum=0
+	      \ifnum\@egvnum<0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#1}}}
+	      \else\ifnum\@egvnum>0
+              \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+	      \fi\fi
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \fi
+     \fi\fi\fi\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%    THREE BRANCHES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Three branches
+
+\def\iiib#1{%
+	\ifnum\@eghnum<0\@eghnum=-\@eghnum\fi
+	\ifnum\@egvnum<0\@egvnum=-\@egvnum\fi
+	\ifinitial\@iiibranchesi\initialfalse
+	\else\@iiibranches\fi
+	\@ifnextchar[{\@iiibo{#1}}{\@iiib{#1}}%
+}
+
+\def\@iiibo#1[#2]#3#4#5{%
+	\def\@branchplp{#2}
+	\@iiilabels{#1}{#3}{#4}{#5}
+	\@ifnextchar[{\@iiibot{#1}[#2]{#3}{#4}{#5}}{}%
+}
+
+\def\@iiib#1#2#3#4{%
+	\def\@branchplp{t}
+	\@iiilabels{#1}{#2}{#3}{#4}
+	\@ifnextchar[{\@iiibt{#1}{#3}{#4}}{}%
+}
+
+\def\@iiibot#1[#2]#3#4#5[#6][#7][#8]{%
+	\@iiipayoffs{#6}{#7}{#8}%
+}
+
+\def\@iiibt#1#2#3#4[#5][#6][#7]{%
+	\@iiipayoffs{#5}{#6}{#7}%
+}
+
+% Noninitial node with 3 branches
+
+\def\@iiibranches{%
+	\put(\@egxnum,\@egynum){\egnode}
+	\if\@egdirection d
+	   \ifnum\@eghnum=0\relax
+	   \else\@tempcnta=\@eghdistance
+	      \divide\@tempcnta by\@egabshnum
+	      \multiply\@tempcnta by\@egabsvnum
+	      \put(\@egxnum,\@egynum){\line(0,-1){\@tempcnta}}
+	   \fi
+	   \put(\@egxnum,\@egynum){\line(-\@eghnum,-\@egvnum){\@eghdistance}}
+	   \put(\@egxnum,\@egynum){\line(\@eghnum,-\@egvnum){\@eghdistance}}
+	\else\if\@egdirection u
+	   \ifnum\@eghnum=0\relax
+	   \else\@tempcnta=\@eghdistance
+	      \divide\@tempcnta by\@egabshnum
+	      \multiply\@tempcnta by\@egabsvnum
+	      \put(\@egxnum,\@egynum){\line(0,1){\@tempcnta}}
+	   \fi
+	   \put(\@egxnum,\@egynum){\line(-\@eghnum,\@egvnum){\@eghdistance}}
+	   \put(\@egxnum,\@egynum){\line(\@eghnum,\@egvnum){\@eghdistance}}
+	\else\if\@egdirection r
+	   \put(\@egxnum,\@egynum){\line(1,0){\@eghdistance}}
+	   \put(\@egxnum,\@egynum){\line(\@eghnum,\@egvnum){\@eghdistance}}
+	   \put(\@egxnum,\@egynum){\line(\@eghnum,-\@egvnum){\@eghdistance}}
+	\else\if\@egdirection l
+	   \put(\@egxnum,\@egynum){\line(-1,0){\@eghdistance}}
+	   \put(\@egxnum,\@egynum){\line(-\@eghnum,\@egvnum){\@eghdistance}}
+	   \put(\@egxnum,\@egynum){\line(-\@eghnum,-\@egvnum){\@eghdistance}}
+	\fi\fi\fi\fi
+}
+
+% Initial node with 3 branches
+
+\def\@iiibranchesi{%
+% Initial node
+	\put(\@egxnum,\@egynum){\circle{\initnodediam}}
+	\@egmodxnum=\@egxnum\@egmodynum=\@egynum
+% Branches
+% Divide unitlength by 10 to make things more accurate
+	\divide\unitlength by 10
+	\multiply\@egmodxnum by 10\multiply\@egmodynum by 10
+	\@adjdist=\@eghdistance\multiply\@adjdist by 10
+% Make correction for size of initial circle
+	\calcshift
+     \advance\@adjdist by -\@hshift
+% Draw lines, depending on direction of game
+	\if\@egdirection d
+	   \advance\@egmodynum by -50
+	   \ifnum\@eghnum=0\relax
+	   \else\@tempcnta=\@eghdistance
+	      \multiply\@tempcnta by 10
+	      \divide\@tempcnta by\@egabshnum
+	      \multiply\@tempcnta by\@egabsvnum
+	      \put(\@egmodxnum,\@egmodynum){\line(0,-1){\@tempcnta}}
+	   \fi
+	   \advance\@egmodynum by 50
+	   \advance\@egmodxnum by -\@hshift\advance\@egmodynum by -\@vshift
+	      \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,-\@egvnum){\@adjdist}}
+	   \advance\@egmodxnum by \@hshift\advance\@egmodxnum by \@hshift
+	      \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,-\@egvnum){\@adjdist}}
+	\else\if\@egdirection u
+	   \advance\@egmodynum by 50
+	   \ifnum\@eghnum=0\relax
+	   \else\@tempcnta=\@eghdistance
+	      \multiply\@tempcnta by 10
+	      \divide\@tempcnta by\@egabshnum
+	      \multiply\@tempcnta by\@egabsvnum
+	      \put(\@egmodxnum,\@egmodynum){\line(0,1){\@tempcnta}}
+	   \fi
+	   \advance\@egmodynum by -50
+	   \advance\@egmodxnum by -\@hshift\advance\@egmodynum by \@vshift
+	   \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,\@egvnum){\@adjdist}}
+	   \advance\@egmodxnum by \@hshift\advance\@egmodxnum by \@hshift
+	   \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,\@egvnum){\@adjdist}}
+	\else\if\@egdirection r
+	   \advance\@egmodxnum by 50
+	   \put(\@egmodxnum,\@egmodynum){\line(1,0){\@adjdist}}
+	   \advance\@egmodxnum by -50
+	   \advance\@egmodxnum by \@hshift\advance\@egmodynum by \@vshift
+	   \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,\@egvnum){\@adjdist}}
+	   \advance\@egmodynum by -\@vshift\advance\@egmodynum by -\@vshift
+	   \put(\@egmodxnum,\@egmodynum){\line(\@eghnum,-\@egvnum){\@adjdist}}
+	\else\if\@egdirection l
+	   \advance\@egmodxnum by -50
+	   \put(\@egmodxnum,\@egmodynum){\line(-1,0){\@adjdist}}
+	   \advance\@egmodxnum by 50
+	   \advance\@egmodxnum by -\@hshift\advance\@egmodynum by \@vshift
+	   \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,\@egvnum){\@adjdist}}
+	   \advance\@egmodynum by -\@vshift\advance\@egmodynum by -\@vshift
+	   \put(\@egmodxnum,\@egmodynum){\line(-\@eghnum,-\@egvnum){\@adjdist}}
+	\fi\fi\fi\fi
+% Reset unitlength
+	\multiply\unitlength by 10
+}
+
+% Player label and action labels
+
+\def\@iiilabels#1#2#3#4{%
+% player label
+     \fboxrule 0pt\fboxsep\egplayerlabelsep
+	\@egmodxnum=\@egxnum\@egmodynum=\@egynum
+     \if\@egdirection d
+        \if\@branchplp l
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#1}}}
+        \else\if\@branchplp r
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection u
+        \if\@branchplp l
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#1}}}
+        \else\if\@branchplp r
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection r
+        \if\@branchplp u
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#1}}}
+        \else\if\@branchplp d
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \fi\fi
+     \else\if\@egdirection l
+        \if\@branchplp u
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#1}}}
+        \else\if\@branchplp d
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#1}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#1}}}
+        \fi\fi
+     \fi\fi\fi\fi
+% action labels
+     \fboxsep\egactionlabelsep
+	\ifnum\@eghnum=0\@egvoffset=\@eghdistance
+	\else
+        \@egvoffset=\@egvnum
+        \multiply\@egvoffset by\@eghdistance
+        \divide\@egvoffset by\@eghnum
+	\fi
+	\divide\@egvoffset by 2
+	\ifnum\@eghnum=0\@eghoffset=0
+	   \else\@eghoffset=\@eghdistance
+	\fi
+	\divide\@eghoffset by 2
+     \if\@egdirection d
+        \advance\@egmodynum by -\@egvoffset
+        \advance\@egmodxnum by -\@eghoffset
+	   \ifnum\@egvnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#2}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#2}}}
+        \fi
+        \advance\@egmodxnum by \@eghoffset
+	   \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#3}}}
+        \advance\@egmodxnum by \@eghoffset
+	   \ifnum\@egvnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#4}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#4}}}
+        \fi
+     \else\if\@egdirection u
+        \advance\@egmodynum by \@egvoffset
+        \advance\@egmodxnum by -\@eghoffset
+	   \ifnum\@egvnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#2}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#2}}}
+        \fi
+        \advance\@egmodxnum by \@eghoffset
+	   \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#3}}}
+        \advance\@egmodxnum by \@eghoffset
+	   \ifnum\@egvnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[t]{\fbox{#4}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#4}}}
+        \fi
+     \else\if\@egdirection r
+        \advance\@egmodxnum by \@eghoffset
+        \advance\@egmodynum by \@egvoffset
+	   \ifnum\@eghnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#2}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[br]{\fbox{#2}}}
+        \fi
+        \advance\@egmodynum by -\@egvoffset
+	   \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#3}}}
+        \advance\@egmodynum by -\@egvoffset
+	   \ifnum\@eghnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[r]{\fbox{#4}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tr]{\fbox{#4}}}
+        \fi
+     \else\if\@egdirection l
+        \advance\@egmodxnum by -\@eghoffset
+        \advance\@egmodynum by \@egvoffset
+	   \ifnum\@eghnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#2}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[bl]{\fbox{#2}}}
+        \fi
+        \advance\@egmodynum by -\@egvoffset
+	   \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[b]{\fbox{#3}}}
+        \advance\@egmodynum by -\@egvoffset
+	   \ifnum\@eghnum=0
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[l]{\fbox{#4}}}
+        \else
+           \put(\@egmodxnum,\@egmodynum){\makebox(0,0)[tl]{\fbox{#4}}}
+        \fi
+     \fi\fi\fi\fi
+}
+
+% Payoffs
+
+\def\@iiipayoffs#1#2#3{%
+     \fboxsep\egpayoffsep
+     \ifnum\@eghnum=0\@egvoffset=\@eghdistance
+     \else
+        \@egvoffset=\@egvnum
+        \multiply\@egvoffset by\@eghdistance
+        \divide\@egvoffset by\@eghnum
+     \fi
+	\@eghoffset=\@eghdistance
+     \if\@egdirection d
+        \advance\@egynum by -\@egvoffset
+        \advance\@egxnum by -\@eghoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@egvnum=0
+           \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#1}}}
+        \fi
+        \advance\@egxnum by \@eghoffset
+        \put(\@egxnum,\@egynum){\egnode}
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#2}}}
+        \advance\@egxnum by \@eghoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@egvnum=0
+           \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#3}}}
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#3}}}
+        \fi
+     \else\if\@egdirection u
+        \advance\@egynum by \@egvoffset
+        \advance\@egxnum by -\@eghoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@egvnum=0
+           \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \fi
+        \advance\@egxnum by \@eghoffset
+        \put(\@egxnum,\@egynum){\egnode}
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#2}}}
+        \advance\@egxnum by \@eghoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@egvnum=0
+           \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#3}}}
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#3}}}
+        \fi
+     \else\if\@egdirection r
+        \ifnum\@eghnum=0\relax
+        \else
+           \advance\@egxnum by \@eghoffset
+        \fi
+        \advance\@egynum by \@egvoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@eghnum=0
+           \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#1}}}
+        \fi
+        \advance\@egynum by -\@egvoffset
+        \put(\@egxnum,\@egynum){\egnode}
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#2}}}
+        \advance\@egynum by -\@egvoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@eghnum=0
+           \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#3}}}
+        \else
+           \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#3}}}
+        \fi
+     \else\if\@egdirection l
+        \ifnum\@eghnum=0\relax
+        \else
+           \advance\@egxnum by -\@eghoffset
+        \fi
+        \advance\@egynum by \@egvoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@eghnum=0
+          \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#1}}}
+        \else
+          \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#1}}}
+        \fi
+        \advance\@egynum by -\@egvoffset
+        \put(\@egxnum,\@egynum){\egnode}
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#2}}}
+        \advance\@egynum by -\@egvoffset
+        \put(\@egxnum,\@egynum){\egnode}
+        \ifnum\@eghnum=0
+          \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#3}}}
+        \else
+          \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#3}}}
+        \fi
+     \fi\fi\fi\fi
+}
+
+% Information set
+% \infoset(x,y){length}{name of player}
+%
+\def\infoset(#1,#2){%
+	\@ifnextchar[{\@infoseto(#1,#2)}{\@infoset(#1,#2)}%
+}
+
+\def\@infoseto(#1,#2)[#3]#4#5{%
+	\if#3h
+	  \def\@egdirection{d}%
+	\else\if#3v
+	  \def\@egdirection{r}%
+	\fi\fi
+	\@infos(#1,#2){#4}{#5}%
+}
+
+\def\@infoset(#1,#2)#3#4{%
+	\def\@egdirection{\@egdefdirection}%
+	\@infos(#1,#2){#3}{#4}%
+}
+
+\def\@infos(#1,#2)#3#4{%
+     \fboxrule 0pt\fboxsep\egplayerlabelsep
+	\@egxnum=#1\@egynum=#2\@eghnum=#3
+	\divide\@eghnum by\infosetds
+	\if\@egdirection d
+	   \multiput(\@egxnum,\@egynum)(\infosetds,0){\@eghnum}{\infosetdot}
+	\else\if\@egdirection u
+	   \multiput(\@egxnum,\@egynum)(\infosetds,0){\@eghnum}{\infosetdot}
+	\else\if\@egdirection r
+	   \multiput(\@egxnum,\@egynum)(0,\infosetds){\@eghnum}{\infosetdot}
+	\else\if\@egdirection l
+	   \multiput(\@egxnum,\@egynum)(0,\infosetds){\@eghnum}{\infosetdot}
+	\fi\fi\fi\fi
+	\multiply\@eghnum by\infosetds\divide\@eghnum by 2
+	\if\@egdirection d
+	   \advance\@egxnum by\@eghnum
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[b]{\fbox{#4}}}%
+	\else\if\@egdirection u
+	   \advance\@egxnum by\@eghnum
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[t]{\fbox{#4}}}%
+	\else\if\@egdirection r
+	   \advance\@egynum by\@eghnum
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[r]{\fbox{#4}}}%
+	\else\if\@egdirection l
+	   \advance\@egynum by\@eghnum
+	   \put(\@egxnum,\@egynum){\makebox(0,0)[l]{\fbox{#4}}}%
+	\fi\fi\fi\fi
+}
+
+% egame environment
+
+\def\egame(#1,#2){%
+	\initialtrue
+	\@ifnextchar[{\@egulo(#1,#2)}{\@egul(#1,#2)}%
+}
+
+% set unit length for game
+
+\def\@egulo(#1,#2)[#3]{%
+	\@egunitlength=#3%
+	\setlength{\unitlength}{\@egunitlength}
+	\begin{picture}(#1,#2)
+}
+
+\def\@egul(#1,#2){%
+	\@egunitlength=0.1mm%
+	\setlength{\unitlength}{\@egunitlength}
+	\begin{picture}(#1,#2)
+}
+
+\def\endegame{\end{picture}}
+
+\def\calcshift{%
+     \ifnum\@egabshnum=0
+	   \@hshift=0\@vshift=50
+     \else\ifnum\@egabshnum=1
+	   \ifnum\@egabsvnum=0\@hshift=50\@vshift=0
+	   \else\ifnum\@egabsvnum=1\@hshift=35\@vshift=35
+	   \else\ifnum\@egabsvnum=2\@hshift=22\@vshift=45
+	   \else\ifnum\@egabsvnum=3\@hshift=16\@vshift=47
+	   \else\ifnum\@egabsvnum=4\@hshift=12\@vshift=49
+	   \else\ifnum\@egabsvnum=5\@hshift=10\@vshift=49
+	   \else\ifnum\@egabsvnum=6\@hshift=8\@vshift=49
+	   \fi\fi\fi\fi\fi\fi\fi
+	\else\ifnum\@egabshnum=2
+	   \ifnum\@egabsvnum=1\@hshift=45\@vshift=22
+	   \else\ifnum\@egabsvnum=3\@hshift=28\@vshift=42
+	   \else\ifnum\@egabsvnum=5\@hshift=19\@vshift=46
+	   \fi\fi\fi
+	\else\ifnum\@egabshnum=3
+	   \ifnum\@egabsvnum=1\@hshift=47\@vshift=16
+	   \else\ifnum\@egabsvnum=2\@hshift=42\@vshift=28
+	   \else\ifnum\@egabsvnum=4\@hshift=30\@vshift=40
+	   \else\ifnum\@egabsvnum=5\@hshift=26\@vshift=43
+	   \fi\fi\fi\fi
+	\else\ifnum\@egabshnum=4
+	   \ifnum\@egabsvnum=1\@hshift=49\@vshift=12
+	   \else\ifnum\@egabsvnum=3\@hshift=40\@vshift=30
+	   \else\ifnum\@egabsvnum=5\@hshift=31\@vshift=39
+	   \fi\fi\fi
+	\else\ifnum\@egabshnum=5
+	   \ifnum\@egabsvnum=1\@hshift=49\@vshift=10
+	   \else\ifnum\@egabsvnum=2\@hshift=46\@vshift=19
+	   \else\ifnum\@egabsvnum=3\@hshift=43\@vshift=26
+	   \else\ifnum\@egabsvnum=4\@hshift=39\@vshift=31
+	   \else\ifnum\@egabsvnum=6\@hshift=32\@vshift=38
+	   \fi\fi\fi\fi\fi
+	\else\ifnum\@egabshnum=6
+	   \ifnum\@egabsvnum=1\@hshift=49\@vshift=8
+	   \else\ifnum\@egabsvnum=5\@hshift=38\@vshift=32
+	   \fi\fi
+	\fi\fi\fi\fi\fi\fi\fi
+	\multiply\@hshift by\initnodediam
+	\divide\@hshift by 10
+	\multiply\@vshift by\initnodediam
+	\divide\@vshift by 10
+}
+

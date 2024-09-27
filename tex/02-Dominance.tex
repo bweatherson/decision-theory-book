@@ -1,0 +1,194 @@
+\section{Dominance Reasoning}
+The simplest rule we can use for decision making is \textit{never choose dominated options}. There is a stronger and a weaker version of this rule.
+
+An option A \textbf{strongly dominated} another option B if in every state, A leads to better outcomes than B. A \textbf{weakly dominates} B if in every state, A leads to at least as good an outcome as B, and in some states it leads to better outcomes.
+
+We can use each of these as decision principles. The dominance principle we'll be primarily interested in says that if A strongly dominates B, then A should be preferred to B. We get a slightly \textit{stronger} principle if we use \textit{weak} dominance. That is, we get a slightly stronger principle if we say that whenever A weakly dominates B, A should be chosen over B. It's a stronger principle because it applies in more cases --- that is, whenever A strongly dominates B, it also weakly dominates B.
+
+Dominance principles seem very intuitive when applied to everyday decision cases. Consider, for example, a revised version of our case about choosing whether to watch football or work on a term paper. Imagine that you'll do very badly on the term paper if you leave it to the last minute. And imagine that the term paper is vitally important for something that matters to your future. Then we might set up the decision table as follows.
+
+\starttab{c   c c}
+& \textbf{Your team wins} & \textbf{Your team loses}  \\
+\textbf{Watch football }& 2 & 1  \\
+\textbf{Work on paper} & 4 & 3
+\stoptab If your team wins, you are better off working on the paper, since 4 $>$ 2. And if your team loses, you are better off working on the paper, since 3 $>$ 1. So either way you are better off working on the paper. So you should work on the paper.
+
+\section{States and Choices}
+Here is an example from Jim Joyce that suggests that dominance might not be as straightforward a rule as we suggested above.
+
+\begin{quotation}
+\noindent Suupose you have just parked in a seedy neighborhood when a man approaches and offers to ``protect'' your car from harm for \$10. You recognize this as extortion and have heard that people who refuse ``protection'' invariably return to find their windshields smashed. Those who pay find their cars intact. You cannot park anywhere else because you are late for an important meeting. It costs \$400 to replace a windshield. Should you buy ``protection''? Dominance says that you should not. Since you would rather have the extra \$10 both in the even that your windshield is smashed and in the event that it is not, Dominance tells you not to pay. (Joyce, \textit{The Foundations of Causal Decision Theory}, pp 115-6.)
+\end{quotation}
+
+\noindent We can put this in a table to make the dominance argument that Joyce suggests clearer.
+
+\starttab{c   c c}
+& \textbf{Broken Windshield} & \textbf{Unbroken Windshield}  \\
+\textbf{Pay extortion} & -\$410 & -\$10  \\
+\textbf{Don't pay} & -\$400 & 0
+\stoptab In each column, the number in the `Don't pay' row is higher than the number in the `Pay extortion' row. So it looks just like the case above where we said dominance gives a clear answer about what to do. But the conclusion is crazy. Here is how Joyce explains what goes wrong in the dominance argument.
+
+\begin{quotation}
+\noindent Of course, this is absurd. Your choice has a direct influence on the state of the world; refusing to pay makes it likly that your windshield will be smashed while paying makes this unlikely. The extortionist is a despicable person, but he has you over a barrel and investing a mere \$10 now saves \$400 down the line. You should pay now (and alert the police later).
+\end{quotation}
+
+\noindent This seems like a general principle we should endorse. We should define \textit{states} as being, intuitively, independent of choices. The idea behind the tables we've been using is that the outcome should depend on two factors - what you do and what the world does. If the `states' are dependent on what choice you make, then we won't have successfully `factorised' the dependence of outcomes into these two components.
+
+We've used a very intuitive notion of `independence' here, and we'll have a lot more to say about that in later sections. It turns out that there are a lot of ways to think about independence, and they yield different recommendations about what to do. For now, we'll try to use `states' that are clearly independent of the choices we make.
+
+\section{Maximin and Maximax}
+Dominance is a (relatively) uncontroversial rule, but it doesn't cover a lot of cases. We'll start now lookintg at rules that are more or less comprehensive. To start off, let's consider rules that we might consider rules for optimists and pessimists respectively.
+
+The \textbf{Maximax} rule says that you should \textbf{maxi}mise the \textbf{max}imum outcome you can get. Basically, consider the best possible outcome, consider what you'd have to do to bring that about, and do it. In general, this isn't a very plausible rule. It recommends taking any kind of gamble that you are offered. If you took this rule to Wall St, it would recommend buying the riskiest derivatives you could find, because they might turn out to have the best results. Perhaps needless to say, I don't recommend that strategy.
+
+The \textbf{Maximin} rule says that you should \textbf{maxi}mise the \textbf{min}imum outcome you can get. So for every choice, you look at the worst-case scenario for that choice. You then pick the option that has the least bad worst case scenario. Consider the following list of preferences from our watch football/work on paper example.
+
+\starttab{c   c c}
+& \textbf{Your team wins} & \textbf{Your team loses}  \\
+\textbf{Watch football} & 4 & 1  \\
+\textbf{Work on paper} & 3 & 2
+\stoptab So you'd prefer your team to win, and you'd prefer to watch if they win, and work if they lose. So the worst case scenario if you watch the game is that they lose - the worst case scenario of all in the game. But the worst case scenario if you don't watch is also that they lose. Still that wasn't as bad as watching the game and seeing them lose. So you should work on the paper.
+
+We can change the example a little without changing the recommendation.
+
+\starttab{c   c c}
+& \textbf{Your team wins} & \textbf{Your team loses}  \\
+\textbf{Watch football} & 4 & 1  \\
+\textbf{Work on paper} & 2 & 3
+\stoptab In this example, your regret at missing the game overrides your desire for your team to win. So if you don't watch, you'd prefer that they lose. Still the worst case scenario is you don't watch is 2, and the worst case scenario if you do watch is 1. So, according to maximin, you should not watch. 
+
+Note in this case that the worst case scenario is a different state for different choices. Maximin doesn't require that you pick some `absolute' worst-case scenario and decide on the assumption it is going to happen. Rather, you look at different worst case scenarios for different choices, and compare them.
+
+\section{Ordinal and Cardinal Utilities}
+All of the rules we've looked at so far depend only on the \textit{ranking} of various options. They don't depend on how much we prefer one  option over another. They just depend on which order we rank goods is.
+
+To use the technical language, so far we've just looked at rules that just rely on \textbf{ordinal utilities}. The term \textit{ordinal} here means that we only look at the \textbf{order} of the options. The rules that we'll look at rely on \textbf{cardinal utilities}. Whenever we're associating outcomes with numbers in a way that the magnitudes of the differences between the numbers matters, we're using cardinal utilities.
+
+It is rather intuitive that something more than the ordering of outcomes should matter to what decisions we make. Imagine that two agents, Chris and Robin, each have to make a decision between two airlines to fly them from New York to San Francisco. One airline is more expensive, the other is more reliable. To oversimplify things, let's say the unreliable airline runs well in good weather, but in bad weather, things go wrong. And Chris and Robin have no way of finding out what the weather along the way will be. They would prefer to save money, but they'd certainly not prefer for things to go badly wrong. So they face the following decision table.
+
+\starttab{c   c c}
+& \textbf{Good weather} & \textbf{Bad weather } \\
+\textbf{Fly cheap airline} & 4 & 1  \\
+\textbf{Fly good airline} & 3 & 2
+\stoptab If we're just looking at the ordering of outcomes, that is the decision problem facing both Chris and Robin.
+
+But now let's fill in some more details about the cheap airlines they could fly. The cheap airline that Chris might fly has a problem with luggage. If the weather is bad, their passengers' luggage will be a day late getting to San Francisco. The cheap airline that Robin might fly has a problem with staying in the air. If the weather is bad, their plane will crash.
+
+Those seem like very different decision problems. It might be worth risking one's luggage being a day late in order to get a cheap plane ticket. It's not worth risking, seriously risking, a plane crash. (Of course, we all take some risk of being in a plane crash, unless we only ever fly the most reliable airline that we possibly could.) That's to say, Chris and Robin are facing very different decision problems, even though the ranking of the four possible outcomes is the same in each of their cases. So it seems like some decision rules should be sensitive to magnitudes of differences between options. The first kind of rule we'll look at uses the notion of regret.
+
+\section{Regret}
+Whenever you are faced with a decision problem without a dominating option, there is a chance that you'll end up taking an option that turns out to be sub-optimal. If that happens there is a chance that you'll regret the choice you take. That isn't always the case. Sometimes you decide that you're happy with the choice you made after all. Sometimes you're in no position to regret what you chose because the combination of your choice and the world leaves you dead.
+
+Despite these complications, we'll define the \textbf{regret} of a choice to be the difference between the value of the best choice given that state, and the value of the choice in question. So imagine that you have a choice between going to the movies, going on a picnic or going to a baseball game. And the world might produce a sunny day, a light rain day, or a thunderstorm. We might imagine that your values for the nine possible choice-world combinations are as follows.
+
+\starttab{c   c c c}
+& \textbf{Sunny} & \textbf{Light rain} & \textbf{Thunderstorm}  \\
+\textbf{Picnic} & 20 & 5 & 0  \\
+\textbf{Baseball} & 15 & 2 & 6  \\
+\textbf{Movies} & 8 & 10 & 9
+\stoptab Then the amount of regret associated with each choice, in each state, is as follows
+
+\starttab{c   c c c}
+& \textbf{Sunny} & \textbf{Light rain} & \textbf{Thunderstorm}  \\
+\textbf{Picnic} & 0 & 5 & 9  \\
+\textbf{Baseball} & 5 & 8 & 3  \\
+\textbf{Movies} & 12 & 0 & 0
+\stoptab Look at the middle cell in the table, the 8 in the baseball row and light rain column. The reason that's a 8 is that in that possibility, you get utility 2. But you could have got utility 10 from going to the movies. So the regret level is 10 - 2, that is, 8.
+
+There are a few rules that we can describe using the notion of regret. The most commonly discussed one is called \textbf{Minimax regret}. The idea behind this rule is that you look at what the maximum possible regret is for each option. So in the above example, the picnic could end up with a regret of 9, the baseball with a regret of 8, and the movies with a regret of 12. Then you pick the option with the \textit{lowest} maximum possible regret. In this case, that's the baseball.
+
+The minimax regret rule leads to plausible outcomes in a lot of cases. But it has one odd structural property. In this case it recommends choosing the baseball over the movies and picnic. Indeed, it thinks going to the movies is the worst option of all. But now imagine that the picnic is ruled out as an option. (Perhaps we find out that we don't have any way to get picnic food.) Then we have the following table.
+
+\starttab{c   c c c}
+& \textbf{Sunny} & \textbf{Light rain} & \textbf{Thunderstorm}  \\
+\textbf{Baseball} & 15 & 2 & 6  \\
+\textbf{Movies} & 8 & 10 & 9
+\stoptab And now the amount of regret associated with each option is as follows.
+
+\starttab{c   c c c}
+& \textbf{Sunny} & \textbf{Light rain} & \textbf{Thunderstorm}  \\
+\textbf{Baseball} & 0 & 8 & 3  \\
+\textbf{Movies} & 7 & 0 & 0
+\stoptab Now the maximum regret associated with going to the baseball is 8. And the maximum regret associated with going to the movies is 7. So minimax regret recommends going to the movies.
+
+Something very odd just happened. We had settled on a decision: going to the baseball. Then an option that we'd decided against, a seemingly irrelevant option, was ruled out. And because of that we made a new decision: going to the movies. It seems that this is an odd result. It violates what decision theorists call the \textbf{Irrelevance of Independence Alternatives}. Formally, this principle says that if option $C$ is chosen from some set $S$ of options, then $C$ should be chosen from any set of options that (a) includes $C$ and (b) only includes choices in $S$. The minimax regret rule violates this principle, and that seems like an unattractive feature of the rule.
+
+\section{Likely Outcomes}
+Earlier we considered the a decision problem, basically deciding what to do with a Sunday afternoon, that had the following table.
+
+\starttab{c   c c c}
+& \textbf{Sunny} & \textbf{Light rain} & \textbf{Thunderstorm}  \\
+\textbf{Picnic} & 20 & 5 & 0  \\
+\textbf{Baseball} & 15 & 2 & 6  \\
+\textbf{Movies} & 8 & 10 & 9
+\stoptab We looked at how a few different decision rules would treat this decision. The maximin rule would recommend going to the movies, the maximax rule going to the picnic, and the minimax regret rule going to the baseball.
+
+But if we were faced with that kind of decision in real life, we wouldn't sit down to start thinking about which of those three rules were correct, and using the answer to that philosophical question to determine what to do. Rather, we'd consult a weather forecast. If it looked like it was going to be sunny, we'd go on a picnic. If it looked like it was going to rain, we'd go to the movie. What's relevant is how likely each of the three states of the world are. That's something none of our decision rules to date have considered, and it seems like a large omission.
+
+In general, how likely various states are plays a major role in deciding what to do. Consider the following broad kind of decision problem. There is a particular disease that, if you catch it and don't have any drugs to treat it with, is likely fatal. Buying the drugs in question will cost \$500. Do you buy the drugs?
+
+Well, that probably depends on how likely it is that you'll catch the disease in the first place. The case isn't entirely hypothetical. You or I could, at this moment, be stockpiling drugs that treat anthrax poisoning, or avian flu. I'm not buying drugs to defend against either thing. If it looked more likely that there would be more terrorist attacks using anthrax, or an avian flu epidemic, then it would be sensible to spend \$500, and perhaps a lot more, defending against them. As it stands, that doesn't seem particularly sensible. (I have no idea exactly how much buying the relevant drugs would cost; the \$500 figure was somewhat made up. I suspect it would be a rolling cost because the drugs would go `stale'.)
+
+We'll start off today looking at various decision rules that might be employed taking account of the likelihood of various outcomes. Then we'll look at what we might mean by likelihoods. This will start us down the track to discussions of probability, a subject that we'll be interested in for most of the rest of the course.
+
+\section{Do What's Likely to Work}
+The following decision rule doesn't have a catchy name, but I'll call it Do What's Likely to Work. The idea is that we should look at the various states that could come about, and decide which of them is most likely to actually happen. This is more or less what we would do in the decision above about what to do with a Sunday afternoon. The rule says then we should make the choice that will result in the best outcome in that most likely of states.
+
+The rule has two nice advantages. First, it doesn't require a very sophisticated theory of likelihoods. It just requires us to be able to rank the various states in terms of how likely they are. Using some language from the previous section, we rely on a \textit{ordinal} rather than a \textit{cardinal} theory of likelihoods. Second, it matches up well enough with a lot of our everyday decisions. In real life cases like the above example, we really do decide what state is likely to be actual (i.e. decide what the weather is likely to be) then decide what would be best to do in that circumstance.
+
+But the rule also leads to implausible recommendations in other real life cases. Indeed, in some cases it is so implausible that it seems that it must at some level be deeply mistaken. Here is a simple example of such a case.
+
+You have been exposed to a deadly virus. About $\nicefrac{1}{3}$ of people who are exposed to the virus are infected by it, and all those infected by it die unless they receive a vaccine. By the time any symptoms of the virus show up, it is too late for the vaccine to work. You are offered a vaccine for \$500. Do you take it or not?
+
+Well, the most likely state of the world is that you don't have the virus. After all, only $\nicefrac{1}{3}$ of people who are exposed catch the virus. The other $\nicefrac{2}{3}$ do not, and the odds are that you are in that group. And if you don't have the virus, it isn't worth paying \$500 for a vaccine against a virus you haven't caught. So by ``Do What's Likely to Work'', you should decline the vaccine.
+
+But that's crazy! It seems as clear as anything that you should pay for the vaccine. You're in serious danger of dying here, and getting rid of that risk for \$500 seems like a good deal. So ``Do What's Likely to Work'' gives you the wrong result. There's a reason for this. You stand to lose a lot if you die. And while \$500 is a lot of money, it's a lot less of a loss than dying. Whenever the downside is very different depending on which choice you make, sometimes you should avoid the bigger loss, rather than doing the thing that is most likely to lead to the right result.
+
+Indeed, sometimes the sensible decision is one that leads to the best outcome in no possible states at all. Consider the following situation. You've caught a nasty virus, which will be fatal unless treated. Happily, there is a treatment for the virus, and it only costs \$100. Unhappily, there are two strands of the virus, call them A and B. And each strand requires a different treatment. If you have the A strand, and only get the treatment for the B virus, you'll die. Happily, you can have each of the two treatments; they don't interact with each other in nasty ways. So here are your options.
+
+\starttab{c   c c}
+& \textbf{Have strand A} & \textbf{Have strand B}  \\
+\textbf{Get treatment A only} & Pay \$100 + live & Pay \$100 + die  \\
+\textbf{Get treatment B only} & Pay \$100 + die & Pay \$100 + live  \\
+\textbf{Get both treatments} & Pay \$200 + live & Pay \$200 + live
+\stoptab Now the sensible thing to do is to get both treatments. But if you have strand A, the best thing to do is to get treatment A only. And if you have strand B, the best thing to do is to get treatment B only. There is no state whatsoever in which getting both treatments leads to the best outcome. Note that ``Do What's Likely to Work'' only ever recommends options that are the best in some state or other. So it's a real problem that sometimes the thing to do does not produce the best outcome in \textit{any} situation.
+
+%\newpage
+%\section{Exercises}
+%
+%\subsection{St Crispin's Day Speech}
+%In his play \textit{Henry V}, Shakespeare gives the title character the following little speech. The context is that the English are about to go to battle with the French at Agincourt, and they are heavily outnumbered. The king's cousin Westmoreland has said that he wishes they had more troops, and Henry strongly disagrees.
+%
+%\begin{verse}
+%What's he that wishes so? \\
+%My cousin Westmoreland? No, my fair cousin; \\
+%If we are marked to die, we are enough \\
+%To do our country loss; and if to live, \\
+%The fewer men, the greater share of honor. \\
+%God's will! I pray thee, wish not one man more. 
+%\end{verse}
+%
+%\noindent Is the decision principle Henry is using here (a) dominance, (b) maximin, (c) maximax or (d) minimax regret? Is his argument persuasive?
+%
+%\subsection{Dominance and Regret}
+%Assume that in a decision problem, choice C is a dominating option. Will the minimax regret rule recommend choosing C? Defend your answer; i.e. say why C must be chosen, it must not be chosen, or why there isn't enough information to tell whether C will be chosen.
+%
+%\subsection{Irrelevance of Independent Alternatives}
+%Sami always chooses by the maximax rule. Will Sami's choices satisfy the irrelevance of independent alternatives condition? Say why or why not.
+%
+%\subsection{Applying the Rules}
+%For each of the following decision tables, say which decision would be preferred by (a) the maximin rule, (b) the maximax rule and (c) the minimax regret rule. Also say whether the minimax regret rule would lead to a different choice if a non-chosen option were elminated. (You just have to give answers here, not show your workings.)
+%
+%\starttab{c   c c c}
+%& \textbf{S1} & \textbf{S2} & \textbf{S3}  \\
+%\textbf{C1} & 9 & 5 & 1  \\
+%\textbf{C2} & 8 & 6 & 3  \\
+%\textbf{C3} & 7 & 2 & 4
+%\stoptab
+%
+%\starttab{c   c c c}
+%& \textbf{S1} & \textbf{S2} & \textbf{S3}  \\
+%\textbf{C1} & 15 & 2 & 1  \\
+%\textbf{C2} & 9 & 9 & 9  \\
+%\textbf{C3} & 4 & 4 & 16
+%\stoptab

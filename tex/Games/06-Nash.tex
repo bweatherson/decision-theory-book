@@ -1,0 +1,213 @@
+\chapter{Mixed Strategies}
+
+\section{Mixtures and Dominance}
+
+Now that we have the notion of a mixed strategy, we need to revise a little bit about what we said about dominant strategies. Recall that we used the \citegame{BRNSD} to show that some strategies which were not dominated were nevertheless not best responses.
+
+\starttab{r c c }
+%This is called BRNSD
+%It is an illustration that undominated strategies may not be best responses
+\textbf{\citegame{BRNSD}} & $l$ & $r$ \\
+$U$ & 3, 3 & 0, 0 \\
+$M$ & 1, 1 & 1, 1 \\
+$D$ & 0, 0 & 3, 3 \\
+\fintab Now compare the strategy $M$ to the strategy $S$ = \tol{\nicefrac{1}{2}, 0, \nicefrac{1}{2}}. If $C$ plays $l$, then $M$ returns 1, but the mixed strategy has an expected return of 1.5. If $C$ plays $r$, then $M$ returns 1, but $S$ has an expected return of 1.5. Indeed, if $C$ plays any mixture of $l$ and $r$, then $M$ returns 1, but $S$ still has an expected return of 1.5. In effect, $M$ is a dominated strategy; it is dominated by $S$.
+
+So when we are talking about whether a strategy is dominated, we have to distinguish the scope of the tacit quantifier. Remember, `dominated' means `dominated by something'. If we are only quantifying over pure strategies, then $M$ is not dominated. If we are quantifying over mixed strategies as well, then $M$ is dominated. At least some authors use `dominated' with this more expansive quantifier domain in mind, so $M$ is dominated because $S$ dominates it. There is a nice advantage to doing this. (There are also costs; it is harder to tell just by looking whether strategies are dominated in this more expansive sense.) It means we can distinguish nicely between what I've called a Best Strategy, which is really a strategy that is not strongly dominated, and what we might call Perfect Strategies, which are strategies that are not weakly dominated in this sense.  We'll come back to this when we look at Stalnaker's work in a few chapters.
+
+\section{What is a Mixed Strategy?}
+
+So far we've noted that there are some games that don't have pure strategy \NEs. And we said that if we expand the space of available strategies to include mixed strategies, then those games do have \NEs. In fact we've said, though not gone close to proving this, that all finite games have at least one \NE\ solution, once we allow that agents can play mixed strategies.
+
+But what does it mean to `play a mixed strategy'? As game theorists sometimes put it, how should be \textbf{interpret} talk of mixed strategies. It turns out the options here are very similar to the candidate `interpretations' of probability.\footnote{See the Stanford Encyclopedia of Philosophy article on \href{http://plato.stanford.edu/entries/probability-interpret/}{Interpretations of Probability} for more background here.} Basically the interpretations can be classified as either \textbf{metaphysical} or \textbf{epistemological}. We're going to start with one of the metaphysical interpretations, then look at a few epistemological interpretations, and finally return to some more mundane metaphysical interpretations.
+
+The most obvious, and natural, interpretation uses objective chances. What it means to play the strategy \ol{x, 1-x} is to grab some chance device that goes into one state with chance $x$, and another state with chance $1-x$, see which state it goes into, then play the $s_1$ if it is in the first state, and $s_2$ if it is in the second state. Consider, for instance, the game Rock, Paper, Scissors, here represented as \gamelab{RockPaperScissors}.
+
+ \starttab{r c c c}
+%This is called RockPaperScissors
+%It is Rock, Paper, Scissors!
+\textbf{\citegame{RockPaperScissors}} & Rock & Paper & Scissors \\
+Rock & 0, 0 & -1, 1 & 1, -1 \\
+Paper & 1, -1 & 0, 0 & -1, 1 \\
+Scissors & -1, 1 & 1, -1 & 0, 0 \\
+\fintab For each player, the \eqm\ strategy is to play \ol{\nicefrac{1}{3}, \nicefrac{1}{3}, \nicefrac{1}{3}}. (Exercise: Verify this!) The chance interpretation of this mixed strategy is that the player takes some randomising device, say a die, that has a $\nicefrac{1}{3}$ chance of coming up in one of three states. Perhaps the player rolls the die and plays Rock if it lands 1 or 2, Paper if it lands 3 or 4, Scissors if it lands 5 or 6.
+
+A slightly more elegant version of this strategy involves the game Matching Pennies. We've seen the formal version of this game before, but the informal version is fun as well. Basically each player reveals a penny, and Row wins if they are both heads up or both tails up, and Column wins if one coin is heads up and the other tails up. Apparently this was a source of some schoolyard amusement before students had things like Angry Birds, or football, to play. As I said, we've seen the game table before, though not with these labels. 
+
+\starttab{r c c}
+%This is called MatchingPenniesText
+%It is Matching Pennies
+\gamelab{MatchingPenniesText} & Heads & Tails \\
+Heads & 1, -1 & -1, 1 \\
+Tails & -1, 1 & 1, -1 \\
+\fintab Again, the only \eqm\ solution is for each player to play \ol{\nicefrac{1}{2}, \nicefrac{1}{2}}. And here the chance interpretation of this strategy is that each player plays by simply flipping their coin, and letting it land where it may.
+
+But obviously it is very hard to procure a chance device on the spot for any mixed strategy one might choose to play. How should we interpret a mixed strategy then? The natural move is to opt for some kind of \textit{epistemological} interpretation of mixtures.
+
+One option is a straightforward subjectivist interpretation of the relevant probabilities. So Row plays a mixed strategy \ol{x, 1-x} iff Column's subjective probability that Row is playing $s_1$ with is $x$, and her subjective probability that Row is playing $s_2$ is $1-x$. One does hear game theorists offer such subjective interpretations of mixed strategies, but actually they don't seem to make a lot of sense. For one thing, it's hard to say how Column's credences should be in any sense a \textit{strategy} for Row, unless Row has Jedi mind-control powers. And if Row does have Jedi mind-control powers, then she shouldn't settle for any kind of mixed strategy equilibrium. In Rock, Paper, Scissors, for instance, she should follow the strategy of playing Rock and using her Jedi mind-control powers to get Column to think she's playing Paper.
+
+Perhaps we can retain a subjectivist interpretation if we change who the subject is. Frank Arntzenius, in a recent paper called ``No Regrets'', offers a different kind of subjectivist interpretation. He says that an agent plays a mixed strategy \ol{x, 1-x} if her credences at the end of rational deliberation are that she'll play $s_1$ with probability $x$, and $s_2$ with probability $1-x$. He admits there are oddities with this interpretation. In particular, he notes that it means that if you take some kind of \eqm\ theory to be the theory of rationality (as he does), then our theory of rationality turns out to be a theory of what one should believe one will do, not what one will do. This feels a little like changing the subject.
+
+Could some kind of objective version of an epistemological interpretation do any better? Perhaps we could say that to play \ol{x, 1-x} is to act in such a way that the objectively rational thing to believe about the agent is that she'll play $s_1$ with probability $x$? Arguably, the objective chance interpretation is a version of this; given the Principal Principle, the rational thing to believe about a person who uses a randomising device that comes up $s_1$ with chance $x$ is that they'll play $s_1$ with probability $x$. But beyond that, it is hard to see what advantage the view has. After all, if it is an available strategy to make rational people think that you're playing $s_1$ with probability $x$, in Rock, Paper, Scissors you should make them think you're likely playing Paper when you're actually playing Rock. So it's hard to see how the \eqm\ solution is rational.
+
+In Ken Binmore's decision theory textbook \textit{Playing for Real}, he seems to endorse something like the objective epistemological interpretation of mixed strategies.
+
+\begin{quote}
+Suppose that we deny Eve access to a randomizing device when she plays Matching Pennies with Adam. Is she now doomed to lose? Not if she knows her Shakespeare well! She can then make each choice of \textit{head} or \textit{tail} contingent on whether there is an odd or even number of speeches in the successive scenes of \textit{Titus Andronicus}. Of course, Adam might in principle guess that this is what she is doing---but how likely is this? He would have to know her initial state of mind with a quite absurd  precision in order to setle on such a hypothesis. Indeed, I don't know myself why I chose \textit{Titus Andronicus} from all Shakespeare's plays \dots To outguess me in such a manner, Adam would need to know my own mind better than I know it myself. (Binmore 2006, 185).
+\end{quote}
+
+\noindent But why is the likelihood that Adam will figure out Eve's decision a component of Eve's \textit{strategy}? Either Eve has some control over the probabilities Adam will assign to her making various choices, or she doesn't. If she doesn't, then she doesn't have the power to play any mixed strategy interpreted this way. If she does, she shouldn't use them to give Adam \textit{true} beliefs about her likely decisions. So it's hard to see the advantages.
+
+Perhaps then the detour through epistemological interpretations was a red herring. And this leads us back to two more metaphysical interpretations, both of them involving frequencies.
+
+One of these interpretations is particularly important in biology, and we will return to this idea much later in the course. The idea is that a species plays a mixed strategy \ol{x, 1-x} iff $x$ of its population plays $s_1$, and $1-x$ of its population plays $s_2$. Once we're looking at population level `strategies' we've obviously moved a little away from the focus on \textit{rational} game playing that has been the focus of the course to date. I'm not sure that it even makes sense to assign agency to populations.\footnote{Probably many of you think something stronger, that it's clearly wrong to assign agency to populations. But there are plausible versions of functionalism about the mental that imply that populations might have beliefs, desires, intentions and the like. I will not, however, assume that kind of functionalism in these notes.} And presumably the way the population implements the policy of having this frequency distribution of strategies is by having some randomizing device that  sorts individual organisms into one of two types. So perhaps this isn't really an alternative to the objective chance interpretation either.
+
+The other big alternative is hinted at in Binmore's discussion. Note that he refers to `each choice of \textit{head} or \textit{tail}'. This implicates at least that there will be more than one. So what he's really interested in is the case where Adam and Eve play Matching Pennies repeatedly. In this case, we might say that playing a mixed strategy \ol{x, 1-x} is playing $s_1$ in $x$ of the repeated games, and playing $s_2$ in $1-x$ of the repeated games.
+
+But it's odd to bring repeated games in here. It looks suspiciously like changing the subject. What we care about is what we should do in this very game, not in a long sequence of games. Put another way, we should in the first instance be looking for a rule about what to do in a (known to be) one-shot game. What should we do in such a game? Considerations about what would happen were we to repeat the game seem irrelevant to that.
+
+The issues about repeated games are complicated, and it is worth spending some time going over them directly.
+
+\section{Nash, Best Response and Repeated Games}
+
+Here's a hypothesis. It is not one widely accepted by game theorists, but it is worth considering. The hypothesis is that in any game where there is common knowledge of rationality, any strategy which is BRBRI (i.e., that is a best response to a best response to a best response ...) can be rationally played.
+
+Now here's an objection to that hypothesis. Consider repeated games of Rock, Paper, Scissors. In any given game, playing Rock is BRBRI. That's because playing Rock is a best response to playing Scissors, which is a best response to playing Paper, which is a best response to playing Rock, and so on. But playing Rock repeatedly is dumb. If it weren't dumb, the following scene (from The Simpsons episode ``The Front'' (April 15, 1993)) wouldn't be funny.
+\medskip
+
+   Lisa:  Look, there's only one way to settle this.  Rock-paper-scissors. 
+
+   Lisa's brain: Poor predictable Bart.  Always takes `rock'. 
+
+   Bart's brain: Good ol' `rock'.  Nuthin' beats that! 
+
+   Bart:  Rock! 
+
+   Lisa:  Paper. 
+
+   Bart:  D'oh! 
+
+\medskip
+\noindent Since Bart's strategy is BRBRI, and is irrational, it follows that the hypothesis is false.
+
+I think that objection is too quick, but it takes some time to say why. Let's think a bit about where Bart goes wrong. Imagine he and Lisa play Rock, Paper, Scissors (hereafter RPS) many many times. At first Lisa plays the mixed strategy \ol{\nicefrac{1}{3}, \nicefrac{1}{3}, \nicefrac{1}{3}}, and Bart plays Rock. So each of them have an expected return of 0. By the 11\th\ round, Lisa has figured out what Bart is playing, and plays Paper, for an expected return of 1, while Bart has an expected return of -1.
+
+Now let's think about when Bart goes wrong. To do this, I'm going to assume that Bart is rational. This is clearly false; Bart is obviously not playing rationally. But I want to see just where the assumption of rationality leads to a contradiction. Let's say we knew in advance nothing but that Bart was going to play Rock on the 11\sth\ round. Since we're still assuming Bart is rational, it follows that playing Rock is a best response given his credences over Lisa's moves. Without I hope loss of generality, let's assume Lisa is still playing \ol{\nicefrac{1}{3}, \nicefrac{1}{3}, \nicefrac{1}{3}}. Then Bart's expected return is 0, like for any other strategy, so it's fine to play Rock.
+
+But of course Bart doesn't just play Rock in the 11\sth\ round. He also plays in the previous ten rounds. And that means that Lisa won't still be playing \ol{\nicefrac{1}{3}, \nicefrac{1}{3}, \nicefrac{1}{3}} by the time we get to the 11\sth\ round. Instead, she'll be playing Paper. So Bart's expected return in the 11\sth\ round is not 0, it is (roughly) -1.
+
+I think something follows from those reflections. When we added in information about Bart's play in the first ten rounds, Bart's expected return in the 11\sth\ round dropped. So I conclude that there was a long-term cost to his play in the first 10 rounds. When he played Rock all those times, his expected return \textit{in that round} was 0. But he incurred a long-term cost by doing so. That long-term cost isn't properly represented in the matricies for each round of the game. When we include it, it no longer becomes clear that Rock is BRBRI in each round.
+
+A natural question then is, what really is the payoff table for each round of RPS? The existing table isn't a payoff table for two reasons. First, it lists outcomes, not valuations of outcomes. And second, it only lists one kind of outcome, the short-run winnings, not the long-run consequences of any given strategy. What we really need is a valuation function over long-run consequences. 
+
+So what is the payoff table for each round of the game? I think that's just much too hard a question to answer. What we can say with some precision is what the short-run outcome table is for each round. And summing short-run outcomes gives us long-run outcomes, which hopefully will correlate in some sensible way with payoffs. But determining the long-run outcomes of any given strategy is much too hard.
+
+And that's one reason to care about both mixed strategies, and the existence of equilibria. Sometimes the best we can do in specifying a game is to specify the short-run outcomes, and say that the long-run outcomes are sums of them. Now the following hypothesis is clearly false: In any long-run game, it is rationally permissible to, at each stage, play any strategy which would be BRBRI if the short-run outcomes were the total payoffs. The Bart and Lisa example refutes that hypothesis. But it doesn't refute the hypothesis that I started this section with, namely that any BRBRI strategy is rationally acceptable.
+
+\section{Justifying Nash}
+
+Let's look at a different hypothesis, namely that only Nash \Eqm\ strategies are rationally permissible. This is something that many game theorists would endorse. But it's a striking thesis. It says that sometimes only mixed strategies are rationally permissible, since any pure strategy will not be in \eqm. And this is surprising given what we said earlier about decision theory.
+
+Remember that a game is just a decision problem where the relevant parts of the world include other rational actors. So we should think that decision theoretic considerations would apply. Indeed, the view that game theory and decision theory have radically different norms will have some odd consequences in situations where one is dealing with borderline rational agents, such as, perhaps, non-human primates or very young human children.
+
+And yet, orthodox decision theory \textit{never} says that mixed strategies are preferable to pure strategies. It might say that a mixed strategy is no worse than a pure strategy, but it will never say that the mixed strategy is better. We can see this quite easily. Assume our agent has two possible choices, $s_1$ and $s_2$. The expected value of $s_1$ is $E(s_1)$, and the expected value of $s_2$ is $E(s_2)$. Without loss of generality, assume $E(s_1) \geq E(s_2)$. (If that's not true, just relabel the strategies so it becomes true!) Let's work out the expected value of an arbitrary mixed strategy.
+
+\begin{align*}
+E(\langle x, 1-x \rangle) &= xE(s_1) + (1-x)E(s_2) \\
+&= xE(s_1) + (1-x)E(s_1) + (1-x)((E(s_2) - E(s_1)) \\
+&\leq  xE(s_1) + (1-x)E(s_1) \\
+&= E(s_1) 
+\end{align*} \noindent The reasoning on the third line is that since $E(s_1) \geq E(s_2)$, $E(s_2) - E(s_1) \leq 0$. And since $x$ is a probability, and hence in $[0, 1]$, $1-x \geq 0$. So $(1-x)((E(s_2) - E(s_1)) \leq 0$, so $xE(s_1) + (1-x)E(s_1) + (1-x)((E(s_2) - E(s_1)) \leq  xE(s_1) + (1-x)E(s_1)$.
+
+So the mixed strategy can't do better than the better of the pure strategies. Indeed, it only does as well as $s_1$ when $(1-x)((E(s_2) - E(s_1)) = 0$, which means either $1-x = 0$ or  $E(s_2) - E(s_1)$. The first of these happens when $x=1$, i.e., when the agent plays the pure strategy $s_1$. The second of these happens when $E(s_2) = E(s_1)$, i.e., the two pure strategies have the same expected return, so it doesn't matter, from an expected utility perspective, which one we play. (We'll come back to this fact a lot next time.)
+
+So if a mixed strategy never has a higher expected return than a pure strategy, how can it be better? To see what is really happening, we need to step back a bit and revisit some notions from decision theory. Recall that one of the options we considered for handling Newcomb problems was Ratificationist Decision Theory. That theory said that we should value outcomes as Causal Decision Theory recommended. But it also said that we should rule out, or veto, any option that was not ratifiable. One example we used to illustrate that was the case where the agent had a choice between \$2000 and playing Newcomb's Problem. And we argued that only taking the sure \$2000 was ratifiable.
+
+Interestingly, that it is the very same conclusion that we reach through using a form of backward induction. Let's set up the game as a chart. We'll use $P$ for the player, and $D$ for the demon. At move 1, $P$'s choices are \textit{C}ash or \textit{B}ox. After that, we'll use 1 and 2 for the obvious meanings; predictions for the demon, boxes for the players. The payoffs are player first, demon second. To make the numbers easier to read, we'll set 1 util as being worth \$1,000. And we'll call the extended form of this \gamelab{TwoStageNP}.
+
+\begin{figure}[t]
+\begin{center}
+\begin{picture}(350, 150)
+\pictext{175}{0}{$P$}
+\put(175, 12){\circle*{4}}
+\put(175, 12){\line(-2, 1){70}}
+\put(175, 12){\line(2, 1){70}}
+\pictext{135}{20}{$C$}
+\pictext{215}{20}{$B$}
+
+\pictext{105}{50}{2, 0}
+
+\pictext{245}{35}{$D$}
+\put(245, 47){\circle*{4}}
+\put(245, 47){\line(-1, 1){35}}
+\put(245, 47){\line(1, 1){35}}
+\pictext{220}{55}{1}
+\pictext{270}{55}{2}
+
+\pictext{210}{70}{$P$}
+\put(210, 82){\circle*{4}}
+\put(210, 82){\line(-1, 2){20}}
+\pictext{190}{125}{1000, 1}
+\put(210, 82){\line(1, 2){20}}
+\pictext{230}{125}{1001, 0}
+\pictext{195}{95}{1}
+\pictext{225}{95}{2}
+
+\pictext{280}{70}{$P$}
+\put(280, 82){\circle*{4}}
+\put(280, 82){\line(-1, 2){20}}
+\pictext{260}{125}{0, 0}
+\put(280, 82){\line(1, 2){20}}
+\pictext{300}{125}{1, 1}
+\pictext{265}{95}{1}
+\pictext{295}{95}{2}
+
+\multiput(210,82)(5, 0){14}{\line(1, 0){3}}
+
+\end{picture}
+\end{center}
+\caption{\citegame{TwoStageNP}}
+\label{TwoStageNPChart}
+\end{figure}
+
+Note crucially the dotted line between the player's choices in the top right. Although the player makes her choice \textit{after} the demon does, the player doesn't know what the demon chooses. This makes backwards induction a little tricky; the demon can't assume that the player will make the best response to her choice, if the player doesn't know what the choice is.
+
+But when we look at the numbers more closely, that worry dissipates. Whatever the demon does, the player is better off playing 2. So we should assume that the player will play 2. Given that the player will play 2, the demon is best off playing 2. And given that the demon is best off playing 2, the player at the initial node is best off playing $C$. So backwards induction leads to the same conclusion that ratificationist approaches do. And, as I said, this seems like an intuitive enough verdict, at least in this case.
+
+\section{Equilibrium and Ratification}
+A large number of fairly orthodox game theorists typically accept the following two propositions.
+
+\begin{itemize*}
+\item It is strictly better to defect than co-operate in Prisoners' Dilemma, and in general one should always take strictly dominating options.
+\item In some games, such as Rock-Paper-Scissors, the best thing to do is to play a mixed strategy. In those games, playing a mixed strategy is preferably to playing any pure strategy.
+\end{itemize*}
+
+\noindent In general, anyone who thinks there is something normatively significant in playing Nash \Eqm\ strategies will have to accept something like those two claims. But if you look at the two biggest positions in philosophical decision theory, they are hard to reconcile. Evidential Decision Theorists may accept the second, but will reject the first. On Evidential Decision Theory, it may be best to accept a dominated option if, as in Newcomb's Problem, the states are evidentially connected to one's choice. And Causal Decision Theorists will accept the first, but not the second. On Causal Decision Theory, the expected value of a mixed strategy is just the (weighted) average value of the strategies being mixed, and the only rule is to maximise expected value, so the mixed strategy can't be preferable to each of the elements of the mixture.
+
+Some of the tension is resolved if we add ratificationist decision theories to our menu of choices. In particular, a causal ratificationist might accept both of the bullet points above. It is obvious that they will accept the first. The co-operation option in Prisoners' Dilemma is both unratifiable and lower valued than the defection option. What's interesting is that, given one big extra assumption, they can accept the second as well. 
+
+The big extra assumption is that conditional on one's playing a strategy $S$, one should give probability 1 to the claim that the other player will do something that is in their best interests given that one is playing $S$. Let's apply that to Rock-Paper-Scissors. Conditional on playing Rock, one should give probability 1 to the proposition that the other player will play Paper. That is, one should give probability 0 to the proposition \textit{If I were to play Rock, I would win}, while giving probability 1 to the proposition \textit{If I were to play Scissors, I would win}. So conditional on playing Rock, the best thing to do, \textit{from a causal perspective}, is to play Scissors.
+
+So playing Rock is not ratifiable, and by similar reasoning, neither is playing Paper or Scissors. Does this mean nothing is ratifiable? Not at all; the mixed strategies might still be ratifiable. In particular, the mixed strategy where one plays each of the pure strategies with probability $\nicefrac{1}{3}$, is ratifiable. At least, it is ratifiable if we assume that causal ratificationism is the correct theory of rational choice. If one plays this mixed strategy, and the other player knows it, then every strategy the other player could play is equally valuable to them; they each have expected value 0. Given that each strategy is equally valuable, the other player could play any strategy that is rationally acceptable. Since we are assuming causal ratificationism, that means they could play any ratifiable strategy. But the only ratifiable strategy is the mixed strategy  where one plays each of the pure strategies with probability $\nicefrac{1}{3}$. Conditional on the other player doing that, moving away from the mixed strategy has no advantages (though it also has no costs). So causal ratificationism, plus an assumption that the other player is an excellent mind reader, delivers the orthodox result.
+
+There are other reasons to associate orthodoxy in game theory with causal ratificationism. Here, for instance, is Ken Binmore motivating the use of \eqm\ concepts in a prominent game theory textbook (\textit{Playing for Real}).
+
+\begin{quote}
+Why should anyone care about Nash equilibria? There are at least two reasons. The first is that a game theory book can't authoratively point to a pair of strategies as the solution of a game unless it is a Nash \eqm. Suppose, for example, that $t$ weren't a best reply to $s$. [Player 2] would then reason that if [Player 1] follows the book's advice and plays $s$, then she would do better not to play $t$. But a book can't be authoritative on what is rational if rational people don't play as it predicts. (\textit{Playing for Real}, 18-19)
+\end{quote}
+
+\noindent It seems to me that this argument only makes sense if we assume some ratificationist theory of decision making. What Binmore is encouraging us to focus on here are strategies that are still rational strategies in situations where everyone believes that they are rational strategies. That's close, I think, to saying that we should only follow strategies that are best strategies conditional on being played.
+
+There's a secondary argument Binmore is making here which I think is more misleading. The most the little argument he gives could show is that if a game has a unique solution, then that solution must be a Nash \eqm. But it doesn't follow from that that there is anything special about Nash \eqm\ as opposed, say, to strategies that are BRBRI. After all, if a game has a unique solution, each player will play a strategy that is BRBRI. And if each player has multiple BRBRI strategies, even if some of them are not part of any Nash \eqm, it isn't clear why a book which said each BRBRI strategy was rational would be self-undermining. If I say that any pure or mixed strategy whatsoever could be rational in Rock-Paper-Scissors, and Player 1 believes me, and Player 2 knows this, Player 2 can't use that knowledge to undermine my advice.
+
+But you might note that Binmore says there is a second reason. Here's what it is.
+
+\begin{quote}
+Evolution provides a second reason why we should care about Nash equilibria. If the payoffs in a game correspond to how fit the players are, then adjustment processes that favor the more fit at the expense of the less fit will stop working when we get to a Nash \eqm\ because all the survivors will then be as fit as it is possible to be in the circumstances. (\textit{Playing for Real}, 19)
+\end{quote}
+
+\noindent This seems to me like a very strong reason to care about Nash \eqm\ in \textit{repeated} games, like competition for food over time. The same is true in Rock-Paper-Scissors. It isn't true that Rock wins every time, and you shouldn't play Rock every time like Bart Simpson does. But that's because you'll give away your strategy. It doesn't show that a pure strategy of Rock is wrong in any given game of Rock-Paper-Scissors.
+
+As we noted at the end of the last section, it is not clear that the standard representation of the payoffs in any given round of a repeated game are correct. Some strategies incur costs down the road that aren't properly reflected in the individual payoff matrices. But, as we also noticed, it is hard to do much about this. The best thing might be to just note that the payoffs aren't quite right, and look for \eqm\ with respect to the not quite right payoffs.
+
+%In any case, we're going to want to come back to what Causal Decision Theory says about repeated games somewhat later, so it is best to set that aside for now. What I really have wanted to argue here was that ratificationism is necessary to motivate some of the core ideas of game theory.

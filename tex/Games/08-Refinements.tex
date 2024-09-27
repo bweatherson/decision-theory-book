@@ -1,0 +1,609 @@
+\chapter{Refining Nash Equilibria}
+
+In many games there are multiple Nash equilibria. Some of these equilibria seem highly unreasonable. For instance, the mixed equilibria in Battle of the Sexes has a lower payout to both players than either of the pure equilibria. In some coordination games, as we saw earlier, there are very poor outcomes that are still equilibria. For instance, in this game both $Aa$ and $Bb$ are equilibria, but we would expect players to play $Aa$, not $Bb$.
+
+\starttab{r c c}
+\gamelab{AsymmCoord} & a & b \\
+A & 1000, 1000 & 0, 0 \\
+B & 0, 0 & 1, 1  \\
+\fintab 
+
+\noindent Considerations such as these have pushed many game theorists to develop \textbf{refinements} of the concept of Nash \eqm. A refinement is an \eqm\ concept that is stronger than Nash \eqm. We have already seen a couple of refinements of Nash \eqm\ in the discussion of coordination games. Here are two such refinements. (The first name is attested in the literature, the second I made up because I couldn't find a standard name.)
+
+\begin{description}
+\item[Pareto Nash \eqm] is a Nash \eqm\ that Pareto dominates every other Nash \eqm.
+\item[Risk Nash \eqm] is a Nash \eqm\ that risk dominates every other \eqm.
+\end{description}
+
+\noindent We could also consider weak versions of these concepts. A weak Pareto Nash \eqm\ is a Nash \eqm\ that is not Pareto-dominated by any other \eqm, and a weak risk Nash \eqm\ is a Nash \eqm\ that is not risk dominated by any other Nash \eqm. Since we've already spent a fair amount of time on these concepts when we discussed coordination games, I won't go on more about them here.
+
+We can also generate refinements of Nash \eqm\ by conjoining dominance conditions to the definition of Nash \eqm. For instance, the following two definitions are of concepts strictly stronger than Nash \eqm.
+
+\begin{description}
+\item[Nash + Weak Dominance] A Nash \eqm\ that is not weakly dominated by another strategy.
+\item[Nash + Iterated Weak Dominance] A Nash \eqm\ that is not deleted by (some process of) iterative deletion of weakly dominated strategies.
+\end{description}
+
+\noindent In the following game, all three of $Aa$, $Bb$ and $Cc$ are Nash equilibria, but $Cc$ is weakly dominated, and $Bb$ does not survive iterated deletion of weakly dominated strategies.
+
+\starttab{r c c c}
+\gamelab{WeakNash} & a & b & c \\
+A & 3, 3 & 2, 0 & 0, 0 \\
+B & 0, 2 & 2, 2 & 1, 0 \\
+C & 0, 0 & 0, 1 & 1, 1 
+\fintab
+
+\noindent But most refinements don't come from simply conjoining an independently motivated condition onto Nash \eqm. We'll start with the most significant refinement, subgame perfect \eqm.
+
+\section{Subgame Perfect Equilibrium}
+
+Consider the following little game. The two players, call them Player I and Player II, have a choice between two options, call them Good and Bad. The game is a sequential move game; first Player I moves then Player II moves. Each player gets 1 if they choose Good and 0 if they choose Bad. We will refer to this game as \gamelab{EasyGame}. Here is its game tree.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(350, 110)
+\pictext{175}{0}{I}
+\put(175, 12){\circle*{4}}
+\put(175, 12){\line(-2, 1){70}}
+\put(175, 12){\line(2, 1){70}}
+\pictext{135}{20}{G}
+\pictext{215}{20}{B}
+
+\pictext{105}{35}{II}
+\put(105, 47){\circle*{4}}
+\put(105, 47){\line(-1, 1){35}}
+\pictext{70}{85}{(1, 1)}
+\put(105, 47){\line(1, 1){35}}
+\pictext{140}{85}{(1, 0)}
+\pictext{80}{55}{G}
+\pictext{130}{55}{B}
+
+\pictext{245}{35}{II}
+\put(245, 47){\circle*{4}}
+\put(245, 47){\line(-1, 1){35}}
+\pictext{210}{85}{(0, 1)}
+\put(245, 47){\line(1, 1){35}}
+\pictext{280}{85}{(0, 0)}
+\pictext{220}{55}{G}
+\pictext{270}{55}{B}
+
+%\multiput(105,47)(5, 0){28}{\line(1, 0){3}}
+
+\end{picture}
+\end{center}
+\caption{\citegame{EasyGame}}
+\label{EasyGameTree}
+\end{figure}
+
+\noindent A strategy for Player I in \citegame{EasyGame} is just a choice of one option, Good or Bad. A strategy for Player II is a little more complicated. She has to choose both what to do if Player I chooses Good, and what to do if Player II chooses Bad. We'll write her strategy as $\alpha \beta$, where $\alpha$ is what she does if Player I chooses Good, and $\beta$ is what she does if Player II chooses Bad. (We will often use this kind of notation in what follows. Wherever it is potentially ambiguous, I'll try to explain it. But the notation is very common in works on game theory, and it is worth knowing.)
+
+The most obvious Nash equilibrium of the game is that Player I chooses Good, and Player II chooses Good whatever Player I does. But there is another Nash \eqm, as looking at the strategic form of the game reveals. We'll put Player I on the row and Player II on the column. (We'll also do this from now on unless there is a reason to do otherwise.)
+
+\starttab{r c c c c}
+\textbf{\citegame{EasyGame}} & gg & gb & bg & bb \\
+G & 1, 1 & \textbf{1, 1} & 1, 0 & 1, 0 \\
+B & 0, 1 & 0, 0 & 0, 1 & 0, 0 \\
+\fintab Look at the cell that I've bolded, where Player I plays Good, and Player II plays Good, Bad. That's a Nash \eqm. Neither player can improve their outcome, given what the other player plays. But it is a very odd Nash \eqm. It would be very odd for Player II to play this, since it risks getting 0 when they can guarantee getting 1.
+
+It's true that Good, Bad is weakly dominated by Good, Good. But as we've already seen, and as we'll see in very similar examples to this soon, there are dangers in throwing out \textit{all} weakly dominated strategies. Many people think that there is something else wrong with what Player II does here.
+
+Consider the sub-game that starts with the right-hand decision node for Play\-er II. That isn't a very interesting game; Player I has no choices, and Player II simply has a choice between 1 and 0. But it is a game. And note that Good, Bad is not a Nash \eqm\ of that game. Indeed, it is a \textit{strictly} dominated strategy in that game, since it involves taking 0 when 1 is freely available.
+
+Say that a strategy pair is a \textbf{subgame perfect \eqm} when it is a Nash \eqm, and it is a Nash \eqm\ of every sub-game of the game. The pair Good and Good, Bad is not subgame perfect, since it is not a Nash \eqm\ of the right-hand subgame.
+
+When we solve extensive form games by backwards induction, we not only find Nash equilibria, but subgame perfect equilibria. Solving this game by backwards induction would reveal that Player II would choose Good wherever she ends up, and then Player I will play Good at the first move. And the only subgame perfect \eqm\ of the game is that Player I plays Good, and Player II plays Good, Good.
+
+\newpage
+
+\section{Forward Induction}
+
+In motivating subgame perfect \eqm, we use the idea that players will suppose that future moves will be rational. We can also develop constraints based around the idea that past moves were rational. This kind of reasoning is called \textbf{forward induction}. A clear, and relatively uncontroversial, use of it is in this game by Cho and Kreps's paper ``signaling Games and Stable Equilibria'' (QJE, 1987). We'll return to that paper in more detail below, but first we'll discuss \gamelab{ForwardInduction}.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(300, 300)
+
+\put(150, 150){\circle{4}}
+\pictext{150}{138}{$N$}
+\pictext{110}{155}{$x$}
+\pictext{190}{155}{$1-x$}
+\put(152, 150){\line(1, 0){71}}
+\put(77, 150){\line(1, 0){71}}
+
+\put(75, 150){\circle*{4}}
+\pictext{65}{145}{$1_p$}
+\put(75, 152){\line(0, 1){68}}
+\pictext{65}{180}{$P$}
+\put(75, 148){\line(0, -1){68}}
+\pictext{65}{110}{$Q$}
+
+\put(225, 150){\circle*{4}}
+\pictext{235}{145}{$1_b$}
+\put(225, 152){\line(0, 1){68}}
+\pictext{235}{180}{$P$}
+\put(225, 148){\line(0, -1){68}}
+\pictext{235}{110}{$Q$}
+
+\multiput(75, 220)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{225}{2}
+
+\put(75, 220){\circle*{4}}
+\put(75, 220){\line(-1, 1){50}}
+\put(75, 220){\line(1, 1){50}}
+\pictext{40}{240}{$p$}
+\pictext{110}{240}{$b$}
+\pictext{25}{275}{1, 1}
+\pictext{125}{275}{-1, -1}
+
+\put(225, 220){\circle*{4}}
+\put(225, 220){\line(-1, 1){50}}
+\put(225, 220){\line(1, 1){50}}
+\pictext{190}{240}{$p$}
+\pictext{260}{240}{$b$}
+\pictext{175}{275}{-1, -1}
+\pictext{275}{275}{-1, 1}
+
+\pictext{75}{65}{0, 0}
+\pictext{225}{65}{0, 0}
+
+\end{picture}
+\end{center}
+\caption{\citegame{ForwardInduction}}
+\end{figure}
+
+\noindent This game takes a little more interpreting than some we've looked at previously. We use the convention that an empty disc indicates the initial node of the game. In this case, as in a few games we'll look at below, it is in the middle of the tree. The first move is made by $N$ature, denoted by $N$. Nature makes Player 1 playful with probability $x$, or bashful, with probability $1-x$. Player 1's personality type is revealed to Player 1, but not to Player 2. If she's playful, she moves to the node marked $1_p$, if bashful to the node marked $1_b$. Either way she has a choice about whether to play a guessing game with Player 2, where Player 2 has to guess her personality type. Player 1's payouts are as follows:
+
+\begin{itemize*}
+\item If she doesn't play the guessing game, she gets 0.
+\item If she's playful, she gets 1 if Player 2 guesses correctly, and -1 if Player 2 guesses incorrectly.
+\item If she's bashful, she gets -1 either way.
+\end{itemize*}
+
+\noindent Player 2's payouts are a little simpler.
+
+\begin{itemize*}
+\item If the guessing game isn't played, she gets 0.
+\item If it is played and she guesses correctly, she gets 1.
+\item If it is played and she guesses wrongly, she gets -1.
+\end{itemize*}
+
+\noindent The horizontal dashed line at the top indicates that if one of the upper nodes is reached, Player 2 doesn't know which node she is at. So we can't simply apply backward induction. Indeed, there aren't any subgames of this game, since there are no nodes that are neither initial nor terminal such that when they are reached, both players know they are there.
+
+Player 1 has four possible strategies. She has to decide whether to $P$lay or $Q$uit both for when she is playful and when she is bashful. We'll write a strategy $\alpha \beta$ as the strategy of playing $\alpha$ if playful, and $\beta$ if bashful. (We're going to repeat a lot of this notation when we get to signaling games, but it is worthwhile going over it a few times to be maximally clear.) Player 2 only has one choice and two possible strategies: if she gets to guess, she can guess $p$layful or $b$ashful. If we set out the strategic form of the game, we get the following expected payouts. (It's worth checking that you understand why these are the expected payouts for each strategy.)
+
+\starttab{r c c}
+\textbf{\citegame{ForwardInduction}} & $p$ & $b$ \\
+$PP$ & $2x - 1, 2x - 1$ & $-1, 1 - 2x$ \\
+$PQ$ & $x, x$ & $-x, -x$ \\
+$QP$ & $x - 1, x - 1$ & $x - 1, 1 - x$ \\
+$QQ$ & $0, 0$ & $0, 0$ \\
+\fintab Assuming $0 < x < 1$, it is easy to see that there are two pure Nash equilibria here: \tol{PQ, p} and \tol{QQ, b}. But there is something very odd about the second \eqm. Assume that both players are rational, and Player 2 actually gets to play. If Player 1 is bashful, then $Q$uitting dominates $P$laying. So a rational bashful Player 1 wouldn't give Player 2 a chance to move. So if Player 2 gets a chance to move, Player 1 must be playful. And if Player 1 is playful, the best move for Player 2 is $p$. So by forward induction reasoning, Player 2 should play $p$. Moreover, Player 1 can figure all this out, so by backward induction reasoning she should play her best response to $p$, namely $PQ$.
+
+We'll look at reasons for being sceptical of forward induction reasoning, or at least of some notable applications of it, next time. But at least in this case, it seems to deliver the right verdict: the players should get to the \tol{PQ, p} \eqm, not the \tol{QQ, b} \eqm.
+
+\newpage
+
+\section{Perfect Bayesian \Eqm}
+
+The core idea behind subgame perfect \eqm\ was that we wanted to eliminate equilibria that relied on `incredible threats'. That is, there are some equilibria such that the first player makes a certain move only because if they make a different move, the second player to move would, on their current strategy, do something that makes things worse for both players. But there's no reason to think that the second player would actually do that.
+
+The same kind of consideration can arise in games where there aren't any subgames. For instance, consider the following game, which we'll call \gamelab{PBEx}.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(200, 100)
+\put(100, 15){\circle{4}}
+\pictext{100}{0}{1}
+
+\put(100, 15){\line(-2, 1){70}}
+\put(100, 15){\line(0, 1){35}}
+\put(100, 15){\line(2, 1){70}}
+
+\pictext{60}{25}{$L$}
+\pictext{108}{25}{$M$}
+\pictext{140}{25}{$R$}
+
+\multiput(30, 50)(4, 0){18}{\line(1, 0){2}}
+
+\pictext{65}{55}{2}
+
+\put(30, 50){\circle*{4}}
+\put(100, 50){\circle*{4}}
+
+\put(30, 50){\line(-1, 2){20}}
+\put(30, 50){\line(1, 2){20}}
+
+\put(100, 50){\line(-1, 2){20}}
+\put(100, 50){\line(1, 2){20}}
+
+\pictext{15}{60}{$l$}
+\pictext{45}{60}{$r$}
+
+\pictext{85}{60}{$l$}
+\pictext{115}{60}{$r$}
+
+\pictext{10}{90}{(3, 1)}
+\pictext{50}{90}{(0, 0)}
+
+\pictext{80}{90}{(1, 1)}
+\pictext{120}{90}{(0, 0)}
+
+\pictext{170}{50}{(2, 2)}
+\end{picture}
+\end{center}
+\caption{\citegame{PBEx}}
+\end{figure}
+
+\noindent The game here is a little different to one we've seen so far. First Player 1 makes a move, either $L$, $M$ or $R$. If her move is $R$, the game ends, with the (2, 2) payout. If she moves $L$ or $M$, the game continues with a move by Player 2. But crucially, Player 2 does not know what move Player 1 made, so she does not know which node she is at. So there isn't a subgame here to start. Player 2 chooses $l$ or $r$, and then the game ends.
+
+There are two Nash equilibria to \citegame{PBEx}. The obvious \eqm\ is $Ll$. In that \eqm\, Player 1 gets her maximal payout, and Player 2 gets as much as she can get given that the rightmost node is unobtainable. But there is another Nash equilibrium available, namely $Rr$. In that \eqm, Player 2 gets her maximal payout, and Player 1 gets the most she can get given that Player 2 is playing $r$. But note what a strange \eqm\ it is. It relies on the idea that Player 2 would play $r$ were she to be given a move. But that is absurd. Once she gets a move, she has a straight choice between 1, if she plays $l$, and 0, if she plays $r$. So obviously she'll play $l$. 
+
+This is just like the examples that we used to motivate subgame perfect \eqm, but that concept doesn't help us here. So we need a new concept. The core idea is that each player should be modelled as a Bayesian expected utility maximiser. More formally, the following constraints are put on players.
+
+\begin{enumerate*}
+\item At each point in the game, each player has a probability distribution over where they are in the game. These probability distributions are correct about the other players' actions. That is, if a player is playing a strategy $S$, everyone has probability 1 that they are playing $S$. If $S$ is a mixed strategy, this might involve having probabilities between 0 and 1 in propositions about which move the other player will make, but players have correct beliefs about other players' strategies.
+\item No matter which node is reach, each player is disposed to maximise expected utility on arrival at that node.
+\item When a player had a positive probability of arriving at a node, on reaching that node they update by conditionalisation.
+\item When a player gave 0 probability to reaching a node (e.g., because the \eqm\ being played did not include that node), they have some disposition or other to form a set of consistent beliefs at that node.
+\end{enumerate*}
+
+\noindent The last constraint is very weak, but it does enough to eliminate the \eqm\ $Rr$. The constraint implies that when Player 2 moves, she must have some probability distribution $\Pr$ such that there's an $x$ such that $\Pr(L) = x$ and $\Pr(M) = 1-x$. Whatever value $x$ takes, the expected utility of $l$ given $\Pr$ is 1, and the expected utility of $r$ is 0. So being disposed to play $r$ violates the second condition. So $Rr$ is not a Perfect Bayesian \eqm.
+
+It's true, but I'm not going to prove it, that all Perfect Bayesian equilibria are Nash equilibria. It's also true that the converse does not hold, and this we have proved; \citegame{PBEx} is an example.
+
+\chapter{Signaling Games}
+
+Concepts like Perfect Bayesian \eqm\ are useful for the broad class of games known as signaling games. In a signaling game, Player 1 gets some information that is hidden from player 2. Many applications of these games involve the information being \textit{de se} information, so the information that Player 1 gets is referred to as her \textit{type}. But that's inessential; what is essential is that only one player gets this information. Player 1 then has a choice of move to make. There is a small loss of generality here, but we'll restrict our attention to games where Player 1's choices are independent of her type, i.e., of the information she receives. Player 2 sees Player 1's move (but not, remember, her type) and then has a choice of her own to make. Again with a small loss of generality, we'll restrict attention to cases where Player 2's available moves are independent of what Player 1 does. 
+
+\section{Communication Games}
+
+We'll start, in game \gamelab{SignalLewis} with a signaling game where the parties' interests are perfectly aligned.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(300, 300)
+
+\put(150, 150){\circle{4}}
+\pictext{150}{138}{$N$}
+\pictext{110}{155}{$p$}
+\pictext{190}{155}{$1-p$}
+\put(152, 150){\line(1, 0){71}}
+\put(77, 150){\line(1, 0){71}}
+
+\put(75, 150){\circle*{4}}
+\pictext{65}{145}{1}
+\put(75, 152){\line(0, 1){68}}
+\pictext{65}{180}{$U$}
+\put(75, 148){\line(0, -1){68}}
+\pictext{65}{110}{$D$}
+
+\put(225, 150){\circle*{4}}
+\pictext{235}{145}{1}
+\put(225, 152){\line(0, 1){68}}
+\pictext{235}{180}{$U$}
+\put(225, 148){\line(0, -1){68}}
+\pictext{235}{110}{$D$}
+
+\multiput(75, 220)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{225}{2}
+
+\put(75, 220){\circle*{4}}
+\put(75, 220){\line(-1, 1){50}}
+\put(75, 220){\line(1, 1){50}}
+\pictext{40}{240}{$l$}
+\pictext{110}{240}{$r$}
+\pictext{25}{275}{1, 1}
+\pictext{125}{275}{0, 0}
+
+\put(225, 220){\circle*{4}}
+\put(225, 220){\line(-1, 1){50}}
+\put(225, 220){\line(1, 1){50}}
+\pictext{190}{240}{$l$}
+\pictext{260}{240}{$r$}
+\pictext{175}{275}{0, 0}
+\pictext{275}{275}{1, 1}
+
+\multiput(75, 80)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{60}{2}
+
+\put(75, 80){\circle*{4}}
+\put(75, 80){\line(-1, -1){50}}
+\put(75, 80){\line(1, -1){50}}
+\pictext{40}{50}{$l$}
+\pictext{110}{50}{$r$}
+\pictext{25}{10}{1, 1}
+\pictext{125}{10}{0, 0}
+
+\put(225, 80){\circle*{4}}
+\put(225, 80){\line(-1, -1){50}}
+\put(225, 80){\line(1, -1){50}}
+\pictext{190}{50}{$l$}
+\pictext{260}{50}{$r$}
+\pictext{175}{10}{0, 0}
+\pictext{275}{10}{1, 1}
+
+\end{picture}
+\end{center}
+\caption{\citegame{SignalLewis}}
+\end{figure}
+
+As above, we use an empty disc to signal the initial node of the game tree. In this case, it is the node in the centre of the tree. The first move is made by Nature, again denoted as $N$. Nature assigns a type to Player 1; that is, she makes some proposition true, and reveals it to Player 1. Call that proposition $q$. We'll say that Nature moves left if $q$ is true, and right otherwise. We assume the probability (in some good sense of probability) of $q$ is $p$, and this is known before the start of the game. After Nature moves, Player 1 has to choose $U$p or $D$own. Player 2 is shown Player 1's choice, but not Nature's move. That's the effect of the horizontal dashed lines. If the game reaches one of the upper nodes, Player 2 doesn't know which one it is, and if it reaches one of the lower nodes, again Player 2 doesn't know which it is. Then Player 2 has a make a choice, here simply denoted as $l$eft or $r$ight.
+
+In any game of this form, each player has a choice of four strategies. Player 1 has to choose what to do if $q$ is true, and what to do if $q$ is false. We'll write $\alpha \beta$ for the strategy of doing $\alpha$ if $q$, and $\beta$ if $\neg q$. Since $\alpha$ could be $U$ or $D$, and $\beta$ could be $U$ or $D$, there are four possible strategies. Player 2 has to choose what to do if $U$ is played, and what to do if $D$ is played. We'll write $\gamma \delta$ for the strategy of doing $\gamma$ if $U$ is played, and $\delta$ if $D$ is played. Again, there are four possible choices. (If Player 2 knew what move Nature had made, there would be four degrees of freedom in her strategy choice, so she'd have 16 possible strategies. Fortunately, she doesn't have that much flexibility!)
+
+Any game of this broad form is a signaling game. signaling games differ in (a) the interpretation of the moves, and (b) the payoffs. \citegame{SignalLewis} has a very simple payoff structure. Both players get 1 if Player 2 moves $l$ iff $q$, and 0 otherwise. If we think of $l$ as the formation of a belief that $q$, and $r$ as the formation of the opposite belief, this becomes a simple communication game. The players get a payoff iff Player 2 ends up with a true belief about $q$, so Player 1 is trying to communicate to Player 2 whether $q$ is true. This kind of simple communication game was used by David Lewis in his book \textit{Convention} to show that game theoretic approaches could be fruitful in the study of meaning. The game is perfectly symmetric if $p = \nicefrac{1}{2}$; so as to introduce some asymmetries, I'll work through the case where $p = \nicefrac{3}{5}$.
+
+\citegame{SignalLewis} has a dizzying array of Nash equilibria, even given this asymmetry introducing assumption. They include the following:
+
+\begin{itemize*}
+\item There are two \textbf{separating} equilibria, where what Player 1 does depends on what Nature does. These are \tol{UD, lr} and \tol{DU, rl}. These are rather nice equilibria; both players are guaranteed to get their maximal payout.
+\item There are two \textbf{pooling} equilibria, where what Player 1 does is independent of what Nature does. These are \tol{UU, ll} and \tol{DD, ll}. Given that she gets no information from Player 1, Player 2 may as well guess. And since $\Pr(q) > \nicefrac{1}{2}$, she should guess that $q$ is true; i.e., she should play $l$. And given that Player 2 is going to guess, Player 1 may as well play anything. So these are also equilibria.
+\item And there are some \textbf{babbling} equilibria. For instance, there is the \eqm\ where Player 1 plays either $UU$ or $DD$ with some probability $r$, and Player 2 plays $ll$.
+\end{itemize*}
+
+\noindent Unfortunately, these are all Perfect Bayesian equilibria too. For the separating and babbling equilibria, it is easy to see that conditionalising on what Player 1 plays leads to Player 2 maximising expected utility by playing her part of the \eqm. And for the pooling equilibria, as long as the probability of $q$ stays above $\nicefrac{1}{2}$ in any `off-the-\eqm-path' play (e.g., conditional on $D$ in the \tol{UU, ll} \eqm), Player 2 maximises expected utility at every node.
+
+That doesn't mean we have nothing to say. For one thing, the separating equilibria are Pareto-dominant in the sense that both players do better on those equilibria than they do on any other. So that's a non-coincidental reason to think that they will be the equilibria that arise. There are other refinements on Perfect Bayesian equilibria that are more narrowly tailored to signaling games. We'll introduce them by looking at a couple of famous signaling games.
+
+\section{Signaling without Cooperation}
+
+Economists have been interested for several decades in game-theoretic representations of college that give make going to college essentially a signal in a game. For example, consider the following variant of the signaling game, \gamelab{SignalCollegeSignal}. It has the following intended interpretation:
+
+\begin{itemize*}
+\item Player 1 is a student and potential worker, Player 2 is an employer.
+\item The student is either bright or dull with probability $p$ of being bright. Nature reveals the type to the student, but only the probability to the employer, so $q$ is that the student is bright.
+\item The student has the choice of going to college ($U$) or the beach ($D$).
+\item The employer has the choice of hiring the student ($l$) or rejecting them ($r$).
+\end{itemize*}
+
+\noindent In \citegame{SignalCollegeSignal} we make the following extra assumptions about the payoffs.
+
+\begin{itemize*}
+\item Being hired is worth 4 to the student.
+\item Going to college rather than the beach costs the bright student 1, and the dull student 5, since college is much harder work for dullards.
+\item The employer gets no benefit from hiring college students as such.
+\item Hiring a bright student pays the employer 1, hiring a dull student costs the employer 1, and rejections have no cost or benefit.
+\end{itemize*}
+
+\noindent The resulting game tree is shown in \ref{SignalCollegeTree}. In this game, dull students never prefer to go to college, since even the lure of a job doesn't make up for the pain of actually having to study. So a rational strategy for Player 1 will never be of the form $\alpha U$, since for dull students, college is a dominated option, being dominated by $\alpha D$. But whether bright students should go to college is a trickier question. That is, it is trickier to say whether the right strategy for Player 1 is $UD$ or $DD$, which are the two strategies consistent with eliminating the strictly dominated strategies. (Remember that strictly dominated strategies cannot be part of a Nash \eqm.)
+
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(300, 300)
+
+\put(150, 150){\circle{4}}
+\pictext{150}{138}{$N$}
+\pictext{110}{155}{$p$}
+\pictext{190}{155}{$1-p$}
+\put(152, 150){\line(1, 0){71}}
+\put(77, 150){\line(1, 0){71}}
+
+\put(75, 150){\circle*{4}}
+\pictext{65}{145}{1}
+\put(75, 152){\line(0, 1){68}}
+\pictext{65}{180}{$U$}
+\put(75, 148){\line(0, -1){68}}
+\pictext{65}{110}{$D$}
+
+\put(225, 150){\circle*{4}}
+\pictext{235}{145}{1}
+\put(225, 152){\line(0, 1){68}}
+\pictext{235}{180}{$U$}
+\put(225, 148){\line(0, -1){68}}
+\pictext{235}{110}{$D$}
+
+\multiput(75, 220)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{225}{2}
+
+\put(75, 220){\circle*{4}}
+\put(75, 220){\line(-1, 1){50}}
+\put(75, 220){\line(1, 1){50}}
+\pictext{40}{240}{$l$}
+\pictext{110}{240}{$r$}
+\pictext{25}{275}{3, 1}
+\pictext{125}{275}{-1, 0}
+
+\put(225, 220){\circle*{4}}
+\put(225, 220){\line(-1, 1){50}}
+\put(225, 220){\line(1, 1){50}}
+\pictext{190}{240}{$l$}
+\pictext{260}{240}{$r$}
+\pictext{175}{275}{-1, -1}
+\pictext{275}{275}{-5, 0}
+
+\multiput(75, 80)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{60}{2}
+
+\put(75, 80){\circle*{4}}
+\put(75, 80){\line(-1, -1){50}}
+\put(75, 80){\line(1, -1){50}}
+\pictext{40}{50}{$l$}
+\pictext{110}{50}{$r$}
+\pictext{25}{10}{4, 1}
+\pictext{125}{10}{0, 0}
+
+\put(225, 80){\circle*{4}}
+\put(225, 80){\line(-1, -1){50}}
+\put(225, 80){\line(1, -1){50}}
+\pictext{190}{50}{$l$}
+\pictext{260}{50}{$r$}
+\pictext{175}{10}{4, -1}
+\pictext{275}{10}{0, 0}
+
+\end{picture}
+\end{center}
+\caption{\citegame{SignalCollegeSignal}}
+\label{SignalCollegeTree}
+\end{figure}
+
+First, consider the case where $p < \nicefrac{1}{2}$. In that case, if Player 1 plays $DD$, then Player 2 gets $2p-1$ from playing either $ll$ or $rl$, and 0 from playing $lr$ or $rr$. So she should play one of the latter two options. If she plays $rr$, then $DD$ is a best response, since when employers aren't going to hire, students prefer to go to the beach. So there is one \textbf{pooling} \eqm, namely \tol{DD, rr}. But what if Player 2 plays $lr$. Then Player 1's best response is $UD$, since bright students prefer college conditional on it leading to a job. So there is also a \textbf{separating} \eqm, namely \tol{UD, lr}. The employer prefers that \eqm, since her payoff is now $p$ rather than 0. And students prefer it, since their payoff is $3p$ rather than 0. So if we assume that people will end up at Pareto-dominant outcomes, we have reason to think that bright students, and only bright students, will go to college, and employers will hire college students, and only college students. And all this is true despite there being no advantage whatsoever to going to college in terms of how good an employee one will be.
+
+Especially in popular treatments of the case, the existence of this kind of model can be used to motivate the idea that college \textit{only} plays a signaling role. That is, some people argue that in the real world college does not make students more economically valuable, and the fact that college graduates have better employment rates, and better pay, can be explained by the signaling function of college. For what it's worth, I highly doubt that is the case. The wage premium one gets for going to college tends to \textit{increase} as one gets further removed from college, although the further out from college you get, the less important a signal college participation is. One can try to explain this fact too on a pure signaling model of college's value, but frankly I think the assumptions needed to do so are heroic. The model is cute, but not really a picture of how actual college works.
+
+So far we assumed that $p < \nicefrac{1}{2}$. If we drop that assumption, and assume instead that $p > \nicefrac{1}{2}$, the case becomes more complicated. Now if Player 1 plays $DD$, i.e., goes to the beach no matter what, Player 2's best response is still to hire them. But note that now a very odd \eqm\ becomes available. The pair \tol{DD, rl} is a Nash \eqm, and, with the right assumptions, a Perfect Bayesian \eqm. This pair says that Player 1 goes to the beach whatever her type, and Player 2 hires only beach goers.
+
+This is a very odd strategy for Player 2 to adopt, but it is a little hard to say just why it is odd. It is clearly a Nash \eqm. Given that Player 2 is playing $rl$, then clearly beach-going dominates college-going. And given that Player 1 is playing $DD$, playing $rl$ gets as good a return as is available to Player 2, i.e., $2p-1$. Could it also be a Perfect Bayesian equilibrium? It could, provided Player 2 has a rather odd update policy. Say that Player 2 thinks that if someone goes to college, they are a dullard with probability greater than $\nicefrac{1}{2}$. That's consistent with what we've said; given that Player 1 is playing $DD$, the probability that a student goes to college is 0. So the conditional probability that a college-goer is bright is left open, and can be anything one likes in Perfect Bayesian \eqm. So if Player 2 sets it to be, say, 0, then the rational reaction is to play $rl$.
+
+But now note what an odd update strategy this is for Player 2. She has to assume that if someone deviates from the $DD$ strategy, it is someone for whom the deviation is strictly dominated. Well, perhaps it isn't crazy to assume that someone who would deviate from an \eqm\ isn't very bright, so maybe this isn't the oddest assumption in this particular context. But a few economists and game theorists have thought that we can put more substantive constraints on probabilities conditional on `off-the-\eqm-path' behaviour. One such constraint, is, roughly, that deviation shouldn't lead to playing a dominated strategy. This is the ``\textbf{intuitive criterion}'' of Cho and Kreps. In this game, all the criterion rules out is the odd pair \tol{DD, rl}. It doesn't rule out the very similiar pair \tol{DD, ll}. But the intuitive criterion makes more substantial constraints in other games. We'll close the discussion of signaling games with such an example, and a more careful statement of the criterion.
+
+\section{The Intuitive Criterion}
+
+The tree in \ref{SignalCanadianTree} represents \gamelab{SignalCanadian}, which is also a guessing game. The usual statement of it involves all sorts of unfortunate stereotypes about the type of men who have quiche and/or beer for breakfast, and I'm underwhelmed by it. So I'll run with an example that relies on different stereotypes.
+
+A North American tourist is in a bar. 60\% of the North Americans who pass through that bar are from Canada, the other 40\% are from the US. (This is a little implausible for most parts of the world, but maybe it is very cold climate bar. In Cho and Kreps' version the split is 90/10 not 60/40, but all that matters is which side of 50/50 it is.) The tourist, call her Player 1, knows her nationality, although the barman doesn't. The tourist can ask for the bar TV to be turned to hockey or to baseball, and she knows once she does that the barman will guess at her nationality. (The barman might also try to rely on her accent, but she has a fairly neutral upper-Midwest/central Canada accent.) Here are the tourist's preferences.
+
+\begin{itemize*}
+\item If she is American, she has a (weak) preference for watching baseball rather than hockey.
+\item If she is Canadian, she has a (weak) preference for watching hockey rather than baseball.
+\item Either way, she has a strong preference for being thought of as Canadian rather than American. This preference is considerably stronger than her preference over which sport to watch.
+\end{itemize*}
+
+\noindent The barman's preferences are simpler; he prefers to make true guesses to false guesses about the tourist's nationality. All of this is common knowledge. So the decision tree is given below. In this tree, $B$ means asking for baseball, $H$ means asking for hockey, $a$ means guessing the tourist is from the USA, $c$ means guessing she is from Canada.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{picture}(300, 300)
+
+\put(150, 150){\circle{4}}
+\pictext{150}{138}{$N$}
+\pictext{110}{155}{$0.6$}
+\pictext{190}{155}{$0.4$}
+\put(152, 150){\line(1, 0){71}}
+\put(77, 150){\line(1, 0){71}}
+
+\put(75, 150){\circle*{4}}
+\pictext{65}{145}{1}
+\put(75, 152){\line(0, 1){68}}
+\pictext{65}{180}{$H$}
+\put(75, 148){\line(0, -1){68}}
+\pictext{65}{110}{$B$}
+
+\put(225, 150){\circle*{4}}
+\pictext{235}{145}{1}
+\put(225, 152){\line(0, 1){68}}
+\pictext{235}{180}{$H$}
+\put(225, 148){\line(0, -1){68}}
+\pictext{235}{110}{$B$}
+
+\multiput(75, 220)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{225}{2}
+
+\put(75, 220){\circle*{4}}
+\put(75, 220){\line(-1, 1){50}}
+\put(75, 220){\line(1, 1){50}}
+\pictext{40}{240}{$c$}
+\pictext{110}{240}{$a$}
+\pictext{25}{275}{3, 1}
+\pictext{125}{275}{1, -1}
+
+\put(225, 220){\circle*{4}}
+\put(225, 220){\line(-1, 1){50}}
+\put(225, 220){\line(1, 1){50}}
+\pictext{190}{240}{$c$}
+\pictext{260}{240}{$a$}
+\pictext{175}{275}{2, -1}
+\pictext{275}{275}{0, 1}
+
+\multiput(75, 80)(12, 0){13}{\line(1, 0){6}}
+\pictext{150}{60}{2}
+
+\put(75, 80){\circle*{4}}
+\put(75, 80){\line(-1, -1){50}}
+\put(75, 80){\line(1, -1){50}}
+\pictext{40}{50}{$c$}
+\pictext{110}{50}{$a$}
+\pictext{25}{10}{2, 1}
+\pictext{125}{10}{0, -1}
+
+\put(225, 80){\circle*{4}}
+\put(225, 80){\line(-1, -1){50}}
+\put(225, 80){\line(1, -1){50}}
+\pictext{190}{50}{$c$}
+\pictext{260}{50}{$a$}
+\pictext{175}{10}{3, -1}
+\pictext{275}{10}{1, 1}
+
+\end{picture}
+\end{center}
+\caption{\citegame{SignalCanadian}}
+\label{SignalCanadianTree}
+\end{figure}
+
+There are two Nash equilibria for this game. One is \tol{HH, ca}; everyone asks for hockey, and the barman guesses Canadian if hockey, American if baseball. It isn't too hard to check this is an \eqm. The Canadian gets her best outcome, so it is clearly an \eqm\ for her. The American gets the second-best outcome, but asking for baseball would lead to a worse outcome. And given that everyone asks for hockey, the best the barman can do is go with the prior probabilities, and that means guessing Canadian. It is easy to see how to extend this to a perfect Bayesian \eqm; simply posit that conditional on baseball being asked for, the probability that the tourist is American is greater than $\nicefrac{1}{2}$.
+
+The other \eqm\ is rather odder. It is \tol{BB, ac}; everyone asks for baseball, and the barman guesses American if hockey, Canadian if baseball. Again, it isn't too hard to see how it is Nash \eqm. The Canadian would rather have hockey, but not at the cost of being thought American, so she has no incentive to defect. The American gets her best outcome, so she has no incentive to defect. And the barman does as well as he can given that he gets no information out of the request, since everyone requests baseball.
+
+Surprisingly, this could also be a perfect Bayesian \eqm. This requires that the barman maximise utility at every node. The tricky thing is to ensure he maxmises utility at the node where hockey is chosen. This can be done provided that conditional on hockey being chosen, the probability of American rises to above  $\nicefrac{1}{2}$. Well, nothing we have said rules that out, so there \textit{exists} a perfect Bayesian \eqm. But it doesn't seem very plausible. Why would the barman adopt just \textit{this} updating disposition?
+
+One of the active areas of research on signaling games is the development of formal rules to rule out intuitively crazy updating dispositions like this. (Small note for the methods folks: at least some of the economists working on this explicitly say that the aim is to develop formal criteria that capture clear intuitions about cases.) I'm just going to note one of the very early attempts in this area, Cho and Kreps' \textit{Intuitive Criterion}.
+
+Start with some folksy terminology that is (I think) novel to me. Let an outcome $o$ of the game be any combination of moves by nature and the players. Call the players'  moves collectively $P$ and nature's move $N$. So an outcome is a pair \tol{P, N}. Divide the players into three types.
+
+\begin{itemize*}
+\item The \textbf{happy} players in $o$ are those such that given $N$, $o$ maximises their possible returns. That is, for all possible $P^\prime$, their payoff in \tol{P, N} is at least as large as their payoff in \tol{P^\prime, N}.
+\item The \textbf{content} players are those who are not happy, but who are such that for no strategy $s^\prime$ which is an alternative to their current strategy $s$, would they do better given what nature and the other players would do if they played $s^\prime$.
+\item The \textbf{unhappy} players are those who are neither happy nor content.
+\end{itemize*}
+
+\noindent The standard Nash \eqm\ condition is that no player is unhappy. So assume we have a Nash \eqm\, with only happy and content players. And assume it is also a Perfect Bayesian \eqm. That is, for any `off-\eqm' outcome, each player would have some credence function such that their play maximises utility given that function.
+
+Now add one constraint to those credence functions:
+
+\begin{quote}
+\textbf{Intuitive Criterion - Weak Version}
+
+Assume a player has probability 1 that a strategy combination $P$ will be played. Consider their credence function conditional on another player playing $s^\prime$, wh\-ich is different to the strategy $s$ they play in $P$. If it is consistent with everything else the player believes that $s^\prime$ could be played by a player who is content with the actual outcome \tol{P, N}, then give probability 1 to $s^\prime$ being played by a content player.
+\end{quote}
+
+\noindent That is, if some deviation from \eqm\ happens, give probability 1 to it being one of the content players, not one of the happy players, who makes the deviation.
+
+That's enough to rule out the odd \eqm\ for the baseball-hockey game. The only way that is a Perfect Bayesian \eqm\ is if the barman responds to a hockey request by \textit{increasing} the probability that the tourist is American. But in the odd \eqm, the American is happy, and the Canadian is merely content. So the Intuitive Criterion says that the barman should give credence 1 to the hockey requester, i.e., the deviator from \eqm, being Canadian. And if so, the barman won't respond to a hockey request by guessing the requestor is American, so the Canadian would prefer to request hockey. And that means the outcome is no longer an \eqm, since the Canadian is no longer even content with requesting baseball.
+
+In games where everyone has only two options, the weak version I've given is equivalent to what Cho and Kreps offers. The official version is a little more complicated. First some terminology of mine, then their terminology next.
+
+\begin{itemize*}
+\item A player is \textbf{happy to have played} $s$ rather than $s^\prime$ if the payoff for $s$ in $o$ is greater than any possible outcome for $s^\prime$ given $N$.
+\item A player is \textbf{content to have played} $s$ rather than $s^\prime$ if they are not happy to have played $s$ rather than $s^\prime$, but the payoff for $s$ in $o$ is as great as the payoff for $s^\prime$ given $N$ and the other players' strategies.
+\item A player is \textbf{unhappy to have played} $s$ rather than $s^\prime$ if they are neither happy nor content to have played $s$ rather than $s^\prime$.
+\end{itemize*}
+
+\noindent If a player is happy to have played $s$ rather than $s^\prime$, and $s$ is part of some \eqm\ outcome $o$, then Cho and Kreps say that $s^\prime$ is an \textbf{equilibrium-dominated} strategy. The full version of the Intuitive Criterion is then:
+
+\begin{quote}
+\textbf{Intuitive Criterion - Full Version}
+
+Assume a player has probability 1 that a strategy combination $P$ will be played. Consider their credence function conditional on another player playing $s^\prime$, wh\-ich is different to the strategy $s$ they play in $P$. If it is consistent with everything else the player believes that $s^\prime$ could be played by a player who is merely content to have played $s$ rather than $s^\prime$,  then give probability 1 to $s^\prime$ being played by someone who is content to have played $s$, rather than someone who is happy to have played $s$.
+\end{quote}
+
+\noindent This refinement matters in games where players have three or more options. It might be that a player's options are $s_1, s_2$ and  $s_3$, and their type is $t_1$ or $t_2$. In the Nash \eqm\ in question, they play $s_1$. If they are type $t_1$, they are happy to have played $s_1$ rather than $s_2$, but merely content to have played $s_1$ rather than $s_3$. If they are type $t_2$, they are happy to have played $s_1$ rather than $s_3$, but merely content to have played $s_1$ rather than $s_2$. In my terminology above, both players are content rather than happy with the outcome. So the weak version of the Intuitive Criterion wouldn't put any restrictions on what we can say about them conditional on them playing, say $s_2$. But the full version does say something; it says other players should assign probability 1 to the player being type $t_2$ conditional on them playing $s_2$, since the alternative is that $s_2$ is played by a player who is happy they played $s_1$ rather than $s_2$. Similarly, it says that conditional on the player playing $s_3$, other players should assign probability 1 to their being of type $t_1$, since the alternative is to assign positive probability to a player deviating to a strategy they are happy not to play.
+
+The Intuitive Criterion has been the subject of an enormous literature. Goo\-gle Scholar lists nearly 2000 citations for the Cho and Kreps paper alone, and similar rules are discussed in other papers. So there are arguments that it is too weak and arguments too strong, and refinements in all sorts of directions. But we'll leave those. What I most wanted to stress was the \textit{form} a refinement of Perfect Bayesian \eqm\ would take. It is a constraint on the conditional credences of agents conditional on some probability 0 event happening. It's interesting that there are some plausible, even intuitive constraints; in general it seems the economic literature has investigated rationality under 0 probability evidence more than philosophers have.
+
+\section{Other Types of Constraint}
+
+We don't have the time, or space, to go into other kinds of constraints in as much detail, but I wanted to quickly mention two other ways in which game theorists have attempted to restrict Nash \eqm.
+
+The first is sometimes called \textbf{trembling-hand \eqm}. The idea is that we should restrict our attention to those strategies that are utility maximising given a very very high credence that the other players will play the strategies they actually play, and some positive (but low) credence that they will play each other strategy. This is very important to real-world applications, since it is very implausible that we should assign probability 1 to any claim about the other players, particularly claims of the form that they will play some \eqm\ rather than another. (There is a connection here to the philosophical claim that rational credences are \textit{regular}; that is, that they assign positive probability to anything possible.)
+
+In normal form games, the main effect of this is to rule out strategies that are weakly dominated. Remember that there are many strategies that are equilibria that are weakly dominated, since \eqm\ concepts typically only require that player can't do better given some other constraint. But if we have to assign positive probability to any alternative, then the weakly dominating strategy will get a utility boost from the alternative under which it is preferable.
+
+Things get more complicated when we put a `trembling-hand' constraint on solutions to extensive form games. The usual idea is that players should, at each node, assign a positive probability to each deviation from \eqm\ play. This can end up being a rather tight constraint, especially when combined with such ideas as subgame-perfection.
+
+The other kind of refinement I'll briefly discuss in \textbf{evolutionary stability}. This is, as the name suggests, a concept that arose out of game-theoretic models of evolution. As such, it only really applies to symmetric games. In such a game, we can write things like $U(s, s^\prime)$, meaning the payoff that one gets for playing $s$ when the other player is playing $s^\prime$. In an asymmetric game, we'd have to also specify which `side' one was when playing $s$, but there's no need for that in a symmetric game.
+
+We then say that a strategy is evolutionarily stable iff these two conditions hold.
+
+\begin{align*}
+\forall t: (U(s, s) &\geq U(t, s)) \\
+\forall t \neq s: (U(s, s) &> U(t, s) \vee U(s, s) > U(t, t))\\
+\end{align*}
+
+\noindent The idea is that a species playing $s$ is immune to invasion if it satisfies these conditions. Any invader will play some alternative strategy $t$. Think then of a species playing $t$ whose members have to play either against the existing strategy $s$ with high probability, or against other members of their own species with low probability. The first clause says that the invader can't do better in the normal case, where they play with a dominant strategy. The second clause says that they do worse in one of the two cases that come up during the invasion, either playing the dominant strategy or playing their own kind. The effect is that the dominant strategy will do better, and the invader will die out.
+
+For real-world applications we might often want to restrict the quantifier to biologically plausible strategies. And, of course, we'll want to be very careful with the specification of the game being played. But there are some nice applications of this concept in explanations of certain \eqm\ outcomes. That's a topic for biology class though - not rational choice theory.
+
+%\subsection*{Trembling Hand Equilbrium}
+
+%\subsection*{Evolutionarily Stable Strategy}
+
+%\subsection*{Extending the Graph of Normative Statuses}

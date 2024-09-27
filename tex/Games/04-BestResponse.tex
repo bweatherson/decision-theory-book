@@ -1,0 +1,362 @@
+\chapter{Best Responses}
+
+We have done as much as we can for now by merely thinking about dominance. We need to look at games where there is no dominant option. To do this requires the decision theory material; if anything is confusing, refer back to those parts of the notes.
+
+Here are the core features of orthodox decision theory.
+
+\begin{itemize*}
+\item Rational agents have a credence function over salient alternatives that is identical to some probability function $\Pr$.
+\item Rational agents also have a real-valued utility function $U$ over salient outcomes.
+\item The rational action for such an agent to do is the action that maximises \textbf{expected} utility, i.e., maximises the expected value of $U$ relative to that function $\Pr$.
+\end{itemize*}
+
+We can use orthodox decision theory to develop some new game theoretic concepts.\footnote{Some authors suggest a small modification to this decision theory, that has implications for game theory. This modification plays a prominent role in some recent work on game theory by Robert Stalnaker.
+
+Let's say that the expected utility of two possible actions $\alpha$ and $\beta$ are identical. But there are some possible states of the world that are live (in some salient sense), despite having probability 0. On every one of those states, $\alpha$ does better than $\beta$. Now how an action does on a probability 0 event makes no difference to its expected utility, so this feature doesn't increase $\alpha$'s expected utility. But it seems to be useful to know as a tie-breaker. Say that $\alpha$ is \textbf{barely better} than $\beta$ iff they have the same expected utility, there are some live probability 0 events on which $\alpha$ is better than $\beta$, and no live probability 0 events on which $\beta$ is better than $\alpha$.
+
+So we can define a new concept. Say that an action is \textbf{rational} iff there is no alternative action with a higher expected utility. And say that an action is \textbf{perfectly rational} iff it is rational, and there is no action that is barely better than it. Perfect rationality helps resolve some puzzles about infinite chains of events, and gives us a motivation for not choosing weakly dominated options. 
+
+Assume that a fair coin will be flipped a countable infinity of times. Let $AH$ be the proposition that all the flips land heads, and $EH$ the proposition that all the even numbered flips (i.e., the second, fourth etc.) land heads. An agent has the choice between $\alpha$, which is accepting a gift of a bet that pays \$1,000,000 if $EH$, $\beta$, which is accepting a gift of a bet that pays \$1,000,000 if $AH$, and $\gamma$, which is to decline both gifts. All three options have an expected return of 0, since the probability of a coin landing heads on each of an infinity of flips is 0. But $\alpha$ is barely better than $\beta$, since if $EH$ is true, it returns \$1,000,000, while $\beta$ still has an expected return of 0. And $\beta$ is barely better than $\gamma$, since it returns \$1,000,000 if $AH$, while $\gamma$ still returns nothing.
+
+On weak dominance, consider again \citegame{BinmoreOddWeak}.
+
+\starttab{r c c}
+\textbf{\citegame{BinmoreOddWeak}} & $l$ & $r$ \\
+$U$ & 1, 1 & 100, 0 \\
+$D$ & 0, 100 & 100, 100 \\
+\fintab Assume that the row player thinks the probability that $C$ will play $r$ is 1. Then whether she plays $U$ or $D$ doesn't affect her rationality; she has an expected return of 100 either way. But it's a live possibility, in what seems to be the right sense, that $C$ will play $l$. And if so, $U$ does better than $D$. So $U$ is barely better than $D$, and is the only perfectly rational play.}
+
+\section{Best Responses}
+
+We will start with the notion of a \textbf{best response}.
+
+\begin{description}
+\item[Best Response] A strategy $s_i$ is a best response for player $i$ iff there is some probability distribution $\Pr$ over the possible strategies of other players such that playing $s_i$ maximises $i$'s \textit{expected} payoff, given $\Pr$. (Note that we're using `maximise' in such a way that it allows that other strategies do just as well; it just rules out other strategies doing better.)
+\end{description}
+
+\noindent Let's look at an example of this, using a game we have already seen.
+
+\starttab{r c c }
+%This is called DomScope
+%It is an illustration of the scope ambiguity in the definition of domination
+\textbf{\citegame{DomScope}} & $l$ & $r$ \\
+$U$ & 3, 0 & 0, 0 \\
+$M$ & 2, 0 & 2, 0 \\
+$D$ & 0, 0 & 3, 0 \\
+\fintab We will just look at things from the perspective of $R$, the player who chooses the row. What we want to show is that \textit{all three} of the possible moves here are best responses.
+
+It is clear that $U$ is a best response. Set $\Pr(l) = 1, \Pr(r) = 0$. Then $E(U) = 3, E(M) = 2, E(D) = 0$. It is also clear that $D$ is a best response. Set $\Pr(l) = 0, \Pr(r) = 1$. Then $E(U) = 0, E(M) = 2, E(D) = 3$.
+
+The striking thing is that $M$ can also be a best response. Set $\Pr(l) = \Pr(r) = \nicefrac{1}{2}$. Then $E(U) = E(D) = \nicefrac{3}{2}$. But $E(M) = 2$, which is greater than $\nicefrac{3}{2}$. So if $R$ thinks it is equally likely that $C$ will play either $l$ or $r$, then $R$ maximises expected utility by playing $M$. Of course, she doesn't maximise actual utility. Maximising actual utility requires making a gamble on which choice $C$ will make. That isn't always wise; it might be best to take the safe option.
+
+It's very plausible that agents should play best responses. If a move is not a best response, then there is no way that it maximises expected utility, no matter what one's views of the other players are. And one should maximise expected utility. So we have a new normative status to add to our list.\footnote{Here is the updated graph of how these norms relate.
+
+\begin{center}
+\begin{picture}(240, 90)
+%\put(47.5, 0){NSD}
+\pictext{120}{0}{NSD}
+%\put(60, 0){\makebox(0, 0)[b]{NSD}}
+\put(120, 12){\line(-3, 1){60}}
+\put(120, 12){\line(0, 1){20}}
+\put(120, 12){\line(3, 1){60}}
+%\put(20, 40){\makebox(0, 0){NSDAI}}
+%\put(2, 36){\makebox[30][c]{NSDAI}}
+\pictext{60}{36}{NWD}
+\pictext{120}{36}{NSDAI}
+\pictext{180}{36}{BR}
+%\put(86, 36){NWD}
+\put(60, 48){\line(0, 1){20}}
+\put(120, 48){\line(-3, 1){60}}
+%\put(43, 72){NWDAI}
+\pictext{60}{72}{NWDAI}
+\end{picture}
+\end{center}
+
+\noindent There are quite a few claims made in this graph; let's go through the proofs of them.
+
+\stratcomp{All BR strategies are NSD}{
+If $s$ is strictly dominated by $s^\prime$, then the expected value of playing $s^\prime$ is greater than the expected value of playing $s$, no matter which strategy you think one's partners will play. So $s$ is not a best response; $s^\prime$ is better. Hence any strategy that is a best response is not strictly dominated.}
+
+\stratcomp{Some strategies are NWDAI, and hence NSDAI, NWD and NSD, but not BR}{
+Consider this variant on \citegame{DomScope}. 
+
+\starttab{r c c }
+%This is called BRNSD
+%It is an illustration that undominated strategies may not be best responses
+\gamelab{BRNSD} & $l$ & $r$ \\
+$U$ & 3, 3 & 0, 0 \\
+$M$ & 1, 1 & 1, 1 \\
+$D$ & 0, 0 & 3, 3 \\
+\fintab Consider things from $R$'s perspective. The probability that $C$ will play $l$ is $x$, for some $x$, and the probability that she will play $r$ is $1-x$. So $E(U) = 3x, E(D) = 3(1-x)$ and $E(M) = 1$. If $M$ is to be a best response, then we must have $E(M) \geq E(U)$, and $E(M) \geq E(D)$. The first condition entails that $1 \geq 3x$, i.e., $x \leq \nicefrac{1}{3}$. The second condition entails that $1 \geq 3(1-x)$, i.e., $x \geq \nicefrac{2}{3}$. But these two conditions can't both be satisfied, so $M$ is not a best response under any circumstances.
+
+But nor is $M$ even weakly dominated. Since $M$ sometimes does better than $U$, and sometimes does better than $D$, it is not dominated by either. Moreover, neither of $C$'s strategies is weakly dominated by the other. So eliminating weakly dominated strategies removes no strategies whatsoever from the game. Hence $M$ is NWDAI, and hence NSDAI, NWD and NSD, but it is not BR.}
+
+\stratcomp{Some BR strategies are not NSDAI, and hence not NWDAI}{Consider the following game, whose payoffs will be explained below.
+\starttab{r c c c c}
+%This is called ThreeRoundPD
+%It is a three-shot PD, with a small defect bonus
+\gamelab{ThreeRoundPD} & 0 & 1 & 2 & 3 \\
+0 & 9, 9 & 6, 11.1 & 4, 9.2 & 2, 7.3 \\
+1 & 11.1, 6 & 7.1, 7.1 & 4.1, 9.2 & 2.1, 9.2 \\
+2 & 9.2, 4 & 9.2, 4.1 & 5.2, 5.2 & 2.2, 7.3 \\
+3 & 7.3, 2 & 7.3, 2.1 & 7.3, 2.2 & 3.3, 3.3
+\fintab The idea is that $R$ and $C$ will `play' three rounds of Prisoners' Dil\-emma. They have to specify their strategy in advance, and, to make things easy, they only have four options. Their strategy must be of the form ``Tit-for-tat-minus-$n$'', for $n \in \{0, 1, 2, 3\}$. The strategy ``Tit-for-tat'' in an iterated Prisoners' Dilemma is the strategy of playing $B$ in the first game, then in any subsequent game, playing whatever one's partner played in the previous game. The strategy ``Tit-for-tat-minus-$n$'' is the strategy of playing Tit-for-tat until there are $n$ moves to go, at which point one plays $A$ the rest of the way.
+
+To make sure various strategies are \textit{strictly} dominated, I tinkered with the payoffs a little. Someone who plays Tit-for-tat-minus-$n$ gets a bonus of $\nicefrac{n}{10}$.
+
+From now on, unless it makes too much ambiguity, we'll use $n$ to refer to the strategy of playing Tit-for-Tat-minus $n$. Note that 0 is strictly dominated by both 1 and 2. If we assume that neither player will play 0, then 1 is dominated by 2. And if we assume that neither player will play 0 or 1, then 2 is dominated by 3. So iterative deletion of strictly dominated strategies leaves us with nothing but 3. That is, both players should play $A$ from the start, if they want to play strategies that are NSDAI.
+
+But also note that any strategy except 0 is BR. Given a probability of 1 that the other player will play 0, the best response is 1. Given a probability of 1 that the other player will play 1, the best response is 2. And given a probability of 1 that the other player will play 2 or 3, the best response is 3. So 1 and 2 are both BR, but not NSDAI, and hence not NWDAI.
+}
+
+\stratcomp{Some BR strategies are not NWD}{
+This one is a little odd, though it turns out to be important for a lot of subsequent analysis.
+
+\starttab{r c c}
+%This is called WeakDom
+%It is an illustration of how a weakly dominated strategy can have a lot of 'virtues'
+\textbf{\citegame{WeakDom}} & $l$ & $r$ \\
+$U$ & 1, 1 & 0, 0 \\
+$D$ & 0, 0 & 0, 0 \\
+\fintab This is a game of perfect co-operation; the players get the same payoffs in every case. And they both get 1 if we end up at $\langle U, l \rangle$, and 0 otherwise. Note that both $D$ and $R$ are weakly dominated. So $\langle U, l \rangle$ is the only NWD outcome of the game. 
+
+But both $D$ and $r$ are best responses. If $C$ plays $r$, then it doesn't matter what $R$ plays. Since a best response only has to be as good as the alternatives, not better, in that circumstance $D$ is a best response. A similar argument shows that $r$ is a best response. So we have two examples of strategies that are BR despite being weakly dominated.
+}
+}
+
+\begin{description}
+\item[BR] That is, is a \textbf{B}est \textbf{R}esponse.
+\end{description}
+
+\section{Iterated Best Responses}
+
+Some best responses are pretty crazy when playing against a rational opponent. Consider the following game from $R$'s perspective.
+
+\starttab{r c c}
+%This is called BadBR
+%It is an illustration of how a best response can be a bad move
+\gamelab{BadBR} & $L$ & $r$ \\
+$U$ &  5, 5 & 0, -5\\
+$D$ & 0, 5 & 2, -5\\
+\fintab In this game, $D$ is a best response. It does best if $C$ chooses $r$. But why on earth would $C$ do that? $C$ gets 5 for sure if she chooses $L$, and -5 for sure if she chooses $r$. Assuming the weakest possible rationality constraint on $C$, she won't choose a sure loss over a sure gain. So given that, $C$ should choose $U$.
+
+Of course, we could have shown that with just considering domination. Note that $U$ is both NSDAI and NWDAI, while $D$ has neither of these properties. The following example is a little more complex.
+
+\starttab{r c c c}
+%This is called NonIteratedBR
+%It is an illustration of how a best response can be a bad move
+\gamelab{NonIteratedBR} & $l$ & $m$ & $r$\\
+$U$ & 1, 3 & 0, 1 & 1, 0\\
+$D$ & 0, 0 & 1, 1 & 0, 3\\
+\fintab In this game neither player has a dominated move. So just using domination techniques can't get us closer to solving the game. And, from $R$'s perspective, thinking about best responses doesn't help either. $U$ is a best response if $C$ is going to play $l$ or $r$ with probability at least $\nicefrac{1}{2}$, and $D$ is best response if $C$ is going to play $m$ with probability at least $\nicefrac{1}{2}$.
+
+But note that $m$ is not a best response for $C$. The argument for this is just the argument we used in \citegame{BRNSD}. Now let's assume, when thinking from $R$'s perspective, that $C$ will play a best response. That is, we're assuming $C$ will play either $l$ or $r$. Given that, the best thing for $R$ to do is to play $U$.
+
+More carefully, if $R$ knows that $C$ is rational, and if $R$ knows that rational agents always play best responses, then $R$ has a compelling reason to play $U$. This suggests a new normative status.
+
+\begin{description}
+\item[BRBR] That is, is a \textbf{B}est \textbf{R}esponse to a \textbf{B}est \textbf{R}esponse.
+\end{description}
+
+In the footnotes, I show some properties of BRBR strategies. We will use this notion a lot going forward.\footnote{\stratcomp{All BRBR strategies are BR}{
+This is obvious. All BRBR strategies are best responses to best responses, hence they are best responses to something, which by definition makes them BR.}
+
+\stratcomp{Some BR strategies are not BRBR}{
+See \citegame{NonIteratedBR}. From $R$'s perspective, $D$ is BR but not BRBR.}}
+
+We can go on further. Think about \citegame{NonIteratedBR} from $C$'s perspective. Assuming $R$ is rational, and knows $C$ is rational, then $R$ has a compelling reason to play $U$. And if $R$ plays $U$, the best response for $C$ is $l$. This doesn't mean that $l$ is the only best response; $r$ is also a best response. Nor does it mean $l$ is the only best response to a best response; $r$ is the best response to $D$, which as we showed above is a best response. What's really true is that $l$ is the only best response to a best response to a best response.
+
+That means that if $C$ knows that $R$ knows that $C$ is rational, then $C$ has a strong reason to play $l$. We could designate this with a new status, perhaps BRBRBR. But at this point it's best to simply iterate to infinity.\footnote{
+\stratcomp{All BRBRI strategies are BRBR}{
+This is obvious.}
+
+\stratcomp{Some BRBR strategies are not BRBRI}{
+See \citegame{NonIteratedBR}. From $C$'s perspective, $R$ is BRBR but not BRBRI.}}
+
+\begin{description}
+\item[BRBRI] That is, is a \textbf{B}est \textbf{R}esponse to a \textbf{B}est \textbf{R}esponse to a Best Response, and so on to \textbf{I}nfinity.
+\end{description}
+
+\noindent We say that $p$ is \textbf{mutual knowledge} if every player in the game knows it. We say that $p$ is \textbf{common knowledge} if everyone knows it, and everyone knows everyone knows it, and so on. It seems plausible that in any game where it is mutual knowledge that everyone is rational, agents should only play BRBR strategies. And at least there's a case to be made that in a game where it is common knowledge that the players are rational, players should play BRBRI strategies. (Though we will come back to this point repeatedly, especially in the context of extensive form games.)\footnote{Let's update our graph of different normative statuses.
+
+\begin{center}
+\begin{picture}(240, 150)
+%\put(47.5, 0){NSD}
+\pictext{120}{0}{NSD}
+%\put(60, 0){\makebox(0, 0)[b]{NSD}}
+\put(120, 12){\line(-3, 1){60}}
+\put(120, 12){\line(0, 1){20}}
+\put(120, 12){\line(3, 1){60}}
+%\put(20, 40){\makebox(0, 0){NSDAI}}
+%\put(2, 36){\makebox[30][c]{NSDAI}}
+\pictext{60}{36}{NWD}
+\pictext{120}{36}{NSDAI}
+\pictext{180}{36}{BR}
+%\put(86, 36){NWD}
+\put(60, 48){\line(0, 1){20}}
+\put(120, 48){\line(-3, 1){60}}
+%\put(43, 72){NWDAI}
+\pictext{60}{72}{NWDAI}
+\put(180, 48){\line(0, 1){20}}
+\pictext{180}{72}{BRBR}
+\put(180, 84){\line(0, 1){20}}
+\put(120, 48){\line(15, 14){60}}
+\pictext{180}{108}{BRBRI}
+\end{picture}
+\end{center}
+
+\noindent We have already gone over some of the proofs of the claims in the graph; let's finish up this part by going over the rest.
+
+\stratcomp{All BRBRI strategies are NSDAI}{
+The proof of this is actually a little complicated. We will just go over the proof for a two-player game; generalising the proof introduces even more complications. 
+
+Assume for \textit{reductio} that it isn't true. That is, assume that a BRBRI strategy, call it $s_0$ is deleted in the process of iterative deletion of strongly dominated strategies. So $s_0$ is a best response to some strategy $s_1$ which is a best response to some strategy $s_2$ which is a best response to some strategy $s_3$ etc. (Since we're assuming games are finite, many of these $s_i$ must be identical to each other.)
+
+Every such deletion happens at some round or other of deletion. Let the round that this BRBRI strategy is deleted be the $n$'th round. That is, given the strategies surviving after $n-1$ rounds, some alternative strategy $s^\prime$ does better than $s_0$ no matter what alternative strategy is played. So $s_1$ must have been already deleted. That's because $s_0$ is a best response to $s_1$, and an inferior response to all surviving strategies. So $s_1$ is deleted in, at the latest, the $n-1$'th round.
+
+Now consider the round at which $s_1$ is deleted. Some alternative to $s_1$ is a better response than $s_1$ to any strategy surviving to this stage of the iterative deletion process. But $s_1$ is, by hypothesis, a best response to $s_2$. So $s_2$ must have been antecedently deleted before this round. That is, $s_2$ must have been deleted by at the latest the $n-2$'nd round of the iterative deletion process.
+
+Generalising this argument, strategy $s_k$ must be deleted by, at the latest, the $n-k$'th round of the iterative deletion process. But this is impossible. Consider, for instance, the case where $k = n+1$. Strategy $s_{n+1}$ must be deleted by, at the latest, the -1'th round. But there is no -1'th round, so we get a contradiction, completing the \textit{reductio}.
+}
+
+\stratcomp{Some strategies which are BRBR are not NSDAI, and hence not NWDAI}{
+See \citegame{ThreeRoundPD}. Playing 1 is a best response (to playing 0). And playing 2 is a best response to playing 1, so it is BRBR. But iterative deletion of strongly dominated strategies deletes first 0, then 1, then 2. So playing 2 is not NSDAI.
+}
+
+\stratcomp{Some strategies which are BRBRI, and hence BR, and not NWD}{
+We again use \citegame{WeakDom}. Playing $D$ is a best response to playing $R$, which is a best response to playing $D$, which is a best response to playing $R$, etc. So each of these strategies is BRBRI. But both strategies are weakly dominated. So being BRBRI does not entail being NWD.}}
+
+\section{Nash Equilibrium}
+In a two-player game, for a strategy $s_0$ to be BRBRI, it must be the best response to some strategy $s_1$, which is the best response to some strategy $s_2$, which is the best response to some strategy $s_3$, etc. But we are assuming that there are only finitely many strategy choices available. So how can we get such an infinite chain going?
+
+The answer, of course, is to repeat ourselves. As long as we get some kind of loop, we can extend such a chain forever, by keeping on circling around the loop. And the simplest loop will have just two steps in it. So consider any pair of strategies $\langle s_0, s_1 \rangle$ such that $s_0$ is the best response to $s_1$, and $s_1$ is the best response to $s_0$. In that case, each strategy will be BRBRI, since we can run around that two-step `loop' forever, with each stop on the loop being a strategy which is a best response to the strategy we previous stopped at.
+
+When a pair of strategies fit together nicely like this, we say they are a \textbf{Nash Equilibrium}. More generally, in an $n$-player game, we use the following definition.
+
+\begin{description}
+\item[NE] Some strategies $s_1, ..., s_n$ in an $n$-player game form a \textbf{N}ash \textbf{E}quilibrium iff for each $i$, $s_i$ is a best response to the strategies played by the other $n-1$ players. That is, iff player $i$ cannot do better by playing any alternative strategy to $s_i$, given that the other players are playing what they actually do.
+\end{description}
+
+\noindent The `Nash' in Nash \Eqm\ is in honour of John Nash, who developed the concept, and proved some striking mathematical results concerning it. You may remember that Nash was the subject of a bio-pic some years back, `A Beautiful Mind'. The movie required believing that Russell Crowe was a mad genius, and didn't properly deploy the notion of Nash \Eqm, so maybe it is best if we keep our contact with Nash to the textbooks.
+
+\stratcomp{All NE strategies are BRBRI}{
+By hypothesis, if $s$ is part of a NE pair, then there is some $s^\prime$ such that $s$ is a best response to $s^\prime$, and $s^\prime$ is a best response to $s$. And that means that each of $s$ and $s^\prime$ is BRBRI.
+}
+
+\stratcomp{Some BRBRI are not NE}{
+We'll prove a slight stronger result in a few pages, but for now we can get the result we need by looking at the following simple game.
+
+\starttab{r c c}
+%This game is called MatchingPennies
+\gamelab{MatchingPennies} & $l$ & $r$ \\
+$U$ & 1, 0 & 0, 1 \\
+$D$ & 0, 1 & 1, 0 \\
+\fintab None of the (pure) strategies $U, D, l$ or $r$ are NE. That's because there's no NE pair we can make out of those four. And that's fairly obvious from the fact that whichever corner of the table we end up in, one of the players would have done better by swapping their strategy.
+
+But note that each of the four strategies is BRBRI. $U$ is a best response to $l$, which is a best response to $D$, which is a best response to $r$, which is a best response to $U$, which is \dots.
+
+The point here should be clear once we think about how we got from the idea of BRBRI to the idea of NE. We wanted a `loop' of strategies, such that each was a best response to the strategy before it. NE was what we got when we had a loop of length 2. But there are loops which are longer than that; for example, there are loops of length 4. And any loop is sufficient for the strategies on the loop to be BRBRI. And these strategies need not be NE.}
+
+Eliminating strongly dominated strategies will, if it gets you to something, get you to Nash Equilibria. Eliminating weakly dominated strategies may have more curious results. The details are in a long footnote.\footnote{
+
+\stratcomp{Some NE strategies are not NWD, and hence not NWDAI}{
+We again use \citegame{WeakDom}.
+
+\starttab{r c c}
+%This is called WeakDom
+%It is an illustration of how a weakly dominated strategy can have a lot of 'virtues'
+\textbf{\citegame{WeakDom}} & $l$ & $r$ \\
+$U$ & 1, 1 & 0, 0 \\
+$D$ & 0, 0 & 0, 0 \\
+\fintab The pair $\langle D, r\rangle$ is a Nash \Eqm\ pair. But neither $D$ nor $r$ survives the cutting out of weakly dominated strategies.
+}
+
+\stratcomp{Some NWDAI strategies are not NE}{
+This one is a little more complicated, but only a little. Basically, we take \citegame{MatchingPennies} and add a `co-operative' strategy.
+
+\starttab{r c c c}
+\gamelab{CoopMatchingPennies} & $l$ &$m$ &$r$ \\
+$U$ & 4, 4 & 3, 3 & 3, 3 \\
+$M$ & 3, 3 & 5, 0 & 0, 5 \\
+$D$ & 3, 3 & 0, 5 & 5, 0\\
+%This game is called CoopMatchingPennies
+%It illustrates how NE can be stronger than avoiding dominance
+\fintab First, note that $\langle U, l\rangle$ is a Nash \Eqm. Second, note that if $R$ plays $M$, then $C$'s best response is to play $r$. And if $C$ plays $r$, $R$'s best response is to play $D$, and so on. So $R$ playing $M$ can't be part of any Nash \Eqm. If it were, there would have to be some response on $C$'s part to which $R$ playing $M$ was a best response, and there isn't. Similar arguments show that $R$ playing $D$ isn't part of any Nash \Eqm. And similar arguments to that show that $C$ playing either $m$ or $r$ can't be part of any Nash \Eqm. 
+
+So $\langle U, l\rangle$ is the \textit{only} (pure) Nash \Eqm in the game. (I'll explain why I'm puttng `pure' in occasionally very soon!) But eliminating dominated strategies gets us precisely nowhere, since as can be quickly verified, there are no dominated strategies in the game. So for each player, playing $M$ is NWDAI, but is not NE.
+
+Note that this example is also an argument that some BRBRI strategies are not NE, since for each player $M$ is BRBRI. (Exercise: Prove this!)
+}
+%How to get a BRBRI in a finite game
+%Definition of Nash EQM
+%Position of Nash EQM
+Given all that, we can update the graph of normative statuses. 
+
+%\begin{figure}[t]
+\begin{center}
+\begin{picture}(240, 180)
+%\put(47.5, 0){NSD}
+\pictext{120}{0}{NSD}
+%\put(60, 0){\makebox(0, 0)[b]{NSD}}
+\put(120, 12){\line(-3, 1){60}}
+\put(120, 12){\line(0, 1){20}}
+\put(120, 12){\line(3, 1){60}}
+%\put(20, 40){\makebox(0, 0){NSDAI}}
+%\put(2, 36){\makebox[30][c]{NSDAI}}
+\pictext{60}{36}{NWD}
+\pictext{120}{36}{NSDAI}
+\pictext{180}{36}{BR}
+%\put(86, 36){NWD}
+\put(60, 48){\line(0, 1){20}}
+\put(120, 48){\line(-3, 1){60}}
+%\put(43, 72){NWDAI}
+\pictext{60}{72}{NWDAI}
+\put(180, 48){\line(0, 1){20}}
+\pictext{180}{72}{BRBR}
+\put(180, 84){\line(0, 1){20}}
+\put(120, 48){\line(15, 14){60}}
+\pictext{180}{108}{BRBRI}
+\put(180, 120){\line(0,1){20}}
+\pictext{180}{144}{NE}
+\label{NormsAfterNE}
+\end{picture}
+%\caption{Normative Statuses}
+\end{center}
+%\end{figure}
+}
+
+\section{Nash Equilibrium in Simultaneous Move Games}
+
+Let's return to \citegame{MatchingPennies}. It looks at first like there won't be any Nash \Eqm\ strategies in this game. That would be unfortunate; all of our statuses so far are exemplified by at least one strategy in each game.
+
+But that would be too quick. It leaves out a large class of strategies. Game theorists say that as well as simply choosing to play $U$, or choosing to play $D$, $R$ has another choice. She can play a \textbf{mixed strategy}. A mixed strategy is where the player plays different pure strategies with different probabilities. We'll come back very soon to what we might possibly \textit{mean} by `probability' here, but for now let's explore the consequences for the existence of Nash Equilibria.
+
+Let's assume that $R$ plays $U$ with probability $\nicefrac{1}{2}$, and $D$ with probability $\nicefrac{1}{2}$. And similarly, assume that $C$ plays $l$ with probability $\nicefrac{1}{2}$, and $r$ with probability $\nicefrac{1}{2}$. Can either player do better by deviating from these strategies?
+
+Let's look at it first from $C$'s perspective. If she plays $l$, then her expected return is given by the following equation.
+\begin{align*}
+E(L) &= \text{Prob that } R \text{ plays $U$} \times \text{Payoff of }\langle U, l \rangle \\
+& \hspace{36pt} + \text{Prob that } R \text{ plays $D$} \times \text{Payoff of }\langle D, l \rangle \\
+&= \nicefrac{1}{2} \times 0 + \nicefrac{1}{2} \times 1 \\
+&= \nicefrac{1}{2}
+\end{align*}
+\noindent And the expected return of playing $r$ is given by the following equation.
+\begin{align*}
+E(R) &= \text{Prob that } R \text{ plays $U$} \times \text{Payoff of }\langle U, r \rangle \\
+& \hspace{36pt} + \text{Prob that } R \text{ plays $D$} \times \text{Payoff of }\langle D, r \rangle \\
+&= \nicefrac{1}{2} \times 1 + \nicefrac{1}{2} \times 0 \\
+&= \nicefrac{1}{2}
+\end{align*}
+\noindent Let $M_x$ be the mixed strategy of playing $L$ with probability $x$, and $R$ with probability $1-x$. Then the expected value of $M_x$ is given by the following equation.
+\begin{align*}
+E(M_x) &= \Pr(l)E(l) + \Pr(r)E(r) \\
+ &= \nicefrac{x}{2} + \nicefrac{1-x}{2} \\
+&= \nicefrac{1}{2}
+\end{align*}
+\noindent So whichever strategy $C$ adopts, whether it is $l$, $r$ or one of the continuum many values of $M_x$, she'll have an expected payout of $\nicefrac{1}{2}$. That means that she can't do any better by playing any alternative to $M_{\nicefrac{1}{2}}$. Of course, that's for the rather boring reason that any strategy is as good as any other at this point.
+
+When we're discussing $R$'s strategies, we'll say that $M_x$ is the strategy of playing $U$ with probability $x$, and $D$ with probability $1-x$. A similar argument shows that given that $C$ is playing $M_{\nicefrac{1}{2}}$, all strategies are as good as each other for $R$. That means that the pair $\langle M_{\nicefrac{1}{2}}, M_{\nicefrac{1}{2}} \rangle$ is a Nash \Eqm. Each player does as well as they can playing $M_{\nicefrac{1}{2}}$ given that the other player is playing $M_{\nicefrac{1}{2}}$. And that's the definition of a Nash \Eqm.
+
+It turns out that for any game with a finite number of choices for each player, there is always at least one Nash \Eqm, if we include mixed strategies. The proof of this is beyond the scope of these notes, however. 
+
+Rather than using ad hoc naming conventions like $M_x$, it would be good to have better ways of referring to mixed strategies. I'll use the following (fairly standard) notation. If a player's choices for pure strategies are $s_1, s_2, ..., s_n$, then the vector $\langle x_1, x_2, ..., x_n\rangle$ will represent the mixed strategy of playing $s_i$ with probability $x_i$. If the game is represented on a table, we'll let the first (i.e., leftmost) column be $C$'s strategy $s_1$, the second column be her strategy $s_2$, and so on. And we'll let the first (i.e., highest) row be $R$'s strategy $s_1$, the second row be her strategy $s_2$, and so on. This notation will need to get more complicated when we consider games in extensive form, but in fact we usually use mixed strategies for games displayed in strategic form, so this isn't a huge loss.

@@ -1,0 +1,133 @@
+\section{Causal and Evidential Decision Theory}
+In the last chapter we looked at two ways of thinking about the expected utility of an action $A$. These are \begin{align*}
+Pr(S_1)U(S_1A) + ...  + Pr(S_n)U(S_nA) \\
+Pr(S_1|A)U(S_1A) + ...  + Pr(S_n|A)U(S_nA)
+\end{align*}
+
+\noindent It will be convenient to have names for these two approaches. So let's say that the first of these, which uses unconditional probabilities, is \textbf{causal expected value}, and the second of these, which uses conditional probabilities is the \textbf{evidential expected value}. The reason for the names should be clear enough. The causal expected value measures what you can expect to bring about by your action. The evidential expected value measures what kind of result your action is evidence that you'll get.
+
+\textbf{Causal Decision Theory} then is the theory that rational agents aim to maximise causal expected utility.
+
+\textbf{Evidential Decision Theory} is the theory that rational agents aim to maximise evidential expected utility.
+
+In the last chapter we looked at reasons why we should be causal decision theorists rather than evidential decision theorists. We'll close out this section by looking at various puzzles for causal decision theory, and then looking at one reason why we might want some kind of hybrid approach.
+
+\section{Right and Wrong Tabulations}
+If we use the causal approach, it is very important how we divide up the states. We can see this by thinking again about an example from Jim Joyce that we discussed a while ago.
+
+\begin{quotation}
+Suupose you have just parked in a seedy neighborhood when a man approaches and offers to ``protect'' your car from harm for \$10. You recognize this as extortion and have heard that people who refuse ``protection'' invariably return to find their windshields smashed. Those who pay find their cars intact. You cannot park anywhere else because you are late for an important meeting. It costs \$400 to replace a windshield. Should you buy ``protection''? Dominance says that you should not. Since you would rather have the extra \$10 both in the even that your windshield is smashed and in the event that it is not, Dominance tells you not to pay. (Joyce, \textit{The Foundations of Causal Decision Theory}, pp 115-6.)
+\end{quotation}
+
+\noindent If we set this up as a table, we get the following possible states and outcomes.
+
+\starttab{r c  c}
+& \textbf{Broken Windshield} & \textbf{Unbroken Windshield} \\
+\textbf{Pay extortion} & -\$410 & -\$10 \\
+\textbf{Don't pay} & -\$400 & 0
+\stoptab Now if you look at the causal expected value of each action, the expected value of not paying will be higher. And this will be so whatever probabilities you assign to broken windshield and unbroken windshield. Say that the probability of the first is $x$ and of the second is $1-x$. Then we'll have the following (assuming dollars equal utils)
+\begin{align*}
+Exp(U(\text{Pay extortion})) &= -410x -10(1-x) \\
+ &= -400x - 10 \\
+Exp(U(\text{Don't pay}) &= -400x -0(1-x) \\
+ &= -400x
+\end{align*}
+
+Whatever $x$ is, the causal expected value of not paying is higher by 10. That's obviously a bad result. Is it a problem for causal decision theory though? No. As the name `causal' suggests, it is crucial to causal decision theory that we separate out what we have causal power over from what we don't have causal power over. The states of the world represent what we can't control. If something can be causally affected by our actions, it can't be a background state.
+
+So this is a complication in applying causal decision theory. Note that it is not a problem for evidential decision theory. We can even use the very table that we have there. Let's assume that the probability of broken windshield given paying is 0, and the probability of unbroken windshield given paying is 0. Then the expected utilities will work out as follows \begin{align*}
+Exp(U(\text{Pay extortion})) &= -410 \times 0 -10 \times 1 \\
+ &=  -10 \\
+Exp(U(\text{Don't pay}) &= -400 \times 1 - 10 \times 0 \\
+ &= -400
+\end{align*} So we get the right result that we should pay up. It is a nice feature of evidential decision theory that we don't have to be so careful about what states are and aren't under our control. Of course, if the only reason we don't have to worry about what is and isn't under our control is that the theory systematically ignores such facts, even though they are intuitively relevant to decision theory, this isn't perhaps the best advertisement for evidential decision theory.
+
+\section{Why Ain'Cha Rich}
+You might think that the following argument for taking one-box is compelling.
+
+\begin{enumerate*}
+\item Most people who take one box end up rich, and most people who take two boxes don't.
+\item It is better, at least in the context of this puzzle, to end up rich than not.
+\item So you should do what the people who end up rich do.
+\item So you should take one box.
+\end{enumerate*}
+
+\noindent The problem is that this argument over-generates. The same argument implies that you should take just one box in the case where the demon makes the prediction, and then tells you what it is, before you choose. Call this case \textit{Transparent Newcomb's Problem}. Evidential decision theory says that you should take both boxes in it, just like causal decision theory says. But the kind of reasoning we just laid out says you should take one box in both the regular and transparent version of Newcomb's Problem. So the reasoning must be flawed.
+
+\section{Dilemmas}
+Consider the following story, told by Allan Gibbard and William Harper in their paper setting out causal decision theory. \begin{quote}
+Consider the story of the man who met Death in Damascus. Death looked surprised, but then recovered his ghastly composure and said, 
+`I {\sc am coming for you tomorrow}'. The terrified man that night bought a camel and rode to Aleppo. The next day, Death knocked on the door of the room where he was hiding, and said `I {\sc have come for you}'. 
+
+`But I thought you would be looking for me in Damascus', said the man.
+ 
+`{\sc Not at all}', said Death `{\sc that is why I was surprised to see you yesterday. I knew that today I was to find you in Aleppo}'. 
+
+Now suppose the man knows the following. Death works from an appointment book which states time and place; a person dies if and only if the book correctly states in what city he will be at the stated time. The book is made up weeks in advance on the basis of highly reliable predictions. An appointment on the next day has been inscribed for him. Suppose, on this basis, the man would take his being in Damascus the next day as strong evidence that his appointment with Death is in Damascus, and would take his being in Aleppo the next day as strong evidence that his appointment is in Aleppo...
+ 
+If... he decides to go to Aleppo, he then has strong grounds for expecting that Aleppo is where Death already expects him to be, and hence it is rational for him to prefer staying in Damascus. Similarly, deciding to stay in Damascus would give him strong grounds for thinking that he ought to go to Aleppo.
+\end{quote}
+In cases like this, the agent is in a real dilemma. Whatever he does, it seems that it will be the wrong thing. If he goes to Aleppo, then Death will probably be there. And if he stays in Damascus, then Death will probably be there as well. So it seems like he is stuck.
+
+Of course in one sense, there is clearly a right thing to do, namely go wherever Death isn't. But that isn't the sense of right decision we're typically using in decision theory. Is there something that he can do that maximises expected utility. In a sense the answer is ``No''. Whatever he does, doing that will be some evidence that Death is elsewhere. And what he should do is go wherever his evidence suggests Death isn't. This turns out to be impossible, so the agent is bound not to do the rational thing.
+
+Is this a problem for causal decision theory? It is if you think that we should always have a rational option available to us. If you think that `rational' here is a kind of `ought', and you think `ought' implies `can', then you might think we have a problem, because in this case there's a sense in which the man can't do the right thing. (Though this is a bit unclear; in the actual story, there's a perfectly good sense in which he could have stayed in Aleppo, and the right thing to do, given his evidence, would have been to stay in Aleppo. So in one sense he could have done the right thing.) But both the premises of the little argument here are somewhat contentious. It isn't clear that we should say you ought, in any sense, maximise expected utility. And the principle that ought implies can is rather controversial. So perhaps this isn't a clear counterexample to causal decision theory.
+
+The response that Gibbard and Harper give to this puzzle is that it is just a dil\-emma. Whatever the man plays, he'll regret it. That's one way of rejecting the ought implies can premise. Not everyone is convinced by that move. Reed Richter argued that this was the wrong thing to say about \textit{asymmetric} versions of the Death in Damascus case. Imagine that getting to Aleppo will cost a huge amount of money, and be incredibly painful. Then the table might look something like this:
+
+\starttab{r c c}
+%This is called AsymmetricDeathinDamascus
+%It is Matching Pennies with Asymmetries
+\gamelab{AsymmetricDeathinDamascus} & \textbf{Damascus} & \textbf{Aleppo} \\
+\textbf{Damascus} & 1, -1 & -1, 0.5 \\
+\textbf{Aleppo} & -1, 1 & 1, -1.5 \\
+\fintab Again, whatever the man does, he will regret it, just like in the original Death in Damascus example. But it seems wrong to treat the two options available to the man symmetrically. After all, going to Aleppo is much worse for him. If forced to choose, Richter argued, he should stay in Damascus. Let's look at that case again after looking at a third kind of solution to the puzzle.
+
+\section{Ratificationism}
+
+Some people don't like Causal Decision Theory because it trucks in metaphysical notions like causation and counterfactuals. Richard Jeffrey was worried that Causal Decision Theory was too metaphysical, but he agreed that we should take both boxes in Newcomb's Problem. So he promoted a \textit{Ratificationist} version of Evidential Decision Theory.
+
+The idea behind ratificationism is that only \textit{ratifiable} decisions are rationally allowed. A decision is ratifiable if it maximises expected utility conditional on that decision being taken. We can add a ratifiability clause to Evidential Decision Theory, as Jeffrey does, or to Causal Decision Theory, as (in effect) Frank Arntzenius has recently suggested. 
+
+If we add a ratifiability clause to Evidential Decision Theory, we get the result that rational agents should take both boxes. That's because only it is ratifiable. We computed earlier the expected utility of each choice according to Evidential Decision Theory, and concluded that the utility of taking just one box was higher. But now look what happens if we conditionalise on the hypothesis that we'll take just one box. (For simplicity, we'll again assume \$1 is worth 1 util.) It is easy enough to see that taking both boxes is better.
+
+\begin{align*}
+\Pr(\text{Million in opaque box} | \text{Take one box}) &= 0.99 \text{therefore} \\
+V(\text{Take one box} | \text{Take one box}) &= 0.99 \times 1,000,000 + 0.01 \times 0 \\
+&= 990,000 \\
+V(\text{Take both boxes} | \text{Take one box}) &= 0.99 \times 1,001,000 + 0.01 \times 1,000 \\
+&= 991,000 
+\end{align*} But there is something very odd about this way of putting things. It requires thinking about the expected value of an action conditional on something that entails the action is not taken. In Newcomb's Problem we can sort of make sense of this; we use the conditional assumption that we're taking one box to seed the probability of the demon doing certain actions, then we run the calculations from there. But I don't see any reason to think that we should, in general, be able to make sense of this notion.
+
+A better approach, I think, is to mix ratificationism with Causal Decision Theory.  This lets us solve what's otherwise a hard problem for Causal Decision Theory. Note that when we argued that Causal Decision Theory implies you should take both boxes, we argued somewhat indirectly. We argued that Causal Decision Theory validated dominance reasoning in Newcomb's Problem, and dominance reasoning implied taking both boxes. We didn't do what you'd expect someone using Causal Decision Theory to do, of finding the values for the two choices and comparing them. And that leads to some problems. Imagine the following situation. You are offered the choice between getting \$2,000 for certain, and playing the game with the demon and the boxes. You might feel that you should take the money, but Causal Decision Theory on its own has a hard time generating that verdict.
+
+Adding ratification makes the problem easier. Let's assume the demon is very very accurate; given that the player is choosing $\varphi$, the probability that the demon will predict $\varphi$ is 0.9999. Now let's work through the values of taking each of the options. (Let $p_i$ is the proposition that the demon predicts that $i$ boxes will be taken. We'll use $T_i$ as shorthand for \textit{Take i boxes}. And we'll assume, again that a dollar is worth a util.)
+\begin{align*}
+U(T_1 | T_1) &= \Pr(T_1 \boxright p_1 | T_1)U(T_1 \wedge p_1) + \Pr(T_1 \boxright p_2 | T_1)U(T_1 \wedge p_2) \\
+&= 0.9999 \times 1,000,000 + 0.0001 \times 0 \\
+&= 999,900 \\
+U(T_2 | T_1) &= \Pr(T_2 \boxright p_1 | T_1)U(T_2 \wedge p_1) + \Pr(T_2 \boxright p_2 | T_1)U(T_2 \wedge p_2) \\
+&= 0.9999 \times 1,001,000 + 0.0001 \times 1,000 \\
+&= 1,001,900 \\
+U(T_1 | T_2) &= \Pr(T_1 \boxright p_1 | T_2)U(T_1 \wedge p_1) + \Pr(T_1 \boxright p_2 | T_2)U(T_1 \wedge p_2) \\
+&= 0.0001 \times 1,000,000 + 0.9999 \times 0 \\
+&= 100 \\
+U(T_2 | T_2) &= \Pr(T_2 \boxright p_1 | T_2)U(T_2 \wedge p_1) + \Pr(T_2 \boxright p_2 | T_2)U(T_2 \wedge p_2) \\
+&= 0.0001 \times 1,001,000 + 0.9999 \times 1,000 \\
+&= 1,100	
+\end{align*} The important thing to note about this calculation is that $\Pr(T_2 \boxright p_1 | T_1)$ is very high, 0.9999 in our version of the game. What this says is that once we've assumed $T_1$, then the counterfactual $T_2 \boxright p_1$ is very very probable. That is, given that we're taking 1 box, it is very probable that if we had taken 2 boxes, there would still have been money in the opaque box. But that's just what Newcomb's problem suggests.
+
+Note that neither $T_1$ nor $T_2$ is ratifiable. Given $T_1$, the player would be better with $T_2$. (The expected value of taking both boxes would be 1,001,900, as compared to an expected value of 999,900 for taking one box.) And given $T_2$, the player would be better with simply taking the \$2,000 and not playing, since the expected payout of $T_2$ is a mere 1,100. But taking \$2,000 is ratifiable. Given that the player is doing this, no other option is better. After all, if they are the kind of player who is moved by the reasoning that leads to taking the \$2,000, then they are almost certainly two boxers, and so probably the opaque box would be empty. So the only ratifiable decision is to take \$2,000. This ratificationist argument is, I think, intuitively plausible.
+
+\section{Weak Newcomb Problems}
+Imagine a small change to the original Newcomb problem. Instead of there being \$1000 in the clear box, there is \$800,000. Still, evidential decision theory recommends taking one box. The evidential expected value of taking both boxes is now roughly \$800,000, while the evidential expected value of taking just the one box is \$1,000,000. Causal decision theory recommends taking both boxes, as before.
+
+So neither theory changes its recommendations when we increase the amount in the clear box. But I think many people find the case for taking just the one box to be less compelling in this variant. Does that suggest we need a third theory, other than just causal or evidential decision theory?
+
+It turns out that we can come up with hybrid theories that recommend taking one box in the original case, but two boxes in the original case. Remember that in principle anything can have a probability, including theories of decision. So let's pretend that given the (philosophical) evidence on the table, the probability of causal decision theory is, say, 0.8, while the probability of evidential decision theory is 0.2. (I'm not saying these numbers are right, this is just a possibility to float.) And let's say that we should do the thing that has the highest \textit{expected} expected utility, where we work out expected expected utilities by summing over the expectation of the action on different theories, times the probability of each theory. (Again, I'm not endorsing this, just floating it.)
+
+Now in the original Newcomb problem, evidential decision theory says taking one boxes is \$999,000 better, while causal decision theory say staking both boxes is \$1,000 better. So the expected expected utility of taking one box rather than both boxes is $0.2 \times 999,000 - 0.8 \times 1,000$, which is 199,000. So taking one box is `better' by 199,000
+
+In the modified Newcomb problem, evidential decision theory says taking one boxes is \$200,000 better, while causal decision theory says taking both boxes is \$800,000 better. So the expected expected utility of taking one box rather than both boxes is $0.2 \times 200,000 - 0.8 \times 800,000$, i.e., -600,000. So taking both boxes is `better' by 600,000.
+
+If you think that changing the amount in the clear box can change your decision in Newcomb's problem, then possibly you want a hybrid theory, perhaps like the one floated here.

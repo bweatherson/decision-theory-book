@@ -1,0 +1,83 @@
+\section{Decisions and Games}
+This course is an introduction to decision theory. We're interested in what to do when the outcomes of your actions depend on some external facts about which you are uncertain. The simplest such decision has the following structure.
+
+\starttab{c c c}
+	& \textbf{State 1} & \textbf{State 2} \\
+	\textbf{Choice 1 }& $a$ & $b$ \\
+	\textbf{Choice 2} & $c$ & $d$
+\stoptab The choices are the options you can take. The states are the ways the world can be that affect how good an outcome you'll get. And the variables, $a$, $b$, $c$ and $d$ are numbers measuring how good those outcomes are. For now we'll simply have higher numbers representing better outcomes, though eventually we'll want the numbers to reflect how good various outcomes are.
+
+Let's illustrate this with a simple example. It's a Sunday afternoon, and you have the choice between watching a football game and finishing a paper due on Monday. It will be a little painful to do the paper after the football, but not impossible. It will be fun to watch football, at least if your team wins. But if they lose you'll have spent the afternoon watching them lose, and still have the paper to write. On the other hand, you'll feel bad if you skip the game and they win. So we might have the following decision table.
+
+\starttab{c c c}
+	& \textbf{Your Team Wins} &\textbf{ Your Team Loses} \\
+	\textbf{Watch Football} & 4 & 1 \\
+	\textbf{Work on Paper} & 2 & 3
+\stoptab The numbers of course could be different if you have different preferences. Perhaps your desire for your team to win is stronger than your desire to avoid regretting missing the game. In that case the table might look like this.
+
+\starttab{c c c}
+	& \textbf{Your Team Wins} & \textbf{Your Team Loses} \\
+	\textbf{Watch Footbal}l & 4 & 1 \\
+	\textbf{Work on Paper} & 3 & 2
+\stoptab Either way, what turns out to be for the best depends on what the state of the world is. These are the kinds of decisions with which we'll be interested.
+
+Sometimes the relevant state of the world is the action of someone who is, in some loose sense, interacting with you. For instance, imagine you are playing a game of rock-paper-scissors. We can represent that game using the following table, with the rows for your choices and the columns for the other person's choices.
+
+\vspace{9pt}
+\starttab{c c c c}
+	& & & \\
+	& \textbf{Rock} & \textbf{Paper} & \textbf{Scissors} \\
+	\textbf{Rock} & 0 & -1 & 1 \\
+	\textbf{Paper} & 1 & 0 & -1 \\
+	\textbf{Scissors} & -1 & 1 & 0
+\stoptab Not all games are competitive like this. Some games involve coordination. For instance, imagine you and a friend are trying to meet up somewhere in New York City. You want to go to a movie, and your friend wants to go to a play, but neither of you wants to go to something on their own. Sadly, your cell phone is dead, so you'll just have to go to either the movie theater or the playhouse, and hope your friend goes to the same location. We might represent the game you and your friend are playing this way.
+
+\starttab{c   c c}
+	& \textbf{Movie Theater} & \textbf{Playhouse} \\
+	\textbf{Movie Theater} & (2, 1) & (0, 0) \\
+	\textbf{Playhouse} & (0, 0) & (1, 2)
+\stoptab In each cell now there are two numbers, representing first how good the outcome is for you, and second how good it is for your friend. So if you both go to the movies, that's the best outcome for you, and the second-best for your friend. But if you go to different things, that's the worst result for both of you. We'll look a bit at games like this where the party's interests are neither strictly allied nor strictly competitive.
+
+Traditionally there is a large division between \textbf{decision theory}, where the outcome depends just on your choice and the impersonal world, and \textbf{game theory}, where the outcome depends on the choices made by multiple interacting agents. We'll follow this tradition here, starting on decision theory and then going on to game theory. The relationship between the two topics is complicated. On the one hand, every game is itself a decision problem. Or, perhaps better, it is a plurality of decision problems. So you might think that once we have described how to make decisions, it is just a matter of applying that theory to the class of problems where one's outcome is dependent on the actions of others. On the other hand, there are some approaches to that special class of decision problems where other rational actors are involved that are unavailable in the more general case. So it is worth spending some time separately on each.
+
+\section{Previews}
+Just thinking intuitively about decisions like whether to watch football, it seems clear that how likely the various states of the world are is highly relevant to what you should do. If you're more or less certain that your team will win, and you'll enjoy watching the win, then you should watch the game. But if you're more or less certain that your team will lose, then it's better to start working on the term paper. That intuition, that how likely the various states are affects what the right decision is, is central to modern decision theory.
+
+The best way we have to formally regiment likelihoods is \textbf{probability theory}. So we'll spend quite a bit of time in this course looking at probability, because it is central to good decision making. We'll spend some time going over the basics of probability theory itself. Many people, most people in fact, make simple errors when trying to reason probabilistically. This is especially true when trying to reason with so-called \textbf{conditional probabilities}. We'll look at a few common errors, and look at ways to avoid them. And we'll look at some arguments as to why we should use probability theory, rather than some other theory of uncertainty, in our reasoning. Outside of philosophy it is sometimes taken for granted that we should mathematically represent uncertainties as probabilities, but this is in fact quite a striking and, if true, profound result. So we'll pay some attention to arguments in favor of using probabilities. Some of these arguments will also be relevant to questions about whether we should represent the value of outcomes with numbers.
+
+We'll then look at two different ways to apply probabilities in making decisions. The different ways will be crucial for examples where one's own actions are evidence that the world is one way or another. And this class turns out to be very important when thinking about games.
+
+So that will lead into a discussion of games, and about the best way to reason in situations where you know other rational people are thinking about the same problem that you are thinking about. Game theory is a much more active area of research across the disciplines than is decision theory, and we'll spend much of our time in that part of the course looking at contributions by economists.
+
+Finally, we'll look at how groups make decisions. One common way that groups do this is by voting. But there are a number of ways to aggregate votes, especially when there are more than two choices available. And none of the ways seem to give us exactly what we want. So we'll look at the strengths and weaknesses of each.
+
+To end today, let's look at some of the examples that have motivated theorists in the different fields.
+
+\section{Example: Newcomb}
+In front of you are two boxes, call them A and B. You call see that in box B there is \$1000, but you cannot see what is in box A. You have a choice, but not perhaps the one you were expecting. Your first option is to take just box A, whose contents you do not know. Your other option is to take both box A and box B, with the extra \$1000.
+
+There is, as you may have guessed, a catch. A demon has predicted whether you will take just one box or take two boxes. The demon is very good at predicting these things -- in the past she has made many similar predictions and been right every time. If the demon predicts that you will take both boxes, then she's put nothing in box A. If the demon predicts you will take just one box, she has put \$1,000,000 in box A. So the table looks like this.
+\starttab{l   c c}
+& \textbf{Predicts 1 box} & \textbf{Predicts 2 boxes} \\
+\textbf{Take 1 box} & \$1,000,000 & \$0 \\
+\textbf{Take 2 boxes} & \$1,001,000 & \$1,000
+\stoptab There are interesting arguments for each of the two options here.
+
+The argument for taking just one box is easy. The way the story has been set up, lots of people have taken this challenge before you. Those that have taken 1 box have walked away with a million dollars. Those that have taken both have walked away with a thousand dollars. You'd prefer to be in the first group to being in the second group, so you should take just one box.
+
+The argument for taking both boxes is also easy. Either the demon has put the million in box A or she hasn't. If she has, you're better off taking both boxes. That way you'll get \$1,001,000 rather than \$1,000,000. If she has not, you're better off taking both boxes. That way you'll get \$1,000 rather than \$0. Either way, you're better off taking both boxes, so you should do that.
+
+Both arguments seem quite strong. The problem is that they lead to incompatible conclusions. So which is correct?
+
+\section{Example: Centipede}
+Two strangers, Ankita and Bojan, have been offered the chance to play a game. Each has to write on a sheet of paper a whole number between 1 and 100. Let $a$ be what Ankita writes, and $b$ be what Bojan writes. Let $x$ be the smaller of these values. (Or if $a = b$, let $x$ just be $a$.) If they write the same number, they will each get $x$. If one writes a smaller number and the other a larger, the one who wrote the smaller number will get $x+2$, and the one who wrote the larger number will get $x-2$. So the bigger the numbers they write, the more money will get handed out, but there is a bonus for writing a smaller number.
+
+They don't know each other, and don't care about each other's wealth. But they do each prefer having more money to less.
+
+Think about things from Ankita's perspective. (Bojan's perspective is obviously the same.) It is never better to write 100 than 99, and it is sometimes worse. If Bojan writes 98 or less, then she'll get two dollars less than what Bojan wrote, whether she writes 99 or 100. If Bojan writes 99 or 100, she'll get one dollar more for writing 99. So she should not write 100. And Bojan should not write 100 either, for the same reasons. And Ankita can figure this out, if she knows Bojan is rational. 
+
+Now compare the options of writing 99 or 98. If Bojan writes 100, then it is better to write 99. But Bojan won't write 100, as we just showed. If Bojan writes 97 or less, it doesn't matter if Ankita writes 98 or 99. But if Bojan writes 98 or 99, it is better (by one dollar) for Ankita to write 98. So she should not write 99, and by similar reasoning neither should Bojan. And by similar reasoning neither of them should write 98, and so on, until the only choice they have left is 1. So they should each write 1, and receive \$1. Is that right?
+
+\section{Upcoming}
+
+\noindent These are just two of the puzzles we'll be looking at as the course proceeds. Some of these will be decision puzzles, like Newcomb's Problem. Some of them will be puzzles that are related to game theory, like Centipede. And some will be voting puzzles. I hope the puzzles are somewhat interesting. I hope even more that we learn something from them.

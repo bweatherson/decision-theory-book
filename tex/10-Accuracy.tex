@@ -1,0 +1,78 @@
+\section{Aims of Credences}
+Belief aims at the truth. A belief that $p$ succeeds if $p$ is true, and fails if $p$ is not true. Can we say anything similar for personal probabilities, or credences? Can we say, that is, what makes a credence better or worse in terms of the truth of its content?
+
+Here is one simple idea. If the agent's credence that $p$ is greater than one half, then the credence succeeds if $p$ it's true and fails if $p$ is false. Conversely, if the credence is less than one half, it succeeds if $p$ is false, and fails if $p$ is true. The idea is that if your credence in $p$ is greater than one half, then you think that $p$ is more likely to be true than false, and thought succeeds just in case $p$ is true.
+
+But this idea is much too simple. It doesn't posit any difference between having a credence in $p$ of 0.51, and having a credence in $p$ of 0.99. That's worrying for several reasons. If there is no difference in success conditions between two states, it isn't even clear that the states are distinct, so it isn't clear on this view that there are more than three possible credences. And in any case, it seems if $p$ is false, one has failed much more spectacularly if one's credence in $p$ is 0.99, than if it were 0.51. The simple idea doesn't allow for that. And the simple idea gets some `success' cases wrong. If every day, one's credence in snow is 0.51, and it snows every day, then really one was insufficiently confident. But the simple idea implies that one was right every time.
+
+\section{Calibration}
+
+The first serious idea we'll look at takes off from this last example. What's wrong with constantly thinking snow is just more likely than not, when in fact it snows every day? Perhaps it is that you are not \textit{calibrated}. An agent's credences are calibrated just in case half of the propositions in which their credence is one-half are true, and three-quarters of the propositions in which their credence is three-quarters are true, and one-third of the propositions in which their credence is one-third are true, and so on for all the other possible credences.
+
+It is very plausible that an agent whose is doing well at forming credences will end up calibrated. But what we started off this chapter considering was a slightly stronger claim. Agents who are good at believing won't just end up with lots of true beliefs. They will also aim at the truth. Similarly for calibration, we can ask whether an agent who is good at forming credences will end up calibrated, but we can also ask whether aiming at calibration is a good thing to do. And the answer to the latter question is very likely no.
+
+The distinction between how an ideal agent is, and what good agents aim at, is generally important across philosophy. There are everyday cases in which the two come apart. The ideal agent will never have anything to apologise for, so will never apologise. But we should not aim to never apologise. We can meet that aim by not apologising for wrongs we do, and that's no good. The ideal agent will fail to answer an even number of questions on a math exam, because they'll fail to answer zero. But we shouldn't aim to fail to answer an even number; that might mean leaving out one more if we have no idea how to answer the last question. Being calibrated might be like never apologising, or failing to answer an even number, something that is good in principle, but not a good aim. Let's see why that might be so.
+
+Imagine it is Thursday night, and a weather forecaster has (sincerely) said every week day this week that snow the next day is 80\% likely. And it snowed Monday, Tuesday and Thursday, but not Wednesday. That's not bad forecasting, as these things go. It's now Thursday night, and it is completely obviously going to snow the next day. What should the forecaster's credence in snow on Friday be? Well, perhaps it should be 1, since it is completely, obviously going to snow. But note that if she sets her credence at 0.8, she will be perfectly calibrated for the week, and she knows this. So if she's aiming for calibration, she should set her credence in snow on Friday at 0.8. 
+
+Many philosophers have concluded from that example, correctly I think, that calibration is not worth aiming at. Being calibrated might in some ways be like never apologising. It might be good to satisfy calibration, as long as you satisfy it for the right reasons. But if things have gone even a little wrong in the past, aiming for calibration can make things worse. So calibration can't be an aim, like truth is an aim of belief. Because aiming to have your beliefs be true can never make things worse.
+
+\section{Scoring Rules}
+A different approach is to give each credence a \textit{score}, which measures how accurate it is. Here's one simple way to do that. Let $t$ be a function from propositions to numbers, such that $t(p)$ is 1 if $p$ is true, and 0 if $p$ is false. As is standard, we'll write $|x|$ for the \textit{absolute value} of $x$, i.e., $x$ itself if $x$ is positive or 0, and $-x$ if $x$ is negative. Then the accuracy score of a particular credence $c$ in proposition $p$ is 
+
+\begin{equation*}
+f(|c - t(p)|)
+\end{equation*}
+The value $c - t(p)$ is, in some sense, the distance between $c$ and $t(p)$. If the agent's credence is 1 in a truth, or 0 in a falsehood, there is no distance between them. Otherwise there is some distance. But if $p$ is true, this `distance' could be negative, which is why we take absolute values.
+
+The function $f$ is a \textbf{scoring rule}, which measures how much we penalise the agent for being certain distances from the truth. There are a number of different scoring rules we could use. The core feature they all have is that they are \textit{monotone increasing}. That is, they satisfy the following condition:
+
+\begin{equation*}
+\forall x, y \in [0, 1]: x > y \leftrightarrow f(x) > f(y)
+\end{equation*}
+The accuracy of the agent's overall credal state is then just the sum of the inaccuracies in the credences in propositions we are interested in. So if we are just interested in $p$ and in $q$, and the agent's credences in these are 0.7 and 0.8 respectively, then her accuracy score will be $f(0.3) + f(0.2)$.
+
+The aim is to have as low an accuracy score as possible. Like in golf, low scores win. A perfectly accurate agent has credence 1 in all truths, and credence 0 in all falsehoods. (God is presumably that way.) But even less accurate agents should, in general, try to become more accurate. It is better to have higher credences in truths, and lower credences in falsehoods.
+
+\section{Linear Rule}
+At this stage you might wonder why I have added this complexity by including a function $f$ in the definition. Why not just say that $|c - t(p)|$ is the accuracy score? Of course, adding the $f$ to the definition doesn't preclude that option. We could just say that $f(x) = x$. Call this the \textbf{linear scoring rule}. We'll denote it with $l$. It is the most simple and natural scoring rule, yet it is not at all popular among people who use scoring rules for philosophical and statistical purposes. Let's see why that is.
+
+Imagine that a particular die is known to be fair. Let $p$ be the proposition that the next time it is thrown, it comes up 1, 2, 3 or 4, and hence $\neg p$ be that it comes up 5 or 6. Ankita's credence in $p$ is $\nicefrac{2}{3}$, since she knows all the facts we've just described. But Bojan's credence in $p$ is 0.8. Ankita thinks this is odd of Bojan, but then she notices something troubling.
+
+Using the linear scoring rule, Ankita works out the expected accuracy score for herself and Bojan. She is interested in their scores across the pair of propositions $\{p, \neg p \}$. So first she assumes $p$ is true, then works out her accuracy score for both $p$ and for $\neg p$. It's $\nicefrac{1}{3}$ for each, since each credence is $\nicefrac{1}{3}$ from the truth. She sums those together, and multiplies by the probability of $p$, i.e., $\nicefrac{2}{3}$. Then she does the same thing under the assumption $p$ is false, and multiplies the sum by the probability of $\neg p$, i.e., $\nicefrac{1}{3}$. Then she does the same thing for Bojan. Letting $a$ be her inaccuracy score, and $b$ be Bojan's score, this looks as follows.
+
+\begin{align*}
+E(a) &= \frac{2}{3} \times (\frac{1}{3} + \frac{1}{3}) + \frac{1}{3} \times (\frac{2}{3} + \frac{2}{3}) = \frac{8}{9} \\
+E(b) &= \frac{2}{3} \times (\frac{1}{5} + \frac{1}{5}) + \frac{1}{3} \times (\frac{4}{5} + \frac{4}{5}) = \frac{4}{5} 
+\end{align*}
+And she is shocked to discover that Bojan's expected inaccuracy score is actually lower than hers. If she follows the rule \textit{minimise expected inaccuracy}, she should by her own lights change her credences to match up with Bojan's. And if she aims to minimise inaccracy, she should follow the rule \textit{minimise expected inaccuracy}. So it looks like there is something unstable, or even incoherent, about her credences. But there is nothing wrong with having credence $\nicefrac{2}{3}$ that a fair die will land 1, 2, 3 or 4 on the next throw. What's gone wrong?
+
+What has gone wrong is that the linear rule is a bad scoring rule. It is not a \textbf{proper} scoring rule. A proper rule satisfies the following intuitive condition: for any credences in $p$ and in $\neg p$ that satisfy the probability calculus (i.e., they sum to 1), the agent's expectation of their own accuracy score is as low as their expectation of any other agent's accuracy score. A \textbf{strictly proper} scoring rule has the further feature that the agent expects themselves to be more accurate than any other agent, unless that agent has the same credences as they do. (A proper but not strictly proper rule allows for ties in expected accuracy between agents with distinct credences.) Formally, a strictly proper rule $f$ satisfies this constraint:
+
+\begin{equation*}
+\forall x \in [0,1], y, z: 2xf(1-x) + 2(1-x)f(x) \leq x(f(1-y)+f(z)) + (1-x)(f(y)+f(1-z))
+\end{equation*}
+The left-hand side of that equation is the agent's expectation of their own accuracy, assuming their credence in $p$ is $x$, and in $\neg p$ is $1-x$. The right hand side is the agent's expectation of the accuracy of an agent whose credence in $p$ is $y$, and in $\neg p$ is $z$.
+
+If a scoring rule is improper, an agent can find themselves in Ankita's position. In particular, they can have credences that seem perfectly natural given the physical setup they face, but they could expect to do better by changing their credences. If a scoring rule is proper, that can't happen. If it is strictly proper then it would be worse, by one's own lights, to move away from those `natural' credences.
+
+\section{Two Proper Scoring Rules}
+The linear rule is not proper. But there are a number of scoring rules that are proper. In particular, the following two rules are both proper and very widely used.
+
+The quadratic score makes $f(x) = x^2$. It is sometimes called the Brier score, after the statistician Glenn Brier who popularised its use.
+
+The logarithmic (or log) score makes $f(x) = -log(1-x)$. You can use whatever base you like for the logarithms, but for most purposes it is best to use `natural' logarithms, so $log(x)$ is the $y$ such that $e^y = x$. The number $e$ is an important mathematical constant, approximately equal to 2.71828. More precisely, it is the limit as $n$ tends to infinity of $(1 + \nicefrac{1}{n})^n$.
+
+The main difference between the two rules comes from cases where the agent is very confident in a falsehood. The Brier score issues inaccuracy scores that only range from 0 to 1, so even the worst score is one that can be made up for with accuracy elsewhere. The log score assigns an inaccuracy score of infinity to an agent who is perfectly confident in any falsehood. No matter how accurate they are elsewhere, an agent who is completely wrong about one proposition is maximally inaccurate given the log score.
+
+We aren't going to go into the philosophical arguments for or against either of these particular scores. In practice, the Brier score seems to be more commonly used, though of the people who think there is a single correct score to use, it is more common to hear defences of the log score.
+
+%\section{Exercises}
+%Ankita and Bojan are forecasting the weather for Monday, Tuesday and Wednesday. Let $m$ be the proposition that it will snow on Monday, $t$ that it will snow on Tuesday, and $w$ that it will snow on Wednesday. Ankita thinks that it is 70\% likely that $m, t$ and $w$ are true, and 30\% likely they are all false. Bojan thinks each proposition is 80\% likely, and is probabilistically independent of the other two.In fact, it does snow all three days. Which of the two is more accurate? Answer this question varying:
+%
+%\begin{itemize*}
+%\item Whether we take the propositions we are interested are just $m, t$ and $w$, or we are also interested in the conjunction $m \wedge t \wedge w$; and
+%\item Whether we use the Brier score or the log score
+%\end{itemize*}
+%
+%Some philosophers think that measuring inaccuracy across a class of propositions that is not closed under conjunction, e.g., the set that contains $m, t$ and $w$ but not the conjunction $m \wedge t \wedge w$ leads to a distorted picture of which credences are really most accurate. Does this case make such a philosophical view more or less plausible?

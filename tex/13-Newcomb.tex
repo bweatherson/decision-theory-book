@@ -1,0 +1,194 @@
+\section{The Puzzle}
+In front of you are two boxes, call them A and B. You call see that in box B there is \$1000, but you cannot see what is in box A. You have a choice, but not perhaps the one you were expecting. Your first option is to take just box A, whose contents you do not know. Your other option is to take both box A and box B, with the extra \$1000.
+
+There is, as you may have guessed, a catch. A demon has predicted whether you will take just one box or take two boxes. The demon is very good at predicting these things -- in the past she has made many similar predictions and been right every time. If the demon predicts that you will take both boxes, then she's put nothing in box A. If the demon predicts you will take just one box, she has put \$1,000,000 in box A. So the table looks like this.
+
+\starttab{l  c  c}
+& \textbf{Predicts 1 box} & \textbf{Predicts 2 boxes} \\ 
+\textbf{Take 1 box} & \$1,000,000 & \$0 \\ 
+\textbf{Take 2 boxes} & \$1,001,000 & \$1,000
+\stoptab There are interesting arguments for each of the two options here.
+
+The argument for taking just one box is easy. The way the story has been set up, lots of people have taken this challenge before you. Those that have taken 1 box have walked away with a million dollars. Those that have taken both have walked away with a thousand dollars. You'd prefer to be in the first group to being in the second group, so you should take just one box.
+
+The argument for taking both boxes is also easy. Either the demon has put the million in the opaque or she hasn't. If she has, you're better off taking both boxes. That way you'll get \$1,001,000 rather than \$1,000,000. If she has not, you're better off taking both boxes. That way you'll get \$1,000 rather than \$0. Either way, you're better off taking both boxes, so you should do that.
+
+Both arguments seem quite strong. The problem is that they lead to incompatible conclusions. So which is correct?
+
+\section{Two Principles of Decision Theory}
+The puzzle was first introduced to philosophers by Robert Nozick. And he suggested that the puzzle posed a challenge for the compatibility of two decision theoretic rules. These rules are
+
+\begin{itemize*}
+\item Never choose dominated options
+\item Maximise expected utility
+\end{itemize*}
+
+Nozick argued that if we never chose dominated options, we would choose both boxes. The reason for this is clear enough. If the demon has put \$1,000,000 in the opaque box, then it is better to take both boxes, since getting \$1,001,000 is better than getting \$1,000,000. And if the demon put nothing in the opaque box, then your choices are \$1,000 if you take both boxes, or \$0 if you take just the empty box. Either way, you're better off taking both boxes. This is obviously just the standard argument for taking both boxes. But note that however plausible it is as an argument for taking both boxes, it is compelling as an argument that taking both boxes is a dominating option.
+
+To see why Nozick thought that maximising expected utility leads to taking one box, we need to see how he is thinking of the expected utility formula. That formula takes as an input the probability of each state. Nozick's way of approaching things, which was the standard at the time, was to take the expected utility of an action $A$ to be given by the following sum
+
+\begin{equation*}
+Exp(U(A)) = Pr(S_1 | A)U(AS_1) + ... + Pr(S_n | A)U(AS_n)
+\end{equation*}
+
+Note in particular that we put into this formula the probability of each state \textit{given that A is chosen}. We don't take the unconditional probability of being in that state. These numbers can come quite dramatically apart.
+
+In Newcomb's problem, it is actually quite hard to say what the probability of each state is. (The states here, of course, are just that there is either \$1,000,000 in the opaque box or that there is nothing in it.) But what's easy to say is the probability of each state given the choices you make. If you choose both boxes, the probability that there is nothing in the opaque box is very high, and the probability that there is \$1,000,000 in it is very low. Conversely, if you choose just the one box, the probability that there is \$1,000,000 in it is very high, and the probability that there is nothing in it is very low. Simplifying just a little, we'll say that this high probability is 1, and the low probabiilty is 0. When working out the utility calculations, it will be helpful to use the following abbreviations:
+
+\begin{itemize*}
+\item $B$ = Take \textbf{b}oth boxes;
+\item $O$ = Take \textbf{o}ne box;
+\item $M$ = \textbf{M}illion in opaque box;
+\item $N$ = Nothing in opaque box.
+\end{itemize*}
+The expected utility of each choice then is
+
+\begin{align*}
+Exp(U(B)) \\
+&= Pr(M | B)U(M \wedge B)\\
+&+ Pr(N | B)U(N \wedge B) \\
+ &= 0 \times 1,001,000 + 1 \times 1,000 \\
+ &= 1,000 \\
+Exp(U(O)) \\
+&= Pr(M | O)U(M \wedge O)\\
+&+ Pr(N | O)U(N \wedge O) \\
+ &= 1 \times 1,000,000 + 0 \times 0 \\
+ &= 1,000,000
+ \end{align*}
+
+I've assumed here that the marginal utility of money is constant, so we can measure utility by the size of the numerical prize. That's an idealisation, but hopefully a harmless enough one.
+
+\section{Bringing Two Principles Together}
+In earlier chapters we argued that the expected utility rule never led to a conflict with the dominance principle. But here it has led to a conflict. Something seems to have gone badly wrong.
+
+The problem was that we've used two distinct definitions of expected utility in the two arguments. In the version we had used in previous chapters, we presupposed that the probability of the states was independent of the choices that were made. So we didn't talk about $Pr(S_1|A)$ or $Pr(S_1|B)$ or whatever. We simply talked about $Pr(S_1)$.
+
+If you make that assumption, expected utility maximisation does indeed imply dominance. We won't rerun the entire proof here, but let's see how it works in this particular case. Let's say that the probability that there is \$1,000,000 in the opaque box is $x$. It won't matter at all what $x$ is. And assume that the expected utility of a choice $A$ is given by this formula, where we use the unconditional probability of states as inputs.
+
+\begin{equation*}
+Exp(U(A)) = Pr(S_1)U(AS_1) + ... + Pr(S_n | A)U(AS_n)
+\end{equation*}
+
+Applied to our particular case, that would give us the following calculations.
+
+\begin{align*}
+Exp(U(B)) \\
+&= Pr(M)U(M \wedge B)\\
+&+ Pr(N)U(N \wedge B) \\
+&= x \times 1,001,000 + (1-x) \times 1,000 \\
+ &= 1,000 + 1,000,000x \\
+Exp(U(O)) \\
+&= Pr(M)U(M \wedge O)\\
+&+ Pr(N)U(N \wedge O)\\
+ &= x \times 1,000,000 + (1-x) \times 0 \\
+ &= 1,000,000x
+ \end{align*}
+ 
+And clearly the expected value of taking both boxes is 1,000 higher than the expected utility of taking just one box. So as long as we don't conditionalise on the act we are performing, there isn't a conflict between the dominance principle and expected utility maximisation.
+
+While that does resolve the mathematical puzzle, it hardly resolves the underlying philosophical problem. Why, we might ask, shouldn't we conditionalise on the actions we are performing? In general, it's a bad idea to throw away information, and the choice that we're about to make is a piece of information. So we might think it should make a difference to the probabilities that we are using.
+
+The best response to this argument, I think, is that it leads to the wrong results in Newcomb's problem, and related problems. But this is a somewhat controversial clam. After all, some people think that taking one box is the right result in Newcomb's problem. And as we saw above, if we conditionalise on our action, then the expected utility of taking one box is higher than the expected utility of taking both. So such theorists will not think that it gives the wrong answer at all. To address this worry, we need to look more closely back at Newcomb's original problem, and its variants.
+
+\section{Well Meaning Friends}
+The next few sections are going to involve looking at arguments that we should take both boxes in Newcomb's problem, or to rejecting arguments that we should only take one box.
+
+The simplest argument is just a dramatisation of the dominance argument. But still, it is a way to see the force of that argument. Imagine that you have a friend who can see into the opaque box. Perhaps the box is clear from behind, and your friend is standing behind the box. Or perhaps your friend has super-powers that let them see into opaque boxes. If your friend was able to give you advice, and has your best interests at heart, they'll tell you to take both boxes. That's true whether or not there is a million dollars in the opaque box. Either way, they'll know that you're better off taking both boxes.
+
+Of course, there are lots of cases where a friend with more knowledge than you and your interests at heart will give you advice that is different to what you might intuitively think is correct. Imagine that I have just tossed a biased coin that has an 80\% chance of landing heads. The coin has landed, but neither of us can see how it has landed. I offer you a choice between a bet that pays \$1 if it landed heads, and a bet that pays \$1 if it landed tails. Since heads is more likely, it seems you should take the bet on heads. But if the coin has landed tails, then a well meaning and well informed friend will tell you that you should bet on tails.
+
+But that case is somewhat different to the friend in Newcomb's problem. The point here is that you know what the friend will tell you. And plausibly, whenever you know what advice a friend will give you, you should follow that advice. Even in the coin-flip case, if you knew that your friend would tell you to bet on tails, it would be smart to bet on tails. After all, knowing that your friend would give you that advice would be equivalent to knowing that the coin landed tails. And if you knew the coin landed tails, then whatever arguments you could come up with concerning chances of landing tails would be irrelevant. It did land tails, so that's what you should bet on.
+
+There is another way to dramatise the dominance argument. Imagine that after the boxes are opened, i.e. after you know which state you are in, you are given a chance to revise your choice if you pay \$500. If you take just one box, then whatever is in the opaque box, this will be a worthwhile switch to make. It will either take you from \$0 to \$500, or from \$1,000,000 to \$1,000,500. And once the box is open, there isn't even an intuition that you should worry about how the box got filled. So you should make the switch.
+
+But it seems plausible in general that if right now you've got a chance to do X, and you know that if you don't do X now you'll certainly pay good money to do X later, and you know that when you do that you'll be acting perfectly rationally, then you should simply do X. After all, you'll get the same result whether you do X now or later, you'll simply not have to pay the `late fee' for taking X any later. More relevantly to our case, if you would switch to X once the facts were known, even if doing so required paying a fee, then it seems plausible that you should simply do X now. It doesn't seem that including the option of switching after the boxes are revealed changes anything about what you should do before the boxes are revealed, after all.
+
+Ultimately, I'm not sure that either of the arguments I gave here, either the well meaning friend argument or the switching argument, are any more powerful than the dominance argument. Both of them are just ways of dramatising the dominance argument. And someone who thinks that you should take just one box is, by definition, someone who isn't moved by the dominance argument. So let's look at other arguments for taking both boxes.
+
+\section{Real Life Newcomb Cases}
+In the previous notes we ended up saying that there are two quite different ways to think about utility expectations. We can use the unconditional probability of each state, or, for each choice, we can use the probabilities of each state conditional on the choice the agent makes. That is, we can take the expected utility of a choice $A$ to be given by one or other of the following formulae.
+\begin{align*}
+Pr(S_1)U(S_1A) + ...  + Pr(S_n)U(S_nA) \\
+Pr(S_1|A)U(S_1A) + ...  + Pr(S_n|A)U(S_nA)
+\end{align*}
+
+It would be nice to know which of these is the right formula, since the two formulae disagree about cases like Newcomb's problem. Since we have a case where they disagree, a simple methodology suggests itself. Figure out what we should do in Newcomb's problem, and then select the formula which agrees with the correct answer. But this method has two flaws.
+
+First, intuitions about Newcomb's puzzle are themselves all over the place. If we try to adjust our theory to match our judgments in Newcomb's problem, then different people will have different theories.
+
+Second, Newcomb's problem is itself quite fantastic. This is part of why different people have such divergent intuitions on the example. But it also might make us think that the problem is not particularly urgent. If the two equations only come apart in fantastic cases like this, perhaps we can ignore the puzzles.
+
+So it would be useful to come up with more realistic examples where the two equations come apart. It turns out that what is driving the divergence between the equations is that there is a common cause of the world being in a certain state and you making the choice that you make. Any time there is something in the world that tracks your decision making processes, we'll have a Newcomb like problem.
+
+For example, imagine that we are in a Prisoners' Dilemma situation where we know that the other prisoner uses very similar decision making procedures to what we use. Here is the table for a Prisoners' Dilemma.
+
+\starttab{c c  c}
+ & \textbf{Other} & \textbf{Other} \\
+ & \textbf{Cooperates} & \textbf{Defects} \\ 
+\textbf{You Cooperate} & (3,3) & (0, 5) \\
+\textbf{You Defect} & (5, 0) & (1, 1)
+\stoptab In this table the notation ($x$, $y$) means that you get $x$ utils and the other person gets $y$ utils. Remember that utils are meant to be an overall measure of what you value, so it includes your altruistic care for the other person.
+
+Let's see why this resembles a Newcomb problem. Assume that conditional on your performing an action $A$, the probability that the other person will do the same action is 0.9. Then, if we are taking probabilities to be conditional on choices, the expected utility of the two choices is
+
+\begin{align*}
+Exp(U(Coop)) &= 0.9 \times 3 + 0.1 \times 0 \\
+  &= 2.7 \\
+ Exp(U(Defect)) &= 0.1 \times 5 + 0.9 \times 1 \\
+  &= 1.4
+ \end{align*}
+So if we use probabilities conditional on choices, we end up with the result that you should cooperate. But note that cooperation is dominated by defection. If the other person defects, then your choice is to get 1 (by defecting) or 0 (by cooperating). You're better off cooperating. If the other person cooperates, then your choice is to get 5 (by defecting) or 0 (by cooperating). So whatever probability we give to the possible actions of the other person, provided we don't conditionalise on our choice, we'll end up deciding to defect.
+
+Prisoners Dilemma cases are much less fantastic than Newcomb problems. Even Prisoners Dilemma cases where we have some confidence that the other party sufficiently resembles us that they will likely (not certainly) make the same choice as us are fairly realistic. So they are somewhat better than Newcomb's original problem for detecting intuitions. But the problem of divergent intuitions still remains. Many people are unsure about what the right thing to do in a Prisoners Dilemma problem is. 
+
+So it is worth looking at some cases without that layer of complication. Real life cases are tricky to come by, but for a while some people suggested that the following might be a case. We've known for a long time that smoking causes various cancers. We've known for even longer than that that smoking is correlated with various cancers. For a while there was a hypothesis that smoking did not cause cancer, but was correlated with cancer because there was a common cause. Something, presumably genetic, caused people to (a) have a disposition to smoke, and (b) develop cancer. Crucially, this hypothesis went, smoking did not raise the risk of cancer; whether you got cancer or not was largely due to the genes that led to a desire for smoking.
+
+We now know, by means of various tests, that this isn't true. (For one thing, the reduction in cancer rates among people who give up smoking is truly impressive, and hard to explain on the model that these cancers are all genetic.) But at least at some point in history it was a not entirely crazy hypothesis. Let's assume this hypothesis is actually true (contrary to fact). And let's assume that you (a) want to smoke, other things being equal, and (b) really don't want to get cancer. You don't know whether you have the desire for smoking/disposition to get cancer gene or not? What should you do?
+
+Plausibly, you should smoke. You either have the gene or you don't. If you do, you'll probably get cancer, but you can either get cancer while smoking, or get cancer while not smoking, and since you enjoy smoking, you should smoke. If you don't, you won't get cancer whether you smoke or not, so you should indulge your preference for smoking.
+
+It isn't just philosophers who think this way. At some points (after the smoking/cancer correlation was discovered but before the causal connection was established) various tobacco companies were trying very hard to get evidence for this `common cause' hypothesis. Presumably the reason they were doing this was because they thought that if it were true, it would be rational for people to smoke more, and hence people would smoke more.
+
+But note that this presumption is true if and only if we use the `unconditional' version of expected utility theory. To see this, we'll use the following table for the various outcomes.
+\starttab{r c  c}
+ & \textbf{Get Cancer} & \textbf{Don't get Cancer} \\ 
+\textbf{Smoke} & 1 & 6 \\
+\textbf{Don't Smoke} & 0 & 5
+\stoptab 
+The assumption is that not getting cancer is worth 5 to you, while smoking is worth 1 to you. Now we know that smoking is evidence that you have the cancer gene, and this raises dramatically the chance of you getting cancer. So the (evidential) probability of getting cancer conditional on smoking is, we'll assume, 0.8, while the (evidential) probability of getting cancer conditional on not smoking is, we'll assume, 0.2. And remember this isn't because cancer causes smoking in our example, but rather that there is a common cause of the two. Still, this is enough to make the expected utilities work out as follows. 
+
+\begin{align*}
+Exp(U(Smoke)) &= 0.8 \times 1 + 0.2 \times 6 \\
+  &= 2 \\
+Exp(U(No Smoke)) &= 0.2 \times 0 + 0.8 \times 5 \\
+  &= 4
+ \end{align*}
+
+And the recommendation is not to smoke, even though smoking dominates. This seems very odd. As it is sometimes put, the recommendation here seems to be a matter of managing the `news', not managing the outcome. What's bad about smoking is that if you smoke you get some evidence that something bad is going to happen to you. In particular, you get evidence that you have this cancer gene, and that's really bad news to get because dramatically raises the probability of getting cancer. But not smoking doesn't mean that you don't have the gene, it just means that you don't find out that you have the gene. Not smoking looks like a policy of denying yourself good outcomes because you don't want to get bad news. And this doesn't look rational.
+
+So this case has convinced a lot of decision theorists that we shouldn't use conditional probabilities of states when working out the utility of various outcomes. Using conditional probabilities will be good if we want to learn the `news value' of some choices, but not if we want to learn how useful those choices will be to us.
+
+\section{Tickle Defence}
+Not everyone has been convinced by these `real-life' examples. The counter-argument is that in any realistic case, the gene that leads to smoking has to work by changing our dispositions. So there isn't just a direct causal connection between some genetic material and smoking. Rather, the gene causes a desire to smoke, and the desire to smoke cause the smoking. As it is sometimes put, between the gene and the smoking there has to be something mental, a `tickle' that leads to the smoking.
+
+Now this is important because we might think that rational agents know their own mental states. Let's assume that for now. So if an agent has the smoking desire they know it, perhaps because this desire has a distinctive phenomenology, a tickle of sorts. And if the agent knows this, then they won't get any extra evidence that they have a desire to smoke from their actual smoking. So the probability of getting cancer given smoking is not higher than the probability of getting cancer given not smoking.
+
+In the case we have in mind, the bad news is probably already here. Once the agent realises that their values are given by the table above, they've already got the bad news. Someone who didn't have the gene wouldn't value smoking more than not smoking. Once the person conditionalises on the fact that that is their value table, the evidence that they actually smoke is no more evidence. Either way, they are (say) 80\% likely to get cancer. So the calculations are really something like this:
+
+ \begin{align*}
+Exp(U(Smoke)) &= 0.8 \times 1 + 0.2 \times 6 \\
+  &= 2 \\
+ Exp(U(No Smoke)) &= 0.8 \times 0 + 0.2 \times 5 \\
+  &= 1
+\end{align*}
+And we get the correct answer that in this situation we should smoke. So this isn't a case where the two different equations we've used give different answers. And hence it isn't a reason for using unconditional probabilities rather than conditional probabilities.
+
+There are two common responses to this argument. The first is that it isn't clear that there is always a `tickle'. The second is that it isn't a requirement of rationality that we know what tickles we have. Let's look at these in turn.
+
+First, it was crucial to this defence that the gene (or whatever) that causes both smoking and cancer causes smoking by causing some particular mental state first. But this isn't a necessary feature of the story. It might be that, say, everyone has the `tickle' that goes along with wanting to smoke. (Perhaps this desire has some evolutionary advantage. Or, more likely, it might be a result of something that genuinely had evolutionary advantage.) Perhaps what the gene does is to affect how much willpower we have, and hence how likely we are to overcome the desire. 
+
+Second, it was also crucial to the defence that it is a requirement of rationality that people know what `tickles' they have. If this isn't supposed, we can just imagine that our agent is a rational person who is ignorant of their own desires. But this supposition is quite strong. It is generally not a requirement of rationality that we know things about the external world. Some things are just hidden from us, and it isn't a requirement of rationality that we be able to see what is hidden. Similarly, it seems at least possible that some things in our own mind should be hidden. Whether or not you believe in things like subconscious desires, the possibility of them doesn't seem to systematically undermine human rationality.
+
+Note that these two responses dovetail nicely. If we think that the gene works not by producing individual desires, but by modifying quite general standing dispositions like how much willpower we have, it is even more plausible to think that this is not something a rational person will always know about. It is a little odd to think of a person who desires to smoke but doesn't realise that they desire to smoke. It isn't anywhere near as odd to think about a person who has very little willpower but, perhaps because their willpower is rarely tested, doesn't realise that they have low willpower. Unless they are systematically ignoring evidence that they lack willpower, they aren't being clearly irrational.
+
+So it seems there are possible, somewhat realistic, cases where one choice is evidence, to a rational agent, that something bad is likely to happen, even though the choice does not bring about the bad outcome. In such a case using conditional probabilities will lead to avoiding the bad news, rather than producing the best outcomes. And that seems to be irrational.

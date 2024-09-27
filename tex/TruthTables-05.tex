@@ -1,0 +1,137 @@
+\section{Compound Sentences}
+Some sentences have other sentences as parts. We're going to be especially interested in sentences that have the following structures, where $A$ and $B$ are themselves sentences.
+
+\begin{itemize*}
+\item $A$ and $B$; which we'll write as $A \wedge B$
+\item $A$ or $B$; which we'll write as $A \vee B$
+\item It is not the case that $A$; which we'll write as $\neg A$
+\end{itemize*}
+
+What's special about these three compound formations is that the truth value of the whole sentence is fixed by the truth value of the parts. In fact, we can present the relationship between the truth value of the whole and the truth value of the parts using the truth tables discussed in the previous chapter. Here are the tables for the three connectives. First for and,
+
+\starttab{c c  c}
+$A$ & $B$ & $A \wedge B$ \\ 
+T & T & T \\
+T & F & F \\
+F & T & F \\
+F & F & F
+\stoptab Then for or. (Note that this is so-called \textit{inclusive} disjunction. The whole sentence is true if both disjuncts are true.)
+\starttab{c c  c}
+$A$ & $B$ & $A \vee B$ \\ 
+T & T & T \\
+T & F & T \\
+F & T & T \\
+F & F & F
+\stoptab Finally for not.
+\starttab{c  c}
+$A$ & $\neg A$ \\ 
+T & F \\
+F & T
+\stoptab The important thing about this way of thinking about compound sentences is that it is \textit{recursive}. I said above that some sentences have other sentences as parts. The easiest cases of this to think about are cases where $A$ and $B$ are atomic sentences, i.e. sentences that don't themselves have other sentences as parts. But nothing in the definitions we gave, or in the truth tables, requires that. $A$ and $B$ themselves could also be compound. And when they are, we can use truth tables to figure out how the truth value of the whole sentence relates to the truth value of its smallest constituents.
+
+It will be easiest to see this if we work through an example. So let's spend some time considering the following sentence.
+
+\begin{equation*}
+(p \wedge q) \vee \neg r
+\end{equation*}
+
+The sentence has the form $A \vee B$. But in this case $A$ is the compound sentence $p \wedge q$, and $B$ is the compound sentence $\neg r$. If we're looking at the possible truth values of the three sentences $p$, $q$ and $r$, we saw in the previous chapter that there are 2$^3$, i.e. 8 possibilities. And they can be represented as follows.
+
+\starttab{c c c}
+$p$ & $q$ & $r$ \\ \hline
+T & T & T \\
+T & T & F \\
+T & F & T \\
+T & F & F \\
+F & T & T \\
+F & T & F \\
+F & F & T \\
+F & F & F \\
+\stoptab It isn't too hard, given what we said above, to see what the truth values of $p \wedge q$, and of $\neg r$ will be in each of those possibilities. The first of these, $p \wedge q$, is true at a possibility just in case there's a T in the first column (i.e. $p$ is true) and a T in the second column (i.e. $q$ is true). The second sentence, $\neg r$ is true just in case there's an F in the third column (i.e. $r$ is false). So let's represent all that on the table.
+
+\starttab{c c c  c c}
+$p$ & $q$ & $r$ & $p \wedge q$ & $\neg r$ \\ \hline
+T & T & T & T & F\\
+T & T & F & T & T\\
+T & F & T & F & F\\
+T & F & F & F & T\\
+F & T & T & F & F\\
+F & T & F & F & T\\
+F & F & T & F & F\\
+F & F & F & F & T\\
+\stoptab Now the whole sentence is a disjunction, i.e. an or sentence, with the fourth and fifth columns representing the two disjuncts. So the whole sentence is true just in case either there's a T in the fourth column, i.e. $p \wedge q$ is true, or a T in the fifth column, i.e. $\neg r$ is true. We can represent that on the table as well.
+
+\starttab{c c c  c c c}
+$p$ & $q$ & $r$ & $p \wedge q$ & $\neg r$ & $(p \wedge q) \vee \neg r$ \\ \hline
+T & T & T & T & F & T\\
+T & T & F & T & T & T\\
+T & F & T & F & F & F\\
+T & F & F & F & T & T\\
+F & T & T & F & F & F\\
+F & T & F & F & T & T\\
+F & F & T & F & F & F\\
+F & F & F & F & T & T\\
+\stoptab And this gives us the full range of dependencies of the truth value of our whole sentence on the truth value of its parts.
+
+This is relevant to probability because, as we've been stressing, probability is a measure over possibility space. So if you want to work out the probability of a sentence like $(p \wedge q) \vee \neg r$, one way is to work out the probability of each of the eight basic possibilities here, then work out at which of those possibilities $(p \wedge q) \vee \neg r$ is true, then sum the probabilities of those possibilities at which it is true. To illustrate this, let's again use the table of probabilities from the previous chapter.
+
+\starttab{c c c | c}
+$p$ & $q$ & $r$ \\ \hline
+T & T & T & 0.0008\\
+T & T & F & 0.008\\
+T & F & T & 0.08\\
+T & F & F & 0.8\\
+F & T & T & 0.0002\\
+F & T & F & 0.001\\
+F & F & T & 0.01\\
+F & F & F & 0.1
+\stoptab If those are the probabilities of each basic possibility, then the probability of $(p \wedge q) \vee \neg r$ is the sum of the values on the lines on which it is true. That is, it is the sum of the values on lines 1, 2, 4, 6 and 8. That is, it is 0.0008 + 0.008 + 0.8 + 0.001 + 0.1, which is 0.9098.
+
+\section{Equivalence, Entailment, Inconsistency,  and Logical Truth}
+To a first approximation, we can define logical equivalence and logical entailment within the truth-table framework. The accounts we'll give here aren't quite accurate, and we'll make them a bit more precise in the next section. But they are on the right track, and they suggest some results that are, as it turns out, true in the more accurate structure.
+
+If two sentences have the same pattern of Ts and Fs in their truth table, they are logically equivalent. Consider, for example, the sentences $\neg A \vee \neg B$ and $\neg (A \wedge B)$. Their truth tables are given in the fifth and seventh columns of this table.
+
+\starttab{c c  c c c c c}
+$A$ & $B$ & $\neg A$ & $\neg B$ & $\mathbf{\neg A \vee \neg B}$ & $A \wedge B$ & $\mathbf{\neg (A \wedge B)}$ \\ \hline
+T & T & F & F & \textbf{F} & T & \textbf{F} \\
+T & F & F & T & \textbf{T} & F & \textbf{T} \\
+F & T & T & F & \textbf{T} & F & \textbf{T} \\
+F & F & T & T & \textbf{T} & F & \textbf{T} \\
+\stoptab Note that those two columns are the same. That means that the two sentences are logically equivalent.
+
+Now something important follows from the fact that the sentences are true in the same rows. For each sentence, the probability of the sentence is the sum of the probabilities of the rows in which it is true. But if the sentences are true in the same row, those are the same sums in each case. So the probability of the two sentences is the same. This leads to an important result.
+
+\begin{itemize*}
+\item \textbf{Logically equivalent sentences have the same probability}
+\end{itemize*}
+
+\noindent Note that we haven't quite proven this yet, because our account of logical equivalence is not quite accurate. But the result will turn out to hold when we fix that inaccuracy.
+
+One of the notions that logicians care most about is \textit{validity}. An argument with premises $A_1, A_2, ..., A_n$ and conclusion $B$ is valid if it is impossible for the premises to be true and the conclusion false. Slightly more colloquially, if the premises are true, then the conclusion has to be true. Again, we can approximate this notion using truth tables. An argument is \textit{invalid} if there is a line where the premises are true and the conclusion false. An argument is \textit{valid} if there is no such line. That is, it is valid if in all possibilities where all the premises are true, the conclusion is also true.
+
+When the argument that has $A$ as its only premise, and $B$ as its conclusion, is valid, we say that $A$ \textbf{entails} $B$. If every line on the truth table where $A$ is true is also a line where $B$ is true, then $A$ entails $B$.
+
+Again, this has consequences for probability. The probability of a sentence is the sum of the probability of the possibilities in which it is true. If $A$ entails $B$, then the possibilities where $B$ is true will include all the possibilities where $A$ is true, and may include some more. So the probability of $B$ can't be \textit{lower} than the probability of $A$. That's because each of these probabilities are sums of non-negative numbers, and each of the summands in the probability of $A$ is also a summand in the probability of $B$.
+
+\begin{itemize*}
+\item \textbf{If $A$ entails $B$, then the probability of $B$ is at least as great as the probability of $A$}
+\end{itemize*}
+
+The argument we've given for this is a little rough, because we're working with an approximation of the definition of entailment, but it will turn out that the result goes through even when we tidy up the details.
+
+Two sentences are \textbf{inconsistent} if they cannot be true together. Roughly, that means there is no line on the truth table where they are both true. Assume that $A$ and $B$ are inconsistent. So $A$ is true at lines $L_1, L_2, ..., L_n$, and $B$ is true at lines $L_{n+1}, ..., L_m$, where these do not overlap. So $A \vee B$ is true at lines $L_1, L_2, ..., L_n, L_{n+1}, ..., L_m$. So the probability of $A$ is the probability of $L_1$ plus the probability of $L_2$ plus $...$ plus the probability of $L_n$. And the probability of $B$ is the probability of $L_{n+1}$ plus  $...$ plus the probability of $L_m$. And the probability of $A \vee B$ is the probability of $L_1$ plus the probability of $L_2$ plus $...$ plus the probability of $L_n$ plus $L_{n+1}$ plus  $...$ plus the probability of $L_m$. That's to say
+
+\begin{itemize*}
+\item \textbf{If $A$ and $B$ are inconsistent, then the probability of $A \vee B$ equals the probability of $A$ plus the probability of $B$}
+\end{itemize*}
+
+This is just the addition rule for measures transposed to probabilities. And it is a crucial rule, one that we will use all the time. (Indeed, it is sometimes taken to be the characteristic axiom of probability theory. We will look at axiomatic approaches to probability in the next chapter.)
+
+Finally, a \textbf{logical truth} is something that is true in virtue of logic alone. It is true in all possibilities, since what logic is does not change. A logical truth is entailed by any sentence. And a logical truth only entails other sentences.
+
+Any sentence that is true in all possibilities must have probability 1. That's because probability is a \textit{normalised} measure, and in a normalised measure, the measure of the universe is 1. And a logical truth is true at every point in the `universe' of logical space.
+
+\begin{itemize*}
+\item \textbf{Any logical truth has probability 1}
+\end{itemize*}

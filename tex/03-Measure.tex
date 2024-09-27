@@ -1,0 +1,290 @@
+\section{Probability Defined}
+We talk informally about probabilities all the time. We might say that it is more probable than not that such-and-such team will make the playoffs. Or we might say that it's very probable that a particular defendant will be convicted at his trial. Or that it isn't very probable that the next card will be the one we need to complete this royal flush.
+
+We also talk formally about probability in mathematical contexts. Formally, a probability function is a normalised measure over a possibility space. Below we'll be saying a fair bit about what each of those terms mean. We'll start with \textit{measure}, then say what a \textit{normalised measure} is, and finally (over the next two days) say something about \textit{possibility spaces}.
+
+There is a very important philosophical question about the connection between our informal talk and our formal talk. In particular, it is a very deep question whether this particular kind of formal model is the right model to represent our informal, intuitive concept. The vast majority of philosophers, statisticians, economists and others who work on these topics think it is, though as always there are dissenters. In this course we'll largely follow this orthodoxy, though some of the puzzles we'll look at are connected to the reasons for dissent.
+
+\section{Measures}
+A measure is a function from `regions' of some space to non-negative numbers with the following property. If A is a region that divides exactly into regions B and C, then the measure of A is the sum of the measures of B and C. And more generally, if A divides exactly into regions B$_1$, B$_2$, ..., B$_n$, then the measure of A will be the sum of the measures of B$_1$, B$_2$, ... and B$_n$.
+
+Here's a simple example of a measure: the function that takes as input any part of New York City, and returns as output the population of that part. Assume that the following numbers are the populations of New York's five boroughs. (These numbers are far from accurate.)
+
+\starttab{c c}
+\textbf{Borough} & \textbf{Population} \\ 
+Brooklyn & 2,500,000 \\
+Queens & 2,000,000 \\
+Manhattan & 1,500,000 \\
+The Bronx & 1,000,000 \\
+Staten Island & 500,000
+\stoptab We can already think of this as a function, with the left hand column giving the inputs, and the right hand column the values. Now if this function is a \textit{measure}, it should be additive in the sense described above. So consider the part of New York City that's on Long Island. That's just Brooklyn plus Queens. If the population function is a measure, the value of that function, as applied to the Long Island part of New York, should be 2,500,000 plus 2,000,000, i.e. 4,500,000. And that makes sense: the population of Brooklyn plus Queens just is the population of Brooklyn plus the population of Queens.
+
+Not every function from regions to numbers is a measure. Consider the function that takes a region of New York City as input, and returns as output the proportion of people in that region who are New York Mets fans. We can imagine that this function has the following values. (Again, I'm just making these numbers up; don't trust these numbers!)
+
+\starttab{c c}
+\textbf{Borough} & \textbf{Mets Proportion} \\ 
+Brooklyn & 0.6 \\
+Queens & 0.75 \\
+Manhattan & 0.5 \\
+The Bronx & 0.25 \\
+Staten Island & 0.5
+\stoptab Now think again about the part of New York we discussed above: the Brooklyn plus Queens part. What proportion of people in that part of the city are Mets fans? We certainly can't figure that out by just looking at the Brooklyn number from the above table, 0.6, and the Queens number, 0.75, and adding them together. That would yield the absurd result that the proportion of people in that part of the city who are Mets fans is 1.35.
+
+That's to say, the function from a region to the proportion of people in that region who are Mets fans is \textit{not} a measure. Measures are functions that are always additive over subregions. The value of the function applied to a whole region is the sum of the values the function takes when applied to the parts. `Counting' functions, like population, have this property. 
+
+The measure function we looked at above takes real regions, parts of New York City, as inputs. But measures can also be defined over things that are suitably analogous to regions. Imagine a family of four children, named below, who eat the following amounts of meat at dinner.
+
+\starttab{c c}
+\textbf{Child} & \textbf{Meat Consumption (g)} \\ 
+Alice & 400 \\
+Bruce & 300 \\
+Chuck & 200 \\
+Daria & 100
+\stoptab We can imagine a function that takes a group of children (possibly including just one child, or even no children) as inputs, and has as output how many grams of meat those children ate. This function will be a measure. If the `groups' contain just the one child, the values of the function will be given by the above table. If the group contains two children, the values will be given by the addition rule. So for the group consisting of Alice and Chuck, the value of the function will be 600. That's because the amount of meat eaten by Alice and Chuck just is the amount of meat eaten by Alice, plus the amount of meat eaten by Chuck. Whenever the value of a function, as applied to a group, is the sum of the values of the function as applied to the members, we have a measure function.
+
+\section{Normalised Measures}
+A measure function is defined over some regions. Usually one of those regions will be the `universe' of the function; that is, the region made up of all those regions the function is defined over. In the case where the regions are regions of physical space, as in our New York example, that will just be the physical space consisting of all the smaller regions that are inputs to the function. In our New York example, the universe is just New York City. In cases where the regions are somewhat more metaphorical, as in the case of the children's meat-eating, the universe will also be defined somewhat more metaphorically. In that case, it is just the group consisting of the four children.
+
+However the universe is defined, a normalised measure is simply a measure function where the value the function gives to the universe is 1. So for every sub-region of the universe, its measure can be understood as a proportion of the universe.
+
+We can `normalise' any measure by simply dividing each value through by the value of the universe. If we wanted to normalise our New York City population measure, we would simply divide all values by 7,500,000. The values we would then end up with are as follows.
+
+\starttab{c c}
+\textbf{Borough} & \textbf{Population} \\ 
+Brooklyn & $\nicefrac{1}{3}$ \\
+Queens & $\nicefrac{4}{15}$ \\
+Manhattan & $\nicefrac{1}{5}$ \\
+The Bronx & $\nicefrac{2}{15}$ \\
+Staten Island & $\nicefrac{1}{3}$
+\stoptab Some measures may not have a well-defined universe, or the value of the measure over the whole universe may be infinite, and in those cases we cannot normalise the measure. But generally normalisation is a simple matter of dividing everything by the value the function takes when applied to the whole universe. And the benefit of doing this is that it gives us a simple way of representing proportions.
+
+\section{Formalities}
+So far I've given a fairly informal description of what measures are, and what normalised measures are. In this section we're going to go over the details more formally. If you understand the concepts well enough already, or if you aren't familiar enough with set theory to follow this section entirely, you should feel free to skip forward to the next section. Note that this is a slightly simplified, and hence slightly inaccurate, presentation; we aren't focussing on issues to do with infinity. 
+
+A measure is a function $m$ satisfying the following conditions.
+
+\begin{enumerate*}
+\item The domain $D$ is a set of sets.
+\item The domain is closed under union, intersection and complementation with respect to the relevant universe U. That is, if $A \in D$ and $B \in D$, then $(A \cup B) \in D$ and $(A \cup B) \in D$ and $U \setminus A \in D$
+\item The range is a set of non-negative real numbers
+\item The function is additive in the following sense: If $A \cap B = \emptyset$, then $m(A \cup B) = m(A) + m(B)$
+\end{enumerate*}
+
+We can prove some important general results about measures using just these properties. Note that we the following results follow more or less immediately from additivity.
+
+\begin{enumerate*}
+\item $m(A) = m(A \cap B) + m(A \cap (U \setminus B))$
+\item $m(B) = m(A \cap B) + m(B \cap (U \setminus A))$
+\item $m(A \cup B) = m(A \cap B) + m(A \cap (U \setminus B)) + m(B \cap (U \setminus A))$
+\end{enumerate*}
+
+The first says that the measure of $A$ is the measure of $A$'s intersection with $B$, plus the measure of $A$'s intersection with the complement of $B$. The first says that the measure of $B$ is the measure of $A$'s intersection with $B$, plus the measure of $B$'s intersection with the complement of $A$. In each case the point is that a set is just made up of its intersection with some other set, plus its intersection with the complement of that set. The final line relies on the fact that the union of $A$ and $B$ is made up of (i) their intersection, (ii) the part of A that overlaps B's complement and (iii) the part of B that overlaps A's complement. So the measure of $A \cup B$ should be the sum of the measure of those three sets.
+
+Note that if we add up the LHS and RHS of lines 1 and 2 above, we get
+\begin{equation*}
+m(A) + m(B) = m(A \cap B) + m(A \cap (U \setminus B)) + m(A \cap B) + m(A \cap (U \setminus B))
+\end{equation*}
+And subtracting $m(A \cap B)$ from each side, we get
+\begin{equation*}
+m(A) + m(B) - m(A \cap B) = m(A \cap B) + m(A \cap (U \setminus B)) + m(A \cap (U \setminus B))
+\end{equation*}
+But that equation, plus line 3 above, entails that
+\begin{equation*}
+m(A) + m(B) - m(A \cap B) = m(A \cup B)
+\end{equation*}
+And that identity holds whether or not $A \cap B$ is empty. If $A \cap B$ is empty, the result is just equivalent to the addition postulate, but in general it is a stronger result, and one we'll be using a fair bit in what follows.
+
+\section{Possibility Space}
+Imagine you're watching a baseball game. There are lots of ways we could get to the final result, but there are just two ways the game could end. The home team could win, call this possibility H, or the away team could win, call this possibility A. (Or the universe could end before the game does. We'll ignore these `possibilities' in what follows.)
+
+Let's complicate the example somewhat. Imagine that you're watching one game while keeping track of what's going on in another game. Now there are four ways that the games could end. Both home teams could win. The home team could win at your game while the away team wins the other game. The away team could win at your game while the home team wins the other game. Or both away teams could win. This is a little easier to represent on a chart.
+
+\starttab{c c}
+\textbf{Your game} & \textbf{Other game} \\ 
+H & H \\
+H & A \\
+A & H \\
+A & A \\
+\stoptab Here H stands for home team winning, and A stands for away team winning. If we start to consider a third game, there are now 8 possibilities. We started with 4 possibilities, but now each of these divides in 2: one where the home team wins the third game, and one where the away team wins. It's just about impossible to represent these verbally, so we'll just use a chart.
+
+\starttab{c c c}
+\textbf{Game 1} & \textbf{Game 2} & \textbf{Game 3} \\ 
+H & H & H \\
+H & H & A \\
+H & A & H \\
+H & A & A \\
+A & H & H \\
+A & H & A \\
+A & A & H \\
+A & A & A
+\stoptab Of course, in general we're interested in more things than just the results of baseball games. But the same structure can be applied to many more cases.
+
+Say that there are three propositions, $p$, $q$ and $r$ that we're interested in. And assume that all we're interested in is whether each of these propositions is true or false. Then there are eight possible ways things could turn out, relative to what we're interested in. In the following table, each row is a possibility. T means the proposition at the head of that column is true, F means that it is false.
+
+\starttab{c c c}
+$\bm{p}$ & $\bm{q}$ & $\bm{r}$ \\ 
+T & T & T \\
+T & T & F \\
+T & F & T \\
+T & F & F \\
+F & T & T \\
+F & T & F \\
+F & F & T \\
+F & F & F 
+\stoptab These eight possibilities are the foundation of the possibility space we'll use to build a probability function.
+
+A measure is an additive function. So once you've set the values of the smallest parts, you've fixed the values of the whole. That's because for any larger part, you can work out its value by summing the values of its smaller parts. We can see this in the above example. Once you've fixed how much meat each child has eaten, you've fixed how much meat each group of children have eaten. The same goes for probability functions. In the cases we're interested in, once you've fixed the measure, i.e. the probability of each of the eight basic possibilities represented by the above eight rows, you've fixed the probability of all propositions that we're interested in.
+
+For concreteness, let's say the probability of each row is given as follows.
+
+\starttab{c c c  c}
+$\bm{p}$ & $\bm{q}$ & $\bm{r}$ & \textbf{Probability}\\ 
+T & T & T & 0.0008\\
+T & T & F & 0.008\\
+T & F & T & 0.08\\
+T & F & F & 0.8\\
+F & T & T & 0.0002\\
+F & T & F & 0.001\\
+F & F & T & 0.01\\
+F & F & F & 0.1
+\stoptab So the probability of the fourth row, where $p$ is true while $q$ and $r$ are false, is 0.8. (Don't worry for now about where these numbers come from; we'll spend much more time on that in what follows.) Note that these numbers sum to 1. This is required; probabilities are \textbf{normalised} measures, so they must sum to 1.
+
+Then the probability of any proposition is simply the sum of the probabilities of each row on which it is true. For instance, the probability of $p$ is the sum of the probabilities of the first four rows. That is, it is 0.0008 + 0.008 + 0.08 + 0.8, which is 0.8888. 
+
+\section{Compound Sentences}
+Some sentences have other sentences as parts. We're going to be especially interested in sentences that have the following structures, where $A$ and $B$ are themselves sentences.
+
+\begin{itemize*}
+\item $A$ and $B$; which we'll write as $A \wedge B$
+\item $A$ or $B$; which we'll write as $A \vee B$
+\item It is not the case that $A$; which we'll write as $\neg A$
+\end{itemize*}
+
+What's special about these three compound formations is that the truth value of the whole sentence is fixed by the truth value of the parts. In fact, we can present the relationship between the truth value of the whole and the truth value of the parts using the truth tables discussed in the previous chapter. Here are the tables for the three connectives. First for and,
+
+\starttab{c c  c}
+$\bm{A}$ & $\bm{B}$ & $\bm{A \wedge B}$ \\ 
+T & T & T \\
+T & F & F \\
+F & T & F \\
+F & F & F
+\stoptab Then for or. (Note that this is so-called \textit{inclusive} disjunction. The whole sentence is true if both disjuncts are true.)
+\starttab{c c  c}
+$\bm{A}$ & $\bm{B}$ & $\bm{A \vee B}$ \\ 
+T & T & T \\
+T & F & T \\
+F & T & T \\
+F & F & F
+\stoptab Finally for not.
+\starttab{c  c}
+$\bm{A}$ & $\bm{\neg A}$ \\ 
+T & F \\
+F & T
+\stoptab The important thing about this way of thinking about compound sentences is that it is \textit{recursive}. I said above that some sentences have other sentences as parts. The easiest cases of this to think about are cases where $A$ and $B$ are atomic sentences, i.e. sentences that don't themselves have other sentences as parts. But nothing in the definitions we gave, or in the truth tables, requires that. $A$ and $B$ themselves could also be compound. And when they are, we can use truth tables to figure out how the truth value of the whole sentence relates to the truth value of its smallest constituents.
+
+It will be easiest to see this if we work through an example. So let's spend some time considering the following sentence.
+
+\begin{equation*}
+(p \wedge q) \vee \neg r
+\end{equation*}
+
+The sentence has the form $A \vee B$. But in this case $A$ is the compound sentence $p \wedge q$, and $B$ is the compound sentence $\neg r$. If we're looking at the possible truth values of the three sentences $p$, $q$ and $r$, we saw in the previous chapter that there are 2$^3$, i.e. 8 possibilities. And they can be represented as follows.
+
+\starttab{c c c}
+$\bm{p}$ & $\bm{q}$ & $\bm{r}$ \\ 
+T & T & T \\
+T & T & F \\
+T & F & T \\
+T & F & F \\
+F & T & T \\
+F & T & F \\
+F & F & T \\
+F & F & F \\
+\stoptab It isn't too hard, given what we said above, to see what the truth values of $p \wedge q$, and of $\neg r$ will be in each of those possibilities. The first of these, $p \wedge q$, is true at a possibility just in case there's a T in the first column (i.e. $p$ is true) and a T in the second column (i.e. $q$ is true). The second sentence, $\neg r$ is true just in case there's an F in the third column (i.e. $r$ is false). So let's represent all that on the table.
+
+\starttab{c c c  c c}
+$\bm{p}$ & $\bm{q}$ & $\bm{r}$ & $\bm{p \wedge q}$ & $\bm{\neg r}$ \\ 
+T & T & T & T & F\\
+T & T & F & T & T\\
+T & F & T & F & F\\
+T & F & F & F & T\\
+F & T & T & F & F\\
+F & T & F & F & T\\
+F & F & T & F & F\\
+F & F & F & F & T\\
+\stoptab Now the whole sentence is a disjunction, i.e. an or sentence, with the fourth and fifth columns representing the two disjuncts. So the whole sentence is true just in case either there's a T in the fourth column, i.e. $p \wedge q$ is true, or a T in the fifth column, i.e. $\neg r$ is true. We can represent that on the table as well.
+
+\starttab{c c c  c c c}
+$\bm{p}$ & $\bm{q}$ & $\bm{r}$ & $\bm{p \wedge q}$ & $\bm{\neg r}$ & $\bm{(p \wedge q) \vee \neg r}$ \\ 
+T & T & T & T & F & T\\
+T & T & F & T & T & T\\
+T & F & T & F & F & F\\
+T & F & F & F & T & T\\
+F & T & T & F & F & F\\
+F & T & F & F & T & T\\
+F & F & T & F & F & F\\
+F & F & F & F & T & T\\
+\stoptab And this gives us the full range of dependencies of the truth value of our whole sentence on the truth value of its parts.
+
+This is relevant to probability because, as we've been stressing, probability is a measure over possibility space. So if you want to work out the probability of a sentence like $(p \wedge q) \vee \neg r$, one way is to work out the probability of each of the eight basic possibilities here, then work out at which of those possibilities $(p \wedge q) \vee \neg r$ is true, then sum the probabilities of those possibilities at which it is true. To illustrate this, let's again use the table of probabilities from the previous chapter.
+
+\starttab{c c c  c}
+$\bm{p}$ & $\bm{q}$ & $\bm{r}$ & \textbf{Probability}\\ 
+T & T & T & 0.0008\\
+T & T & F & 0.008\\
+T & F & T & 0.08\\
+T & F & F & 0.8\\
+F & T & T & 0.0002\\
+F & T & F & 0.001\\
+F & F & T & 0.01\\
+F & F & F & 0.1
+\stoptab If those are the probabilities of each basic possibility, then the probability of $(p \wedge q) \vee \neg r$ is the sum of the values on the lines on which it is true. That is, it is the sum of the values on lines 1, 2, 4, 6 and 8. That is, it is 0.0008 + 0.008 + 0.8 + 0.001 + 0.1, which is 0.9098.
+
+\section{Equivalence, Entailment, Inconsistency,  and Logical Truth}
+To a first approximation, we can define logical equivalence and logical entailment within the truth-table framework. The accounts we'll give here aren't quite accurate, and we'll make them a bit more precise in the next section. But they are on the right track, and they suggest some results that are, as it turns out, true in the more accurate structure.
+
+If two sentences have the same pattern of Ts and Fs in their truth table, they are logically equivalent. Consider, for example, the sentences $\neg A \vee \neg B$ and $\neg (A \wedge B)$. Their truth tables are given in the fifth and seventh columns of this table.
+
+\starttab{c c  c c c c c}
+$\bm{A}$ & $\bm{B}$ & $\bm{\neg A}$ & $\bm{\neg B}$ & $\bm{\neg A \vee \neg B}$ & $\bm{A \wedge B}$ & $\bm{\neg (A \wedge B)}$ \\ 
+T & T & F & F & \textbf{F} & T & \textbf{F} \\
+T & F & F & T & \textbf{T} & F & \textbf{T} \\
+F & T & T & F & \textbf{T} & F & \textbf{T} \\
+F & F & T & T & \textbf{T} & F & \textbf{T} \\
+\stoptab Note that those two columns are the same. That means that the two sentences are logically equivalent.
+
+Now something important follows from the fact that the sentences are true in the same rows. For each sentence, the probability of the sentence is the sum of the probabilities of the rows in which it is true. But if the sentences are true in the same row, those are the same sums in each case. So the probability of the two sentences is the same. This leads to an important result.
+
+\begin{itemize*}
+\item \textbf{Logically equivalent sentences have the same probability}
+\end{itemize*}
+
+\noindent Note that we haven't quite proven this yet, because our account of logical equivalence is not quite accurate. But the result will turn out to hold when we fix that inaccuracy.
+
+One of the notions that logicians care most about is \textit{validity}. An argument with premises $A_1, A_2, ..., A_n$ and conclusion $B$ is valid if it is impossible for the premises to be true and the conclusion false. Slightly more colloquially, if the premises are true, then the conclusion has to be true. Again, we can approximate this notion using truth tables. An argument is \textit{invalid} if there is a line where the premises are true and the conclusion false. An argument is \textit{valid} if there is no such line. That is, it is valid if in all possibilities where all the premises are true, the conclusion is also true.
+
+When the argument that has $A$ as its only premise, and $B$ as its conclusion, is valid, we say that $A$ \textbf{entails} $B$. If every line on the truth table where $A$ is true is also a line where $B$ is true, then $A$ entails $B$.
+
+Again, this has consequences for probability. The probability of a sentence is the sum of the probability of the possibilities in which it is true. If $A$ entails $B$, then the possibilities where $B$ is true will include all the possibilities where $A$ is true, and may include some more. So the probability of $B$ can't be \textit{lower} than the probability of $A$. That's because each of these probabilities are sums of non-negative numbers, and each of the summands in the probability of $A$ is also a summand in the probability of $B$.
+
+\begin{itemize*}
+\item \textbf{If $A$ entails $B$, then the probability of $B$ is at least as great as the probability of $A$}
+\end{itemize*}
+
+The argument we've given for this is a little rough, because we're working with an approximation of the definition of entailment, but it will turn out that the result goes through even when we tidy up the details.
+
+Two sentences are \textbf{inconsistent} if they cannot be true together. Roughly, that means there is no line on the truth table where they are both true. Assume that $A$ and $B$ are inconsistent. So $A$ is true at lines $L_1, L_2, ..., L_n$, and $B$ is true at lines $L_{n+1}, ..., L_m$, where these do not overlap. So $A \vee B$ is true at lines $L_1, L_2, ..., L_n, L_{n+1}, ..., L_m$. So the probability of $A$ is the probability of $L_1$ plus the probability of $L_2$ plus $...$ plus the probability of $L_n$. And the probability of $B$ is the probability of $L_{n+1}$ plus  $...$ plus the probability of $L_m$. And the probability of $A \vee B$ is the probability of $L_1$ plus the probability of $L_2$ plus $...$ plus the probability of $L_n$ plus $L_{n+1}$ plus  $...$ plus the probability of $L_m$. That's to say
+
+\begin{itemize*}
+\item \textbf{If $A$ and $B$ are inconsistent, then the probability of $A \vee B$ equals the probability of $A$ plus the probability of $B$}
+\end{itemize*}
+
+This is just the addition rule for measures transposed to probabilities. And it is a crucial rule, one that we will use all the time. (Indeed, it is sometimes taken to be the characteristic axiom of probability theory. We will look at axiomatic approaches to probability in the next chapter.)
+
+Finally, a \textbf{logical truth} is something that is true in virtue of logic alone. It is true in all possibilities, since what logic is does not change. A logical truth is entailed by any sentence. And a logical truth only entails other sentences.
+
+Any sentence that is true in all possibilities must have probability 1. That's because probability is a \textit{normalised} measure, and in a normalised measure, the measure of the universe is 1. And a logical truth is true at every point in the `universe' of logical space.
+
+\begin{itemize*}
+\item \textbf{Any logical truth has probability 1}
+\end{itemize*}

@@ -1,0 +1,197 @@
+\section{Games with Multiple Moves}
+Most real life games have more than one move in them. The players in chess, for instance, do not just make one simultaneous move and then stop. In fact, games like chess differ from the simple games we've been studying in two respects. First, the players make more than one move. Second, the players do not move simultaneously.
+
+To a first approximation, those differences might be different than they first appear. We can imagine two super-duper-computers playing chess as follows. Each of them announces, simultaneously, their strategies for the complete game. A strategy here is a decision about what to do at any stage the game might come to. The `play' of the game would then consist in moving the various pieces around in accord with the various strategies the computers laid out.
+
+Of course, this is completely impractical. Even the best of modern computers can't deal with all the possible positions that might come up on a chess board. What they have to do, like what we do, is to look at the positions that actually arise and deal with them when they come up. But if we're abstracting away from computational costs (as we are throughout) the difference between chess as it actually is (with turn-by-turn moves) and `strategy chess' looks a little smaller.
+
+\section{Extensive and Normal Form}
+What we've noted so far is that there are two ways to `play' a many move game. We can wait and watch the moves get played. Or we can have each player announce their strategy at the start of the game. Somewhat reflecting these two ways of thinking about games, there are two ways of representing many move games. First, we can represent them in \textbf{extensive form}. The following is an extensive form representation of a zero-sum game. 
+
+\begin{figure}[htb] 
+\hspace*{\fill} 
+\begin{egame}(600,280) 
+% 
+% put the initial branch at (300,240), with (x,y) direction 
+% (2,1), and horizontal length 200 
+\putbranch(300,240)(2,1){200}
+% 
+% give the branch two actions, label it for player 1, 
+% and label the actions $L$ and $R$ 
+\iib{Row}{$L$}{$R$} 
+% 
+% put a branch at (100,140), with (x,y) direction 
+% (1,1) and horizontal length 100 
+\putbranch(100,140)(1,1){100} 
+% 
+% give the branch two actions, omit a player label, 
+% label the actions $a$ and $b$,
+\iib{}{$a$}{$b$}[$4$][$3$] 
+% 
+% put a branch at (500,140), with (x,y) direction (1,1) 
+% and horizontal length 100 
+\putbranch(500,140)(1,1){100} 
+% 
+% give the branch two actions, omit a player label, 
+% label the actions $c$ and $d$, and assign the payoffs 
+\iib{}{$c$}{$d$}[$2$][$1$] 
+% 
+% draw an information set between the nodes at (100,140) 
+% and (500,140) 
+\infoset(100,140){400}{Column} 
+% 
+\end{egame} 
+\hspace*{\fill} 
+\caption[]{An extensive game}
+\label{f:one} 
+\end{figure} 
+Each node in the chart represents a move that a player makes. The nodes are marked with the name of the player who moves at that point. So in this game, Row moves first, then Column moves, then the game is done. The numbers at the end represent the payoffs. Eventually there will be two numbers there, but for now we're still in the realm of zero-sum games, so we're just using a single number.
+
+In this game, Row plays first and has to choose between $L$ and $R$. Then Column plays, and the choices Column has depend on what move Row made. If Row played $L$, then Column could choose between $a$ and $b$. (And presumably would choose $b$, since Column is trying to minimise the number.) If Row played $R$, then Column could choose between $c$ and $d$. (And presumably would choose $d$, since Column is trying to minimise the number.) If we assume Column will make the rational play, then Row's choice is really between getting 3, if she plays $L$, and 1, if she plays $R$, so she should play $L$.
+
+As well as this extensive form representation, we can also represent the game in \textbf{normal form}. A normal form representation is where we set out each player's possible strategies for the game. As above, a strategy is a decision about what to do in every possibility that may arise. Since Row only has one move in this game, her strategy is just a matter of that first move. But Column's strategy has to specify two things: what to do if Row plays $L$, and what to do if Row plays $R$. We'll represent a strategy for Column with two letters, e.g., $ac$. That's the strategy of playing $a$ if Row plays $L$ and $c$ if Row plays $R$. The normal form of this game is then
+
+\starttab{r | c c c c}
+ & $ac$ & $ad$ & $bc$ & $bd$ \\ \hline
+$L$ & 4 & 4 & 3 & 3 \\
+$R$ & 2 & 1 & 2 & 1
+\stoptab
+
+\section{Two Types of Equilibrium}
+In the game we've been looking at above, there are two Nash equilibrium outcomes. The first is $<L, bc>$, and the second is $<L, bd>$. Both of these end up with a payoff of 3. But there is something odd about the first equilibrium. In that equilibrium, Column has a strategy that embeds some odd dispositions. If Row (foolishly) plays $R$, then Column's strategy says to (equally foolishly) play $c$. But clearly the best play for Column in this circumstance is $d$, not $c$.
+
+So in a sense, $<L, bc>$ is not an equilibrium strategy. True, it is as good as any strategy that Column can follow given Row's other choices. But it isn't an optimal strategy for Column to follow with respect to every decision that Column has to make.
+
+We'll say a \textbf{subgame perfect equilibrium} is a pair of strategies for Row and Column such that for any given node in the game, from that node on, neither can do better given the other's strategy. A Nash equilibrium satisfies this condition for the `initial' node; subgame perfect equilibrium requires that it be satisfied for all nodes.
+
+\section{Normative Significance of Subgame Perfect Equilibrium}
+Subgame perfect equilibrium is a very significant concept in modern game theory. Some writers take it to be an important restriction on rational action that players play strategies which are part of subgame perfect equilibria. But it is a rather odd concept for a few reasons. We'll say more about this after we stop restricting our attention to zero-sum games, but for now, consider the game in Figure 22.2. (I've used R and C for Row and Column to save space. Again, it's a zero-sum game. And the initial node in these games is always the open circle; the closed circles are nodes that we may or may not get to.)
+
+\begin{figure}[htb]
+\hspace*{\fill} 
+\begin{egame}(550,230) 
+
+\putbranch(100,190)(0,0)[d]{150} 
+\iib{R}{$d$}{$r$}[3][]
+ 
+\putbranch(250,190)(0,0)[d]{150} 
+\iib{C}{$d$}{$r$}[2][]
+ 
+\putbranch(400,190)(0,0)[d]{150} 
+\iib{R}{$d$}{$r$}[4][1]
+ 
+\end{egame}
+\hspace*{\fill} 
+\caption[]{Illustrating subgame perfect equilibrium}
+\label{f:one} 
+\end{figure} 
+
+Note that Row's strategy has to include two choices: what to do at the first node, and what to do at the third node. But Column has (at most) one choice. Note also that the game ends as soon as any player plays $d$. The game continues as long as players are playing $r$, until there are 3 plays of $r$.
+
+We can work out the subgame perfect equilibrium by backwards induction from the terminal nodes of the game. At the final node, the dominating option for Row is $d$, so Row should play $d$. Given that Row is going to play $d$ at that final choice-point, and hence end the game with 4, Column is better off playing $d$ at her one and only choice, and ending the game with 2 rather than the 4 it would end with if Row was allowed to play last. And given that that's what Column is planning to do, Row is better off ending the game straight away by playing $d$ at the very first opportunity, and ending with 3. So the subgame perfect equilibrium is $<dd, d>$.
+
+There are three oddities about this game. 
+
+First, if Row plays $d$ straight away, then the game is over and it doesn't matter what the rest of the strategies are. So there are many Nash equilibria for this game. That implies that there are Nash equilibria that are not subgame perfect equilibria. For instance, $<dr, d>$ is a Nash equilibria, but isn't subgame perfect.  That's not, however, something we haven't seen before.
+
+Second, the reason that $<dr, d>$ is not an equilibrium is that it is an irrational thing for Row to play if the game were to get to the third node. But if Row plays that very strategy, then the game won't get to that third node. Oddly, Row is being criticised here for playing a strategy that could, in principle, have a bad outcome, but will only have a bad outcome if she doesn't play that very strategy. So it isn't clear that her strategy is so bad.
+
+Finally, let's think again about Column's option at the middle node. We worked out what Column should do by working backwards. But the game is played forwards. And if we reach that second node, where Column is playing, then Column knows that Row is not playing an equilibrium strategy. Given that Column knows this, perhaps it isn't altogether obvious that Column should hold onto the assumption that Row is perfectly rational. But without the assumption that Row is perfectly rational, then it isn't obvious that Column should play $d$. After all, that's only the best move on the assumption that Row is rational.
+
+The philosophical points here are rather tricky, and we'll come back to them when we've looked more closely at non zero sum games.
+
+\section{Cooperative Games}
+As we've stressed several times, most human interactions are not zero sum. Most of the time, there is some opportunity for the players' interests to be aligned. This is so even when we look at games involving one (simultaneous) move.
+
+We won't prove this, but it turns out that even when we drop the restriction to zero-sum games, every game has a Nash equilibrium. Sometimes this will be a mixed strategy equilibrium, but often it will be a pure strategy. What is surprising about non-zero sum games is that it is possible for there to be multiple Nash equilibria that are not equal in their outcomes. For instance, consider the following game.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & (4, 1) & (0, 0) \\
+$R_2$ & (0, 0) & (2, 2)
+\stoptab Both $(R_1, C_1)$ and $(R_2, C_2)$ are Nash equilibria. I won't prove this, but there is also a mixed strategy Nash equilibria, ($<\frac{2}{3} R_1, \frac{1}{3} R_2>$, $<\frac{1}{3} C_1, \frac{2}{3} C_2>$). This is an incredibly inefficient Nash equilibrium, since the players end up with the (0, 0) outcome most of the time. But given that that's what the other player is playing, they can't do better.
+
+The players are not indifferent over these three equilibria. Row would prefer the $(R_1, C_1)$ equilibrium, and Column would prefer the $(R_2, C_2)$ equilibrium. The mixed equilibrium is the worst outcome for both of them. Unlike in the zero-sum case, it does matter which equilibrium we end up at. Unfortunately, in the absence the possibility for negotiation, it isn't clear what advice game theory can give about cases like this one, apart from saying that the players should play their part in some equilibrium play or other.
+
+\section{Pareto Efficient Outcomes}
+In game theory, and in economics generally, we say that one outcome $O_1$ is \textbf{Pareto superior} to another $O_2$ if at least one person is better off in $O_1$ than in $O_2$, and no one is worse off in $O_1$ than $O_2$. $O_2$ is \textbf{Pareto inferior} to $O_1$ iff $O_1$ is \textbf{Pareto superior} to $O_2$. An outcome is \textbf{Pareto inefficient} if there is some outcome that is Pareto superior to it. And an outcome is \textbf{Pareto efficient} otherwise.
+
+Some games have multiple equilibria where one equilibrium outcome is Pareto superior to another. We've already seen one example of this with the previous game. In that game, there was a mixed strategy equilibrium that was worse for both players than either pure strategy equilibrium. But there are considerably simpler cases of the same phenomenon.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & (2, 2) & (0, 0) \\
+$R_2$ & (0, 0) & (1, 1)
+\stoptab In this case, the $(R_1, C_1)$ outcome is clearly superior to the $(R_2, C_2)$ outcome. (There's also a mixed strategy equilibrium that is worse again for both players.) And it would be surprising if the players ended up with anything other than the $(R_1, C_1)$ outcome.
+
+It might be tempting at this point to add an extra rule to the \textit{Only choose equilibrium strategies} rule, namely \textit{Never choose an equilibrium that is Pareto inefficient}. Unfortunately, that won't always work. In one famous game, the Prisoners Dilemma, the only equilibrium is Pareto inefficient. Here is a version of the Prisoners Dilemma.
+
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & (3, 3) & (5, 0) \\
+$R_2$ & (0, 5) & (1, 1)
+\stoptab The $(R_2, C_2)$ outcome is Pareto inferior to the $(R_1, C_1)$ outcome. But the $(R_2, C_2)$ outcome is the only equilibrium. Indeed, $(R_2, C_2)$ is the outcome we get to if both players simply eliminate dominated options. Whatever the other player does, each player is better off playing their half of $(R_2, C_2)$. So equilibrium seeking not only fails to avoid Pareto inefficient options; sometimes it actively seeks out Pareto inefficiencies.
+
+\section{Exercises}
+\subsection{Nash Equilibrium}
+Find the Nash equilibrium in each of the following zero-sum games.
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & 4 & 6 \\
+$R_2$ & 3 & 7
+\stoptab 
+\starttab{r | c c}
+ & $C_1$ & $C_2$ \\ \hline
+$R_1$ & 4 & 3 \\
+$R_2$ & 3 & 7
+\stoptab 
+\starttab{r | c c c}
+ & $C_1$ & $C_2$ & $C_3$ \\ \hline
+$R_1$ & 3 & 2 & 4 \\
+$R_2$ & 1 & 5 & 3 \\
+$R_3$ & 0 & 1 & 6
+\stoptab 
+\subsection{Subgame Perfect Equilibrium}
+In the following game, which pairs of strategies form a Nash equilibrium? Which pairs form a subgame perfect equilibrium? In each node, the first number represents R's payoff, the second represents C's payoff. Remember that a strategy for each player has to specify what they would do at each node they could possibly come to.
+\begin{figure}[htb] 
+\hspace*{\fill} 
+\begin{egame}(700,280) 
+% 
+% put the initial branch at (300,240), with (x,y) direction 
+% (2,1), and horizontal length 200 
+\putbranch(350,240)(2,1){250}
+% 
+% give the branch two actions, label it for player 1, 
+% and label the actions $L$ and $R$ 
+\iib{Row}{$L$}{$R$} 
+% 
+% put a branch at (100,140), with (x,y) direction 
+% (1,1) and horizontal length 100 
+\putbranch(100,115)(2,1){150} 
+% 
+% give the branch two actions, omit a player label, 
+% label the actions $a$ and $b$,
+\iiib{}{$a$}{$b$}{$c$}[$(25, 25)$][$(20, 30)$][$(15, 35)$] 
+% 
+% put a branch at (500,140), with (x,y) direction (1,1) 
+% and horizontal length 100 
+\putbranch(600,115)(2,1){150} 
+% 
+% give the branch two actions, omit a player label, 
+% label the actions $c$ and $d$, and assign the payoffs 
+\iiib{}{$d$}{$e$}{$f$}[$(30, 0)$][$(25, 5)$][$(20, 10)$]
+% 
+% draw an information set between the nodes at (100,140) 
+% and (500,140) 
+\infoset(100,115){500}{Column} 
+% 
+\end{egame} 
+\hspace*{\fill} 
+\caption[]{Extensive Game for question 2}
+\label{f:one} 
+\end{figure} 
+\subsection{Equality of Nash Equilibria}
+In a particular zero-sum game, $(R_1, C_1)$ and $(R_2, C_2)$ are Nash equilibria. Prove that (a) both $(R_1, C_2)$ and $(R_2, C_1)$ are Nash equilibria, and (b) $(R_1, C_1)$ and $(R_2, C_2)$ have the same payoffs.
+
+
+
